@@ -43,6 +43,28 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    private boolean checkPassword() {
+        String pw = String.valueOf(passwordEditText.getText());
+        String cPw = String.valueOf(confirmPasswordEditText.getText());
+
+        if (pw.length() >= 8) {
+
+            if (pw.equals(cPw)) {
+                Log.i("RegisterActivity", "checkPassword() passwords are equal");
+                return true;
+
+            } else {
+                Log.i("RegisterActivity", "checkPassword() passwords are NOT equal");
+                return false;
+
+            }
+
+        } else {
+            Log.i("RegisterActivity", "checkPassword() password length is too short");
+            return false;
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -57,7 +79,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.activityRegister_buttonCreateAccount:
                 Log.i("RegisterActivity", "onClick of registerButton called");
 
-                //TODO: Create intent to dashboard with new account
+                if (checkPassword()) {
+                    //TODO: Create intent to dashboard with new account
+
+                } else {
+                    //TODO: Notify user that passwords do not match
+
+                }
+
 
                 //TODO: Pass data through API and check if data is correct
                 break;
