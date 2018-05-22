@@ -19,7 +19,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText emailEditText;
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
-
+    private String dateOfBirth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         passwordEditText = findViewById(R.id.activityRegister_editTextPassword);
         confirmPasswordEditText = findViewById(R.id.activityRegister_editTextConfirmPassword);
+
+        dateOfBirth = "";
 
 
     }
@@ -65,6 +67,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private boolean checkIfEmptyFields() {
+        if (String.valueOf(firstNameEditText.getText()).isEmpty() || String.valueOf(lastNameEditText).isEmpty()
+                || dateOfBirth.length() <= 0) {
+
+            Log.i("RegisterActivity", "checkIfEmptyFields some fields are empty");
+            return false;
+
+        } else {
+            Log.i("RegisterActivity", "checkIfEmptyFields fields are not empty");
+            return true;
+
+        }
+
+
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -79,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.activityRegister_buttonCreateAccount:
                 Log.i("RegisterActivity", "onClick of registerButton called");
 
-                if (checkPassword()) {
+                if (checkPassword() && checkIfEmptyFields()) {
                     //TODO: Create intent to dashboard with new account
 
                 } else {
@@ -97,10 +115,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         month = month + 1;
 
-        String dateOfBirth = (dayOfMonth + "-" + month + "-" + year);
+        dateOfBirth = (dayOfMonth + "-" + month + "-" + year);
         Log.i("RegisterActivity", "onDateSet called, date: " + dateOfBirth);
         datePickerButton.setText(dateOfBirth);
-
 
 
         //TODO: Pass date of birth through with the rest, and possibly add a check for invalid dates (like in the future)
