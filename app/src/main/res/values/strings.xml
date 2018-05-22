@@ -14,5 +14,7 @@
     <string name="password">Password</string>
     <string name="confirmPassword">Confirm password</string>
     <string name="createAccount">Create account</string>
+    <string name="profile">My profile:</string>
+    <string name="changeData">change data</string>
 
 </resources>
