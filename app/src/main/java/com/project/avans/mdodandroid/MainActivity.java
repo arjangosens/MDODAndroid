@@ -44,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
                 );
             }
         });
+
+        Button btn2 = (Button) findViewById(R.id.button_register);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void login(String username, String password) {
