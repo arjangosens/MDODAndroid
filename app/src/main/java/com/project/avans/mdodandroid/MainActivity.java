@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         result.setTextColor(Color.GREEN);
                         try {
                             result.setText(response.getString("token"));
-                            Intent i = new Intent(getApplicationContext(), UserSettings.class);
+                            Intent i = new Intent(getApplicationContext(), Homepage.class);
                             startActivity(i);
                         } catch (JSONException e) {
                         }
