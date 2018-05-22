@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,13 +44,22 @@ public class MainActivity extends AppCompatActivity {
                 );
             }
         });
+
+        Button btn2 = (Button) findViewById(R.id.button_register);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void login(String username, String password) {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        final String url = "https://app-jwt.herokuapp.com/apiv2/login";
+        final String url = "https://prog4sk.herokuapp.com/api/login";
 
         JSONObject body = new JSONObject();
         try {
@@ -71,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
                         result.setTextColor(Color.GREEN);
                         try {
                             result.setText(response.getString("token"));
-                        } catch (JSONException e) {}
+                            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+                            startActivity(i);
+                        } catch (JSONException e) {
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -79,8 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Log.d("VOLLEY_TAG", error.toString());
                         result.setTextColor(Color.RED);
-                        result.setText(error.toString());
-
+                        result.setText(R.string.unValidCredentials);
                     }
                 }
         );
