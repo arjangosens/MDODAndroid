@@ -4,4 +4,15 @@
     <string name="register">register</string>
     <string name="noAccount">Don\'t have an account?</string>
     <string name="unValidCredentials">please enter valid credentials</string>
+    <string name="firstName">First name</string>
+    <string name="Insertion">Insertion</string>
+    <string name="Lastname">Last name</string>
+    <string name="date">Day/Month/Year</string>
+    <string name="Dateofbirth">Date of birth</string>
+    <string name="Email">Email address</string>
+    <string name="emailExample">mail@example.com</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="createAccount">Create account</string>
+
 </resources>
