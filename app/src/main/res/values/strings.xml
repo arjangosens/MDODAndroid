@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MDODAndroid</string>
     <string name="login">Log in</string>
+    <string name="register">register</string>
 </resources>
