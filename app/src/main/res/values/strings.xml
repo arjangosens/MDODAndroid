@@ -3,4 +3,5 @@
     <string name="login">Log in</string>
     <string name="register">register</string>
     <string name="noAccount">Don\'t have an account?</string>
+    <string name="unValidCredentials">please enter valid credentials</string>
 </resources>
