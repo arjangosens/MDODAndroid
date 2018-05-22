@@ -7,11 +7,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private Button registerButton;
     private Button datePickerButton;
+    private EditText firstNameEditText;
+    private EditText insertionEditText;
+    private EditText lastNameEditText;
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private EditText confirmPasswordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +30,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         registerButton.setOnClickListener(this);
         datePickerButton.setOnClickListener(this);
+
+        firstNameEditText = findViewById(R.id.activityRegister_editTextFirstname);
+        insertionEditText = findViewById(R.id.activityRegister_editTextInsertion);
+        lastNameEditText = findViewById(R.id.activityRegister_editTextLastname);
+
+        emailEditText = findViewById(R.id.activityRegister_editTextEmail);
+
+        passwordEditText = findViewById(R.id.activityRegister_editTextPassword);
+        confirmPasswordEditText = findViewById(R.id.activityRegister_editTextConfirmPassword);
 
 
     }
