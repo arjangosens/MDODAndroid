@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        final String url = "https://app-jwt.herokuapp.com/apiv2/login";
+        final String url = "https://prog4sk.herokuapp.com/api/login";
 
         JSONObject body = new JSONObject();
         try {
@@ -71,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
                         result.setTextColor(Color.GREEN);
                         try {
                             result.setText(response.getString("token"));
-                        } catch (JSONException e) {}
+                            Intent i = new Intent(getApplicationContext(), UserSettings.class);
+                            startActivity(i);
+                        } catch (JSONException e) {
+                        }
                     }
                 },
                 new Response.ErrorListener() {
