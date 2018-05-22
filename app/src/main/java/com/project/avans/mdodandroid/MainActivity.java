@@ -80,14 +80,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d("VOLLEY_TAG", response.toString());
                         try {
-<<<<<<< HEAD
-                            result.setText(response.getString("token"));
-                            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
-=======
+
                             Token = response.getString("token");
                             Log.d("the token", Token);
-                            Intent i = new Intent(getApplicationContext(), Homepage.class);
->>>>>>> Login
+                            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+
                             startActivity(i);
                         } catch (JSONException e) {
                         }
