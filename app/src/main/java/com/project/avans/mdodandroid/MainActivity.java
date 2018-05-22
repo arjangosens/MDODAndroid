@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
-    EditText username;
+    EditText email;
     EditText password;
     TextView result;
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        username = (EditText) findViewById(R.id.editText_Username);
+        email = (EditText) findViewById(R.id.editText_Email);
         password = (EditText) findViewById(R.id.editText_Password);
         result = (TextView) findViewById(R.id.textview_Status);
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 login(
-                        username.getText().toString(),
+                        email.getText().toString(),
                         password.getText().toString()
                 );
             }
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         JSONObject body = new JSONObject();
         try {
-            body.put("username", username);
+            body.put("email", username);
             body.put("password", password);
         } catch(Exception e) {
             Log.e("VOLLEY_TAG", e.toString());
