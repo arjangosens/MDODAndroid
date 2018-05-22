@@ -96,8 +96,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         month = month + 1;
-        Log.i("RegisterActivity", "onDateSet called, date: " + dayOfMonth + "/" + month + "/" + year);
-        datePickerButton.setText(dayOfMonth + "/" + month + "/" + year);
+
+        String dateOfBirth = (dayOfMonth + "-" + month + "-" + year);
+        Log.i("RegisterActivity", "onDateSet called, date: " + dateOfBirth);
+        datePickerButton.setText(dateOfBirth);
+
+
 
         //TODO: Pass date of birth through with the rest, and possibly add a check for invalid dates (like in the future)
     }
