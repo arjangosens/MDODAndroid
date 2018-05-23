@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Minder drank en drugs</string>
+    <string name="login">Login</string>
+    <string name="register">registreer</string>
+    <string name="noAccount">Nog geen account?</string>
+    <string name="unValidCredentials">Voer geldige gegevens in.</string>
+    <string name="firstName">Voornaam</string>
+    <string name="Insertion">Tussenvoegsel</string>
+    <string name="Lastname">Achternaam</string>
+    <string name="date">dag/maand/jaar</string>
+    <string name="Dateofbirth">Geboortedatum</string>
+    <string name="Email">Emailadres</string>
+    <string name="emailExample">mail@voorbeeld.com</string>
+    <string name="password">Wachtwoord</string>
+    <string name="confirmPassword">Bevestig wachtwoord</string>
+    <string name="createAccount">Creëer een account</string>
+    <string name="profile">Mijn profiel:</string>
+    <string name="changeData">Wijzig gegevens</string>
+    <string name="registerAlertDialogTitle">Er ging iets fout!</string>
+    <string name="emailInvalid">Email is niet juist</string>
+    <string name="registerPasswordInvalid">Wachtwoord is niet juist</string>
+    <string name="emptyNameOrDate">Naam en/of datum zijn nogsteeds leeg</string>
+    <string name="userSettings">Account instellingen</string>
+    <string name="change">Verander </string>
+    <string name="saveChanges">Opslaan </string>
+
+</resources>

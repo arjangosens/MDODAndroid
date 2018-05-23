@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        final String url = "https://prog4sk.herokuapp.com/api/login";
+        final String url = "https://mdod.herokuapp.com/api/login/client";
 
         JSONObject body = new JSONObject();
         try {
