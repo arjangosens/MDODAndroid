@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     TextView result;
+    String Token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +79,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("VOLLEY_TAG", response.toString());
-                        result.setTextColor(Color.GREEN);
                         try {
-                            result.setText(response.getString("token"));
-                            Intent i = new Intent(getApplicationContext(), Homepage.class);
+
+                            Token = response.getString("token");
+                            Log.d("the token", Token);
+                            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+
                             startActivity(i);
                         } catch (JSONException e) {
                         }
