@@ -1,17 +1,19 @@
 package com.project.avans.mdodandroid;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ListView settingsListview;
 
-    private String[] settings = {"First Name", "insertion", "Last Name", "Date of birth", "Email"};
+    private String[] settings = {"First Name", "insertion", "Last Name", "Date of birth", "Email", "Password"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +31,49 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settingsListview.setOnItemClickListener(this);
     }
 
+    private void showUpdateDialog(String type) {
+        AlertDialog alertDialog;
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Get the layout inflater
+        LayoutInflater inflater = this.getLayoutInflater();
+
+        builder.setTitle("Change " + type);
+
+        switch (type) {
+            case ("Email"):
+                builder.setView(inflater.inflate(R.layout.dialog_updateprofile_email, null));
+                break;
+
+            case ("Password"):
+                builder.setView(inflater.inflate(R.layout.dialog_updateprofile_password, null));
+                break;
+
+            default:
+                builder.setView(inflater.inflate(R.layout.dialog_updateprofile, null));
+                break;
+        }
+
+        builder.setPositiveButton("Save changes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                // TODO: Save changes made in AlertDialog
+            }
+        })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog = builder.create();
+
+        alertDialog.show();
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        showUpdateDialog(settings[position]);
 
     }
 }
