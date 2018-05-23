@@ -85,18 +85,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private boolean checkEmail() {
-        email = String.valueOf(emailEditText.getText());
-        Pattern emailRegex =
-                Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
-
-            Matcher matcher = emailRegex .matcher(email);
-
-            boolean result = matcher.find();
-            Log.i("RegisterActivity", "checkEmail email is " + result);
-
-            return result;
-    }
 
     @Override
     public void onClick(View v) {
@@ -114,10 +102,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 String password = String.valueOf(passwordEditText.getText());
                 String confirmPassword = String.valueOf(confirmPasswordEditText.getText());
+                String email = String.valueOf(emailEditText.getText());
 
                 boolean validPassword = ValueChecker.checkPassword(password, confirmPassword);
                 boolean fieldsNotEmpty = checkIfEmptyFields();
-                boolean validEmail = checkEmail();
+                boolean validEmail = ValueChecker.checkEmail(email);
 
                 if (validPassword && validEmail && fieldsNotEmpty) {
                     //TODO: Create intent to dashboard with new account

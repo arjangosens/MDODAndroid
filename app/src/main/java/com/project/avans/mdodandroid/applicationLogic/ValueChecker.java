@@ -62,4 +62,16 @@ public class ValueChecker {
             return false;
         }
     }
+
+    public static boolean checkEmail(String email) {
+        Pattern emailRegex =
+                Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
+
+        Matcher matcher = emailRegex .matcher(email);
+
+        boolean result = matcher.find();
+        Log.i("RegisterActivity", "checkEmail email is " + result);
+
+        return result;
+    }
 }
