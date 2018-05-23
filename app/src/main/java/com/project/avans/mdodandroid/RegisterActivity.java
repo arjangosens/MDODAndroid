@@ -1,8 +1,10 @@
 package com.project.avans.mdodandroid;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -123,19 +125,45 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.activityRegister_buttonDateOfBirth:
                 Log.i("RegisterActivity", "onClick of datePickerButton called");
 
-                DatePickerDialog dialog = new DatePickerDialog(this, this, 2018, 0, 1);
-                dialog.show();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, 2018, 0, 1);
+                datePickerDialog.show();
 
                 break;
 
             case R.id.activityRegister_buttonCreateAccount:
                 Log.i("RegisterActivity", "onClick of registerButton called");
 
-                if (checkPassword() && checkIfEmptyFields() && checkEmail()) {
+                boolean validPassword = checkPassword();
+                boolean fieldsNotEmpty = checkIfEmptyFields();
+                boolean validEmail = checkEmail();
+
+                if (validPassword && validEmail && fieldsNotEmpty) {
                     //TODO: Create intent to dashboard with new account
 
                 } else {
-                    //TODO: Notify user that passwords do not match
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    String message = "";
+
+                    builder.setTitle("Something went wrong!");
+
+                    if (!validEmail) message += "Email is invalid\n";
+
+                    if  (!validPassword) message += "Password is invalid (requires a minimum of 8 characters)\n";
+
+                    if (!fieldsNotEmpty) message += "Name and/or date of birth are still empty";
+
+                    builder.setMessage(message);
+
+                    builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+
+                    alertDialog.show();
 
                 }
 
