@@ -1,7 +1,10 @@
 package com.project.avans.mdodandroid;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,8 +32,37 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settingsListview.setOnItemClickListener(this);
     }
 
+    private void showUpdateDialog() {
+        AlertDialog alertDialog;
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Get the layout inflater
+        LayoutInflater inflater = this.getLayoutInflater();
+
+        builder.setTitle("Change _____");
+
+        builder.setView(inflater.inflate(R.layout.dialog_updateprofile, null))
+                // Add action buttons
+                .setPositiveButton("Save changes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // TODO: Save changes made in AlertDialog
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog = builder.create();
+
+        alertDialog.show();
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        showUpdateDialog();
 
     }
 }
