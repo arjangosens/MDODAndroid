@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Homepage extends AppCompatActivity {
+public class HomepageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class Homepage extends AppCompatActivity {
         Intent i;
         switch(id){
             case R.id.menu_user_settings:
-                i = new Intent(getApplicationContext(), UserSettings.class);
+                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
                 startActivity(i);
                 break;
             default:
