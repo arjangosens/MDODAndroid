@@ -32,14 +32,14 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settingsListview.setOnItemClickListener(this);
     }
 
-    private void showUpdateDialog() {
+    private void showUpdateDialog(String type) {
         AlertDialog alertDialog;
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        builder.setTitle("Change _____");
+        builder.setTitle("Change " + type);
 
         builder.setView(inflater.inflate(R.layout.dialog_updateprofile, null))
                 // Add action buttons
@@ -62,7 +62,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showUpdateDialog();
+        showUpdateDialog(settings[position]);
 
     }
 }
