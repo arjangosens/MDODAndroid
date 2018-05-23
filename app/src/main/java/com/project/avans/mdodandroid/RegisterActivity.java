@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,35 +71,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private boolean checkPassword() {
-        String pw = String.valueOf(passwordEditText.getText());
-        String cPw = String.valueOf(confirmPasswordEditText.getText());
-
-        Pattern pwRegex =
-                Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
-
-        Matcher matcher = pwRegex.matcher(pw);
-
-        boolean pwRegexResult = matcher.find();
-
-        if (pwRegexResult) {
-
-            if (pw.equals(cPw)) {
-                Log.i("RegisterActivity", "checkPassword() passwords are equal");
-                return true;
-
-            } else {
-                Log.i("RegisterActivity", "checkPassword() passwords are NOT equal");
-                return false;
-
-            }
-
-        } else {
-            Log.i("RegisterActivity", "checkPassword() password is invalid");
-            return false;
-        }
-    }
-
     private boolean checkIfEmptyFields() {
         if (String.valueOf(firstNameEditText.getText()).isEmpty() || String.valueOf(lastNameEditText).isEmpty()
                 || dateOfBirth.length() <= 0) {
@@ -113,18 +85,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private boolean checkEmail() {
-        email = String.valueOf(emailEditText.getText());
-        Pattern emailRegex =
-                Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
-
-            Matcher matcher = emailRegex .matcher(email);
-
-            boolean result = matcher.find();
-            Log.i("RegisterActivity", "checkEmail email is " + result);
-
-            return result;
-    }
 
     @Override
     public void onClick(View v) {
@@ -140,9 +100,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.activityRegister_buttonCreateAccount:
                 Log.i("RegisterActivity", "onClick of registerButton called");
 
-                boolean validPassword = checkPassword();
+                String password = String.valueOf(passwordEditText.getText());
+                String confirmPassword = String.valueOf(confirmPasswordEditText.getText());
+                String email = String.valueOf(emailEditText.getText());
+
+                boolean validPassword = ValueChecker.checkPassword(password, confirmPassword);
                 boolean fieldsNotEmpty = checkIfEmptyFields();
-                boolean validEmail = checkEmail();
+                boolean validEmail = ValueChecker.checkEmail(email);
 
                 if (validPassword && validEmail && fieldsNotEmpty) {
                     //TODO: Create intent to dashboard with new account
