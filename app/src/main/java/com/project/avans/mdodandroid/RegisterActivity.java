@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private Button registerButton;
@@ -20,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
     private String dateOfBirth;
+    private String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         confirmPasswordEditText = findViewById(R.id.activityRegister_editTextConfirmPassword);
 
         dateOfBirth = "";
+        email = "";
 
 
     }
@@ -79,8 +84,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return true;
 
         }
+    }
 
+    private boolean checkEmail() {
+        email = String.valueOf(emailEditText.getText());
+        Pattern emailRegex =
+                Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
 
+            Matcher matcher = emailRegex .matcher(email);
+
+            boolean result = matcher.find();
+            Log.i("RegisterActivity", "checkEmail email is " + result);
+
+            return result;
     }
 
     @Override
@@ -97,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.activityRegister_buttonCreateAccount:
                 Log.i("RegisterActivity", "onClick of registerButton called");
 
-                if (checkPassword() && checkIfEmptyFields()) {
+                if (checkPassword() && checkIfEmptyFields() && checkEmail()) {
                     //TODO: Create intent to dashboard with new account
 
                 } else {
