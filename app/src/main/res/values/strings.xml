@@ -22,5 +22,9 @@
     <string name="emptyNameOrDate">Name and/or date of birth are still empty</string>
     <string name="alertDialogCancelButton" translatable="false">Ok</string>
     <string name="userSettings">User settings</string>
+    <string name="change">Change </string>
+    <string name="saveChanges">Save changes </string>
+    <string name="cancel">Cancel </string>
+
 
 </resources>
