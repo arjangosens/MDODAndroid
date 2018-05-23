@@ -16,5 +16,10 @@
     <string name="createAccount">Create account</string>
     <string name="profile">My profile:</string>
     <string name="changeData">change data</string>
+    <string name="registerAlertDialogTitle">Something went wrong!</string>
+    <string name="emailInvalid">Email is invalid</string>
+    <string name="registerPasswordInvalid">Password is invalid (min 8 characters, at least 1 letter and number, confirmation needs to be equal)</string>
+    <string name="emptyNameOrDate">Name and/or date of birth are still empty</string>
+    <string name="alertDialogCancelButton">Ok</string>
 
 </resources>
