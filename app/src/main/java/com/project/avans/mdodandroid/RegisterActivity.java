@@ -74,7 +74,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String pw = String.valueOf(passwordEditText.getText());
         String cPw = String.valueOf(confirmPasswordEditText.getText());
 
-        if (pw.length() >= 8) {
+        Pattern pwRegex =
+                Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+
+        Matcher matcher = pwRegex.matcher(pw);
+
+        boolean pwRegexResult = matcher.find();
+
+        if (pwRegexResult) {
 
             if (pw.equals(cPw)) {
                 Log.i("RegisterActivity", "checkPassword() passwords are equal");
@@ -87,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
 
         } else {
-            Log.i("RegisterActivity", "checkPassword() password length is too short");
+            Log.i("RegisterActivity", "checkPassword() password is invalid");
             return false;
         }
     }
