@@ -9,12 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ListView settingsListview;
 
-    private String[] settings = {"First Name", "insertion", "Last Name", "Date of birth", "Email"};
+    private String[] settings = {"First Name", "insertion", "Last Name", "Date of birth", "Email", "Password"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +40,26 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         builder.setTitle("Change " + type);
 
-        builder.setView(inflater.inflate(R.layout.dialog_updateprofile, null))
-                // Add action buttons
-                .setPositiveButton("Save changes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        // TODO: Save changes made in AlertDialog
-                    }
-                })
+        switch (type) {
+            case ("Email"):
+                builder.setView(inflater.inflate(R.layout.dialog_updateprofile_email, null));
+                break;
+
+            case ("Password"):
+                builder.setView(inflater.inflate(R.layout.dialog_updateprofile_password, null));
+                break;
+
+            default:
+                builder.setView(inflater.inflate(R.layout.dialog_updateprofile, null));
+                break;
+        }
+
+        builder.setPositiveButton("Save changes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                // TODO: Save changes made in AlertDialog
+            }
+        })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
