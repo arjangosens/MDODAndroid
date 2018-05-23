@@ -1,6 +1,8 @@
 package com.project.avans.mdodandroid;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,8 +35,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText emailEditText;
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
+    private TextView validCredentials;
     private String dateOfBirth;
     private String email;
+    private String Token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +59,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         passwordEditText = findViewById(R.id.activityRegister_editTextPassword);
         confirmPasswordEditText = findViewById(R.id.activityRegister_editTextConfirmPassword);
+
+        validCredentials = findViewById(R.id.activityRegister_validCredentials);
 
         dateOfBirth = "";
         email = "";
@@ -137,5 +155,57 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
         //TODO: Pass date of birth through with the rest, and possibly add a check for invalid dates (like in the future)
+    }
+
+
+    //TODO: connect to the right API URL 
+    private void register(String firstName, String insertion, String lastName, String dateOfBirth, String email, String password) {
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        final String url = "https://prog4sk.herokuapp.com/api/login";
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("firstName", firstName);
+            body.put("insertion", insertion);
+            body.put("lastName", lastName);
+            body.put("dateOfBirth", dateOfBirth);
+            body.put("email", email);
+            body.put("password", password);
+        } catch(Exception e) {
+            Log.e("VOLLEY_TAG", e.toString());
+        }
+
+        // Request a string response from the provided URL.
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("VOLLEY_TAG", response.toString());
+                        try {
+                            Token = response.getString("token");
+                            Log.d("the token", Token);
+                            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+
+                            startActivity(i);
+                        } catch (JSONException e) {
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("VOLLEY_TAG", error.toString());
+                        validCredentials.setTextColor(Color.RED);
+                        validCredentials.setText(R.string.unValidCredentials);
+                    }
+                }
+        );
+
+        queue.add(request);
     }
 }
