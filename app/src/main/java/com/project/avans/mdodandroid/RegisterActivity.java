@@ -145,17 +145,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     String message = "";
 
-                    builder.setTitle("Something went wrong!");
+                    builder.setTitle(R.string.registerAlertDialogTitle);
 
-                    if (!validEmail) message += "Email is invalid\n";
+                    if (!validEmail) message += (getResources().getString(R.string.emailInvalid) + "\n");
 
-                    if  (!validPassword) message += "Password is invalid (requires a minimum of 8 characters)\n";
+                    if  (!validPassword) message += (getResources().getString(R.string.registerPasswordInvalid) + "\n");
 
-                    if (!fieldsNotEmpty) message += "Name and/or date of birth are still empty";
+                    if (!fieldsNotEmpty) message += ("" + getResources().getString(R.string.emptyNameOrDate));
 
                     builder.setMessage(message);
 
-                    builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton(R.string.alertDialogCancelButton, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                         }
