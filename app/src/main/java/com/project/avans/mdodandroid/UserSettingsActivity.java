@@ -14,10 +14,11 @@ import android.widget.ListView;
 
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 
+import java.util.ArrayList;
+
 public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ListView settingsListview;
-
-    private String[] settings = {"First Name", "insertion", "Last Name", "Date of birth", "Email", "Password"};
+    private ArrayList<String> settings = new ArrayList<>();
 
     private EditText updateDialogGenericEditText;
     private EditText updateDialogEmailEditText;
@@ -29,6 +30,22 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
+
+        String firstName = getResources().getString(R.string.firstName);
+        String insertion = getResources().getString(R.string.Insertion);
+        String lastName = getResources().getString(R.string.Lastname);
+        String dateOfBirth = getResources().getString(R.string.Dateofbirth);
+        String email = getResources().getString(R.string.Email);
+        String password = getResources().getString(R.string.password);
+
+        //TODO: add local user data
+
+        settings.add(firstName);
+        settings.add(insertion);
+        settings.add(lastName);
+        settings.add(dateOfBirth);
+        settings.add(email);
+        settings.add(password);
 
         //TODO: connect the Textviews to the userdata
 
@@ -53,11 +70,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         View view;
 
         switch (type) {
-            case ("Email"):
+            case ("Emailadres"):
+            case ("Email address"):
                 view = inflater.inflate(R.layout.dialog_updateprofile_email, null);
                 builder.setView(view);
                 break;
-
+            case ("Wachtwoord"):
             case ("Password"):
                 view = inflater.inflate(R.layout.dialog_updateprofile_password, null);
                 builder.setView(view);
@@ -126,7 +144,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showUpdateDialog(settings[position]);
+        showUpdateDialog(settings.get(position));
 
     }
 }
