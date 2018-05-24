@@ -25,6 +25,7 @@
     <string name="change">Change </string>
     <string name="saveChanges">Save changes </string>
     <string name="cancel">Cancel </string>
+    <string name="logOut">Log out</string>
 
 
 </resources>
