@@ -65,7 +65,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        builder.setTitle("Change " + type);
+        builder.setTitle(getResources().getString(R.string.change)+ " " + type);
 
         View view;
 
@@ -88,7 +88,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         }
 
         final View finalView = view;
-        builder.setPositiveButton("Save changes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().getString(R.string.saveChanges), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
 
@@ -102,11 +102,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 boolean changeIsValid = false;
 
                 switch (type) {
-                    case ("Email"):
+                    case ("Emailadres"):
+                    case ("Email address"):
                         String email = String.valueOf(updateDialogEmailEditText.getText());
                         changeIsValid = ValueChecker.checkEmail(email);
                         break;
 
+                    case ("Wachtwoord"):
                     case ("Password"):
                         String currentPassword = String.valueOf(updateDialogCurrentPasswordEditText.getText());
                         String newPassword = String.valueOf(updateDialogNewPasswordEditText.getText());
@@ -131,7 +133,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 }
             }
         })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

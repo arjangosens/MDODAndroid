@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btn2 = (Button) findViewById(R.id.button_register);
-        btn2.setOnClickListener(new View.OnClickListener() {
+        TextView registerTextView = (TextView) findViewById(R.id.textView_register);
+        registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        final String url = "https://prog4sk.herokuapp.com/api/login";
+        final String url = "https://mdod.herokuapp.com/api/login/client";
 
         JSONObject body = new JSONObject();
         try {
