@@ -34,6 +34,18 @@ public class ValueChecker {
         }
     }
 
+    public static boolean checkCurrentPassword(String currentPassword) {
+        return true;
+    }
+
+    public static boolean checkNewPasswordFormat() {
+        return true;
+    }
+
+    public static boolean checkConfirmMatchesNewPassword() {
+        return true;
+    }
+
     public static boolean checkPassword(String currentPassword, String newPassword, String confirmPassword) {
 
         //TODO: Modify this method so that it checks if currentPassword is correct
