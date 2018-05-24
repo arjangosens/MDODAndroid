@@ -162,10 +162,41 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         String currentPassword = String.valueOf(updateDialogCurrentPasswordEditText.getText());
                         String newPassword = String.valueOf(updateDialogNewPasswordEditText.getText());
                         String confirmPassword = String.valueOf(updateDialogConfirmPasswordEditText.getText());
-                        changeIsValid = ValueChecker.checkPassword(currentPassword, newPassword, confirmPassword);
-                        if (!changeIsValid) {
-                            //TODO: Modify checkpassword() in ValueChecker so that each individual part can be checked
+
+                        String currentPasswordMsg;
+                        String newPasswordMsg;
+                        String confirmPasswordMsg;
+
+                        changeIsValid = true;
+
+                        if (!ValueChecker.checkCurrentPassword(currentPassword)) {
+                            currentPasswordMsg = "Invalid password!";
+                            changeIsValid = false;
+
+                        } else {
+                            currentPasswordMsg = "";
                         }
+
+                        if (!ValueChecker.checkNewPasswordFormat(newPassword)) {
+                            newPasswordMsg = "Needs to be longer than 8 characters and contain at least one number and letter";
+                            changeIsValid = false;
+
+                        } else {
+                            newPasswordMsg = "";
+                        }
+
+                        if (!ValueChecker.checkConfirmMatchesNewPassword(newPassword, confirmPassword)) {
+                            confirmPasswordMsg = "Needs to match new password";
+                            changeIsValid = false;
+
+                        } else {
+                            confirmPasswordMsg = "";
+                        }
+
+                        incorrectCurrentPasswordTextView.setText(currentPasswordMsg);
+                        incorrectNewPasswordTextView.setText(newPasswordMsg);
+                        incorrectConfirmPasswordTextView.setText(confirmPasswordMsg);
+
                         break;
 
                     case ("First name"):
@@ -189,12 +220,16 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         break;
                 }
 
-                if (changeIsValid) {
+                if (changeIsValid)
+
+                {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " allowed");
                     // TODO: Save changes made in AlertDialog
 
                     dialog.dismiss();
-                } else {
+                } else
+
+                {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " NOT allowed");
                 }
 
