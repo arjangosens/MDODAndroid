@@ -153,7 +153,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         String email = String.valueOf(updateDialogEmailEditText.getText());
                         changeIsValid = ValueChecker.checkEmail(email);
                         if (!changeIsValid) {
-                            incorrectEmailTextView.setText("Invalid email address!");
+                            incorrectEmailTextView.setText(getResources().getString(R.string.emailInvalid));
                         }
                         break;
 
@@ -170,7 +170,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         changeIsValid = true;
 
                         if (!ValueChecker.checkCurrentPassword(currentPassword)) {
-                            currentPasswordMsg = "Invalid password!";
+                            currentPasswordMsg = getResources().getString(R.string.userSettingsCurrentPasswordInvalid);
                             changeIsValid = false;
 
                         } else {
@@ -178,7 +178,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         }
 
                         if (!ValueChecker.checkNewPasswordFormat(newPassword)) {
-                            newPasswordMsg = "Needs to be longer than 8 characters and contain at least one number and letter";
+                            newPasswordMsg = getResources().getString(R.string.userSettingsNewPasswordInvalid);
                             changeIsValid = false;
 
                         } else {
@@ -186,7 +186,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         }
 
                         if (!ValueChecker.checkConfirmMatchesNewPassword(newPassword, confirmPassword)) {
-                            confirmPasswordMsg = "Needs to match new password";
+                            confirmPasswordMsg = getResources().getString(R.string.userSettingsConfirmPasswordInvalid);
                             changeIsValid = false;
 
                         } else {
@@ -207,7 +207,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         String field = String.valueOf(updateDialogGenericEditText.getText());
                         Log.i("DialogUpdateProfile", "Value of field: " + field);
                         if (field.equals("")) {
-                            incorrectFieldTextView.setText("Field cannot be empty!");
+                            incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
                         } else {
                             changeIsValid = true;
