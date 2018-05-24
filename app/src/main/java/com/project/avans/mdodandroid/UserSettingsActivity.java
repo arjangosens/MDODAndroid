@@ -151,7 +151,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         if (!changeIsValid) {
                             incorrectEmailTextView.setText("Invalid email address!");
                         }
-
                         break;
 
                     case ("Wachtwoord"):
@@ -160,13 +159,29 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         String newPassword = String.valueOf(updateDialogNewPasswordEditText.getText());
                         String confirmPassword = String.valueOf(updateDialogConfirmPasswordEditText.getText());
                         changeIsValid = ValueChecker.checkPassword(currentPassword, newPassword, confirmPassword);
+                        if (!changeIsValid) {
+                            //TODO: Modify checkpassword() in ValueChecker so that each individual part can be checked
+                        }
+                        break;
+
+                    case ("First name"):
+                    case ("Voornaam"):
+                    case ("Last name"):
+                    case ("Achternaam"):
+
+                        String field = String.valueOf(updateDialogGenericEditText.getText());
+                        Log.i("DialogUpdateProfile", "Value of field: " + field);
+                        if (field.equals("")) {
+                            incorrectFieldTextView.setText("Field cannot be empty!");
+
+                        } else {
+                            changeIsValid = true;
+                        }
                         break;
 
                     default:
-                        Log.i("DialogUpdateProfile", "editText: " + String.valueOf(R.id.dialogUpdateProfile_editText));
-                        if (!String.valueOf(updateDialogGenericEditText.getText()).equals("")) {
-                            changeIsValid = true;
-                        }
+                        Log.i("DialogUpdateProfile", "Default called with type" + type);
+                        changeIsValid = true;
                         break;
                 }
 
