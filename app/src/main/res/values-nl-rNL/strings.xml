@@ -25,4 +25,8 @@
     <string name="change">Verander </string>
     <string name="saveChanges">Opslaan </string>
     <string name="logOut">uitloggen</string>
+    <string name="cancel">cancel</string>
+    <string name="adress">Adres</string>
+    <string name="phoneNumber">Telefoon nummer</string>
+
 </resources>
