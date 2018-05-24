@@ -24,5 +24,5 @@
     <string name="userSettings">Account instellingen</string>
     <string name="change">Verander </string>
     <string name="saveChanges">Opslaan </string>
-
+    <string name="logOut">uitloggen</string>
 </resources>

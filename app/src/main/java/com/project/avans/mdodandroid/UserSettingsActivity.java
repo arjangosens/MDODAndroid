@@ -9,14 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 
 import java.util.ArrayList;
 
-public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener {
     private ListView settingsListview;
     private ArrayList<String> settings = new ArrayList<>();
 
@@ -25,6 +27,16 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private EditText updateDialogCurrentPasswordEditText;
     private EditText updateDialogNewPasswordEditText;
     private EditText updateDialogConfirmPasswordEditText;
+
+    private TextView incorrectCurrentPasswordTextView;
+    private TextView incorrectNewPasswordTextView;
+    private TextView incorrectConfirmPasswordTextView;
+
+    private TextView incorrectEmailTextView;
+    private TextView incorrectFieldTextView;
+
+    private String type;
+    private View updateDialogView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +70,14 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settingsListview.setOnItemClickListener(this);
     }
 
-    private void showUpdateDialog(final String type) {
+    private void showUpdateDialog() {
         AlertDialog alertDialog;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        builder.setTitle(getResources().getString(R.string.change)+ " " + type);
+        builder.setTitle(getResources().getString(R.string.change) + " " + type);
 
         View view;
 
@@ -87,17 +99,47 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 break;
         }
 
-        final View finalView = view;
-        builder.setPositiveButton(getResources().getString(R.string.saveChanges), new DialogInterface.OnClickListener() {
-            @Override
+        updateDialogView = view;
+        builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
+        builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
 
+        alertDialog = builder.create();
+        alertDialog.setOnShowListener(this);
 
-                updateDialogGenericEditText = finalView.findViewById(R.id.dialogUpdateProfile_editText);
-                updateDialogEmailEditText = finalView.findViewById(R.id.dialogUpdateProfileEmail_editText);
-                updateDialogCurrentPasswordEditText = finalView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
-                updateDialogNewPasswordEditText = finalView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
-                updateDialogConfirmPasswordEditText = finalView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
+        alertDialog.show();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        type = settings.get(position);
+        showUpdateDialog();
+
+    }
+
+    @Override
+    public void onShow(final DialogInterface dialog) {
+        Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+                updateDialogEmailEditText = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_editText);
+                updateDialogCurrentPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
+                updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
+                updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
+
+                incorrectCurrentPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePasswor_textViewIncorrectCurrentPassword);
+                incorrectNewPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectNewPassword);
+                incorrectConfirmPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectConfirmPassword);
+
+                incorrectEmailTextView = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_textViewIncorrectEmail);
+                incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
 
                 boolean changeIsValid = false;
 
@@ -106,6 +148,9 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     case ("Email address"):
                         String email = String.valueOf(updateDialogEmailEditText.getText());
                         changeIsValid = ValueChecker.checkEmail(email);
+                        if (!changeIsValid) {
+                            incorrectEmailTextView.setText("Invalid email address!");
+                        }
                         break;
 
                     case ("Wachtwoord"):
@@ -114,13 +159,29 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         String newPassword = String.valueOf(updateDialogNewPasswordEditText.getText());
                         String confirmPassword = String.valueOf(updateDialogConfirmPasswordEditText.getText());
                         changeIsValid = ValueChecker.checkPassword(currentPassword, newPassword, confirmPassword);
+                        if (!changeIsValid) {
+                            //TODO: Modify checkpassword() in ValueChecker so that each individual part can be checked
+                        }
+                        break;
+
+                    case ("First name"):
+                    case ("Voornaam"):
+                    case ("Last name"):
+                    case ("Achternaam"):
+
+                        String field = String.valueOf(updateDialogGenericEditText.getText());
+                        Log.i("DialogUpdateProfile", "Value of field: " + field);
+                        if (field.equals("")) {
+                            incorrectFieldTextView.setText("Field cannot be empty!");
+
+                        } else {
+                            changeIsValid = true;
+                        }
                         break;
 
                     default:
-                        Log.i("DialogUpdateProfile", "editText: " + String.valueOf(R.id.dialogUpdateProfile_editText));
-                        if (!String.valueOf(updateDialogGenericEditText.getText()).equals("")) {
-                            changeIsValid = true;
-                        }
+                        Log.i("DialogUpdateProfile", "Default called with type" + type);
+                        changeIsValid = true;
                         break;
                 }
 
@@ -128,25 +189,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " allowed");
                     // TODO: Save changes made in AlertDialog
 
+                    dialog.dismiss();
                 } else {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " NOT allowed");
                 }
+
             }
-        })
-                .setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        alertDialog = builder.create();
-
-        alertDialog.show();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showUpdateDialog(settings.get(position));
-
+        });
     }
 }
