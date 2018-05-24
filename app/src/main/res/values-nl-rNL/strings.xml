@@ -18,9 +18,9 @@
     <string name="profile">Mijn profiel:</string>
     <string name="changeData">Wijzig gegevens</string>
     <string name="registerAlertDialogTitle">Er ging iets fout!</string>
-    <string name="emailInvalid">Email is niet juist</string>
-    <string name="registerPasswordInvalid">Wachtwoord is niet juist</string>
-    <string name="emptyNameOrDate">Naam en/of datum zijn nogsteeds leeg</string>
+    <string name="emailInvalid">- Email is niet juist</string>
+    <string name="registerPasswordInvalid">- Wachtwoord is onjuist (moet 8 of meer karakters lang zijn en minstens 1 cijfer en letter erin hebben)</string>
+    <string name="emptyNameOrDate">- Naam en/of datum zijn nogsteeds leeg</string>
     <string name="userSettings">Account instellingen</string>
     <string name="change">Verander </string>
     <string name="saveChanges">Opslaan </string>
