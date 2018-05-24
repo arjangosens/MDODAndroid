@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 
@@ -26,6 +27,14 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private EditText updateDialogCurrentPasswordEditText;
     private EditText updateDialogNewPasswordEditText;
     private EditText updateDialogConfirmPasswordEditText;
+
+    private TextView incorrectCurrentPasswordTextView;
+    private TextView incorrectNewPasswordTextView;
+    private TextView incorrectConfirmPasswordTextView;
+
+    private TextView incorrectEmailTextView;
+    private TextView incorrectFieldTextView;
+
     private String type;
     private View updateDialogView;
 
@@ -125,6 +134,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
                 updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
 
+                incorrectCurrentPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePasswor_textViewIncorrectCurrentPassword);
+                incorrectNewPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectNewPassword);
+                incorrectConfirmPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectConfirmPassword);
+
+                incorrectEmailTextView = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_textViewIncorrectEmail);
+                incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+
                 boolean changeIsValid = false;
 
                 switch (type) {
@@ -132,6 +148,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     case ("Email address"):
                         String email = String.valueOf(updateDialogEmailEditText.getText());
                         changeIsValid = ValueChecker.checkEmail(email);
+                        if (!changeIsValid) {
+                            incorrectEmailTextView.setText("Invalid email address!");
+                        }
+
                         break;
 
                     case ("Wachtwoord"):
