@@ -31,6 +31,11 @@ public class HomepageActivity extends AppCompatActivity {
                 i = new Intent(getApplicationContext(), UserSettingsActivity.class);
                 startActivity(i);
                 break;
+            case R.id.menu_logout:
+                i = new Intent(getApplicationContext(), MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }

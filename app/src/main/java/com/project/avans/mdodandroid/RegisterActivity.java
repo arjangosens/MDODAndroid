@@ -2,6 +2,7 @@ package com.project.avans.mdodandroid;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.content.DialogInterface;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
+import com.project.avans.mdodandroid.object_classes.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +44,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextView validCredentials;
     private String dateOfBirth;
     private String email;
-    private String Token;
+    private Context context = this;
+    CharSequence text = "Account aangemaakt";
+    int duration = Toast.LENGTH_SHORT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +105,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.activityRegister_buttonCreateAccount:
                 Log.i("RegisterActivity", "onClick of registerButton called");
 
+                String username = String.valueOf(firstNameEditText.getText());
+                String insert = String.valueOf(insertionEditText.getText());
+                String lastname = String.valueOf(lastNameEditText.getText());
                 String password = String.valueOf(passwordEditText.getText());
                 String confirmPassword = String.valueOf(confirmPasswordEditText.getText());
-                String email = String.valueOf(emailEditText.getText());
+                email = String.valueOf(emailEditText.getText());
 
                 boolean validPassword = ValueChecker.checkPassword(password, confirmPassword);
                 boolean fieldsNotEmpty = checkIfEmptyFields();
@@ -110,6 +118,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 if (validPassword && validEmail && fieldsNotEmpty) {
                     //TODO: Create intent to dashboard with new account
+                    if(insert.isEmpty()){
+                        insert = "";
+                    }
+                    User user = new User(username, insert, lastname, email, dateOfBirth);
+                    register(user, password);
+                    Log.i("user", "user: " + user.getDate() + " " + user.getEmail() );
+                    Log.i("infix", "infix: " + user.getInsertion() + "I");
+
 
                 } else {
 
@@ -148,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         month = month + 1;
 
-        dateOfBirth = (dayOfMonth + "-" + month + "-" + year);
+        dateOfBirth = (year + "-" + month + "-" + dayOfMonth);
         Log.i("RegisterActivity", "onDateSet called, date: " + dateOfBirth);
         datePickerButton.setText(dateOfBirth);
 
@@ -158,19 +174,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     //TODO: connect to the right API URL 
-    private void register(String firstName, String insertion, String lastName, String dateOfBirth, String email, String password) {
+    private void register(User user, String password) {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        final String url = "https://prog4sk.herokuapp.com/api/login";
+        final String url = "https://mdod.herokuapp.com/api/register/client";
 
         JSONObject body = new JSONObject();
         try {
-            body.put("firstName", firstName);
-            body.put("insertion", insertion);
-            body.put("lastName", lastName);
-            body.put("dateOfBirth", dateOfBirth);
-            body.put("email", email);
+            body.put("firstname", user.getName());
+            body.put("infix", user.getInsertion());
+            body.put("lastname", user.getLastname());
+            body.put("dob", user.getDate());
+            body.put("email", user.getEmail());
             body.put("password", password);
         } catch(Exception e) {
             Log.e("VOLLEY_TAG", e.toString());
@@ -184,15 +200,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("VOLLEY_TAG", response.toString());
-                        try {
-                            Token = response.getString("token");
-                            Log.d("the token", Token);
-                            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
-
-                            startActivity(i);
-                        } catch (JSONException e) {
-                        }
+                        Log.d("VOLLEY_TAG response", response.toString());
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Intent intent = new Intent(context, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 },
                 new Response.ErrorListener() {
