@@ -83,9 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
                             Token = response.getString("token");
                             Log.d("the token", Token);
-                            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                            startActivity(i);
+                            startActivity(intent);
                         } catch (JSONException e) {
                         }
                     }

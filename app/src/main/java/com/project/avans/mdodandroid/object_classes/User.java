@@ -8,17 +8,15 @@ public class User implements Serializable{
     private String insertion;
     private String lastname;
     private String email;
-    private String password;
     private String date;
 
 
 
-    public User(String name, String insertion, String lastname, String email, String password, String date) {
+    public User(String name, String insertion, String lastname, String email, String date) {
         this.name = name;
         this.insertion = insertion;
         this.lastname = lastname;
         this.email = email;
-        this.password = password;
         this.date = date;
     }
 
@@ -38,9 +36,7 @@ public class User implements Serializable{
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
 
     public void setDate(String date) {
         this.date = date;
@@ -63,9 +59,6 @@ public class User implements Serializable{
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public String getDate() {
         return date;
