@@ -32,6 +32,9 @@
     <string name="userSettingsNewPasswordInvalid">Needs to be longer than 8 characters and contain at least one number and letter</string>
     <string name="userSettingsConfirmPasswordInvalid">Needs to match new password</string>
     <string name="userSettingsFieldInvalid">Field cannot be empty!</string>
+    <string name="userSettingsCurrentPassword">Current password</string>
+    <string name="userSettingsNewPassword">New password</string>
+    <string name="userSettingsConfirmPassword">Confirm new password</string>
 
 
 </resources>
