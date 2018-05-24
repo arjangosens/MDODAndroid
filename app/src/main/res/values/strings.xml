@@ -24,7 +24,9 @@
     <string name="userSettings">User settings</string>
     <string name="change">Change </string>
     <string name="saveChanges">Save changes </string>
-    <string name="cancel">Cancel </string>
+    <string name="cancel">cancel</string>
+    <string name="adress">Adress</string>
+    <string name="phoneNumber">Phone Number</string>
 
 
 </resources>
