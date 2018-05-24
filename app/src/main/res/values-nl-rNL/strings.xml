@@ -22,4 +22,7 @@
     <string name="registerPasswordInvalid">Wachtwoord is niet juist</string>
     <string name="emptyNameOrDate">Naam en/of datum zijn nogsteeds leeg</string>
     <string name="userSettings">Account instellingen</string>
+    <string name="change">Verander </string>
+    <string name="saveChanges">Opslaan </string>
+    <string name="logOut">uitloggen</string>
 </resources>
