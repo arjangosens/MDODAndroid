@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -16,7 +17,7 @@ import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 
 import java.util.ArrayList;
 
-public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener {
     private ListView settingsListview;
     private ArrayList<String> settings = new ArrayList<>();
 
@@ -25,6 +26,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private EditText updateDialogCurrentPasswordEditText;
     private EditText updateDialogNewPasswordEditText;
     private EditText updateDialogConfirmPasswordEditText;
+    private String type;
+    private View updateDialogView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +61,14 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settingsListview.setOnItemClickListener(this);
     }
 
-    private void showUpdateDialog(final String type) {
+    private void showUpdateDialog() {
         AlertDialog alertDialog;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        builder.setTitle(getResources().getString(R.string.change)+ " " + type);
+        builder.setTitle(getResources().getString(R.string.change) + " " + type);
 
         View view;
 
@@ -87,17 +90,40 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 break;
         }
 
-        final View finalView = view;
-        builder.setPositiveButton(getResources().getString(R.string.saveChanges), new DialogInterface.OnClickListener() {
-            @Override
+        updateDialogView = view;
+        builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
+        builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
 
+        alertDialog = builder.create();
+        alertDialog.setOnShowListener(this);
 
-                updateDialogGenericEditText = finalView.findViewById(R.id.dialogUpdateProfile_editText);
-                updateDialogEmailEditText = finalView.findViewById(R.id.dialogUpdateProfileEmail_editText);
-                updateDialogCurrentPasswordEditText = finalView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
-                updateDialogNewPasswordEditText = finalView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
-                updateDialogConfirmPasswordEditText = finalView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
+        alertDialog.show();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        type = settings.get(position);
+        showUpdateDialog();
+
+    }
+
+    @Override
+    public void onShow(final DialogInterface dialog) {
+        Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+                updateDialogEmailEditText = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_editText);
+                updateDialogCurrentPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
+                updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
+                updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
 
                 boolean changeIsValid = false;
 
@@ -128,25 +154,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " allowed");
                     // TODO: Save changes made in AlertDialog
 
+                    dialog.dismiss();
                 } else {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " NOT allowed");
                 }
+
             }
-        })
-                .setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        alertDialog = builder.create();
-
-        alertDialog.show();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showUpdateDialog(settings.get(position));
-
+        });
     }
 }
