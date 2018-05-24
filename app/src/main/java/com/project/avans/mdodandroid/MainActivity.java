@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     TextView result;
+    String Token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +45,22 @@ public class MainActivity extends AppCompatActivity {
                 );
             }
         });
+
+        TextView registerTextView = (TextView) findViewById(R.id.textView_register);
+        registerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void login(String username, String password) {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        final String url = "https://prog4sk.herokuapp.com/api/login";
+        final String url = "https://mdod.herokuapp.com/api/login/client";
 
         JSONObject body = new JSONObject();
         try {
@@ -69,11 +79,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("VOLLEY_TAG", response.toString());
-                        result.setTextColor(Color.GREEN);
                         try {
-                            result.setText(response.getString("token"));
-                            Intent i = new Intent(getApplicationContext(), Homepage.class);
-                            startActivity(i);
+
+                            Token = response.getString("token");
+                            Log.d("the token", Token);
+                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                            startActivity(intent);
                         } catch (JSONException e) {
                         }
                     }

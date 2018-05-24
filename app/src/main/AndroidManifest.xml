@@ -18,8 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Homepage" />
-        <activity android:name=".UserSettings"></activity>
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".HomepageActivity" />
+        <activity android:name=".UserSettingsActivity"></activity>
     </application>
 
 </manifest>

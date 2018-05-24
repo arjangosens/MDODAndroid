@@ -4,4 +4,28 @@
     <string name="register">register</string>
     <string name="noAccount">Don\'t have an account?</string>
     <string name="unValidCredentials">please enter valid credentials</string>
+    <string name="firstName">First name</string>
+    <string name="Insertion">Insertion</string>
+    <string name="Lastname">Last name</string>
+    <string name="date">Day/Month/Year</string>
+    <string name="Dateofbirth">Date of birth</string>
+    <string name="Email">Email address</string>
+    <string name="emailExample">mail@example.com</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="createAccount">Create account</string>
+    <string name="profile">My profile:</string>
+    <string name="changeData">change data</string>
+    <string name="registerAlertDialogTitle">Something went wrong!</string>
+    <string name="emailInvalid">Email is invalid</string>
+    <string name="registerPasswordInvalid">Password is invalid (min 8 characters, at least 1 letter and number, confirmation needs to be equal)</string>
+    <string name="emptyNameOrDate">Name and/or date of birth are still empty</string>
+    <string name="alertDialogCancelButton" translatable="false">Ok</string>
+    <string name="userSettings">User settings</string>
+    <string name="change">Change </string>
+    <string name="saveChanges">Save changes </string>
+    <string name="cancel">Cancel </string>
+    <string name="logOut">Log out</string>
+
+
 </resources>
