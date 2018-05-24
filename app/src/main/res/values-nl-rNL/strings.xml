@@ -28,5 +28,9 @@
     <string name="cancel">cancel</string>
     <string name="adress">Adres</string>
     <string name="phoneNumber">Telefoon nummer</string>
+    <string name="userSettingsCurrentPasswordInvalid">Onjuist wachtwoord!</string>
+    <string name="userSettingsNewPasswordInvalid">Moet langer dan 8 karakters zijn en minstens 1 letter en cijfer bevatten</string>
+    <string name="userSettingsConfirmPasswordInvalid">Moet hetzelfde zijn als het nieuwe wachtwoord</string>
+    <string name="userSettingsFieldInvalid">Dit veld mag niet leeg zijn!</string>
 
 </resources>
