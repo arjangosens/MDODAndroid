@@ -39,11 +39,12 @@
 
     <TextView
         android:id="@+id/textview_Status"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text=""
+        android:textAlignment="center"
         android:textColor="@color/coloraccent"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/editText_Email"
