@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("VOLLEY_TAG", error.toString());
-                        result.setTextColor(Color.RED);
+//                        result.setTextColor(Color.RED);
                         result.setText(R.string.unValidCredentials);
                     }
                 }
