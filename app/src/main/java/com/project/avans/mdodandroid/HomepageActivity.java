@@ -27,10 +27,10 @@ public class HomepageActivity extends AppCompatActivity {
 
         Intent i;
         switch(id){
-//            case R.id.menu_user_settings:
-//                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
-//                startActivity(i);
-//                break;
+            case R.id.menu_user_settings:
+                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
+                startActivity(i);
+                break;
             case R.id.menu_logout:
                 i = new Intent(getApplicationContext(), MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
