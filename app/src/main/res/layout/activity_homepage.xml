@@ -6,16 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.project.avans.mdodandroid.HomepageActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button_goals"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="login succesvol"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/coloraccent"
+        android:text="@string/goals"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

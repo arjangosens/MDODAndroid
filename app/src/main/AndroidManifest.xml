@@ -18,9 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".HomepageActivity" />
-        <activity android:name=".UserSettingsActivity"></activity>
+        <activity android:name=".UserSettingsActivity" />
+        <activity android:name=".MyPersonalGoalsActivity"></activity>
     </application>
 
 </manifest>
