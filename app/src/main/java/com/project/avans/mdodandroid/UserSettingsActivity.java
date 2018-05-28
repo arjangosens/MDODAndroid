@@ -1,11 +1,14 @@
 package com.project.avans.mdodandroid;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,32 +26,43 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private ArrayList<String> settings = new ArrayList<>();
 
     private EditText updateDialogGenericEditText;
-    private EditText updateDialogEmailEditText;
-    private EditText updateDialogCurrentPasswordEditText;
-    private EditText updateDialogNewPasswordEditText;
-    private EditText updateDialogConfirmPasswordEditText;
+    private EditText updateDialogPhoneNrEditText;
+//    private EditText updateDialogCurrentPasswordEditText;
+//    private EditText updateDialogNewPasswordEditText;
+//    private EditText updateDialogConfirmPasswordEditText;
+//
+//    private TextView incorrectCurrentPasswordTextView;
+//    private TextView incorrectNewPasswordTextView;
+//    private TextView incorrectConfirmPasswordTextView;
 
-    private TextView incorrectCurrentPasswordTextView;
-    private TextView incorrectNewPasswordTextView;
-    private TextView incorrectConfirmPasswordTextView;
+    private String phoneNumber;
+    private String firstName;
+    private String insertion;
+    private String lastName;
+    private String dateOfBirth;
 
-    private TextView incorrectEmailTextView;
     private TextView incorrectFieldTextView;
+    private TextView incorrectPhoneNrTextView;
 
     private String type;
     private View updateDialogView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
-        String firstName = getResources().getString(R.string.firstName);
-        String insertion = getResources().getString(R.string.Insertion);
-        String lastName = getResources().getString(R.string.Lastname);
-        String dateOfBirth = getResources().getString(R.string.Dateofbirth);
-        String email = getResources().getString(R.string.Email);
-        String password = getResources().getString(R.string.password);
+        //removes the title from the title bar in the userSettingsActivity
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        firstName = getResources().getString(R.string.firstName);
+        insertion = getResources().getString(R.string.Insertion);
+        lastName = getResources().getString(R.string.Lastname);
+        dateOfBirth = getResources().getString(R.string.Dateofbirth);
+//        String password = getResources().getString(R.string.password);
+        String adress = getResources().getString(R.string.adress);
+        phoneNumber = getResources().getString(R.string.phoneNumber);
 
         //TODO: add local user data
 
@@ -56,8 +70,9 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settings.add(insertion);
         settings.add(lastName);
         settings.add(dateOfBirth);
-        settings.add(email);
-        settings.add(password);
+//        settings.add(password);
+        settings.add(adress);
+        settings.add(phoneNumber);
 
         //TODO: connect the Textviews to the userdata
 
@@ -81,23 +96,16 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         View view;
 
-        switch (type) {
-            case ("Emailadres"):
-            case ("Email address"):
-                view = inflater.inflate(R.layout.dialog_updateprofile_email, null);
-                builder.setView(view);
-                break;
-            case ("Wachtwoord"):
-            case ("Password"):
-                view = inflater.inflate(R.layout.dialog_updateprofile_password, null);
-                builder.setView(view);
-                break;
+        if (type.equals(phoneNumber)) {
+            view = inflater.inflate(R.layout.dialog_updateprofile_phonenumber, null);
 
-            default:
-                view = inflater.inflate(R.layout.dialog_updateprofile, null);
-                builder.setView(view);
-                break;
+        } else {
+
+            view = inflater.inflate(R.layout.dialog_updateprofile, null);
+
         }
+
+        builder.setView(view);
 
         updateDialogView = view;
         builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
@@ -129,72 +137,84 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             public void onClick(View v) {
 
                 updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
-                updateDialogEmailEditText = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_editText);
-                updateDialogCurrentPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
-                updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
-                updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
-
-                incorrectCurrentPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePasswor_textViewIncorrectCurrentPassword);
-                incorrectNewPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectNewPassword);
-                incorrectConfirmPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectConfirmPassword);
-
-                incorrectEmailTextView = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_textViewIncorrectEmail);
                 incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+//                updateDialogCurrentPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
+//                updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
+//                updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
+
+//                incorrectCurrentPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePasswor_textViewIncorrectCurrentPassword);
+//                incorrectNewPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectNewPassword);
+//                incorrectConfirmPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectConfirmPassword);
+
+
+                updateDialogPhoneNrEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_editText);
+                incorrectPhoneNrTextView =  updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
 
                 boolean changeIsValid = false;
 
-                switch (type) {
-                    case ("Emailadres"):
-                    case ("Email address"):
-                        String email = String.valueOf(updateDialogEmailEditText.getText());
-                        changeIsValid = ValueChecker.checkEmail(email);
-                        if (!changeIsValid) {
-                            incorrectEmailTextView.setText("Invalid email address!");
-                        }
-                        break;
+                if (type.equals(firstName) || type.equals(lastName)) {
+                    String field = String.valueOf(updateDialogGenericEditText.getText());
+                    Log.i("DialogUpdateProfile", "Value of field: " + field);
+                    if (field.equals("")) {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
-                    case ("Wachtwoord"):
-                    case ("Password"):
-                        String currentPassword = String.valueOf(updateDialogCurrentPasswordEditText.getText());
-                        String newPassword = String.valueOf(updateDialogNewPasswordEditText.getText());
-                        String confirmPassword = String.valueOf(updateDialogConfirmPasswordEditText.getText());
-                        changeIsValid = ValueChecker.checkPassword(currentPassword, newPassword, confirmPassword);
-                        if (!changeIsValid) {
-                            //TODO: Modify checkpassword() in ValueChecker so that each individual part can be checked
-                        }
-                        break;
-
-                    case ("First name"):
-                    case ("Voornaam"):
-                    case ("Last name"):
-                    case ("Achternaam"):
-
-                        String field = String.valueOf(updateDialogGenericEditText.getText());
-                        Log.i("DialogUpdateProfile", "Value of field: " + field);
-                        if (field.equals("")) {
-                            incorrectFieldTextView.setText("Field cannot be empty!");
-
-                        } else {
-                            changeIsValid = true;
-                        }
-                        break;
-
-                    default:
-                        Log.i("DialogUpdateProfile", "Default called with type" + type);
+                    } else {
                         changeIsValid = true;
-                        break;
+                    }
+
+                } else if (type.equals(phoneNumber)) {
+                    //TODO: Check if phoneNumber is correct with regEx
+
+                    changeIsValid = true;
+
+                } else {
+                    Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
+                    changeIsValid = true;
+
                 }
 
-                if (changeIsValid) {
+                if (changeIsValid)
+
+                {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " allowed");
                     // TODO: Save changes made in AlertDialog
 
                     dialog.dismiss();
-                } else {
+                } else
+
+                {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " NOT allowed");
                 }
 
             }
         });
+    }
+
+    //adds custom menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        Intent i;
+        switch(id){
+            case R.id.menu_user_settings:
+//                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
+//                startActivity(i);
+                break;
+            case R.id.menu_logout:
+                i = new Intent(getApplicationContext(), MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }
