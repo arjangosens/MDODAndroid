@@ -1,11 +1,14 @@
 package com.project.avans.mdodandroid;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,12 +46,17 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
+        //removes the title from the title bar in the userSettingsActivity
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         String firstName = getResources().getString(R.string.firstName);
         String insertion = getResources().getString(R.string.Insertion);
         String lastName = getResources().getString(R.string.Lastname);
         String dateOfBirth = getResources().getString(R.string.Dateofbirth);
         String email = getResources().getString(R.string.Email);
         String password = getResources().getString(R.string.password);
+        String adress = getResources().getString(R.string.adress);
+        String phoneNumber = getResources().getString(R.string.phoneNumber);
 
         //TODO: add local user data
 
@@ -58,6 +66,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settings.add(dateOfBirth);
         settings.add(email);
         settings.add(password);
+        settings.add(adress);
+        settings.add(phoneNumber);
 
         //TODO: connect the Textviews to the userdata
 
@@ -149,7 +159,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         String email = String.valueOf(updateDialogEmailEditText.getText());
                         changeIsValid = ValueChecker.checkEmail(email);
                         if (!changeIsValid) {
-                            incorrectEmailTextView.setText("Invalid email address!");
+                            incorrectEmailTextView.setText(getResources().getString(R.string.emailInvalid));
                         }
                         break;
 
@@ -158,10 +168,41 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         String currentPassword = String.valueOf(updateDialogCurrentPasswordEditText.getText());
                         String newPassword = String.valueOf(updateDialogNewPasswordEditText.getText());
                         String confirmPassword = String.valueOf(updateDialogConfirmPasswordEditText.getText());
-                        changeIsValid = ValueChecker.checkPassword(currentPassword, newPassword, confirmPassword);
-                        if (!changeIsValid) {
-                            //TODO: Modify checkpassword() in ValueChecker so that each individual part can be checked
+
+                        String currentPasswordMsg;
+                        String newPasswordMsg;
+                        String confirmPasswordMsg;
+
+                        changeIsValid = true;
+
+                        if (!ValueChecker.checkCurrentPassword(currentPassword)) {
+                            currentPasswordMsg = getResources().getString(R.string.userSettingsCurrentPasswordInvalid);
+                            changeIsValid = false;
+
+                        } else {
+                            currentPasswordMsg = "";
                         }
+
+                        if (!ValueChecker.checkNewPasswordFormat(newPassword)) {
+                            newPasswordMsg = getResources().getString(R.string.userSettingsNewPasswordInvalid);
+                            changeIsValid = false;
+
+                        } else {
+                            newPasswordMsg = "";
+                        }
+
+                        if (!ValueChecker.checkConfirmMatchesNewPassword(newPassword, confirmPassword)) {
+                            confirmPasswordMsg = getResources().getString(R.string.userSettingsConfirmPasswordInvalid);
+                            changeIsValid = false;
+
+                        } else {
+                            confirmPasswordMsg = "";
+                        }
+
+                        incorrectCurrentPasswordTextView.setText(currentPasswordMsg);
+                        incorrectNewPasswordTextView.setText(newPasswordMsg);
+                        incorrectConfirmPasswordTextView.setText(confirmPasswordMsg);
+
                         break;
 
                     case ("First name"):
@@ -172,7 +213,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         String field = String.valueOf(updateDialogGenericEditText.getText());
                         Log.i("DialogUpdateProfile", "Value of field: " + field);
                         if (field.equals("")) {
-                            incorrectFieldTextView.setText("Field cannot be empty!");
+                            incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
                         } else {
                             changeIsValid = true;
@@ -185,16 +226,48 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         break;
                 }
 
-                if (changeIsValid) {
+                if (changeIsValid)
+
+                {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " allowed");
                     // TODO: Save changes made in AlertDialog
 
                     dialog.dismiss();
-                } else {
+                } else
+
+                {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " NOT allowed");
                 }
 
             }
         });
+    }
+
+    //adds custom menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        Intent i;
+        switch(id){
+            case R.id.menu_user_settings:
+//                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
+//                startActivity(i);
+                break;
+            case R.id.menu_logout:
+                i = new Intent(getApplicationContext(), MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }
