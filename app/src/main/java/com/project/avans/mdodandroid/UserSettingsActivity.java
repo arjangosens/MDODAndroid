@@ -27,13 +27,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     private EditText updateDialogGenericEditText;
     private EditText updateDialogEmailEditText;
-    private EditText updateDialogCurrentPasswordEditText;
-    private EditText updateDialogNewPasswordEditText;
-    private EditText updateDialogConfirmPasswordEditText;
-
-    private TextView incorrectCurrentPasswordTextView;
-    private TextView incorrectNewPasswordTextView;
-    private TextView incorrectConfirmPasswordTextView;
+//    private EditText updateDialogCurrentPasswordEditText;
+//    private EditText updateDialogNewPasswordEditText;
+//    private EditText updateDialogConfirmPasswordEditText;
+//
+//    private TextView incorrectCurrentPasswordTextView;
+//    private TextView incorrectNewPasswordTextView;
+//    private TextView incorrectConfirmPasswordTextView;
 
     private TextView incorrectEmailTextView;
     private TextView incorrectFieldTextView;
@@ -54,7 +54,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         String lastName = getResources().getString(R.string.Lastname);
         String dateOfBirth = getResources().getString(R.string.Dateofbirth);
         String email = getResources().getString(R.string.Email);
-        String password = getResources().getString(R.string.password);
+//        String password = getResources().getString(R.string.password);
         String adress = getResources().getString(R.string.adress);
         String phoneNumber = getResources().getString(R.string.phoneNumber);
 
@@ -65,7 +65,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settings.add(lastName);
         settings.add(dateOfBirth);
         settings.add(email);
-        settings.add(password);
+//        settings.add(password);
         settings.add(adress);
         settings.add(phoneNumber);
 
@@ -97,11 +97,11 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 view = inflater.inflate(R.layout.dialog_updateprofile_email, null);
                 builder.setView(view);
                 break;
-            case ("Wachtwoord"):
-            case ("Password"):
-                view = inflater.inflate(R.layout.dialog_updateprofile_password, null);
-                builder.setView(view);
-                break;
+//            case ("Wachtwoord"):
+//            case ("Password"):
+//                view = inflater.inflate(R.layout.dialog_updateprofile_password, null);
+//                builder.setView(view);
+//                break;
 
             default:
                 view = inflater.inflate(R.layout.dialog_updateprofile, null);
@@ -140,13 +140,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
                 updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
                 updateDialogEmailEditText = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_editText);
-                updateDialogCurrentPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
-                updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
-                updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
+//                updateDialogCurrentPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
+//                updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
+//                updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
 
-                incorrectCurrentPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePasswor_textViewIncorrectCurrentPassword);
-                incorrectNewPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectNewPassword);
-                incorrectConfirmPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectConfirmPassword);
+//                incorrectCurrentPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePasswor_textViewIncorrectCurrentPassword);
+//                incorrectNewPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectNewPassword);
+//                incorrectConfirmPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectConfirmPassword);
 
                 incorrectEmailTextView = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_textViewIncorrectEmail);
                 incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
@@ -163,47 +163,47 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         }
                         break;
 
-                    case ("Wachtwoord"):
-                    case ("Password"):
-                        String currentPassword = String.valueOf(updateDialogCurrentPasswordEditText.getText());
-                        String newPassword = String.valueOf(updateDialogNewPasswordEditText.getText());
-                        String confirmPassword = String.valueOf(updateDialogConfirmPasswordEditText.getText());
-
-                        String currentPasswordMsg;
-                        String newPasswordMsg;
-                        String confirmPasswordMsg;
-
-                        changeIsValid = true;
-
-                        if (!ValueChecker.checkCurrentPassword(currentPassword)) {
-                            currentPasswordMsg = getResources().getString(R.string.userSettingsCurrentPasswordInvalid);
-                            changeIsValid = false;
-
-                        } else {
-                            currentPasswordMsg = "";
-                        }
-
-                        if (!ValueChecker.checkNewPasswordFormat(newPassword)) {
-                            newPasswordMsg = getResources().getString(R.string.userSettingsNewPasswordInvalid);
-                            changeIsValid = false;
-
-                        } else {
-                            newPasswordMsg = "";
-                        }
-
-                        if (!ValueChecker.checkConfirmMatchesNewPassword(newPassword, confirmPassword)) {
-                            confirmPasswordMsg = getResources().getString(R.string.userSettingsConfirmPasswordInvalid);
-                            changeIsValid = false;
-
-                        } else {
-                            confirmPasswordMsg = "";
-                        }
-
-                        incorrectCurrentPasswordTextView.setText(currentPasswordMsg);
-                        incorrectNewPasswordTextView.setText(newPasswordMsg);
-                        incorrectConfirmPasswordTextView.setText(confirmPasswordMsg);
-
-                        break;
+//                    case ("Wachtwoord"):
+//                    case ("Password"):
+//                        String currentPassword = String.valueOf(updateDialogCurrentPasswordEditText.getText());
+//                        String newPassword = String.valueOf(updateDialogNewPasswordEditText.getText());
+//                        String confirmPassword = String.valueOf(updateDialogConfirmPasswordEditText.getText());
+//
+//                        String currentPasswordMsg;
+//                        String newPasswordMsg;
+//                        String confirmPasswordMsg;
+//
+//                        changeIsValid = true;
+//
+//                        if (!ValueChecker.checkCurrentPassword(currentPassword)) {
+//                            currentPasswordMsg = getResources().getString(R.string.userSettingsCurrentPasswordInvalid);
+//                            changeIsValid = false;
+//
+//                        } else {
+//                            currentPasswordMsg = "";
+//                        }
+//
+//                        if (!ValueChecker.checkNewPasswordFormat(newPassword)) {
+//                            newPasswordMsg = getResources().getString(R.string.userSettingsNewPasswordInvalid);
+//                            changeIsValid = false;
+//
+//                        } else {
+//                            newPasswordMsg = "";
+//                        }
+//
+//                        if (!ValueChecker.checkConfirmMatchesNewPassword(newPassword, confirmPassword)) {
+//                            confirmPasswordMsg = getResources().getString(R.string.userSettingsConfirmPasswordInvalid);
+//                            changeIsValid = false;
+//
+//                        } else {
+//                            confirmPasswordMsg = "";
+//                        }
+//
+//                        incorrectCurrentPasswordTextView.setText(currentPasswordMsg);
+//                        incorrectNewPasswordTextView.setText(newPasswordMsg);
+//                        incorrectConfirmPasswordTextView.setText(confirmPasswordMsg);
+//
+//                        break;
 
                     case ("First name"):
                     case ("Voornaam"):
