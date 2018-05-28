@@ -35,5 +35,6 @@
     <string name="userSettingsCurrentPassword">Huidig wachtwoord</string>
     <string name="userSettingsNewPassword">Nieuw wachtwoord</string>
     <string name="userSettingsConfirmPassword">bevestig nieuw wachtwoord</string>
+    <string name="goals">Mijn persoonlijke doelen</string>
 
 </resources>

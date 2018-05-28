@@ -5,27 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-public class HomepageActivity extends AppCompatActivity {
+public class MyPersonalGoalsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
-
-        //removes the title from the title bar in the HomepageActivity
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        Button btn = (Button) findViewById(R.id.button_goals);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MyPersonalGoalsActivity.class);
-                startActivity(i);
-            }
-        });
+        setContentView(R.layout.activity_my_personal_goals);
     }
 
     //adds custom menu
