@@ -12,6 +12,9 @@ public class HomepageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+
+        //removes the title from the title bar in the HomepageActivity
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     //adds custom menu

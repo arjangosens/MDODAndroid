@@ -1,11 +1,14 @@
 package com.project.avans.mdodandroid;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,6 +45,9 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
+
+        //removes the title from the title bar in the userSettingsActivity
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         String firstName = getResources().getString(R.string.firstName);
         String insertion = getResources().getString(R.string.Insertion);
@@ -235,5 +241,33 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
             }
         });
+    }
+
+    //adds custom menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        Intent i;
+        switch(id){
+            case R.id.menu_user_settings:
+//                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
+//                startActivity(i);
+                break;
+            case R.id.menu_logout:
+                i = new Intent(getApplicationContext(), MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }
