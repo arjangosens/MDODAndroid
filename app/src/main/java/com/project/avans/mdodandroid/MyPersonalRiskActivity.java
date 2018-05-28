@@ -1,40 +1,17 @@
 package com.project.avans.mdodandroid;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-public class HomepageActivity extends AppCompatActivity {
+public class MyPersonalRiskActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
-
-        //removes the title from the title bar in the HomepageActivity
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        Button btn = (Button) findViewById(R.id.button_goals);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MyPersonalGoalsActivity.class);
-                startActivity(i);
-            }
-        });
-
-        Button btn2 = (Button) findViewById(R.id.button_risks);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MyPersonalRiskActivity.class);
-                startActivity(i);
-            }
-        });
+        setContentView(R.layout.activity_personal_risks);
     }
 
     //adds custom menu
@@ -64,4 +41,5 @@ public class HomepageActivity extends AppCompatActivity {
         }
         return true;
     }
+
 }
