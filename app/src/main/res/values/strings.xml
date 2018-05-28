@@ -37,5 +37,6 @@
     <string name="userSettingsConfirmPassword">Confirm new password</string>
     <string name="goals">My personal goals</string>
     <string name="add">add</string>
+    <string name="newGoal">New goal</string>
 
 </resources>

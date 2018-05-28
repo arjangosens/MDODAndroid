@@ -37,5 +37,6 @@
     <string name="userSettingsConfirmPassword">bevestig nieuw wachtwoord</string>
     <string name="goals">Mijn persoonlijke doelen</string>
     <string name="add">toevoegen</string>
+    <string name="newGoal">Nieuw doel</string>
 
 </resources>
