@@ -34,6 +34,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //    private TextView incorrectNewPasswordTextView;
 //    private TextView incorrectConfirmPasswordTextView;
 
+    private String phoneNumber;
+    private String firstName;
+    private String insertion;
+    private String lastName;
+    private String dateOfBirth;
+
     private TextView incorrectFieldTextView;
 
     private String type;
@@ -47,13 +53,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         //removes the title from the title bar in the userSettingsActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        String firstName = getResources().getString(R.string.firstName);
-        String insertion = getResources().getString(R.string.Insertion);
-        String lastName = getResources().getString(R.string.Lastname);
-        String dateOfBirth = getResources().getString(R.string.Dateofbirth);
+        firstName = getResources().getString(R.string.firstName);
+        insertion = getResources().getString(R.string.Insertion);
+        lastName = getResources().getString(R.string.Lastname);
+        dateOfBirth = getResources().getString(R.string.Dateofbirth);
 //        String password = getResources().getString(R.string.password);
         String adress = getResources().getString(R.string.adress);
-        String phoneNumber = getResources().getString(R.string.phoneNumber);
+        phoneNumber = getResources().getString(R.string.phoneNumber);
 
         //TODO: add local user data
 
@@ -87,18 +93,16 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         View view;
 
-        switch (type) {
-//            case ("Wachtwoord"):
-//            case ("Password"):
-//                view = inflater.inflate(R.layout.dialog_updateprofile_password, null);
-//                builder.setView(view);
-//                break;
+        if (type.equals(phoneNumber)) {
+            view = inflater.inflate(R.layout.dialog_updateprofile_phonenumber, null);
 
-            default:
-                view = inflater.inflate(R.layout.dialog_updateprofile, null);
-                builder.setView(view);
-                break;
+        } else {
+
+            view = inflater.inflate(R.layout.dialog_updateprofile, null);
+
         }
+
+        builder.setView(view);
 
         updateDialogView = view;
         builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
@@ -142,69 +146,20 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
                 boolean changeIsValid = false;
 
-                switch (type) {
+                if (type.equals(firstName) || type.equals(lastName)) {
+                    String field = String.valueOf(updateDialogGenericEditText.getText());
+                    Log.i("DialogUpdateProfile", "Value of field: " + field);
+                    if (field.equals("")) {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
-//                    case ("Wachtwoord"):
-//                    case ("Password"):
-//                        String currentPassword = String.valueOf(updateDialogCurrentPasswordEditText.getText());
-//                        String newPassword = String.valueOf(updateDialogNewPasswordEditText.getText());
-//                        String confirmPassword = String.valueOf(updateDialogConfirmPasswordEditText.getText());
-//
-//                        String currentPasswordMsg;
-//                        String newPasswordMsg;
-//                        String confirmPasswordMsg;
-//
-//                        changeIsValid = true;
-//
-//                        if (!ValueChecker.checkCurrentPassword(currentPassword)) {
-//                            currentPasswordMsg = getResources().getString(R.string.userSettingsCurrentPasswordInvalid);
-//                            changeIsValid = false;
-//
-//                        } else {
-//                            currentPasswordMsg = "";
-//                        }
-//
-//                        if (!ValueChecker.checkNewPasswordFormat(newPassword)) {
-//                            newPasswordMsg = getResources().getString(R.string.userSettingsNewPasswordInvalid);
-//                            changeIsValid = false;
-//
-//                        } else {
-//                            newPasswordMsg = "";
-//                        }
-//
-//                        if (!ValueChecker.checkConfirmMatchesNewPassword(newPassword, confirmPassword)) {
-//                            confirmPasswordMsg = getResources().getString(R.string.userSettingsConfirmPasswordInvalid);
-//                            changeIsValid = false;
-//
-//                        } else {
-//                            confirmPasswordMsg = "";
-//                        }
-//
-//                        incorrectCurrentPasswordTextView.setText(currentPasswordMsg);
-//                        incorrectNewPasswordTextView.setText(newPasswordMsg);
-//                        incorrectConfirmPasswordTextView.setText(confirmPasswordMsg);
-//
-//                        break;
-
-                    case ("First name"):
-                    case ("Voornaam"):
-                    case ("Last name"):
-                    case ("Achternaam"):
-
-                        String field = String.valueOf(updateDialogGenericEditText.getText());
-                        Log.i("DialogUpdateProfile", "Value of field: " + field);
-                        if (field.equals("")) {
-                            incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
-
-                        } else {
-                            changeIsValid = true;
-                        }
-                        break;
-
-                    default:
-                        Log.i("DialogUpdateProfile", "Default called with type" + type);
+                    } else {
                         changeIsValid = true;
-                        break;
+                    }
+
+                } else {
+                    Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
+                    changeIsValid = true;
+
                 }
 
                 if (changeIsValid)
