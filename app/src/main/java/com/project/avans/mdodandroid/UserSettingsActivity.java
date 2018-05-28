@@ -26,7 +26,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private ArrayList<String> settings = new ArrayList<>();
 
     private EditText updateDialogGenericEditText;
-    private EditText updateDialogEmailEditText;
 //    private EditText updateDialogCurrentPasswordEditText;
 //    private EditText updateDialogNewPasswordEditText;
 //    private EditText updateDialogConfirmPasswordEditText;
@@ -35,7 +34,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //    private TextView incorrectNewPasswordTextView;
 //    private TextView incorrectConfirmPasswordTextView;
 
-    private TextView incorrectEmailTextView;
     private TextView incorrectFieldTextView;
 
     private String type;
@@ -53,7 +51,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         String insertion = getResources().getString(R.string.Insertion);
         String lastName = getResources().getString(R.string.Lastname);
         String dateOfBirth = getResources().getString(R.string.Dateofbirth);
-        String email = getResources().getString(R.string.Email);
 //        String password = getResources().getString(R.string.password);
         String adress = getResources().getString(R.string.adress);
         String phoneNumber = getResources().getString(R.string.phoneNumber);
@@ -64,7 +61,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settings.add(insertion);
         settings.add(lastName);
         settings.add(dateOfBirth);
-        settings.add(email);
 //        settings.add(password);
         settings.add(adress);
         settings.add(phoneNumber);
@@ -92,11 +88,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         View view;
 
         switch (type) {
-            case ("Emailadres"):
-            case ("Email address"):
-                view = inflater.inflate(R.layout.dialog_updateprofile_email, null);
-                builder.setView(view);
-                break;
 //            case ("Wachtwoord"):
 //            case ("Password"):
 //                view = inflater.inflate(R.layout.dialog_updateprofile_password, null);
@@ -139,7 +130,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             public void onClick(View v) {
 
                 updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
-                updateDialogEmailEditText = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_editText);
 //                updateDialogCurrentPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
 //                updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
 //                updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
@@ -148,20 +138,11 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //                incorrectNewPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectNewPassword);
 //                incorrectConfirmPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectConfirmPassword);
 
-                incorrectEmailTextView = updateDialogView.findViewById(R.id.dialogUpdateProfileEmail_textViewIncorrectEmail);
                 incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
 
                 boolean changeIsValid = false;
 
                 switch (type) {
-                    case ("Emailadres"):
-                    case ("Email address"):
-                        String email = String.valueOf(updateDialogEmailEditText.getText());
-                        changeIsValid = ValueChecker.checkEmail(email);
-                        if (!changeIsValid) {
-                            incorrectEmailTextView.setText(getResources().getString(R.string.emailInvalid));
-                        }
-                        break;
 
 //                    case ("Wachtwoord"):
 //                    case ("Password"):
