@@ -26,6 +26,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private ArrayList<String> settings = new ArrayList<>();
 
     private EditText updateDialogGenericEditText;
+    private EditText updateDialogPhoneNrEditText;
 //    private EditText updateDialogCurrentPasswordEditText;
 //    private EditText updateDialogNewPasswordEditText;
 //    private EditText updateDialogConfirmPasswordEditText;
@@ -41,9 +42,11 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private String dateOfBirth;
 
     private TextView incorrectFieldTextView;
+    private TextView incorrectPhoneNrTextView;
 
     private String type;
     private View updateDialogView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +137,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             public void onClick(View v) {
 
                 updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+                incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
 //                updateDialogCurrentPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
 //                updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
 //                updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
@@ -142,7 +146,9 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //                incorrectNewPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectNewPassword);
 //                incorrectConfirmPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectConfirmPassword);
 
-                incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+
+                updateDialogPhoneNrEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_editText);
+                incorrectPhoneNrTextView =  updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
 
                 boolean changeIsValid = false;
 
@@ -155,6 +161,11 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     } else {
                         changeIsValid = true;
                     }
+
+                } else if (type.equals(phoneNumber)) {
+                    //TODO: Check if phoneNumber is correct with regEx
+
+                    changeIsValid = true;
 
                 } else {
                     Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
