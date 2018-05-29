@@ -12,15 +12,42 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ListView;
 
-public class MyPersonalRiskActivity extends AppCompatActivity implements DialogInterface.OnShowListener{
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskListener;
+import com.project.avans.mdodandroid.adapters.RiskAdapter.onRiskClick;
+import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskAdapter;
+import com.project.avans.mdodandroid.object_classes.Risk;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MyPersonalRiskActivity extends AppCompatActivity implements DialogInterface.OnShowListener, RiskListener{
 
     private View updateDialogView;
+    private ArrayList<Risk> RiskList = new ArrayList<>();
+    private RiskAdapter RiskAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_risks);
+        //Risk e = new Risk("1", "test");
+        //RiskList.add(e);
+        getRisk();
 
         Button add = findViewById(R.id.button_risks);
         add.setOnClickListener(new View.OnClickListener() {
@@ -29,6 +56,18 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                 showUpdateDialog();
             }
         });
+
+        ListView RiskListView = findViewById(R.id.listView_risks);
+        RiskAdapter = new RiskAdapter(getLayoutInflater(), RiskList);
+        RiskListView.setAdapter(RiskAdapter);
+        RiskAdapter.notifyDataSetChanged();
+        RiskListView.setOnItemClickListener(new onRiskClick(getApplicationContext()) {});
+    }
+
+    @Override
+    public void onRiskListener(Risk risk) {
+        RiskList.add(risk);
+        RiskAdapter.notifyDataSetChanged();
     }
 
     private void showUpdateDialog() {
@@ -69,14 +108,6 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                 TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
                 TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
-                String field = String.valueOf(updateDialogGenericEditText.getText());
-                Log.i("DialogUpdateProfile", "Value of field: " + field);
-                if (field.equals("")) {
-                    incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
-
-                } else {
-
-                }
             }
         });
     }
@@ -107,6 +138,53 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void getRisk() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        final String url = "https://jsonplaceholder.typicode.com/photos";
+
+        // Request a string response from the provided URL.
+        StringRequest request = new StringRequest(Request.Method.GET,
+                url,
+                new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject jsonObject;
+                        try {
+                            jsonObject = new JSONObject(response);
+
+                            //System.out.println(jsonObject);
+                            JSONArray RisksJSON = jsonObject.getJSONArray("Risks");
+                            System.out.println("risks " + RisksJSON);
+//                            for(int i=0; i< RisksJSON.length(); i++){
+//                                JSONObject JSONRisk = RisksJSON.getJSONObject(i);
+//                                String Risk = JSONRisk.getString("Risk");
+//                                String RiskID = JSONRisk.getString("_ID");
+//                                Risk rp = new Risk(RiskID, Risk);
+//                                onRiskListener(rp);
+//                            }
+                        } catch (JSONException e) {
+                            Log.e("on resp", e.getLocalizedMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("VOLLEY_TAG", error.toString());
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer "+ MainActivity.Token);
+                return params;
+
+        }};
+        queue.add(request);
     }
 
 }
