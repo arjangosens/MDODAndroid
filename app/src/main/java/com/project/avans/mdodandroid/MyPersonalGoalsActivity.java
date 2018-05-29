@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 
@@ -66,7 +67,17 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
 
             @Override
             public void onClick(View v) {
+                TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+                TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
+                String field = String.valueOf(updateDialogGenericEditText.getText());
+                Log.i("DialogUpdateProfile", "Value of field: " + field);
+                if (field.equals("")) {
+                    incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
+
+                } else {
+
+                }
             }
         });
     }
