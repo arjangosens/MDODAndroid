@@ -14,10 +14,12 @@ import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static String Token;
     EditText email;
     EditText password;
     TextView resultTextView;
-    String Token;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

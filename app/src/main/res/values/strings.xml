@@ -35,7 +35,11 @@
     <string name="userSettingsCurrentPassword">Current password</string>
     <string name="userSettingsNewPassword">New password</string>
     <string name="userSettingsConfirmPassword">Confirm new password</string>
+    <string name="goals">My personal goals</string>
+    <string name="add">add</string>
+    <string name="newGoal">New goal</string>
+    <string name="risks">my personal risks</string>
+    <string name="newRisk">new Risk</string>
     <string name="invalidPhoneNr">Invalid phone number!</string>
-
 
 </resources>
