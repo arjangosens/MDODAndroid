@@ -35,10 +35,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //    private TextView incorrectNewPasswordTextView;
 //    private TextView incorrectConfirmPasswordTextView;
 
-    private String phoneNumber;
-    private String firstName;
-    private String insertion;
-    private String lastName;
+    private String type_phoneNumber;
+    private String type_firstName;
+    private String type_insertion;
+    private String type_lastName;
 
     private TextView incorrectFieldTextView;
     private TextView incorrectPhoneNrTextView;
@@ -55,21 +55,21 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         //removes the title from the title bar in the userSettingsActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        firstName = getResources().getString(R.string.firstName);
-        insertion = getResources().getString(R.string.Insertion);
-        lastName = getResources().getString(R.string.Lastname);
+        type_firstName = getResources().getString(R.string.firstName);
+        type_insertion = getResources().getString(R.string.Insertion);
+        type_lastName = getResources().getString(R.string.Lastname);
 //        String password = getResources().getString(R.string.password);
         String address = getResources().getString(R.string.adress);
-        phoneNumber = getResources().getString(R.string.phoneNumber);
+        type_phoneNumber = getResources().getString(R.string.phoneNumber);
 
         //TODO: add local user data
 
-        settings.add(firstName);
-        settings.add(insertion);
-        settings.add(lastName);
+        settings.add(type_firstName + ": user_firstName");
+        settings.add(type_insertion + ": user_insertion");
+        settings.add(type_lastName + ": user_lastName");
 //        settings.add(password);
         settings.add(address);
-        settings.add(phoneNumber);
+        settings.add(type_phoneNumber);
 
         //TODO: connect the Textviews to the userdata
 
@@ -93,7 +93,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         View view;
 
-        if (type.equals(phoneNumber)) {
+        if (type.equals(type_phoneNumber)) {
             view = inflater.inflate(R.layout.dialog_updateprofile_phonenumber, null);
 
         } else {
@@ -149,7 +149,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
                 boolean changeIsValid = false;
 
-                if (type.equals(firstName) || type.equals(lastName)) {
+                if (type.equals(type_firstName) || type.equals(type_lastName)) {
                     String field = String.valueOf(updateDialogGenericEditText.getText());
                     Log.i("DialogUpdateProfile", "Value of field: " + field);
                     if (field.equals("")) {
@@ -159,7 +159,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         changeIsValid = true;
                     }
 
-                } else if (type.equals(phoneNumber)) {
+                } else if (type.equals(type_phoneNumber)) {
 
                     if (ValueChecker.checkPhoneNumber(String.valueOf(updateDialogPhoneNrEditText.getText()))) {
                         changeIsValid = true;
