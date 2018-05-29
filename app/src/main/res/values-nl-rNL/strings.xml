@@ -27,7 +27,7 @@
     <string name="logOut">uitloggen</string>
     <string name="cancel">Annuleren</string>
     <string name="adress">Adres</string>
-    <string name="phoneNumber">Telefoon nummer</string>
+    <string name="phoneNumber">Telefoonnummer</string>
     <string name="userSettingsCurrentPasswordInvalid">Onjuist wachtwoord!</string>
     <string name="userSettingsNewPasswordInvalid">Moet langer dan 8 karakters zijn en minstens 1 letter en cijfer bevatten</string>
     <string name="userSettingsConfirmPasswordInvalid">Moet hetzelfde zijn als het nieuwe wachtwoord</string>
@@ -35,5 +35,6 @@
     <string name="userSettingsCurrentPassword">Huidig wachtwoord</string>
     <string name="userSettingsNewPassword">Nieuw wachtwoord</string>
     <string name="userSettingsConfirmPassword">bevestig nieuw wachtwoord</string>
+    <string name="invalidPhoneNr">Onjuist telefoonnummer!</string>
 
 </resources>
