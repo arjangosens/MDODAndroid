@@ -163,9 +163,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     }
 
                 } else if (type.equals(phoneNumber)) {
-                    //TODO: Check if phoneNumber is correct with regEx
 
-                    changeIsValid = true;
+                    if (ValueChecker.checkPhoneNumber(String.valueOf(updateDialogPhoneNrEditText.getText()))) {
+                        changeIsValid = true;
+
+                    }
+
 
                 } else {
                     Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
