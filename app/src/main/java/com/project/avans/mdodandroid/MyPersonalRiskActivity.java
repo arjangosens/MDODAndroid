@@ -73,7 +73,6 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
 
     @Override
     public void onRiskListener(Risk risk) {
-        System.out.println("test");
         RiskList.add(risk);
         RiskAdapter.notifyDataSetChanged();
 
@@ -149,53 +148,6 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         return true;
     }
 
-    private void getRisk() {
-        RequestQueue queue = Volley.newRequestQueue(this);
 
-        final String url = "https://jsonplaceholder.typicode.com/photos";
-
-        // Request a string response from the provided URL.
-        StringRequest request = new StringRequest(Request.Method.GET,
-                url,
-                new Response.Listener<String>(){
-                    @Override
-                    public void onResponse(String response) {
-                        JSONObject jsonObject;
-
-
-                        try {
-                            jsonObject = new JSONObject(response);
-
-                            System.out.println(jsonObject);
-                            //JSONArray RisksJSON = jsonObject.getJSONArray("Risks");
-                            //System.out.println("risks " + RisksJSON);
-//                            for(int i=0; i< RisksJSON.length(); i++){
-//                                JSONObject JSONRisk = RisksJSON.getJSONObject(i);
-//                                String Risk = JSONRisk.getString("Risk");
-//                                String RiskID = JSONRisk.getString("_ID");
-//                                Risk rp = new Risk(RiskID, Risk);
-//                                onRiskListener(rp);
-//                            }
-                        } catch (JSONException e) {
-                            Log.e("on resp", e.getLocalizedMessage());
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("VOLLEY_TAG", error.toString());
-                    }
-                })
-        {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", "Bearer "+ MainActivity.Token);
-                return params;
-
-        }};
-        queue.add(request);
-    }
 
 }
