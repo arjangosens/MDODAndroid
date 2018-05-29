@@ -39,7 +39,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private String firstName;
     private String insertion;
     private String lastName;
-    private String dateOfBirth;
 
     private TextView incorrectFieldTextView;
     private TextView incorrectPhoneNrTextView;
@@ -59,9 +58,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         firstName = getResources().getString(R.string.firstName);
         insertion = getResources().getString(R.string.Insertion);
         lastName = getResources().getString(R.string.Lastname);
-        dateOfBirth = getResources().getString(R.string.Dateofbirth);
 //        String password = getResources().getString(R.string.password);
-        String adress = getResources().getString(R.string.adress);
+        String address = getResources().getString(R.string.adress);
         phoneNumber = getResources().getString(R.string.phoneNumber);
 
         //TODO: add local user data
@@ -69,9 +67,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settings.add(firstName);
         settings.add(insertion);
         settings.add(lastName);
-        settings.add(dateOfBirth);
 //        settings.add(password);
-        settings.add(adress);
+        settings.add(address);
         settings.add(phoneNumber);
 
         //TODO: connect the Textviews to the userdata
