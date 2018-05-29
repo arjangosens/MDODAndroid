@@ -167,6 +167,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     if (ValueChecker.checkPhoneNumber(String.valueOf(updateDialogPhoneNrEditText.getText()))) {
                         changeIsValid = true;
 
+                    } else {
+                        incorrectPhoneNrTextView.setText(getResources().getString(R.string.invalidPhoneNr));
                     }
 
 

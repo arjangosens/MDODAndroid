@@ -35,6 +35,7 @@
     <string name="userSettingsCurrentPassword">Current password</string>
     <string name="userSettingsNewPassword">New password</string>
     <string name="userSettingsConfirmPassword">Confirm new password</string>
+    <string name="invalidPhoneNr">Invalid phone number!</string>
 
 
 </resources>
