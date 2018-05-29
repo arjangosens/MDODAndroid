@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class HomepageActivity extends AppCompatActivity {
 
@@ -15,6 +17,24 @@ public class HomepageActivity extends AppCompatActivity {
 
         //removes the title from the title bar in the HomepageActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        Button btn = (Button) findViewById(R.id.button_goals);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MyPersonalGoalsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button btn2 = (Button) findViewById(R.id.button_risks);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MyPersonalRiskActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     //adds custom menu
