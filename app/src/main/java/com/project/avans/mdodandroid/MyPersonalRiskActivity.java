@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.project.avans.mdodandroid.adapters.RiskAdapter.AsyncRisk;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskListener;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.onRiskClick;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskAdapter;
@@ -40,6 +41,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     private View updateDialogView;
     private ArrayList<Risk> RiskList = new ArrayList<>();
     private RiskAdapter RiskAdapter = null;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,12 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         setContentView(R.layout.activity_personal_risks);
         //Risk e = new Risk("1", "test");
         //RiskList.add(e);
-        getRisk();
+        //getRisk();
+        url = "https://jsonplaceholder.typicode.com/users";
+
+        String[] urls = new String[] {url};
+        AsyncRisk task = new AsyncRisk(this);
+        task.execute(urls);
 
         Button add = findViewById(R.id.button_risks);
         add.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +73,10 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
 
     @Override
     public void onRiskListener(Risk risk) {
+        System.out.println("test");
         RiskList.add(risk);
         RiskAdapter.notifyDataSetChanged();
+
     }
 
     private void showUpdateDialog() {
@@ -152,12 +161,14 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                     @Override
                     public void onResponse(String response) {
                         JSONObject jsonObject;
+
+
                         try {
                             jsonObject = new JSONObject(response);
 
-                            //System.out.println(jsonObject);
-                            JSONArray RisksJSON = jsonObject.getJSONArray("Risks");
-                            System.out.println("risks " + RisksJSON);
+                            System.out.println(jsonObject);
+                            //JSONArray RisksJSON = jsonObject.getJSONArray("Risks");
+                            //System.out.println("risks " + RisksJSON);
 //                            for(int i=0; i< RisksJSON.length(); i++){
 //                                JSONObject JSONRisk = RisksJSON.getJSONObject(i);
 //                                String Risk = JSONRisk.getString("Risk");

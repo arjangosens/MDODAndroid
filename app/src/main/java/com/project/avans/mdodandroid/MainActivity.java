@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
-    static String Token;
+    public static String Token;
     EditText email;
     EditText password;
     TextView result;
