@@ -95,8 +95,17 @@ public class ValueChecker {
         Matcher matcher = emailRegex.matcher(email);
 
         boolean result = matcher.find();
-        Log.i("RegisterActivity", "checkEmail email is " + result);
+        Log.i("ValueChecker", "checkEmail() email is " + result);
 
+        return result;
+    }
+
+    public static boolean checkPhoneNumber (String phoneNumber) {
+        Pattern phoneNrRegex = Pattern.compile("^\\+?\\d{6,13}");
+        Matcher matcher = phoneNrRegex.matcher(phoneNumber);
+
+        boolean result = matcher.find();
+        Log.i("ValueChecker", "checkPhoneNumber() phoneNumber is " + result);
         return result;
     }
 }

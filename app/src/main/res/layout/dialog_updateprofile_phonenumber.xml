@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/dialogUpdateProfileEmail_editText"
+        android:id="@+id/dialogUpdateProfilePhone_editText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -14,7 +14,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:hint="@string/phoneNumber"
+        android:inputType="phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,13 +23,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dialogUpdateProfileEmail_textViewIncorrectEmail"
+        android:id="@+id/dialogUpdateProfilePhone_textView"
         android:layout_width="wrap_content"
-        android:layout_height="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:textColor="@color/coloraccent"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/dialogUpdateProfileEmail_editText"
-        app:layout_constraintEnd_toEndOf="@+id/dialogUpdateProfileEmail_editText"
+        app:layout_constraintBottom_toTopOf="@+id/dialogUpdateProfilePhone_editText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/dialogUpdateProfileEmail_editText" />
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
