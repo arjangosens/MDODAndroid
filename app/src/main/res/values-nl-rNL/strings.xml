@@ -4,7 +4,7 @@
     <string name="login">Login</string>
     <string name="register">registreer</string>
     <string name="noAccount">Nog geen account?</string>
-    <string name="unValidCredentials">Voer geldige gegevens in.</string>
+    <string name="inValidCredentials">Voer geldige gegevens in.</string>
     <string name="firstName">Voornaam</string>
     <string name="Insertion">Tussenvoegsel</string>
     <string name="Lastname">Achternaam</string>
