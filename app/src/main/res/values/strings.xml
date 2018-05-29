@@ -39,5 +39,6 @@
     <string name="add">add</string>
     <string name="newGoal">New goal</string>
     <string name="risks">my personal risks</string>
+    <string name="newRisk">new Risk</string>
 
 </resources>

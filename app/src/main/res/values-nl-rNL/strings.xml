@@ -39,5 +39,6 @@
     <string name="add">toevoegen</string>
     <string name="risks">persoonlijke risico situaties</string>
     <string name="newGoal">Nieuw doel</string>
+    <string name="newRisk">Nieuwe risico situatie</string>
 
 </resources>

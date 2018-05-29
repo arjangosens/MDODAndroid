@@ -36,7 +36,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        builder.setTitle(getResources().getString(R.string.newGoal));
+        builder.setTitle(getResources().getString(R.string.risks));
 
         View view;
 
