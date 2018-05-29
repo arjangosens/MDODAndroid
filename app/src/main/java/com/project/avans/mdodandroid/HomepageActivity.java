@@ -26,6 +26,15 @@ public class HomepageActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Button btn2 = (Button) findViewById(R.id.button_risks);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MyPersonalRiskActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     //adds custom menu
