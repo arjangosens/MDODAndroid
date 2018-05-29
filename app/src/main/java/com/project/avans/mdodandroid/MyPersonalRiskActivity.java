@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MyPersonalRiskActivity extends AppCompatActivity implements DialogInterface.OnShowListener{
 
@@ -64,7 +66,17 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
 
             @Override
             public void onClick(View v) {
+                TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+                TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
+                String field = String.valueOf(updateDialogGenericEditText.getText());
+                Log.i("DialogUpdateProfile", "Value of field: " + field);
+                if (field.equals("")) {
+                    incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
+
+                } else {
+
+                }
             }
         });
     }
