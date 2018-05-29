@@ -54,22 +54,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
+        //Get user data
+        getUser();
+
         //removes the title from the title bar in the userSettingsActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        firstName = new UserSettingsType(getResources().getString(R.string.firstName));
-        insertion = new UserSettingsType(getResources().getString(R.string.Insertion));
-        lastName = new UserSettingsType(getResources().getString(R.string.Lastname));
-//        String password = getResources().getString(R.string.password);
-        address = new UserSettingsType(getResources().getString(R.string.adress));
-        phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
-
-
-        // Test values to check hints
-        firstName.setValue("John");
-        lastName.setValue("Doe");
-        phoneNumber.setValue("+31612345678");
-        address.setValue("Lovensdijkstraat 61, Breda");
 
         //TODO: add local user data
 
@@ -149,6 +139,25 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         incorrectPhoneNrTextView =  updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
 
 
+    }
+
+    private void getUser() {
+
+        // Initialise types
+        firstName = new UserSettingsType(getResources().getString(R.string.firstName));
+        insertion = new UserSettingsType(getResources().getString(R.string.Insertion));
+        lastName = new UserSettingsType(getResources().getString(R.string.Lastname));
+//        String password = getResources().getString(R.string.password);
+        address = new UserSettingsType(getResources().getString(R.string.adress));
+        phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
+
+        // Fill types with test values
+        firstName.setValue("John");
+        lastName.setValue("Doe");
+        phoneNumber.setValue("+31612345678");
+        address.setValue("Lovensdijkstraat 61, Breda");
+
+        //TODO: Replace test values with actual API get call
     }
 
     @Override
