@@ -21,10 +21,11 @@ import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static String Token;
     EditText email;
     EditText password;
     TextView result;
-    String Token;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
