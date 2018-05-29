@@ -40,5 +40,7 @@
     <string name="risks">persoonlijke risico situaties</string>
     <string name="newGoal">Nieuw doel</string>
     <string name="newRisk">Nieuwe risico situatie</string>
+    <string name="used">Ik heb gebruikt</string>
+    <string name="new1">Nieuw</string>
 
 </resources>

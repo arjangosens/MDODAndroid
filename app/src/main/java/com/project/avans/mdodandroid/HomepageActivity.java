@@ -35,6 +35,15 @@ public class HomepageActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Button btn3 = (Button) findViewById(R.id.button_used);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), IHaveUsedActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     //adds custom menu
