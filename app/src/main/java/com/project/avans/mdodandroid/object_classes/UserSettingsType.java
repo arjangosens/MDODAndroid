@@ -6,6 +6,12 @@ public class UserSettingsType {
 
     public UserSettingsType(String type) {
         this.type = type;
+        value = "";
+    }
+
+    public UserSettingsType(String type, String value) {
+        this.type = type;
+        this.value = value;
     }
 
     public String getType() {
