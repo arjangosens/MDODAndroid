@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     TextView resultTextView;
-    String Token;
+
 
 
     @Override
