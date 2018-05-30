@@ -17,12 +17,13 @@ import android.widget.TextView;
 import com.project.avans.mdodandroid.adapters.GoalAdapter.AsyncGoal;
 import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalAdapter;
 import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalListener;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.OnAlertBoxAvailable;
 import com.project.avans.mdodandroid.adapters.GoalAdapter.onGoalClick;
 import com.project.avans.mdodandroid.object_classes.Goal;
 
 import java.util.ArrayList;
 
-public class MyPersonalGoalsActivity extends AppCompatActivity implements DialogInterface.OnShowListener, GoalListener {
+public class MyPersonalGoalsActivity extends AppCompatActivity implements DialogInterface.OnShowListener, GoalListener, OnAlertBoxAvailable {
     private View updateDialogView;
     private ArrayList<Goal> goalList = new ArrayList<>();
     private GoalAdapter goalAdapter = null;
@@ -52,7 +53,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         goalAdapter = new GoalAdapter(getLayoutInflater(), goalList);
         goalListView.setAdapter(goalAdapter);
         goalAdapter.notifyDataSetChanged();
-        goalListView.setOnItemClickListener(new onGoalClick(getApplicationContext(), getLayoutInflater()));
+        goalListView.setOnItemClickListener(new onGoalClick(getApplicationContext(), getLayoutInflater(), this));
     }
 
     private void showUpdateDialog() {
@@ -103,6 +104,12 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                 }
             }
         });
+    }
+
+    @Override
+    public void onAlertBoxAvailable(Goal goal) {
+        Log.i("TEST: ", goal.toString());
+        showUpdateDialog();
     }
 
     @Override

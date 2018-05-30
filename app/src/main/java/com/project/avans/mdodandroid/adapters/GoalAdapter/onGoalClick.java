@@ -16,14 +16,15 @@ import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.object_classes.Goal;
 
 
-public class onGoalClick extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener {
+public class onGoalClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private Context context;
     private LayoutInflater inflater;
-    private View updateDialogView;
+    private OnAlertBoxAvailable listener;
 
-    public onGoalClick(Context context, LayoutInflater inflater) {
+    public onGoalClick(Context context, LayoutInflater inflater, OnAlertBoxAvailable listener) {
         this.context = context;
         this.inflater = inflater;
+        this.listener = listener;
     }
 
     @Override
@@ -32,55 +33,7 @@ public class onGoalClick extends AppCompatActivity implements AdapterView.OnItem
 //            Intent intent = new Intent(context, MainActivity.class); // TODO change to edit page
 //            intent.putExtra("Goal", rv);
 //            context.startActivity(intent);
-        showUpdateDialog();
+        listener.onAlertBoxAvailable(rv);
     }
 
-    private void showUpdateDialog() {
-        AlertDialog alertDialog;
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-        builder.setTitle(context.getResources().getString(R.string.newGoal));
-
-        View view;
-
-        view = inflater.inflate(R.layout.dialog_updateprofile, null);
-        builder.setView(view);
-
-        updateDialogView = view;
-        builder.setPositiveButton(context.getResources().getString(R.string.saveChanges), null);
-        builder.setNegativeButton(context.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-
-        alertDialog = builder.create();
-        alertDialog.setOnShowListener(this);
-
-        // TODO: Deze alertDialog moet terug gestuurd worden naar de MyPersonalGoalsActivity
-//        alertDialog.show();
-    }
-
-    @Override
-    public void onShow(DialogInterface dialog) {
-        Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
-                TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
-
-                String field = String.valueOf(updateDialogGenericEditText.getText());
-                Log.i("DialogUpdateProfile", "Value of field: " + field);
-                if (field.equals("")) {
-                    incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
-
-                } else {
-
-                }
-            }
-        });
-    }
 }
