@@ -42,5 +42,6 @@
     <string name="newGoal">Nieuw doel</string>
     <string name="newRisk">Nieuwe risico situatie</string>
     <string name="fieldNotFilledIn">[Niet ingevuld]</string>
+    <string name="city">Woonplaats</string>
 
 </resources>

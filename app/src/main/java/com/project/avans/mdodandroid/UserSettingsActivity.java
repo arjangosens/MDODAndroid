@@ -48,6 +48,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private UserSettingsType insertion;
     private UserSettingsType lastName;
     private UserSettingsType address;
+    private UserSettingsType city;
 
     private UserSettingsAdapter userSettingsAdapter;
 
@@ -76,8 +77,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settings.add(insertion);
         settings.add(lastName);
 //        settings.add(password);
+        settings.add(city);
         settings.add(address);
         settings.add(phoneNumber);
+
 
         //TODO: connect the Textviews to the userdata
 
@@ -124,6 +127,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
             } else if (type.equals(address.getType())) {
                 hint = address.getValue();
+
+            } else if (type.equals(insertion.getType())) {
+                hint = insertion.getValue();
+
+            } else if (type.equals(city.getType())) {
+                hint = city.getValue();
             }
 
             updateDialogGenericEditText.setHint(hint);
@@ -159,6 +168,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //        String password = getResources().getString(R.string.password);
         address = new UserSettingsType(getResources().getString(R.string.adress));
         phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
+        city = new UserSettingsType(getResources().getString(R.string.city));
     }
 
     private void getValues() {
@@ -185,6 +195,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         lastName.setValue(resultObject.getString("lastname"));
                         phoneNumber.setValue(resultObject.getString("phonenumber"));
                         address.setValue(resultObject.getString("adress"));
+                        city.setValue(resultObject.getString("city"));
 
                         ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
 

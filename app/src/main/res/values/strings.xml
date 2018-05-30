@@ -42,5 +42,6 @@
     <string name="newRisk">new Risk</string>
     <string name="invalidPhoneNr">Invalid phone number!</string>
     <string name="fieldNotFilledIn">[Not filled in]</string>
+    <string name="city">City</string>
 
 </resources>
