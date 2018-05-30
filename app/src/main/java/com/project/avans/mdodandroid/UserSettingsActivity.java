@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,7 +23,9 @@ import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.object_classes.UserSettingsType;
 import com.project.avans.mdodandroid.userSettingsAdapter.UserSettingsAdapter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -60,8 +63,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
-        //Get user data
-        getClient();
+        //Get types
+        initTypes();
 
         //removes the title from the title bar in the userSettingsActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -81,9 +84,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settingsListview = (ListView) findViewById(R.id.listview_settings);
         userSettingsAdapter = new UserSettingsAdapter(getLayoutInflater(), settings);
         settingsListview.setAdapter(userSettingsAdapter);
-        userSettingsAdapter.notifyDataSetChanged();
 
         settingsListview.setOnItemClickListener(this);
+
+        // Get user values
+        getValues();
+//        userSettingsAdapter.notifyDataSetChanged();
     }
 
     private void showUpdateDialog() {
@@ -146,15 +152,17 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     }
 
-    private void getClient() {
-
-        // Initialise types
+    private void initTypes() {
         firstName = new UserSettingsType(getResources().getString(R.string.firstName));
         insertion = new UserSettingsType(getResources().getString(R.string.Insertion));
         lastName = new UserSettingsType(getResources().getString(R.string.Lastname));
 //        String password = getResources().getString(R.string.password);
         address = new UserSettingsType(getResources().getString(R.string.adress));
         phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
+    }
+
+    private void getValues() {
+
 //
 //        // Fill types with test values
 //        firstName.setValue("John");
@@ -164,34 +172,29 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         //TODO: Replace test values with actual API get call
 
-        NetworkManager.getInstance().getClient(new VolleyListener<String>() {
+        NetworkManager.getInstance().getClient(new VolleyListener<JSONArray>() {
             @Override
-            public void getResult(String result) {
-                if (!result.isEmpty())
+            public void getResult(JSONArray result) {
+                if (result.length() > 0)
                 {
-                    //do what you need with the result...
-                    Log.i("VOLLEY_GETRESULT", "Result:" + result);
+                    Log.i("VOLLEY_GETRESULT", "Result:" + result.toString());
+                    try {
+                        JSONObject resultObject = result.getJSONObject(0);
+                        firstName.setValue(resultObject.getString("firstname"));
+                        insertion.setValue(resultObject.getString("infix"));
+                        lastName.setValue(resultObject.getString("lastname"));
+                        phoneNumber.setValue(resultObject.getString("phonenumber"));
+                        address.setValue(resultObject.getString("adress"));
 
-//                    try {
-//                        JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
-//
-//                        Token = object.getString("token");
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                    Log.d("the token", Token);
-//                    Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//                    startActivity(intent);
+                        ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
 
-                } else {
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-//                    resultTextView.setText(R.string.inValidCredentials);
                 }
             }
         });
-
     }
 
     @Override

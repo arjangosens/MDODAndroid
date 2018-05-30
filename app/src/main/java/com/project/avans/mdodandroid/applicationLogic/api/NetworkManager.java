@@ -89,7 +89,7 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
-    public void getClient(final VolleyListener<String> listener) {
+    public void getClient(final VolleyListener<JSONArray> listener) {
 
         String url = prefixURL + "client";
 
@@ -101,7 +101,7 @@ public class NetworkManager
                     {
                         Log.d(TAG + ": ", "GET client Response : " + response.toString());
                         if(null != response.toString())
-                            listener.getResult(response.toString());
+                            listener.getResult(response);
                     }
                 },
                 new Response.ErrorListener()
@@ -112,7 +112,7 @@ public class NetworkManager
                         if (null != error.networkResponse)
                         {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
-                            listener.getResult("");
+                            listener.getResult(null);
 
                         }
                     }
