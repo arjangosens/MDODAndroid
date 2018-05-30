@@ -87,7 +87,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     }
 
     @Override
-    public void onShow(DialogInterface dialog) {
+    public void onShow(final DialogInterface dialog) {
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -110,7 +110,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                             {
 
                             } else {
-
+                                dialog.dismiss();
                             }
                         }
 

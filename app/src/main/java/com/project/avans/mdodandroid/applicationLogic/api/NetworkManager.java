@@ -87,9 +87,9 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
-    public void postGoal(String description,final VolleyListener<String> listener) {
+    public void postGoal(String description, final VolleyListener<String> listener) {
 
-        String url = prefixURL + "v1/goals";
+        String url = prefixURL + "v1/goal";
 
         Map<String, Object> jsonParams = new HashMap<>();
         jsonParams.put("description", description);
