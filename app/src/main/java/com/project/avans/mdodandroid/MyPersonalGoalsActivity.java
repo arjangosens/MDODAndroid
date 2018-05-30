@@ -44,8 +44,8 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         });
 
         //TEST DATA API
-        String url = "https://jsonplaceholder.typicode.com/users";
-//        "https://mdod.herokuapp.com/api/v1/goals"
+        String url = "https://mdod.herokuapp.com/api/v1/goal";
+//        "https://mdod.herokuapp.com/api/v1/goal"
 
         String[] urls = new String[] {url};
         AsyncGoal task = new AsyncGoal((GoalListener) this);
@@ -108,9 +108,8 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                         {
                             if (!result.isEmpty())
                             {
-
-                            } else {
                                 dialog.dismiss();
+                            } else {
                             }
                         }
 

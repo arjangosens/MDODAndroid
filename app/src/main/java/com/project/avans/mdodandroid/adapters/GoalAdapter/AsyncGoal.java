@@ -49,7 +49,7 @@ public class AsyncGoal extends AsyncTask<String, Void, String> {
             httpConnection.setAllowUserInteraction(false);
             httpConnection.setInstanceFollowRedirects(true);
             httpConnection.setRequestMethod("GET");
-            httpConnection.setRequestProperty("Content-Type", "application/" + "json");
+            httpConnection.setRequestProperty("X-Access-Token", MainActivity.Token);
             httpConnection.setRequestProperty("authorization", "Bearer " + MainActivity.Token);
             httpConnection.connect();
             responseCode = httpConnection.getResponseCode();
@@ -82,9 +82,8 @@ public class AsyncGoal extends AsyncTask<String, Void, String> {
 
             for(int i=0; i< jsonObject.length(); i++){
                 JSONObject RiskJson = jsonObject.getJSONObject(i);
-                String goal = RiskJson.getString("name");
-                String goalID = RiskJson.getString("id");
-//                System.out.println(RiskID);
+                String goal = RiskJson.getString("description");
+                String goalID = RiskJson.getString("goalId");
 
                 com.project.avans.mdodandroid.object_classes.Goal rp = new Goal(goalID, goal);
                 listener.onGoalListener(rp);
