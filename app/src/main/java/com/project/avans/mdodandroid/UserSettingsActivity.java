@@ -11,15 +11,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.object_classes.UserSettingsType;
 import com.project.avans.mdodandroid.userSettingsAdapter.UserSettingsAdapter;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -58,7 +61,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_user_settings);
 
         //Get user data
-        getUser();
+        getClient();
 
         //removes the title from the title bar in the userSettingsActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -138,12 +141,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
 
-        incorrectPhoneNrTextView =  updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
+        incorrectPhoneNrTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
 
 
     }
 
-    private void getUser() {
+    private void getClient() {
 
         // Initialise types
         firstName = new UserSettingsType(getResources().getString(R.string.firstName));
@@ -152,14 +155,43 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //        String password = getResources().getString(R.string.password);
         address = new UserSettingsType(getResources().getString(R.string.adress));
         phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
-
-        // Fill types with test values
-        firstName.setValue("John");
-        lastName.setValue("Doe");
-        phoneNumber.setValue("+31612345678");
-        address.setValue("Lovensdijkstraat 61, Breda");
+//
+//        // Fill types with test values
+//        firstName.setValue("John");
+//        lastName.setValue("Doe");
+//        phoneNumber.setValue("+31612345678");
+//        address.setValue("Lovensdijkstraat 61, Breda");
 
         //TODO: Replace test values with actual API get call
+
+        NetworkManager.getInstance().getClient(new VolleyListener<String>() {
+            @Override
+            public void getResult(String result) {
+                if (!result.isEmpty())
+                {
+                    //do what you need with the result...
+                    Log.i("VOLLEY_GETRESULT", "Result:" + result);
+
+//                    try {
+//                        JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
+//
+//                        Token = object.getString("token");
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    Log.d("the token", Token);
+//                    Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//
+//                    startActivity(intent);
+
+                } else {
+
+//                    resultTextView.setText(R.string.inValidCredentials);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -245,7 +277,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         int id = item.getItemId();
 
         Intent i;
-        switch(id){
+        switch (id) {
             case R.id.menu_user_settings:
 //                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
 //                startActivity(i);
