@@ -11,19 +11,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+import com.project.avans.mdodandroid.object_classes.UserSettingsType;
+import com.project.avans.mdodandroid.userSettingsAdapter.UserSettingsAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener {
     private ListView settingsListview;
-    private ArrayList<String> settings = new ArrayList<>();
+    private ArrayList<UserSettingsType> settings = new ArrayList<>();
 
     private EditText updateDialogGenericEditText;
     private EditText updateDialogPhoneNrEditText;
@@ -35,11 +43,14 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //    private TextView incorrectNewPasswordTextView;
 //    private TextView incorrectConfirmPasswordTextView;
 
-    private String phoneNumber;
-    private String firstName;
-    private String insertion;
-    private String lastName;
-    private String dateOfBirth;
+    private UserSettingsType phoneNumber;
+    private UserSettingsType firstName;
+    private UserSettingsType insertion;
+    private UserSettingsType lastName;
+    private UserSettingsType address;
+    private UserSettingsType city;
+
+    private UserSettingsAdapter userSettingsAdapter;
 
     private TextView incorrectFieldTextView;
     private TextView incorrectPhoneNrTextView;
@@ -53,40 +64,40 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
+        //Get types
+        initTypes();
+
         //removes the title from the title bar in the userSettingsActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        firstName = getResources().getString(R.string.firstName);
-        insertion = getResources().getString(R.string.Insertion);
-        lastName = getResources().getString(R.string.Lastname);
-        dateOfBirth = getResources().getString(R.string.Dateofbirth);
-//        String password = getResources().getString(R.string.password);
-        String adress = getResources().getString(R.string.adress);
-        phoneNumber = getResources().getString(R.string.phoneNumber);
 
         //TODO: add local user data
 
         settings.add(firstName);
         settings.add(insertion);
         settings.add(lastName);
-        settings.add(dateOfBirth);
 //        settings.add(password);
-        settings.add(adress);
+        settings.add(city);
+        settings.add(address);
         settings.add(phoneNumber);
+
 
         //TODO: connect the Textviews to the userdata
 
         settingsListview = (ListView) findViewById(R.id.listview_settings);
-
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, settings);
-
-        settingsListview.setAdapter(adapter);
+        userSettingsAdapter = new UserSettingsAdapter(getLayoutInflater(), settings);
+        settingsListview.setAdapter(userSettingsAdapter);
 
         settingsListview.setOnItemClickListener(this);
+
+        // Get user values
+        getValues();
+//        userSettingsAdapter.notifyDataSetChanged();
     }
 
     private void showUpdateDialog() {
         AlertDialog alertDialog;
+        String hint = "";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
@@ -96,18 +107,41 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         View view;
 
-        if (type.equals(phoneNumber)) {
+        if (type.equals(phoneNumber.getType())) {
             view = inflater.inflate(R.layout.dialog_updateprofile_phonenumber, null);
+            hint = phoneNumber.getValue();
+
+            updateDialogPhoneNrEditText = view.findViewById(R.id.dialogUpdateProfilePhone_editText);
+            updateDialogPhoneNrEditText.setHint(hint);
 
         } else {
 
             view = inflater.inflate(R.layout.dialog_updateprofile, null);
+            updateDialogGenericEditText = view.findViewById(R.id.dialogUpdateProfile_editText);
 
+            if (type.equals(firstName.getType())) {
+                hint = firstName.getValue();
+
+            } else if (type.equals(lastName.getType())) {
+                hint = lastName.getValue();
+
+            } else if (type.equals(address.getType())) {
+                hint = address.getValue();
+
+            } else if (type.equals(insertion.getType())) {
+                hint = insertion.getValue();
+
+            } else if (type.equals(city.getType())) {
+                hint = city.getValue();
+            }
+
+            updateDialogGenericEditText.setHint(hint);
         }
 
         builder.setView(view);
 
         updateDialogView = view;
+
         builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
         builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -119,11 +153,64 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         alertDialog.setOnShowListener(this);
 
         alertDialog.show();
+
+        incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+
+        incorrectPhoneNrTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
+
+
+    }
+
+    private void initTypes() {
+        firstName = new UserSettingsType(getResources().getString(R.string.firstName));
+        insertion = new UserSettingsType(getResources().getString(R.string.Insertion));
+        lastName = new UserSettingsType(getResources().getString(R.string.Lastname));
+//        String password = getResources().getString(R.string.password);
+        address = new UserSettingsType(getResources().getString(R.string.adress));
+        phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
+        city = new UserSettingsType(getResources().getString(R.string.city));
+    }
+
+    private void getValues() {
+
+//
+//        // Fill types with test values
+//        firstName.setValue("John");
+//        lastName.setValue("Doe");
+//        phoneNumber.setValue("+31612345678");
+//        address.setValue("Lovensdijkstraat 61, Breda");
+
+        //TODO: Replace test values with actual API get call
+
+        NetworkManager.getInstance().getClient(new VolleyListener<JSONArray>() {
+            @Override
+            public void getResult(JSONArray result) {
+                if (result.length() > 0)
+                {
+                    Log.i("VOLLEY_GETRESULT", "Result:" + result.toString());
+                    try {
+                        JSONObject resultObject = result.getJSONObject(0);
+                        firstName.setValue(resultObject.getString("firstname"));
+                        insertion.setValue(resultObject.getString("infix"));
+                        lastName.setValue(resultObject.getString("lastname"));
+                        phoneNumber.setValue(resultObject.getString("phonenumber"));
+                        address.setValue(resultObject.getString("adress"));
+                        city.setValue(resultObject.getString("city"));
+
+                        ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        type = settings.get(position);
+        type = settings.get(position).getType();
         showUpdateDialog();
 
     }
@@ -136,8 +223,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             @Override
             public void onClick(View v) {
 
-                updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
-                incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
 //                updateDialogCurrentPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextCurrentPassword);
 //                updateDialogNewPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextNewPassword);
 //                updateDialogConfirmPasswordEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_editTextConfirmPassword);
@@ -147,14 +232,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //                incorrectConfirmPasswordTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePassword_textViewIncorrectConfirmPassword);
 
 
-                updateDialogPhoneNrEditText = updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_editText);
-                incorrectPhoneNrTextView =  updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
-
                 boolean changeIsValid = false;
 
-                if (type.equals(firstName) || type.equals(lastName)) {
+                if (type.equals(firstName.getType()) || type.equals(lastName.getType())) {
+
                     String field = String.valueOf(updateDialogGenericEditText.getText());
                     Log.i("DialogUpdateProfile", "Value of field: " + field);
+
                     if (field.equals("")) {
                         incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
@@ -162,10 +246,15 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         changeIsValid = true;
                     }
 
-                } else if (type.equals(phoneNumber)) {
-                    //TODO: Check if phoneNumber is correct with regEx
+                } else if (type.equals(phoneNumber.getType())) {
 
-                    changeIsValid = true;
+                    if (ValueChecker.checkPhoneNumber(String.valueOf(updateDialogPhoneNrEditText.getText()))) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectPhoneNrTextView.setText(getResources().getString(R.string.invalidPhoneNr));
+                    }
+
 
                 } else {
                     Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
@@ -202,7 +291,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         int id = item.getItemId();
 
         Intent i;
-        switch(id){
+        switch (id) {
             case R.id.menu_user_settings:
 //                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
 //                startActivity(i);

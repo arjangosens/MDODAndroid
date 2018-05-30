@@ -4,7 +4,7 @@
     <string name="login">Login</string>
     <string name="register">registreer</string>
     <string name="noAccount">Nog geen account?</string>
-    <string name="unValidCredentials">Voer geldige gegevens in.</string>
+    <string name="unValidCredentials">Voer de goede gegevens in.</string>
     <string name="firstName">Voornaam</string>
     <string name="Insertion">Tussenvoegsel</string>
     <string name="Lastname">Achternaam</string>
@@ -14,12 +14,12 @@
     <string name="emailExample">mail@voorbeeld.com</string>
     <string name="password">Wachtwoord</string>
     <string name="confirmPassword">Bevestig wachtwoord</string>
-    <string name="createAccount">Creëer een account</string>
+    <string name="createAccount">Maak een account</string>
     <string name="profile">Mijn profiel:</string>
-    <string name="changeData">Wijzig gegevens</string>
+    <string name="changeData">Verander gegevens</string>
     <string name="registerAlertDialogTitle">Er ging iets fout!</string>
     <string name="emailInvalid">- Email is niet juist</string>
-    <string name="registerPasswordInvalid">- Wachtwoord is onjuist (moet 8 of meer karakters lang zijn en minstens 1 cijfer en letter erin hebben)</string>
+    <string name="registerPasswordInvalid">- Wachtwoord is niet goed (moet 8 of meer karakters lang zijn en minstens 1 cijfer en letter erin hebben)</string>
     <string name="emptyNameOrDate">- Naam en/of datum zijn nogsteeds leeg</string>
     <string name="userSettings">Account instellingen</string>
     <string name="change">Verander </string>
@@ -28,12 +28,20 @@
     <string name="cancel">Annuleren</string>
     <string name="adress">Adres</string>
     <string name="phoneNumber">Telefoonnummer</string>
-    <string name="userSettingsCurrentPasswordInvalid">Onjuist wachtwoord!</string>
-    <string name="userSettingsNewPasswordInvalid">Moet langer dan 8 karakters zijn en minstens 1 letter en cijfer bevatten</string>
+    <string name="userSettingsCurrentPasswordInvalid">Het wachtwoord is niet goed probeer het nog eens</string>
+    <string name="userSettingsNewPasswordInvalid"> Het wachtwoord moet langer dan 8 letters zijn en minstens 1 letter en cijfer bevatten</string>
     <string name="userSettingsConfirmPasswordInvalid">Moet hetzelfde zijn als het nieuwe wachtwoord</string>
     <string name="userSettingsFieldInvalid">Dit veld mag niet leeg zijn!</string>
     <string name="userSettingsCurrentPassword">Huidig wachtwoord</string>
     <string name="userSettingsNewPassword">Nieuw wachtwoord</string>
     <string name="userSettingsConfirmPassword">bevestig nieuw wachtwoord</string>
+    <string name="invalidPhoneNr">Onjuist telefoonnummer!</string>
+    <string name="goals">Mijn persoonlijke doelen</string>
+    <string name="add">toevoegen</string>
+    <string name="risks">persoonlijke risico situaties</string>
+    <string name="newGoal">Nieuw doel</string>
+    <string name="newRisk">Nieuwe risico situatie</string>
+    <string name="fieldNotFilledIn">[Niet ingevuld]</string>
+    <string name="city">Woonplaats</string>
 
 </resources>

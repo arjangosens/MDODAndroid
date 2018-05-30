@@ -3,7 +3,7 @@
     <string name="login">Log in</string>
     <string name="register">register</string>
     <string name="noAccount">Don\'t have an account?</string>
-    <string name="unValidCredentials">please enter valid credentials</string>
+    <string name="inValidCredentials">please enter valid credentials</string>
     <string name="firstName">First name</string>
     <string name="Insertion">Insertion</string>
     <string name="Lastname">Last name</string>
@@ -35,6 +35,13 @@
     <string name="userSettingsCurrentPassword">Current password</string>
     <string name="userSettingsNewPassword">New password</string>
     <string name="userSettingsConfirmPassword">Confirm new password</string>
-
+    <string name="goals">My personal goals</string>
+    <string name="add">add</string>
+    <string name="newGoal">New goal</string>
+    <string name="risks">my personal risks</string>
+    <string name="newRisk">new Risk</string>
+    <string name="invalidPhoneNr">Invalid phone number!</string>
+    <string name="fieldNotFilledIn">[Not filled in]</string>
+    <string name="city">City</string>
 
 </resources>
