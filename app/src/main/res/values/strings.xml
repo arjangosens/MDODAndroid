@@ -41,6 +41,6 @@
     <string name="risks">my personal risks</string>
     <string name="newRisk">new Risk</string>
     <string name="invalidPhoneNr">Invalid phone number!</string>
-    <string name="fieldNotFilledIn">[Not yet filled in]</string>
+    <string name="fieldNotFilledIn">[Not filled in]</string>
 
 </resources>

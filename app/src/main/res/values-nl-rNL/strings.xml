@@ -41,6 +41,6 @@
     <string name="risks">persoonlijke risico situaties</string>
     <string name="newGoal">Nieuw doel</string>
     <string name="newRisk">Nieuwe risico situatie</string>
-    <string name="fieldNotFilledIn">[Nog niet ingevuld]</string>
+    <string name="fieldNotFilledIn">[Niet ingevuld]</string>
 
 </resources>

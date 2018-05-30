@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 import com.project.avans.mdodandroid.object_classes.UserSettingsType;
+import com.project.avans.mdodandroid.userSettingsAdapter.UserSettingsAdapter;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private UserSettingsType insertion;
     private UserSettingsType lastName;
     private UserSettingsType address;
+
+    private UserSettingsAdapter userSettingsAdapter;
 
     private TextView incorrectFieldTextView;
     private TextView incorrectPhoneNrTextView;
@@ -73,10 +76,9 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         //TODO: connect the Textviews to the userdata
 
         settingsListview = (ListView) findViewById(R.id.listview_settings);
-
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, settings);
-
-        settingsListview.setAdapter(adapter);
+        userSettingsAdapter = new UserSettingsAdapter(getLayoutInflater(), settings);
+        settingsListview.setAdapter(userSettingsAdapter);
+        userSettingsAdapter.notifyDataSetChanged();
 
         settingsListview.setOnItemClickListener(this);
     }
