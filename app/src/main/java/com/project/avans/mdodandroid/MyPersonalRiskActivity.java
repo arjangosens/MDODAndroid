@@ -14,27 +14,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ListView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.AsyncRisk;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskListener;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.onRiskClick;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskAdapter;
 import com.project.avans.mdodandroid.object_classes.Risk;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class MyPersonalRiskActivity extends AppCompatActivity implements DialogInterface.OnShowListener, RiskListener{
 
