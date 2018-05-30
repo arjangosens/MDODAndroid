@@ -43,5 +43,7 @@
     <string name="newRisk">Nieuwe risico situatie</string>
     <string name="fieldNotFilledIn">[Niet ingevuld]</string>
     <string name="city">Woonplaats</string>
+    <string name="zipCode">Postcode</string>
+    <string name="invalidZipCode">Onjuiste postcode!</string>
 
 </resources>

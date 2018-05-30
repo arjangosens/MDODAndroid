@@ -35,6 +35,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     private EditText updateDialogGenericEditText;
     private EditText updateDialogPhoneNrEditText;
+    private EditText updateDialogZipCodeEditText;
 //    private EditText updateDialogCurrentPasswordEditText;
 //    private EditText updateDialogNewPasswordEditText;
 //    private EditText updateDialogConfirmPasswordEditText;
@@ -49,11 +50,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private UserSettingsType lastName;
     private UserSettingsType address;
     private UserSettingsType city;
+    private UserSettingsType zipCode;
 
     private UserSettingsAdapter userSettingsAdapter;
 
     private TextView incorrectFieldTextView;
     private TextView incorrectPhoneNrTextView;
+    private TextView incorrectZipCodeTextView;
 
     private String type;
     private View updateDialogView;
@@ -79,6 +82,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //        settings.add(password);
         settings.add(city);
         settings.add(address);
+        settings.add(zipCode);
         settings.add(phoneNumber);
 
 
@@ -114,6 +118,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             updateDialogPhoneNrEditText = view.findViewById(R.id.dialogUpdateProfilePhone_editText);
             updateDialogPhoneNrEditText.setHint(hint);
 
+        } else if (type.equals(zipCode.getType())) {
+            view = inflater.inflate(R.layout.dialog_updateprofile_zipcode, null);
+            hint = zipCode.getValue();
+
+            updateDialogZipCodeEditText = view.findViewById(R.id.dialogUpdateProfileZipCode_editText);
+            updateDialogZipCodeEditText.setHint(hint);
         } else {
 
             view = inflater.inflate(R.layout.dialog_updateprofile, null);
@@ -158,6 +168,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         incorrectPhoneNrTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
 
+        incorrectZipCodeTextView = updateDialogView.findViewById(R.id.dialogUpdateProfileZipCode_textViewIncorrectValue);
+
 
     }
 
@@ -169,6 +181,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         address = new UserSettingsType(getResources().getString(R.string.adress));
         phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
         city = new UserSettingsType(getResources().getString(R.string.city));
+        zipCode = new UserSettingsType(getResources().getString(R.string.zipCode));
     }
 
     private void getValues() {
@@ -255,6 +268,14 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         incorrectPhoneNrTextView.setText(getResources().getString(R.string.invalidPhoneNr));
                     }
 
+
+                } else if (type.equals(zipCode.getType())) {
+                    if (ValueChecker.checkZipCode(String.valueOf(updateDialogZipCodeEditText.getText()))) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectZipCodeTextView.setText(getResources().getString(R.string.invalidZipCode));
+                    }
 
                 } else {
                     Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
