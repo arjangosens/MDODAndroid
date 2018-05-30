@@ -3,12 +3,14 @@ package com.project.avans.mdodandroid.applicationLogic.api;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.project.avans.mdodandroid.MainActivity;
 
 import org.json.JSONObject;
 
@@ -82,6 +84,48 @@ public class NetworkManager
                     }
                 });
 
+        requestQueue.add(request);
+    }
+
+    public void postGoal(String description,final VolleyListener<String> listener) {
+
+        String url = prefixURL + "v1/goals";
+
+        Map<String, Object> jsonParams = new HashMap<>();
+        jsonParams.put("description", description);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.d(TAG + ": ", "login/client Response : " + response.toString());
+                        if(null != response.toString())
+                            listener.getResult(response.toString());
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        if (null != error.networkResponse)
+                        {
+                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            listener.getResult("");
+                        }
+                    }
+                }){@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            Log.i(TAG, "Mainactivity.Token = " + MainActivity.Token);
+            params.put("Authorization", "Bearer " + MainActivity.Token);
+            params.put("X-Access-Token", MainActivity.Token);
+            params.put("Content-Type", "application/json");
+
+            return params;
+        }};
         requestQueue.add(request);
     }
 }

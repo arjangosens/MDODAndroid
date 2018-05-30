@@ -19,6 +19,8 @@ import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalAdapter;
 import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalListener;
 import com.project.avans.mdodandroid.adapters.GoalAdapter.OnAlertBoxAvailable;
 import com.project.avans.mdodandroid.adapters.GoalAdapter.onGoalClick;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.object_classes.Goal;
 
 import java.util.ArrayList;
@@ -100,7 +102,19 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
                 } else {
+                    NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<String>(){
+                        @Override
+                        public void getResult(String result)
+                        {
+                            if (!result.isEmpty())
+                            {
 
+                            } else {
+
+                            }
+                        }
+
+                    });
                 }
             }
         });
