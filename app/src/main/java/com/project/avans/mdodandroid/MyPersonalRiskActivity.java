@@ -5,20 +5,45 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.ListView;
 
-public class MyPersonalRiskActivity extends AppCompatActivity implements DialogInterface.OnShowListener{
+
+import com.project.avans.mdodandroid.adapters.RiskAdapter.AsyncRisk;
+import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskListener;
+import com.project.avans.mdodandroid.adapters.RiskAdapter.onRiskClick;
+import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskAdapter;
+import com.project.avans.mdodandroid.object_classes.Risk;
+
+
+import java.util.ArrayList;
+
+
+public class MyPersonalRiskActivity extends AppCompatActivity implements DialogInterface.OnShowListener, RiskListener{
 
     private View updateDialogView;
+    private ArrayList<Risk> RiskList = new ArrayList<>();
+    private RiskAdapter RiskAdapter = null;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_risks);
+        //Risk e = new Risk("1", "test");
+        //RiskList.add(e);
+        //getRisk();
+        url = "https://jsonplaceholder.typicode.com/users";
+
+        String[] urls = new String[] {url};
+        AsyncRisk task = new AsyncRisk(this);
+        task.execute(urls);
 
         Button add = findViewById(R.id.button_risks);
         add.setOnClickListener(new View.OnClickListener() {
@@ -27,6 +52,19 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                 showUpdateDialog();
             }
         });
+
+        ListView RiskListView = findViewById(R.id.listView_risks);
+        RiskAdapter = new RiskAdapter(getLayoutInflater(), RiskList);
+        RiskListView.setAdapter(RiskAdapter);
+        RiskAdapter.notifyDataSetChanged();
+        RiskListView.setOnItemClickListener(new onRiskClick(getApplicationContext()) {});
+    }
+
+    @Override
+    public void onRiskListener(Risk risk) {
+        RiskList.add(risk);
+        RiskAdapter.notifyDataSetChanged();
+
     }
 
     private void showUpdateDialog() {
@@ -64,6 +102,8 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
 
             @Override
             public void onClick(View v) {
+                TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+                TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
             }
         });
@@ -96,5 +136,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         }
         return true;
     }
+
+
 
 }
