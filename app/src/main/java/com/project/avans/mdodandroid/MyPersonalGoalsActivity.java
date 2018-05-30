@@ -11,12 +11,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.AsyncGoal;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalAdapter;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalListener;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.onGoalClick;
+import com.project.avans.mdodandroid.object_classes.Goal;
 
-public class MyPersonalGoalsActivity extends AppCompatActivity implements DialogInterface.OnShowListener {
+import java.util.ArrayList;
+
+public class MyPersonalGoalsActivity extends AppCompatActivity implements DialogInterface.OnShowListener, GoalListener {
     private View updateDialogView;
+    private ArrayList<Goal> goalList = new ArrayList<>();
+    private GoalAdapter goalAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,20 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                 showUpdateDialog();
             }
         });
+
+        //TEST DATA API
+        String url = "https://jsonplaceholder.typicode.com/users";
+//        "https://mdod.herokuapp.com/api/v1/goals"
+
+        String[] urls = new String[] {url};
+        AsyncGoal task = new AsyncGoal((GoalListener) this);
+        task.execute(urls);
+
+        ListView goalListView = findViewById(R.id.listView);
+        goalAdapter = new GoalAdapter(getLayoutInflater(), goalList);
+        goalListView.setAdapter(goalAdapter);
+        goalAdapter.notifyDataSetChanged();
+        goalListView.setOnItemClickListener(new onGoalClick(getApplicationContext()) {});
     }
 
     private void showUpdateDialog() {
@@ -80,6 +103,12 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                 }
             }
         });
+    }
+
+    @Override
+    public void onGoalListener(Goal goal) {
+        goalList.add(goal);
+        goalAdapter.notifyDataSetChanged();
     }
 
     //adds custom menu

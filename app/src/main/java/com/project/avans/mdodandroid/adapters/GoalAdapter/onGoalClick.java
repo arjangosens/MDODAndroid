@@ -1,9 +1,8 @@
-package com.project.avans.mdodandroid.adapters.RiskAdapter;
+package com.project.avans.mdodandroid.adapters.GoalAdapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -14,25 +13,30 @@ import android.widget.TextView;
 
 import com.project.avans.mdodandroid.MainActivity;
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.object_classes.Goal;
 import com.project.avans.mdodandroid.object_classes.Risk;
 
-public class onRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener{
-        private Context context;
-        private View updateDialogView;
+/**
+ * Created by kelly on 30-5-2018.
+ */
 
-        public onRiskClick(Context context) {
-            this.context = context;
-        }
+public class onGoalClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private Context context;
+    private View updateDialogView;
 
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Risk rv = (Risk) adapterView.getItemAtPosition(i);
+    public onGoalClick(Context context) {
+        this.context = context;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Goal rv = (Goal) adapterView.getItemAtPosition(i);
             Intent intent = new Intent(context, MainActivity.class); // TODO change to edit page
-            intent.putExtra("Risk", rv);
+            intent.putExtra("Goal", rv);
             context.startActivity(intent);
-//            showUpdateDialog();
+//        showUpdateDialog();
 
-        }
+    }
 //
 //    private void showUpdateDialog(){
 //        AlertDialog alertDialog;
@@ -71,11 +75,7 @@ public class onRiskClick extends AppCompatActivity implements AdapterView.OnItem
 //            public void onClick(View v) {
 //                TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
 //                TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
-//
 //            }
 //        });
 //    }
-
-
 }
-
