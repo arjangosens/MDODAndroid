@@ -52,7 +52,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         goalAdapter = new GoalAdapter(getLayoutInflater(), goalList);
         goalListView.setAdapter(goalAdapter);
         goalAdapter.notifyDataSetChanged();
-        goalListView.setOnItemClickListener(new onGoalClick(getApplicationContext()) {});
+        goalListView.setOnItemClickListener(new onGoalClick(getApplicationContext(), getLayoutInflater()));
     }
 
     private void showUpdateDialog() {

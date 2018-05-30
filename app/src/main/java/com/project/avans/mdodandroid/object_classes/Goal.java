@@ -2,10 +2,6 @@ package com.project.avans.mdodandroid.object_classes;
 
 import java.io.Serializable;
 
-/**
- * Created by kelly on 30-5-2018.
- */
-
 public class Goal implements Serializable {
     private String goalID;
     private String goal;
@@ -21,7 +17,7 @@ public class Goal implements Serializable {
         return goalID;
     }
 
-    public String Risk() {
+    public String Goal() {
         return goal;
     }
 

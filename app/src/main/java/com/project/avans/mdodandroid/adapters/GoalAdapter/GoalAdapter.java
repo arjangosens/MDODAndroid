@@ -55,7 +55,7 @@ public class GoalAdapter extends BaseAdapter {
             viewHolder = (GoalAdapter.ViewHolder) view.getTag();
         }
         Goal rv = (Goal) goalArray.get(i);
-        viewHolder.goal.setText(rv.Risk());
+        viewHolder.goal.setText(rv.Goal());
         return view;
     }
 
