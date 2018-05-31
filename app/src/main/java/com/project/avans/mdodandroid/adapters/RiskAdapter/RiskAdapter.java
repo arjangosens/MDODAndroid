@@ -47,11 +47,13 @@ import java.util.ArrayList;
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             ViewHolder viewHolder;
-
             if(view == null){
                 view = inflater.inflate(R.layout.activity_row_risk, null);
                 viewHolder = new ViewHolder();
                 viewHolder.Risk = view.findViewById(R.id.RiskRow);
+                TextView risk = (TextView)view.findViewById(R.id.textView_row);
+                risk.setText(R.string.risk);
+
                 view.setTag(viewHolder);
             }else {
                 viewHolder = (ViewHolder) view.getTag();

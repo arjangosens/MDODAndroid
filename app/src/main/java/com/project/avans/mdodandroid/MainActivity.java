@@ -78,11 +78,11 @@ public class MainActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                            Log.d("the token", Token);
-                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Log.d("the token", Token);
+                    Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                            startActivity(intent);
+                    startActivity(intent);
 
                 } else {
 

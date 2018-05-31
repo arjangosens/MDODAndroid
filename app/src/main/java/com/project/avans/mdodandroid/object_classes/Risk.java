@@ -14,12 +14,20 @@ public class Risk implements Serializable {
         this.Risk = Risk;
 
     }
+    public Risk(String risk){
+        this("", risk);
+    }
 
     public String getRiskID() {
         return RiskID;
     }
 
+    public void setRisk(String risk) {
+        Risk = risk;
+    }
+
     public String Risk() {
+
         return Risk;
     }
 
