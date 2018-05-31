@@ -29,6 +29,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     private View updateDialogView;
     private ArrayList<Goal> goalList = new ArrayList<>();
     private GoalAdapter goalAdapter = null;
+    private String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                type = "";
                 showUpdateDialog();
             }
         });
@@ -59,13 +61,19 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     }
 
     private void showUpdateDialog() {
+
+
         AlertDialog alertDialog;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        builder.setTitle(getResources().getString(R.string.newGoal));
+        if (type.equals("")) {
+            builder.setTitle(getResources().getString(R.string.newGoal));
+        } else if (type.equals("goal")){
+            builder.setTitle("change goal");
+        }
 
         View view;
 
@@ -94,34 +102,44 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
             @Override
             public void onClick(View v) {
                 TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
-                TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+                final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
                 String field = String.valueOf(updateDialogGenericEditText.getText());
                 Log.i("DialogUpdateProfile", "Value of field: " + field);
+
                 if (field.equals("")) {
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
-
                 } else {
-                    NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<String>(){
-                        @Override
-                        public void getResult(String result)
-                        {
-                            if (!result.isEmpty())
-                            {
-                                dialog.dismiss();
-                            } else {
-                            }
-                        }
 
-                    });
+                    if (type.equals("")) {
+                        NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<String>(){
+                            @Override
+                            public void getResult(String result)
+                            {
+                                if (!result.isEmpty())
+                                {
+                                    dialog.dismiss();
+                                    goalList.add(new Goal(updateDialogGenericEditText.getText().toString()));
+                                    goalAdapter.notifyDataSetChanged();
+                                } else {
+                                }
+                            }
+
+                        });
+
+                    } else if (type.equals("goal")){
+                    }
+
                 }
+
+
             }
         });
     }
 
     @Override
     public void onAlertBoxAvailable(Goal goal) {
-        Log.i("TEST: ", goal.toString());
+        type = "goal";
         showUpdateDialog();
     }
 
