@@ -1,38 +1,37 @@
 package com.project.avans.mdodandroid.adapters.RiskAdapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.sip.SipSession;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.project.avans.mdodandroid.MainActivity;
 import com.project.avans.mdodandroid.R;
+
 import com.project.avans.mdodandroid.object_classes.Risk;
 
-public class onRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener{
-        private Context context;
-        private View updateDialogView;
+public class onRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-        public onRiskClick(Context context) {
-            this.context = context;
-        }
+    private OnAlertBoxAvailableR listener;
 
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Risk rv = (Risk) adapterView.getItemAtPosition(i);
-            Intent intent = new Intent(context, MainActivity.class); // TODO change to edit page
-            intent.putExtra("Risk", rv);
-            context.startActivity(intent);
-//            showUpdateDialog();
 
-        }
+    public onRiskClick(OnAlertBoxAvailableR listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Risk rv = (Risk) adapterView.getItemAtPosition(i);
+        listener.onAlertBoxAvailableR(rv);
+    }
+}
+
+
 //
 //    private void showUpdateDialog(){
 //        AlertDialog alertDialog;
@@ -75,7 +74,4 @@ public class onRiskClick extends AppCompatActivity implements AdapterView.OnItem
 //            }
 //        });
 //    }
-
-
-}
 
