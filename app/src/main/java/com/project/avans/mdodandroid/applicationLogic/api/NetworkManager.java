@@ -136,6 +136,30 @@ public class NetworkManager
 
 
     public void postGoal(String description, final VolleyListener<JSONObject> listener) {
+String url = prefixURL + "v1/goal";
+Map<String, Object> jsonParams = new HashMap<>();
+jsonParams.put("description", description);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.d(TAG + ": ", "PUT client Response : " + response.toString());
+                        if(null != response.toString())
+                            listener.getResult(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        if (null != error.networkResponse)
+                        {
+                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            listener.getResult(null);
 
         String url = prefixURL + "v1/goal";
 

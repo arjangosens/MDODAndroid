@@ -29,7 +29,6 @@ import com.project.avans.mdodandroid.adapters.RiskAdapter.onRiskClick;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskAdapter;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
-import com.project.avans.mdodandroid.object_classes.Goal;
 import com.project.avans.mdodandroid.object_classes.Risk;
 
 import org.json.JSONArray;
