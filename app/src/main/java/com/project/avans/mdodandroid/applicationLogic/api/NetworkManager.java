@@ -12,10 +12,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.avans.mdodandroid.MainActivity;
+import com.project.avans.mdodandroid.object_classes.UserSettingsType;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -130,5 +132,56 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
+    public void updateClient(String firstname, String infix, String lastname, String phonenumber,
+                             String birthday, String city, String adress, String zipcode, final VolleyListener<JSONObject> listener) {
 
+        String url = prefixURL + "client";
+
+        Map<String, Object> jsonParams = new HashMap<>();
+        jsonParams.put("firstname", firstname);
+        jsonParams.put("infix", infix);
+        jsonParams.put("lastname", lastname);
+        jsonParams.put("phonenumber", phonenumber);
+        jsonParams.put("birthday", birthday);
+        jsonParams.put("city", city);
+        jsonParams.put("adress", adress);
+        jsonParams.put("zipcode", zipcode);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.d(TAG + ": ", "PUT client Response : " + response.toString());
+                        if(null != response.toString())
+                            listener.getResult(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        if (null != error.networkResponse)
+                        {
+                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            listener.getResult(null);
+
+                        }
+                    }
+                }) {@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            Log.i(TAG, "Mainactivity.Token = " + MainActivity.Token);
+            params.put("Authorization", "Bearer " + MainActivity.Token);
+            params.put("X-Access-Token", MainActivity.Token);
+            params.put("Content-Type", "application/json");
+
+            return params;
+        }};
+
+        requestQueue.add(request);
+
+    }
 }
