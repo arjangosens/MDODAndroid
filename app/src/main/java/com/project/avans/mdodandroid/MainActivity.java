@@ -12,6 +12,10 @@ import android.widget.TextView;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 
 public class MainActivity extends AppCompatActivity {
     public static String Token;
@@ -66,7 +70,14 @@ public class MainActivity extends AppCompatActivity {
                 {
                     //do what you need with the result...
                     Log.i("VOLLEY_GETRESULT", "Result:" + result);
-                    Token = result;
+
+                    try {
+                        JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
+
+                        Token = object.getString("token");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                             Log.d("the token", Token);
                             Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
