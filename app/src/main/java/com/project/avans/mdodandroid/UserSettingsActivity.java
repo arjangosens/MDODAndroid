@@ -246,22 +246,27 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
 
                 boolean changeIsValid = false;
+                String field = "";
 
                 if (type.equals(firstName.getType()) || type.equals(lastName.getType())) {
 
-                    String field = String.valueOf(updateDialogGenericEditText.getText());
+                    field = String.valueOf(updateDialogGenericEditText.getText());
                     Log.i("DialogUpdateProfile", "Value of field: " + field);
 
                     if (field.equals("")) {
                         incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
                     } else {
+
                         changeIsValid = true;
+
                     }
 
                 } else if (type.equals(phoneNumber.getType())) {
 
-                    if (ValueChecker.checkPhoneNumber(String.valueOf(updateDialogPhoneNrEditText.getText()))) {
+                    field = String.valueOf(updateDialogPhoneNrEditText.getText());
+
+                    if (ValueChecker.checkPhoneNumber(field)) {
                         changeIsValid = true;
 
                     } else {
@@ -270,7 +275,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
 
                 } else if (type.equals(zipCode.getType())) {
-                    if (ValueChecker.checkZipCode(String.valueOf(updateDialogZipCodeEditText.getText()))) {
+
+                    field = String.valueOf(updateDialogZipCodeEditText.getText());
+
+                    if (ValueChecker.checkZipCode(field)) {
                         changeIsValid = true;
 
                     } else {
@@ -279,6 +287,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
                 } else {
                     Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
+                    field = String.valueOf(updateDialogGenericEditText.getText());
                     changeIsValid = true;
 
                 }
@@ -288,6 +297,18 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " allowed");
                     // TODO: Save changes made in AlertDialog
+
+                    for (UserSettingsType userSettingsType : settings) {
+
+                        if (userSettingsType.getType().contains(type)) {
+                            userSettingsType.setValue(field);
+
+                            ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
+                            Log.i("UserSettingsActivity", type + " filled with " + field);
+                        }
+                    }
+
+
 
                     dialog.dismiss();
                 } else
