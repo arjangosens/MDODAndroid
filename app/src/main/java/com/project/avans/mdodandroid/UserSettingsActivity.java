@@ -383,22 +383,27 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         AlertDialog alertDialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setTitle("Placeholder delete title");
-        builder.setMessage("Placeholder delete message");
+        builder.setTitle(getResources().getString(R.string.deleteAccountTitle));
+        builder.setMessage(getResources().getString(R.string.deleteAccountMessage));
 
         builder.setCancelable(false);
-        builder.setNegativeButton("No, abort", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getResources().getString(R.string.deleteAccountAbort), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.i("US_DELETEACCOUNT", "Deletion of account aborted");
                 dialog.cancel();
             }
         });
-        builder.setPositiveButton("Yes, delete my account", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().getString(R.string.deleteAccountConfirm), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.i("US_DELETEACCOUNT", "Deletion of account confirmed");
-                NetworkManager.getInstance().deleteClient();
+                NetworkManager.getInstance().deleteClient(new VolleyListener<JSONObject>() {
+                    @Override
+                    public void getResult(JSONObject object) {
+
+                    }
+                });
 
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
