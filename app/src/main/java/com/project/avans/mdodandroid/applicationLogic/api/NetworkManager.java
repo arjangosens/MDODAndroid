@@ -184,4 +184,8 @@ public class NetworkManager
         requestQueue.add(request);
 
     }
+
+    public void deleteClient() {
+        
+    }
 }

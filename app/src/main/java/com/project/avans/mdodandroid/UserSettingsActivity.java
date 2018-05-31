@@ -379,5 +379,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onClick(View v) {
         Log.i("UserSettingsActivity", "Onclick of delete account button called");
+
+
     }
 }
