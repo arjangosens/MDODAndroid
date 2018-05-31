@@ -15,7 +15,7 @@ import com.project.avans.mdodandroid.R;
 
 import com.project.avans.mdodandroid.object_classes.Risk;
 
-public class onRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class onRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private OnAlertBoxAvailableR listener;
 
@@ -24,11 +24,12 @@ public class onRiskClick extends AppCompatActivity implements AdapterView.OnItem
         this.listener = listener;
     }
 
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Risk rv = (Risk) adapterView.getItemAtPosition(i);
-            listener.onAlertBoxAvailableR(rv);
-        }
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Risk rv = (Risk) adapterView.getItemAtPosition(i);
+        listener.onAlertBoxAvailableR(rv);
+    }
+}
 
 
 //

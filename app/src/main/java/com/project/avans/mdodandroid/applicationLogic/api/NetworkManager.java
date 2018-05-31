@@ -136,31 +136,6 @@ public class NetworkManager
 
 
     public void postGoal(String description, final VolleyListener<JSONObject> listener) {
-String url = prefixURL + "v1/goal";
-Map<String, Object> jsonParams = new HashMap<>();
-jsonParams.put("description", description);
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        Log.d(TAG + ": ", "PUT client Response : " + response.toString());
-                        if(null != response.toString())
-                            listener.getResult(response);
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
-                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
-                            listener.getResult(null);
-
         String url = prefixURL + "v1/goal";
 
         Map<String, Object> jsonParams = new HashMap<>();
@@ -326,6 +301,98 @@ jsonParams.put("description", description);
 
             return params;
         }};
+        requestQueue.add(request);
+    }
+
+
+    public void updateClient(String firstname, String infix, String lastname, String phonenumber,
+                             String birthday, String city, String adress, String zipcode, final VolleyListener<JSONObject> listener) {
+
+        String url = prefixURL + "client";
+
+        Map<String, Object> jsonParams = new HashMap<>();
+        jsonParams.put("firstname", firstname);
+        jsonParams.put("infix", infix);
+        jsonParams.put("lastname", lastname);
+        jsonParams.put("phonenumber", phonenumber);
+        jsonParams.put("dob", birthday);
+        jsonParams.put("city", city);
+        jsonParams.put("adress", adress);
+        jsonParams.put("zipcode", zipcode);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(jsonParams),
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.d(TAG + ": ", "PUT client Response : " + response.toString());
+                        if(null != response.toString())
+                            listener.getResult(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        if (null != error.networkResponse)
+                        {
+                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            listener.getResult(null);
+
+                        }
+                    }
+                }) {@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            Log.i(TAG, "Mainactivity.Token = " + MainActivity.Token);
+            params.put("Authorization", "Bearer " + MainActivity.Token);
+            params.put("X-Access-Token", MainActivity.Token);
+            params.put("Content-Type", "application/json");
+
+            return params;
+        }};
+
+        requestQueue.add(request);
+
+    }
+
+    public void deleteClient(final VolleyListener<JSONObject> listener) {
+        String url = prefixURL + "client";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG + ": ", "DELETE client Response : " + response.toString());
+                        if (null != response.toString())
+                            listener.getResult(response);
+                        Log.i("resp", response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
+                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            listener.getResult(null);
+
+                        }
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + MainActivity.Token);
+                params.put("Authorization", "Bearer " + MainActivity.Token);
+                params.put("X-Access-Token", MainActivity.Token);
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+
         requestQueue.add(request);
     }
 }

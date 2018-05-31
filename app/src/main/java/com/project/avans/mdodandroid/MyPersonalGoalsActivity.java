@@ -11,8 +11,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.project.avans.mdodandroid.GoalAdapter.AsyncGoal;
+import com.project.avans.mdodandroid.GoalAdapter.GoalAdapter;
+import com.project.avans.mdodandroid.GoalAdapter.GoalListener;
+import com.project.avans.mdodandroid.GoalAdapter.OnAlertBoxAvailable;
+import com.project.avans.mdodandroid.GoalAdapter.onGoalClick;
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+import com.project.avans.mdodandroid.object_classes.Goal;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,7 +100,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     }
 
     @Override
-    public void onShow(DialogInterface dialog) {
+    public void onShow(final DialogInterface dialog) {
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
         button.setOnClickListener(new View.OnClickListener() {
 
