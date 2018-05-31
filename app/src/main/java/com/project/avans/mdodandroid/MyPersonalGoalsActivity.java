@@ -11,8 +11,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
-import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.AsyncGoal;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalAdapter;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalListener;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.OnAlertBoxAvailable;
+import com.project.avans.mdodandroid.adapters.GoalAdapter.onGoalClick;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+import com.project.avans.mdodandroid.object_classes.Goal;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +51,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
 
         //TEST DATA API
         String url = "https://mdod.herokuapp.com/api/v1/goal";
-//        "https://mdod.herokuapp.com/api/v1/goal
+//        "https://mdod.herokuapp.com/api/v1/goal"
 
         String[] urls = new String[] {url};
         AsyncGoal task = new AsyncGoal((GoalListener) this);
@@ -90,7 +99,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     }
 
     @Override
-    public void onShow(DialogInterface dialog) {
+    public void onShow(final DialogInterface dialog) {
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
         button.setOnClickListener(new View.OnClickListener() {
 
