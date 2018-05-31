@@ -211,6 +211,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         phoneNumber.setValue(resultObject.getString("phonenumber"));
                         address.setValue(resultObject.getString("adress"));
                         city.setValue(resultObject.getString("city"));
+                        zipCode.setValue(resultObject.getString("zipcode"));
 
                         String dobString = resultObject.getString("birthday");
                         String[] splitDobString = dobString.split("T");

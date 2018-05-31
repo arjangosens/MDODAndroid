@@ -45,5 +45,6 @@
     <string name="city">City</string>
     <string name="zipCode">Postal address</string>
     <string name="invalidZipCode">Invalid postal address!</string>
+    <string name="deleteAccount">Delete account</string>
 
 </resources>
