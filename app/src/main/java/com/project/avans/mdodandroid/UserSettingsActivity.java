@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener {
+public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener, Button.OnClickListener {
     private ListView settingsListview;
     private ArrayList<UserSettingsType> settings = new ArrayList<>();
 
@@ -58,6 +58,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private TextView incorrectFieldTextView;
     private TextView incorrectPhoneNrTextView;
     private TextView incorrectZipCodeTextView;
+
+    private Button deleteAccountButton;
 
     private String type;
     private View updateDialogView;
@@ -93,7 +95,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         userSettingsAdapter = new UserSettingsAdapter(getLayoutInflater(), settings);
         settingsListview.setAdapter(userSettingsAdapter);
 
+        deleteAccountButton = (Button) findViewById(R.id.activityUserSettings_buttonDeleteAccount);
+
         settingsListview.setOnItemClickListener(this);
+        deleteAccountButton.setOnClickListener(this);
 
         // Get user values
         getValues();
@@ -369,5 +374,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.i("UserSettingsActivity", "Onclick of delete account button called");
     }
 }
