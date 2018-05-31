@@ -12,23 +12,24 @@ import android.widget.AdapterView;
 
 import com.project.avans.mdodandroid.MainActivity;
 import com.project.avans.mdodandroid.R;
-import com.project.avans.mdodandroid.adapters.GoalAdapter.OnAlertBoxAvailable;
+
 import com.project.avans.mdodandroid.object_classes.Risk;
 
-public class onRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class onRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-        private OnAlertBoxAvailableR listener;
+    private OnAlertBoxAvailableR listener;
 
 
-        public onRiskClick(OnAlertBoxAvailableR listener) {
-            this.listener = listener;
-        }
+    public onRiskClick(OnAlertBoxAvailableR listener) {
+        this.listener = listener;
+    }
 
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Risk rv = (Risk) adapterView.getItemAtPosition(i);
-            listener.onAlertBoxAvailableR(rv);
-        }
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Risk rv = (Risk) adapterView.getItemAtPosition(i);
+        listener.onAlertBoxAvailableR(rv);
+    }
+}
 
 
 //
