@@ -133,10 +133,6 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
-    public void updateClient(String firstname, String infix, String lastname, String phonenumber,
-                             String birthday, String city, String adress, String zipcode, final VolleyListener<JSONObject> listener) {
-
-        String url = prefixURL + "client";
 
     public void postGoal(String description, final VolleyListener<JSONObject> listener) {
 
