@@ -380,6 +380,34 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     public void onClick(View v) {
         Log.i("UserSettingsActivity", "Onclick of delete account button called");
 
+        AlertDialog alertDialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Placeholder delete title");
+        builder.setMessage("Placeholder delete message");
+
+        builder.setCancelable(false);
+        builder.setNegativeButton("No, abort", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("US_DELETEACCOUNT", "Deletion of account aborted");
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton("Yes, delete my account", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("US_DELETEACCOUNT", "Deletion of account confirmed");
+                NetworkManager.getInstance().deleteClient();
+
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
+
+        alertDialog = builder.create();
+        alertDialog.show();
 
     }
 }
