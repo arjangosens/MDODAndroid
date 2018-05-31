@@ -142,12 +142,12 @@ public class NetworkManager
         jsonParams.put("infix", infix);
         jsonParams.put("lastname", lastname);
         jsonParams.put("phonenumber", phonenumber);
-        jsonParams.put("birthday", birthday);
+        jsonParams.put("dob", birthday);
         jsonParams.put("city", city);
         jsonParams.put("adress", adress);
         jsonParams.put("zipcode", zipcode);
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, null,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(jsonParams),
                 new Response.Listener<JSONObject>()
                 {
                     @Override

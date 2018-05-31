@@ -51,6 +51,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private UserSettingsType address;
     private UserSettingsType city;
     private UserSettingsType zipCode;
+    private UserSettingsType birthday;
 
     private UserSettingsAdapter userSettingsAdapter;
 
@@ -182,6 +183,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
         city = new UserSettingsType(getResources().getString(R.string.city));
         zipCode = new UserSettingsType(getResources().getString(R.string.zipCode));
+        birthday = new UserSettingsType("birthday");
     }
 
     private void getValues() {
@@ -210,6 +212,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         address.setValue(resultObject.getString("adress"));
                         city.setValue(resultObject.getString("city"));
 
+                        String dobString = resultObject.getString("birthday");
+                        String[] splitDobString = dobString.split("T");
+                        dobString = splitDobString[0];
+                        birthday.setValue(dobString);
+
+//                        Log.i("BIRTHDAYVALUE", birthday.getValue());
+
                         ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -219,6 +228,16 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 }
             }
         });
+    }
+
+    private void updateClient() {
+        NetworkManager.getInstance().updateClient(firstName.getValue(), insertion.getValue(), lastName.getValue(),
+                phoneNumber.getValue(), birthday.getValue(), city.getValue(), address.getValue(), zipCode.getValue(), new VolleyListener<JSONObject>() {
+                    @Override
+                    public void getResult(JSONObject object) {
+
+                    }
+                });
     }
 
     @Override
@@ -305,6 +324,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
                             ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
                             Log.i("UserSettingsActivity", type + " filled with " + field);
+
+                            updateClient();
                         }
                     }
 
