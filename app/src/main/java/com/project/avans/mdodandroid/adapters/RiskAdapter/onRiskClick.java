@@ -1,7 +1,6 @@
 package com.project.avans.mdodandroid.adapters.RiskAdapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.sip.SipSession;
@@ -10,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.project.avans.mdodandroid.MainActivity;
 import com.project.avans.mdodandroid.R;
@@ -76,7 +73,4 @@ public class onRiskClick extends AppCompatActivity implements AdapterView.OnItem
 //            }
 //        });
 //    }
-
-
-}
 

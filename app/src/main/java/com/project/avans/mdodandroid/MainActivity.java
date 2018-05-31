@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     TextView resultTextView;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
