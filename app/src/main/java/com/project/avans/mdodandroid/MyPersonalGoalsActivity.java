@@ -11,24 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.project.avans.mdodandroid.adapters.GoalAdapter.AsyncGoal;
-import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalAdapter;
-import com.project.avans.mdodandroid.adapters.GoalAdapter.GoalListener;
-import com.project.avans.mdodandroid.adapters.GoalAdapter.OnAlertBoxAvailable;
-import com.project.avans.mdodandroid.adapters.GoalAdapter.onGoalClick;
-import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
-import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
-import com.project.avans.mdodandroid.object_classes.Goal;
+import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 
-import java.util.ArrayList;
-
-public class MyPersonalGoalsActivity extends AppCompatActivity implements DialogInterface.OnShowListener, GoalListener, OnAlertBoxAvailable {
+public class MyPersonalGoalsActivity extends AppCompatActivity implements DialogInterface.OnShowListener {
     private View updateDialogView;
-    private ArrayList<Goal> goalList = new ArrayList<>();
-    private GoalAdapter goalAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +29,6 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                 showUpdateDialog();
             }
         });
-
-        //TEST DATA API
-        String url = "https://mdod.herokuapp.com/api/v1/goal";
-//        "https://mdod.herokuapp.com/api/v1/goal"
-
-        String[] urls = new String[] {url};
-        AsyncGoal task = new AsyncGoal((GoalListener) this);
-        task.execute(urls);
-
-        ListView goalListView = findViewById(R.id.listView);
-        goalAdapter = new GoalAdapter(getLayoutInflater(), goalList);
-        goalListView.setAdapter(goalAdapter);
-        goalAdapter.notifyDataSetChanged();
-        goalListView.setOnItemClickListener(new onGoalClick(getApplicationContext(), getLayoutInflater(), this));
     }
 
     private void showUpdateDialog() {
@@ -87,48 +60,15 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     }
 
     @Override
-    public void onShow(final DialogInterface dialog) {
+    public void onShow(DialogInterface dialog) {
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
-                TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
-                String field = String.valueOf(updateDialogGenericEditText.getText());
-                Log.i("DialogUpdateProfile", "Value of field: " + field);
-                if (field.equals("")) {
-                    incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
-
-                } else {
-                    NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<String>(){
-                        @Override
-                        public void getResult(String result)
-                        {
-                            if (!result.isEmpty())
-                            {
-                                dialog.dismiss();
-                            } else {
-                            }
-                        }
-
-                    });
-                }
             }
         });
-    }
-
-    @Override
-    public void onAlertBoxAvailable(Goal goal) {
-        Log.i("TEST: ", goal.toString());
-        showUpdateDialog();
-    }
-
-    @Override
-    public void onGoalListener(Goal goal) {
-        goalList.add(goal);
-        goalAdapter.notifyDataSetChanged();
     }
 
     //adds custom menu

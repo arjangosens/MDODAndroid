@@ -46,5 +46,4 @@
     <string name="zipCode">Postal address</string>
     <string name="invalidZipCode">Invalid postal address!</string>
 
-    <string name="goal">Goal: </string>
 </resources>
