@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener {
+public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener, Button.OnClickListener {
     private ListView settingsListview;
     private ArrayList<UserSettingsType> settings = new ArrayList<>();
 
@@ -58,6 +58,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private TextView incorrectFieldTextView;
     private TextView incorrectPhoneNrTextView;
     private TextView incorrectZipCodeTextView;
+
+    private Button deleteAccountButton;
 
     private String type;
     private View updateDialogView;
@@ -93,7 +95,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         userSettingsAdapter = new UserSettingsAdapter(getLayoutInflater(), settings);
         settingsListview.setAdapter(userSettingsAdapter);
 
+        deleteAccountButton = (Button) findViewById(R.id.activityUserSettings_buttonDeleteAccount);
+
         settingsListview.setOnItemClickListener(this);
+        deleteAccountButton.setOnClickListener(this);
 
         // Get user values
         getValues();
@@ -211,6 +216,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         phoneNumber.setValue(resultObject.getString("phonenumber"));
                         address.setValue(resultObject.getString("adress"));
                         city.setValue(resultObject.getString("city"));
+                        zipCode.setValue(resultObject.getString("zipcode"));
 
                         String dobString = resultObject.getString("birthday");
                         String[] splitDobString = dobString.split("T");
@@ -368,5 +374,45 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.i("UserSettingsActivity", "Onclick of delete account button called");
+
+        AlertDialog alertDialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(getResources().getString(R.string.deleteAccountTitle));
+        builder.setMessage(getResources().getString(R.string.deleteAccountMessage));
+
+        builder.setCancelable(false);
+        builder.setNegativeButton(getResources().getString(R.string.deleteAccountAbort), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("US_DELETEACCOUNT", "Deletion of account aborted");
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton(getResources().getString(R.string.deleteAccountConfirm), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("US_DELETEACCOUNT", "Deletion of account confirmed");
+                NetworkManager.getInstance().deleteClient(new VolleyListener<JSONObject>() {
+                    @Override
+                    public void getResult(JSONObject object) {
+
+                    }
+                });
+
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
+
+        alertDialog = builder.create();
+        alertDialog.show();
+
     }
 }

@@ -45,5 +45,10 @@
     <string name="city">Woonplaats</string>
     <string name="zipCode">Postcode</string>
     <string name="invalidZipCode">Onjuiste postcode!</string>
+    <string name="deleteAccount">Verwijder mijn account</string>
+    <string name="deleteAccountTitle">Weet u het zeker?</string>
+    <string name="deleteAccountMessage">Als u doorgaat dan verliest u al uw opgeslagen data. Deze actie kan niet meer teruggedraaid worden!</string>
+    <string name="deleteAccountAbort">Nee</string>
+    <string name="deleteAccountConfirm">Ja, verwijder mijn account</string>
 
 </resources>
