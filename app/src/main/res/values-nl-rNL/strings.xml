@@ -45,5 +45,6 @@
     <string name="city">Woonplaats</string>
     <string name="zipCode">Postcode</string>
     <string name="invalidZipCode">Onjuiste postcode!</string>
+    <string name="goal">Doel: </string>
 
 </resources>

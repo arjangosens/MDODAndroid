@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     TextView resultTextView;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +80,18 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                            startActivity(intent);
+                    try {
+                        JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
+
+                        Token = object.getString("token");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("the token", Token);
+                    Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    startActivity(intent);
 
                 } else {
 
