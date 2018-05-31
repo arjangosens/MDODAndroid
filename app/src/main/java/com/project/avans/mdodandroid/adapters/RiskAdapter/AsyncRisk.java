@@ -47,7 +47,7 @@ public class AsyncRisk extends AsyncTask<String, Void, String> {
             httpConnection.setAllowUserInteraction(false);
             httpConnection.setInstanceFollowRedirects(true);
             httpConnection.setRequestMethod("GET");
-            httpConnection.setRequestProperty("Content-Type", "application/" + "json");
+            httpConnection.setRequestProperty("X-Access-Token", MainActivity.Token);
             httpConnection.setRequestProperty("authorization", "Bearer " + MainActivity.Token);
             httpConnection.connect();
             responseCode = httpConnection.getResponseCode();
@@ -80,8 +80,8 @@ public class AsyncRisk extends AsyncTask<String, Void, String> {
 
             for(int i=0; i< jsonObject.length(); i++){
                 JSONObject RiskJson = jsonObject.getJSONObject(i);
-                String Risk = RiskJson.getString("body");
-                String RiskID = RiskJson.getString("id");
+                String Risk = RiskJson.getString("description");
+                String RiskID = RiskJson.getString("riskId");
 //                System.out.println(RiskID);
 
                 Risk rp = new Risk(RiskID, Risk);

@@ -22,8 +22,12 @@ import com.project.avans.mdodandroid.adapters.RiskAdapter.onRiskClick;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskAdapter;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+import com.project.avans.mdodandroid.object_classes.Goal;
 import com.project.avans.mdodandroid.object_classes.Risk;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -34,6 +38,8 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     private ArrayList<Risk> RiskList = new ArrayList<>();
     private RiskAdapter RiskAdapter = null;
     private String url;
+    private String type = "";
+    private Risk riskup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +48,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         //Risk e = new Risk("1", "test");
         //RiskList.add(e);
         //getRisk();
-        url = "https://jsonplaceholder.typicode.com/posts";
+        url = "https://mdod.herokuapp.com/api/v1/risk";
 
         String[] urls = new String[] {url};
         AsyncRisk task = new AsyncRisk((RiskListener) this);
@@ -52,6 +58,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                type = "";
                 showUpdateDialog();
             }
         });
@@ -77,7 +84,11 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        builder.setTitle(getResources().getString(R.string.risks));
+        if (type.equals("")) {
+            builder.setTitle(getResources().getString(R.string.newRisk));
+        } else if (type.equals("update")){
+            builder.setTitle(getResources().getString(R.string.risk_update));
+        }
 
         View view;
 
@@ -106,7 +117,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
             @Override
             public void onClick(View v) {
                 TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
-                TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+                final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
                 String field = String.valueOf(updateDialogGenericEditText.getText());
                 Log.i("DialogUpdateProfile", "Value of field: " + field);
@@ -114,57 +125,87 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
                 } else {
-                    NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<String>(){
-                        @Override
-                        public void getResult(String result)
-                        {
-                            if (!result.isEmpty())
+                    if (type.equals("")) {
+                        NetworkManager.getInstance().postRisk(updateDialogGenericEditText.getText().toString(),  new VolleyListener<JSONObject>(){
+                            @Override
+                            public void getResult(JSONObject result)
                             {
-                                dialog.dismiss();
-                            } else {
-                            }
+
+                                    String RiskId2 = "";
+                                    if (!(result == null)){
+                                        try {
+                                            RiskId2 = result.getString("riskId");
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        dialog.dismiss();
+                                        RiskList.add(new Risk(RiskId2, updateDialogGenericEditText.getText().toString()));
+                                        RiskAdapter.notifyDataSetChanged();
+                                    } else {
+                                    }
+                                }
+
+                            });
+
+                        } else if (type.equals("update")) {
+                            NetworkManager.getInstance().updateRisk(updateDialogGenericEditText.getText().toString(), riskup, new VolleyListener<String>(){
+                                @Override
+                                public void getResult(String result)
+                                {
+                                    if (!result.isEmpty())
+                                    {
+                                        System.out.println(RiskList.indexOf(riskup));
+                                        dialog.dismiss();
+                                        RiskList.get(RiskList.indexOf(riskup)).setRisk(updateDialogGenericEditText.getText().toString());
+                                        RiskAdapter.notifyDataSetChanged();
+                                    } else {
+                                    }
+                                }
+
+                            });
+
                         }
-
-                    });
+                    }
                 }
-            }
-        });
-    }
+            });
+                                  }
 
-    //adds custom menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.settings_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        Intent i;
-        switch(id){
-            case R.id.menu_user_settings:
-                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
-                startActivity(i);
-                break;
-            case R.id.menu_logout:
-                i = new Intent(getApplicationContext(), MainActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+                //adds custom menu
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.settings_menu, menu);
+            return true;
         }
-        return true;
-    }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+
+            Intent i;
+            switch(id){
+                case R.id.menu_user_settings:
+                    i = new Intent(getApplicationContext(), UserSettingsActivity.class);
+                    startActivity(i);
+                    break;
+                case R.id.menu_logout:
+                    i = new Intent(getApplicationContext(), MainActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                    break;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+            return true;
+        }
 
 
-    @Override
-    public void onAlertBoxAvailableR(Risk risk) {
-        Log.i("TEST: ", risk.toString());
-        showUpdateDialog();
-    }
+        @Override
+        public void onAlertBoxAvailableR(Risk risk) {
+            Log.i("TEST: ", risk.toString());
+            type = "update";
+            this.riskup = risk;
+            showUpdateDialog();
+        }
 
 
 }

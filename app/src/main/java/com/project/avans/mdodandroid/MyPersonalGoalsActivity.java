@@ -47,7 +47,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
 
         //TEST DATA API
         String url = "https://mdod.herokuapp.com/api/v1/goal";
-//        "https://mdod.herokuapp.com/api/v1/goal"
+//        "https://mdod.herokuapp.com/api/v1/goal
 
         String[] urls = new String[] {url};
         AsyncGoal task = new AsyncGoal((GoalListener) this);

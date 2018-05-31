@@ -46,6 +46,7 @@
     <string name="zipCode">Postal address</string>
     <string name="invalidZipCode">Invalid postal address!</string>
     <string name="risk">risk</string>
+    <string name="risk_update">update risk</string>
 
     <string name="goal">Goal: </string>
 </resources>
