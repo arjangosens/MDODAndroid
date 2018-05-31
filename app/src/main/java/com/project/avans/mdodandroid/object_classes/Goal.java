@@ -3,12 +3,21 @@ package com.project.avans.mdodandroid.object_classes;
 import java.io.Serializable;
 
 public class Goal implements Serializable {
+    private String goalID;
     private String goal;
 
+    public Goal(String goalID, String goal) {
+        this.goalID = goalID;
+        this.goal = goal;
 
-    public Goal(String Goal) {
-        this.goal = Goal;
+    }
 
+    public String getGoalID() {
+        return goalID;
+    }
+
+    public void setGoal(String goal) {
+        this.goal = goal;
     }
 
     public String Goal() {
@@ -18,8 +27,9 @@ public class Goal implements Serializable {
 
     @Override
     public String toString() {
-        return "Risk{" +
-                ", Risk='" + goal + '\'' +
+        return "Goal{" +
+                "goalID='" + goalID + '\'' +
+                ", goal='" + goal + '\'' +
                 '}';
     }
 }
