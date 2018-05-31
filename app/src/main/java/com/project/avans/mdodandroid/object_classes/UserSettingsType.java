@@ -1,6 +1,8 @@
 package com.project.avans.mdodandroid.object_classes;
 
-public class UserSettingsType {
+import java.io.Serializable;
+
+public class UserSettingsType implements Serializable {
     private String type;
     private String value;
 

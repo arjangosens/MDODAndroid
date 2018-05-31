@@ -11,14 +11,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.object_classes.UserSettingsType;
+import com.project.avans.mdodandroid.userSettingsAdapter.UserSettingsAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -28,6 +35,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     private EditText updateDialogGenericEditText;
     private EditText updateDialogPhoneNrEditText;
+    private EditText updateDialogZipCodeEditText;
 //    private EditText updateDialogCurrentPasswordEditText;
 //    private EditText updateDialogNewPasswordEditText;
 //    private EditText updateDialogConfirmPasswordEditText;
@@ -41,9 +49,14 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private UserSettingsType insertion;
     private UserSettingsType lastName;
     private UserSettingsType address;
+    private UserSettingsType city;
+    private UserSettingsType zipCode;
+
+    private UserSettingsAdapter userSettingsAdapter;
 
     private TextView incorrectFieldTextView;
     private TextView incorrectPhoneNrTextView;
+    private TextView incorrectZipCodeTextView;
 
     private String type;
     private View updateDialogView;
@@ -54,22 +67,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
+        //Get types
+        initTypes();
+
         //removes the title from the title bar in the userSettingsActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        firstName = new UserSettingsType(getResources().getString(R.string.firstName));
-        insertion = new UserSettingsType(getResources().getString(R.string.Insertion));
-        lastName = new UserSettingsType(getResources().getString(R.string.Lastname));
-//        String password = getResources().getString(R.string.password);
-        address = new UserSettingsType(getResources().getString(R.string.adress));
-        phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
-
-
-        // Test values to check hints
-        firstName.setValue("John");
-        lastName.setValue("Doe");
-        phoneNumber.setValue("+31612345678");
-        address.setValue("Lovensdijkstraat 61, Breda");
 
         //TODO: add local user data
 
@@ -77,18 +80,23 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settings.add(insertion);
         settings.add(lastName);
 //        settings.add(password);
+        settings.add(city);
         settings.add(address);
+        settings.add(zipCode);
         settings.add(phoneNumber);
+
 
         //TODO: connect the Textviews to the userdata
 
         settingsListview = (ListView) findViewById(R.id.listview_settings);
-
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, settings);
-
-        settingsListview.setAdapter(adapter);
+        userSettingsAdapter = new UserSettingsAdapter(getLayoutInflater(), settings);
+        settingsListview.setAdapter(userSettingsAdapter);
 
         settingsListview.setOnItemClickListener(this);
+
+        // Get user values
+        getValues();
+//        userSettingsAdapter.notifyDataSetChanged();
     }
 
     private void showUpdateDialog() {
@@ -110,6 +118,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             updateDialogPhoneNrEditText = view.findViewById(R.id.dialogUpdateProfilePhone_editText);
             updateDialogPhoneNrEditText.setHint(hint);
 
+        } else if (type.equals(zipCode.getType())) {
+            view = inflater.inflate(R.layout.dialog_updateprofile_zipcode, null);
+            hint = zipCode.getValue();
+
+            updateDialogZipCodeEditText = view.findViewById(R.id.dialogUpdateProfileZipCode_editText);
+            updateDialogZipCodeEditText.setHint(hint);
         } else {
 
             view = inflater.inflate(R.layout.dialog_updateprofile, null);
@@ -123,6 +137,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
             } else if (type.equals(address.getType())) {
                 hint = address.getValue();
+
+            } else if (type.equals(insertion.getType())) {
+                hint = insertion.getValue();
+
+            } else if (type.equals(city.getType())) {
+                hint = city.getValue();
             }
 
             updateDialogGenericEditText.setHint(hint);
@@ -146,9 +166,59 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
 
-        incorrectPhoneNrTextView =  updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
+        incorrectPhoneNrTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
+
+        incorrectZipCodeTextView = updateDialogView.findViewById(R.id.dialogUpdateProfileZipCode_textViewIncorrectValue);
 
 
+    }
+
+    private void initTypes() {
+        firstName = new UserSettingsType(getResources().getString(R.string.firstName));
+        insertion = new UserSettingsType(getResources().getString(R.string.Insertion));
+        lastName = new UserSettingsType(getResources().getString(R.string.Lastname));
+//        String password = getResources().getString(R.string.password);
+        address = new UserSettingsType(getResources().getString(R.string.adress));
+        phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
+        city = new UserSettingsType(getResources().getString(R.string.city));
+        zipCode = new UserSettingsType(getResources().getString(R.string.zipCode));
+    }
+
+    private void getValues() {
+
+//
+//        // Fill types with test values
+//        firstName.setValue("John");
+//        lastName.setValue("Doe");
+//        phoneNumber.setValue("+31612345678");
+//        address.setValue("Lovensdijkstraat 61, Breda");
+
+        //TODO: Replace test values with actual API get call
+
+        NetworkManager.getInstance().getClient(new VolleyListener<JSONArray>() {
+            @Override
+            public void getResult(JSONArray result) {
+                if (result.length() > 0)
+                {
+                    Log.i("VOLLEY_GETRESULT", "Result:" + result.toString());
+                    try {
+                        JSONObject resultObject = result.getJSONObject(0);
+                        firstName.setValue(resultObject.getString("firstname"));
+                        insertion.setValue(resultObject.getString("infix"));
+                        lastName.setValue(resultObject.getString("lastname"));
+                        phoneNumber.setValue(resultObject.getString("phonenumber"));
+                        address.setValue(resultObject.getString("adress"));
+                        city.setValue(resultObject.getString("city"));
+
+                        ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
     }
 
     @Override
@@ -199,6 +269,14 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     }
 
 
+                } else if (type.equals(zipCode.getType())) {
+                    if (ValueChecker.checkZipCode(String.valueOf(updateDialogZipCodeEditText.getText()))) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectZipCodeTextView.setText(getResources().getString(R.string.invalidZipCode));
+                    }
+
                 } else {
                     Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
                     changeIsValid = true;
@@ -234,7 +312,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         int id = item.getItemId();
 
         Intent i;
-        switch(id){
+        switch (id) {
             case R.id.menu_user_settings:
 //                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
 //                startActivity(i);
