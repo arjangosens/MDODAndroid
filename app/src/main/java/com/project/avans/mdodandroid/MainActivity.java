@@ -76,6 +76,17 @@ public class MainActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                            Log.d("the token", Token);
+                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    try {
+                        JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
+
+                        Token = object.getString("token");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     Log.d("the token", Token);
                     Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

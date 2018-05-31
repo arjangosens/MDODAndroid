@@ -108,4 +108,13 @@ public class ValueChecker {
         Log.i("ValueChecker", "checkPhoneNumber() phoneNumber is " + result);
         return result;
     }
+
+    public static boolean checkZipCode(String zipCode) {
+        Pattern zipCodeRegex = Pattern.compile("^\\d{4}\\s?[A-Za-z]{2}");
+        Matcher matcher = zipCodeRegex.matcher(zipCode);
+
+        boolean result = matcher.find();
+        Log.i("ValueChecker", "checkZipCode() zipCode is " + result);
+        return result;
+    }
 }

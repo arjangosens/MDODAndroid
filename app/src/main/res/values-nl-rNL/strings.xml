@@ -27,7 +27,7 @@
     <string name="logOut">uitloggen</string>
     <string name="cancel">Annuleren</string>
     <string name="adress">Adres</string>
-    <string name="phoneNumber">Telefoon nummer</string>
+    <string name="phoneNumber">Telefoonnummer</string>
     <string name="userSettingsCurrentPasswordInvalid">Het wachtwoord is niet goed probeer het nog eens</string>
     <string name="userSettingsNewPasswordInvalid"> Het wachtwoord moet langer dan 8 letters zijn en minstens 1 letter en cijfer bevatten</string>
     <string name="userSettingsConfirmPasswordInvalid">Moet hetzelfde zijn als het nieuwe wachtwoord</string>
@@ -41,6 +41,10 @@
     <string name="risks">persoonlijke risico situaties</string>
     <string name="newGoal">Nieuw doel</string>
     <string name="newRisk">Nieuwe risico situatie</string>
+    <string name="fieldNotFilledIn">[Niet ingevuld]</string>
+    <string name="city">Woonplaats</string>
+    <string name="zipCode">Postcode</string>
+    <string name="invalidZipCode">Onjuiste postcode!</string>
     <string name="goal">Doel: </string>
 
 </resources>
