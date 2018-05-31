@@ -23,6 +23,9 @@ import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.object_classes.Goal;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class MyPersonalGoalsActivity extends AppCompatActivity implements DialogInterface.OnShowListener, GoalListener, OnAlertBoxAvailable {
@@ -30,6 +33,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     private ArrayList<Goal> goalList = new ArrayList<>();
     private GoalAdapter goalAdapter = null;
     private String type = "";
+    private Goal goal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +105,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
 
             @Override
             public void onClick(View v) {
-                TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+                final TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
                 final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
                 String field = String.valueOf(updateDialogGenericEditText.getText());
@@ -112,27 +116,46 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                 } else {
 
                     if (type.equals("")) {
-                        NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<String>(){
+                        NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<JSONObject>(){
                             @Override
-                            public void getResult(String result)
+                            public void getResult(JSONObject result)
                             {
-                                if (!result.isEmpty())
+                                if (!(result == null))
                                 {
+                                    String goalId = "";
+                                    try {
+                                        goalId = result.getString("goalId");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                     dialog.dismiss();
-                                    goalList.add(new Goal(updateDialogGenericEditText.getText().toString()));
+                                    goalList.add(new Goal(goalId, updateDialogGenericEditText.getText().toString()));
                                     goalAdapter.notifyDataSetChanged();
                                 } else {
+                                    incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong));
                                 }
                             }
 
                         });
 
                     } else if (type.equals("goal")){
+                        NetworkManager.getInstance().putGoal( goal.getGoalID(), updateDialogGenericEditText.getText().toString(),  new VolleyListener<JSONObject>(){
+                            @Override
+                            public void getResult(JSONObject result)
+                            {
+                                if (!(result == null))
+                                {
+                                    dialog.dismiss();
+                                    goal.setGoal(updateDialogGenericEditText.getText().toString());
+                                    goalAdapter.notifyDataSetChanged();
+                                } else {
+                                    incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong2));
+                                }
+                            }
+
+                        });
                     }
-
                 }
-
-
             }
         });
     }
@@ -140,6 +163,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     @Override
     public void onAlertBoxAvailable(Goal goal) {
         type = "goal";
+        this.goal = goal;
         showUpdateDialog();
     }
 

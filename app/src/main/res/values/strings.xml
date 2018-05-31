@@ -45,6 +45,7 @@
     <string name="city">City</string>
     <string name="zipCode">Postal address</string>
     <string name="invalidZipCode">Invalid postal address!</string>
-
+    <string name="somethingWentWrong">Something went wrong, your goal hasn\'t been added</string>
+    <string name="somethingWentWrong2">Something went wrong, your goal hasn\'t been changed</string>
     <string name="goal">Goal: </string>
 </resources>
