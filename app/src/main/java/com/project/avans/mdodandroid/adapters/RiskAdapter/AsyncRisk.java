@@ -80,7 +80,7 @@ public class AsyncRisk extends AsyncTask<String, Void, String> {
 
             for(int i=0; i< jsonObject.length(); i++){
                 JSONObject RiskJson = jsonObject.getJSONObject(i);
-                String Risk = RiskJson.getString("name");
+                String Risk = RiskJson.getString("body");
                 String RiskID = RiskJson.getString("id");
 //                System.out.println(RiskID);
 

@@ -16,16 +16,19 @@ import android.widget.ListView;
 
 
 import com.project.avans.mdodandroid.adapters.RiskAdapter.AsyncRisk;
+import com.project.avans.mdodandroid.adapters.RiskAdapter.OnAlertBoxAvailableR;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskListener;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.onRiskClick;
 import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskAdapter;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.object_classes.Risk;
 
 
 import java.util.ArrayList;
 
 
-public class MyPersonalRiskActivity extends AppCompatActivity implements DialogInterface.OnShowListener, RiskListener{
+public class MyPersonalRiskActivity extends AppCompatActivity implements DialogInterface.OnShowListener, RiskListener, OnAlertBoxAvailableR {
 
     private View updateDialogView;
     private ArrayList<Risk> RiskList = new ArrayList<>();
@@ -39,10 +42,10 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         //Risk e = new Risk("1", "test");
         //RiskList.add(e);
         //getRisk();
-        url = "https://jsonplaceholder.typicode.com/users";
+        url = "https://jsonplaceholder.typicode.com/posts";
 
         String[] urls = new String[] {url};
-        AsyncRisk task = new AsyncRisk(this);
+        AsyncRisk task = new AsyncRisk((RiskListener) this);
         task.execute(urls);
 
         Button add = findViewById(R.id.button_risks);
@@ -57,7 +60,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         RiskAdapter = new RiskAdapter(getLayoutInflater(), RiskList);
         RiskListView.setAdapter(RiskAdapter);
         RiskAdapter.notifyDataSetChanged();
-        RiskListView.setOnItemClickListener(new onRiskClick(getApplicationContext()) {});
+        RiskListView.setOnItemClickListener(new onRiskClick(this) {});
     }
 
     @Override
@@ -96,7 +99,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     }
 
     @Override
-    public void onShow(DialogInterface dialog) {
+    public void onShow(final DialogInterface dialog) {
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -105,6 +108,25 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                 TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
                 TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
+                String field = String.valueOf(updateDialogGenericEditText.getText());
+                Log.i("DialogUpdateProfile", "Value of field: " + field);
+                if (field.equals("")) {
+                    incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
+
+                } else {
+                    NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<String>(){
+                        @Override
+                        public void getResult(String result)
+                        {
+                            if (!result.isEmpty())
+                            {
+                                dialog.dismiss();
+                            } else {
+                            }
+                        }
+
+                    });
+                }
             }
         });
     }
@@ -137,6 +159,12 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         return true;
     }
 
+
+    @Override
+    public void onAlertBoxAvailableR(Risk risk) {
+        Log.i("TEST: ", risk.toString());
+        showUpdateDialog();
+    }
 
 
 }
