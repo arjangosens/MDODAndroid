@@ -85,7 +85,7 @@ public class AsyncGoal extends AsyncTask<String, Void, String> {
                 String goal = RiskJson.getString("description");
                 String goalID = RiskJson.getString("goalId");
 
-                com.project.avans.mdodandroid.object_classes.Goal rp = new Goal(goalID, goal);
+                com.project.avans.mdodandroid.object_classes.Goal rp = new Goal(goal);
                 listener.onGoalListener(rp);
             }
         } catch (JSONException e) {
