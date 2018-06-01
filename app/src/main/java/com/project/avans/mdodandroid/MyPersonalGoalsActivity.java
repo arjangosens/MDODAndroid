@@ -66,19 +66,13 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     }
 
     private void showUpdateDialog() {
-
-
         AlertDialog alertDialog;
+        String hint = "";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        if (type.equals("")) {
-            builder.setTitle(getResources().getString(R.string.newGoal));
-        } else if (type.equals("goal")){
-            builder.setTitle("change goal");
-        }
 
         View view;
 
@@ -86,6 +80,18 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         builder.setView(view);
 
         updateDialogView = view;
+
+        if (type.equals("")) {
+            builder.setTitle(getResources().getString(R.string.newGoal));
+
+        } else if (type.equals("goal")){
+            builder.setTitle(getResources().getString(R.string.changeGoal));
+            hint = goal.getGoal();
+            final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+            updateDialogGenericEditText.setHint(hint);
+
+        }
+
         builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
         builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

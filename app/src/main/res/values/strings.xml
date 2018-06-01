@@ -52,8 +52,8 @@
     <string name="deleteAccountConfirm">Yes, delete my account</string>
     <string name="risk">risk</string>
     <string name="risk_update">update risk</string>
-
     <string name="somethingWentWrong">Something went wrong, your goal hasn\'t been added</string>
     <string name="somethingWentWrong2">Something went wrong, your goal hasn\'t been changed</string>
     <string name="goal">Goal: </string>
+    <string name="changeGoal">Change my goal</string>
 </resources>

@@ -22,6 +22,10 @@ public class Risk implements Serializable {
         return RiskID;
     }
 
+    public String getRisk() {
+        return Risk;
+    }
+
     public void setRisk(String risk) {
         Risk = risk;
     }

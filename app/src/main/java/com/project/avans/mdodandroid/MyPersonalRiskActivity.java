@@ -89,16 +89,11 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
 
     private void showUpdateDialog() {
         AlertDialog alertDialog;
+        String hint = "";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
-
-        if (type.equals("")) {
-            builder.setTitle(getResources().getString(R.string.newRisk));
-        } else if (type.equals("update")){
-            builder.setTitle(getResources().getString(R.string.risk_update));
-        }
 
         View view;
 
@@ -106,6 +101,16 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         builder.setView(view);
 
         updateDialogView = view;
+
+        if (type.equals("")) {
+            builder.setTitle(getResources().getString(R.string.newRisk));
+        } else if (type.equals("update")){
+            builder.setTitle(getResources().getString(R.string.risk_update));
+            hint = riskup.getRisk();
+            final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+            updateDialogGenericEditText.setHint(hint);
+        }
+
         builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
         builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

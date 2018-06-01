@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Tactus</string>
     <string name="login">Login</string>
-    <string name="register">registreer</string>
+    <string name="register">Klik hier</string>
     <string name="noAccount">Nog geen account?</string>
     <string name="unValidCredentials">Voer de goede gegevens in.</string>
     <string name="firstName">Voornaam</string>
@@ -39,8 +39,8 @@
     <string name="goals">Mijn persoonlijke doelen</string>
     <string name="add">toevoegen</string>
     <string name="risks">persoonlijke risico situaties</string>
-    <string name="newGoal">Nieuw doel</string>
-    <string name="newRisk">Nieuw risico</string>
+    <string name="newGoal">Voer een nieuw doel in</string>
+    <string name="newRisk">Voer een nieuw risico in</string>
     <string name="fieldNotFilledIn">[Niet ingevuld]</string>
     <string name="city">Woonplaats</string>
     <string name="zipCode">Postcode</string>
@@ -52,8 +52,9 @@
     <string name="deleteAccountConfirm">Ja, verwijder mijn account</string>
     <string name="somethingWentWrong">Er ging iets fout, uw goal is niet toegevoegd</string>
     <string name="somethingWentWrong2">Er ging iets fout, uw goal is niet veranderd</string>
-    <string name="goal">Doel: </string>
-    <string name="risk">risico</string>
-    <string name="risk_update">verander risico</string>
+    <string name="goal">Mijn doel:</string>
+    <string name="risk">Mijn risico:</string>
+    <string name="risk_update">Verander mijn risico</string>
+    <string name="changeGoal">Verander mijn doel:</string>
 
 </resources>
