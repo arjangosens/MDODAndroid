@@ -91,7 +91,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
             builder.setTitle(getResources().getString(R.string.changeGoal));
             hint = goal.getGoal();
             final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
-            updateDialogGenericEditText.setHint(hint);
+            updateDialogGenericEditText.setText(hint);
 
             builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
                 public void onClick(final DialogInterface dialog, int id) {
