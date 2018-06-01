@@ -16,7 +16,8 @@ public class HomepageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_homepage);
 
         //removes the title from the title bar in the HomepageActivity
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(getResources().getString(R.string.homePageActivityHeader));
 
         Button btn = (Button) findViewById(R.id.button_goals);
         btn.setOnClickListener(new View.OnClickListener() {

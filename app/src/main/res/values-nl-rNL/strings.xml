@@ -63,5 +63,6 @@
     <string name="invalidName">Onjuiste naam!</string>
     <string name="emailNotFound">Account bestaat niet</string>
     <string name="registerActivityHeader">Registreren</string>
+    <string name="homePageActivityHeader">Dashboard</string>
 
 </resources>
