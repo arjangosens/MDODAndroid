@@ -11,11 +11,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.project.avans.mdodandroid.GoalAdapter.AsyncGoal;
+import com.project.avans.mdodandroid.GoalAdapter.GoalAdapter;
+import com.project.avans.mdodandroid.GoalAdapter.GoalListener;
+import com.project.avans.mdodandroid.GoalAdapter.OnAlertBoxAvailable;
+import com.project.avans.mdodandroid.GoalAdapter.onGoalClick;
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+import com.project.avans.mdodandroid.object_classes.Goal;
 
-public class MyPersonalGoalsActivity extends AppCompatActivity implements DialogInterface.OnShowListener {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+public class MyPersonalGoalsActivity extends AppCompatActivity implements DialogInterface.OnShowListener, GoalListener, OnAlertBoxAvailable {
     private View updateDialogView;
+    private ArrayList<Goal> goalList = new ArrayList<>();
+    private GoalAdapter goalAdapter = null;
+    private String type = "";
+    private Goal goal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +45,40 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                type = "";
                 showUpdateDialog();
             }
         });
+
+        //TEST DATA API
+        String url = "https://mdod.herokuapp.com/api/v1/goal";
+//        "https://mdod.herokuapp.com/api/v1/goal
+
+        String[] urls = new String[] {url};
+        AsyncGoal task = new AsyncGoal((GoalListener) this);
+        task.execute(urls);
+
+        ListView goalListView = findViewById(R.id.listView);
+        goalAdapter = new GoalAdapter(getLayoutInflater(), goalList);
+        goalListView.setAdapter(goalAdapter);
+        goalAdapter.notifyDataSetChanged();
+        goalListView.setOnItemClickListener(new onGoalClick(getApplicationContext(), getLayoutInflater(), this));
     }
 
     private void showUpdateDialog() {
+
+
         AlertDialog alertDialog;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        builder.setTitle(getResources().getString(R.string.newGoal));
+        if (type.equals("")) {
+            builder.setTitle(getResources().getString(R.string.newGoal));
+        } else if (type.equals("goal")){
+            builder.setTitle("change goal");
+        }
 
         View view;
 
@@ -60,15 +100,78 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     }
 
     @Override
-    public void onShow(DialogInterface dialog) {
+    public void onShow(final DialogInterface dialog) {
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                final TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+                final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
+                String field = String.valueOf(updateDialogGenericEditText.getText());
+                Log.i("DialogUpdateProfile", "Value of field: " + field);
+
+                if (field.equals("")) {
+                    incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
+                } else {
+
+                    if (type.equals("")) {
+                        NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<JSONObject>(){
+                            @Override
+                            public void getResult(JSONObject result)
+                            {
+                                if (!(result == null))
+                                {
+                                    String goalId = "";
+                                    try {
+                                        goalId = result.getString("goalId");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    dialog.dismiss();
+                                    goalList.add(new Goal(goalId, updateDialogGenericEditText.getText().toString()));
+                                    goalAdapter.notifyDataSetChanged();
+                                } else {
+                                    incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong));
+                                }
+                            }
+
+                        });
+
+                    } else if (type.equals("goal")){
+                        NetworkManager.getInstance().putGoal( goal.getGoalID(), updateDialogGenericEditText.getText().toString(),  new VolleyListener<JSONObject>(){
+                            @Override
+                            public void getResult(JSONObject result)
+                            {
+                                if (!(result == null))
+                                {
+                                    dialog.dismiss();
+                                    goal.setGoal(updateDialogGenericEditText.getText().toString());
+                                    goalAdapter.notifyDataSetChanged();
+                                } else {
+                                    incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong2));
+                                }
+                            }
+
+                        });
+                    }
+                }
             }
         });
+    }
+
+    @Override
+    public void onAlertBoxAvailable(Goal goal) {
+        type = "goal";
+        this.goal = goal;
+        showUpdateDialog();
+    }
+
+    @Override
+    public void onGoalListener(Goal goal) {
+        goalList.add(goal);
+        goalAdapter.notifyDataSetChanged();
     }
 
     //adds custom menu
