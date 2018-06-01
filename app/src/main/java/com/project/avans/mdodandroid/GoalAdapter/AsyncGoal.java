@@ -83,10 +83,17 @@ public class AsyncGoal extends AsyncTask<String, Void, String> {
 
             for(int i=0; i< jsonObject.length(); i++){
                 JSONObject RiskJson = jsonObject.getJSONObject(i);
+                Log.i("TEST: ", RiskJson.toString());
                 String goal = RiskJson.getString("description");
                 String goalID = RiskJson.getString("goalId");
+                String status = RiskJson.getString("isCompleted");
 
-                com.project.avans.mdodandroid.object_classes.Goal rp = new Goal(goalID, goal);
+                Log.i("TEST: ", "goalID: " + goalID + " goal: " + goal + " status: " + status);
+
+                Goal gl = new Goal(goalID, goal, status);
+                com.project.avans.mdodandroid.object_classes.Goal rp = gl;
+
+                Log.i("TEST: ", gl.toString());
                 listener.onGoalListener(rp);
             }
         } catch (JSONException e) {

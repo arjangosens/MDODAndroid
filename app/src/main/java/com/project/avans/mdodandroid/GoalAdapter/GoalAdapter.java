@@ -5,10 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.object_classes.Goal;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -47,19 +53,55 @@ public class GoalAdapter extends BaseAdapter {
         GoalAdapter.ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.activity_row_risk, null);
+            view = inflater.inflate(R.layout.activity_row_goal, null);
             viewHolder = new GoalAdapter.ViewHolder();
-            viewHolder.goal = view.findViewById(R.id.RiskRow);
+            viewHolder.goal = view.findViewById(R.id.goalRow);
+            viewHolder.status = view.findViewById(R.id.checkBox_goal);
             view.setTag(viewHolder);
         }else {
             viewHolder = (GoalAdapter.ViewHolder) view.getTag();
         }
-        Goal rv = (Goal) goalArray.get(i);
+
+//        CheckBox status = findViewById(R.id.checkBox_goal);
+//        if(goal.getStatus().equals("0")){
+//            status.setChecked(false);
+//        } else if (goal.getStatus().equals("1")){
+//            status.setChecked(true);
+//        }
+        final Goal rv = (Goal) goalArray.get(i);
         viewHolder.goal.setText(rv.Goal());
+
+        if(rv.getStatus().equals("0")){
+            viewHolder.status.setChecked(false);
+        } else if (rv.getStatus().equals("1")){
+            viewHolder.status.setChecked(true);
+        }
+
+        viewHolder.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    NetworkManager.getInstance().putStatusGoal(rv.getGoalID(), "1", new VolleyListener<JSONObject>() {
+                        @Override
+                        public void getResult(JSONObject object) {
+
+                        }
+                    });
+                } else {
+                    NetworkManager.getInstance().putStatusGoal(rv.getGoalID(), "0", new VolleyListener<JSONObject>() {
+                        @Override
+                        public void getResult(JSONObject object) {
+
+                        }
+                    });
+                }
+            }
+        });
         return view;
     }
 
     private static class ViewHolder{
         TextView goal;
+        CheckBox status;
     }
 }

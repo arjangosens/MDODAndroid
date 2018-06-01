@@ -20,15 +20,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/RiskRow"
+        android:id="@+id/goalRow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="2dp"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox_goal"
         app:layout_constraintStart_toStartOf="@+id/textView_row"
         app:layout_constraintTop_toBottomOf="@+id/textView_row"
         tools:text="tekst" />
+
+    <CheckBox
+        android:id="@+id/checkBox_goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView_row" />
 
 </android.support.constraint.ConstraintLayout>

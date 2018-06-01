@@ -5,11 +5,16 @@ import java.io.Serializable;
 public class Goal implements Serializable {
     private String goalID;
     private String goal;
+    private String status;
 
-    public Goal(String goalID, String goal) {
+    public Goal(String goalID, String goal, String status) {
         this.goalID = goalID;
         this.goal = goal;
+        this.status = status;
+    }
 
+    public String getStatus() {
+        return status;
     }
 
     public String getGoalID() {
@@ -34,6 +39,7 @@ public class Goal implements Serializable {
         return "Goal{" +
                 "goalID='" + goalID + '\'' +
                 ", goal='" + goal + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
