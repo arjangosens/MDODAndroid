@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 if (!result.isEmpty())
                 {
-                    if (result.equals("empty")){
+                    if(result. equals("empty")){
                         resultTextView.setText(R.string.emailNotFound);
                     }
                     else{
@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                         startActivity(intent);
-
                     }
 
 

@@ -74,7 +74,6 @@ public class NetworkManager
                         Log.d(TAG + ": ", "login/client Response : " + response.toString());
                         if(null != response.toString())
                             listener.getResult(response.toString());
-                        listener.getResult("");
                     }
                 },
                 new Response.ErrorListener()
