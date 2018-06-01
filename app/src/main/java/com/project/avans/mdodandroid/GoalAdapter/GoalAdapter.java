@@ -6,10 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.object_classes.Goal;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -63,7 +68,7 @@ public class GoalAdapter extends BaseAdapter {
 //        } else if (goal.getStatus().equals("1")){
 //            status.setChecked(true);
 //        }
-        Goal rv = (Goal) goalArray.get(i);
+        final Goal rv = (Goal) goalArray.get(i);
         viewHolder.goal.setText(rv.Goal());
 
         if(rv.getStatus().equals("0")){
@@ -71,7 +76,27 @@ public class GoalAdapter extends BaseAdapter {
         } else if (rv.getStatus().equals("1")){
             viewHolder.status.setChecked(true);
         }
-        
+
+        viewHolder.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    NetworkManager.getInstance().putStatusGoal(rv.getGoalID(), "1", new VolleyListener<JSONObject>() {
+                        @Override
+                        public void getResult(JSONObject object) {
+
+                        }
+                    });
+                } else {
+                    NetworkManager.getInstance().putStatusGoal(rv.getGoalID(), "0", new VolleyListener<JSONObject>() {
+                        @Override
+                        public void getResult(JSONObject object) {
+
+                        }
+                    });
+                }
+            }
+        });
         return view;
     }
 
