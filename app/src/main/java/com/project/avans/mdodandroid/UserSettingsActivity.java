@@ -29,12 +29,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener {
+public class UserSettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnShowListener, Button.OnClickListener {
     private ListView settingsListview;
     private ArrayList<UserSettingsType> settings = new ArrayList<>();
 
     private EditText updateDialogGenericEditText;
     private EditText updateDialogPhoneNrEditText;
+    private EditText updateDialogZipCodeEditText;
 //    private EditText updateDialogCurrentPasswordEditText;
 //    private EditText updateDialogNewPasswordEditText;
 //    private EditText updateDialogConfirmPasswordEditText;
@@ -49,11 +50,16 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
     private UserSettingsType lastName;
     private UserSettingsType address;
     private UserSettingsType city;
+    private UserSettingsType zipCode;
+    private UserSettingsType birthday;
 
     private UserSettingsAdapter userSettingsAdapter;
 
     private TextView incorrectFieldTextView;
     private TextView incorrectPhoneNrTextView;
+    private TextView incorrectZipCodeTextView;
+
+    private Button deleteAccountButton;
 
     private String type;
     private View updateDialogView;
@@ -79,6 +85,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //        settings.add(password);
         settings.add(city);
         settings.add(address);
+        settings.add(zipCode);
         settings.add(phoneNumber);
 
 
@@ -88,7 +95,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         userSettingsAdapter = new UserSettingsAdapter(getLayoutInflater(), settings);
         settingsListview.setAdapter(userSettingsAdapter);
 
+        deleteAccountButton = (Button) findViewById(R.id.activityUserSettings_buttonDeleteAccount);
+
         settingsListview.setOnItemClickListener(this);
+        deleteAccountButton.setOnClickListener(this);
 
         // Get user values
         getValues();
@@ -114,6 +124,12 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
             updateDialogPhoneNrEditText = view.findViewById(R.id.dialogUpdateProfilePhone_editText);
             updateDialogPhoneNrEditText.setHint(hint);
 
+        } else if (type.equals(zipCode.getType())) {
+            view = inflater.inflate(R.layout.dialog_updateprofile_zipcode, null);
+            hint = zipCode.getValue();
+
+            updateDialogZipCodeEditText = view.findViewById(R.id.dialogUpdateProfileZipCode_editText);
+            updateDialogZipCodeEditText.setHint(hint);
         } else {
 
             view = inflater.inflate(R.layout.dialog_updateprofile, null);
@@ -158,6 +174,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
         incorrectPhoneNrTextView = updateDialogView.findViewById(R.id.dialogUpdateProfilePhone_textView);
 
+        incorrectZipCodeTextView = updateDialogView.findViewById(R.id.dialogUpdateProfileZipCode_textViewIncorrectValue);
+
 
     }
 
@@ -169,6 +187,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         address = new UserSettingsType(getResources().getString(R.string.adress));
         phoneNumber = new UserSettingsType(getResources().getString(R.string.phoneNumber));
         city = new UserSettingsType(getResources().getString(R.string.city));
+        zipCode = new UserSettingsType(getResources().getString(R.string.zipCode));
+        birthday = new UserSettingsType("birthday");
     }
 
     private void getValues() {
@@ -196,6 +216,14 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         phoneNumber.setValue(resultObject.getString("phonenumber"));
                         address.setValue(resultObject.getString("adress"));
                         city.setValue(resultObject.getString("city"));
+                        zipCode.setValue(resultObject.getString("zipcode"));
+
+                        String dobString = resultObject.getString("birthday");
+                        String[] splitDobString = dobString.split("T");
+                        dobString = splitDobString[0];
+                        birthday.setValue(dobString);
+
+//                        Log.i("BIRTHDAYVALUE", birthday.getValue());
 
                         ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
 
@@ -206,6 +234,16 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 }
             }
         });
+    }
+
+    private void updateClient() {
+        NetworkManager.getInstance().updateClient(firstName.getValue(), insertion.getValue(), lastName.getValue(),
+                phoneNumber.getValue(), birthday.getValue(), city.getValue(), address.getValue(), zipCode.getValue(), new VolleyListener<JSONObject>() {
+                    @Override
+                    public void getResult(JSONObject object) {
+
+                    }
+                });
     }
 
     @Override
@@ -233,22 +271,27 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
 
                 boolean changeIsValid = false;
+                String field = "";
 
                 if (type.equals(firstName.getType()) || type.equals(lastName.getType())) {
 
-                    String field = String.valueOf(updateDialogGenericEditText.getText());
+                    field = String.valueOf(updateDialogGenericEditText.getText());
                     Log.i("DialogUpdateProfile", "Value of field: " + field);
 
                     if (field.equals("")) {
                         incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
                     } else {
+
                         changeIsValid = true;
+
                     }
 
                 } else if (type.equals(phoneNumber.getType())) {
 
-                    if (ValueChecker.checkPhoneNumber(String.valueOf(updateDialogPhoneNrEditText.getText()))) {
+                    field = String.valueOf(updateDialogPhoneNrEditText.getText());
+
+                    if (ValueChecker.checkPhoneNumber(field)) {
                         changeIsValid = true;
 
                     } else {
@@ -256,8 +299,30 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     }
 
 
+                } else if (type.equals(zipCode.getType())) {
+
+                    field = String.valueOf(updateDialogZipCodeEditText.getText());
+
+                    if (ValueChecker.checkZipCode(field)) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectZipCodeTextView.setText(getResources().getString(R.string.invalidZipCode));
+                    }
+
+                } else if (type.equals(city.getType())) {
+                    field = String.valueOf(updateDialogGenericEditText.getText());
+
+                    if (ValueChecker.checkCity(field)) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.cityInvalid));
+                    }
+
                 } else {
                     Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
+                    field = String.valueOf(updateDialogGenericEditText.getText());
                     changeIsValid = true;
 
                 }
@@ -267,6 +332,20 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " allowed");
                     // TODO: Save changes made in AlertDialog
+
+                    for (UserSettingsType userSettingsType : settings) {
+
+                        if (userSettingsType.getType().contains(type)) {
+                            userSettingsType.setValue(field);
+
+                            ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
+                            Log.i("UserSettingsActivity", type + " filled with " + field);
+
+                            updateClient();
+                        }
+                    }
+
+
 
                     dialog.dismiss();
                 } else
@@ -305,5 +384,45 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.i("UserSettingsActivity", "Onclick of delete account button called");
+
+        AlertDialog alertDialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(getResources().getString(R.string.deleteAccountTitle));
+        builder.setMessage(getResources().getString(R.string.deleteAccountMessage));
+
+        builder.setCancelable(false);
+        builder.setNegativeButton(getResources().getString(R.string.deleteAccountAbort), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("US_DELETEACCOUNT", "Deletion of account aborted");
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton(getResources().getString(R.string.deleteAccountConfirm), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i("US_DELETEACCOUNT", "Deletion of account confirmed");
+                NetworkManager.getInstance().deleteClient(new VolleyListener<JSONObject>() {
+                    @Override
+                    public void getResult(JSONObject object) {
+
+                    }
+                });
+
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
+
+        alertDialog = builder.create();
+        alertDialog.show();
+
     }
 }

@@ -1,8 +1,12 @@
-package com.project.avans.mdodandroid.adapters.RiskAdapter;
+package com.project.avans.mdodandroid.GoalAdapter;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.project.avans.mdodandroid.GoalAdapter.GoalListener;
 import com.project.avans.mdodandroid.MainActivity;
+import com.project.avans.mdodandroid.adapters.RiskAdapter.RiskListener;
+import com.project.avans.mdodandroid.object_classes.Goal;
 import com.project.avans.mdodandroid.object_classes.Risk;
 
 import org.json.JSONArray;
@@ -19,12 +23,11 @@ import java.net.URL;
 import java.net.URLConnection;
 
 
-public class AsyncRisk extends AsyncTask<String, Void, String> {
+public class AsyncGoal extends AsyncTask<String, Void, String> {
+    private GoalListener listener = null;
 
-    private RiskListener listener = null;
 
-
-    public AsyncRisk(RiskListener listener) {
+    public AsyncGoal(GoalListener listener) {
         this.listener = listener;
     }
 
@@ -80,12 +83,11 @@ public class AsyncRisk extends AsyncTask<String, Void, String> {
 
             for(int i=0; i< jsonObject.length(); i++){
                 JSONObject RiskJson = jsonObject.getJSONObject(i);
-                String Risk = RiskJson.getString("description");
-                String RiskID = RiskJson.getString("riskId");
-//                System.out.println(RiskID);
+                String goal = RiskJson.getString("description");
+                String goalID = RiskJson.getString("goalId");
 
-                Risk rp = new Risk(RiskID, Risk);
-                listener.onRiskListener(rp);
+                com.project.avans.mdodandroid.object_classes.Goal rp = new Goal(goalID, goal);
+                listener.onGoalListener(rp);
             }
         } catch (JSONException e) {
             Log.e("json ex", e.getLocalizedMessage());

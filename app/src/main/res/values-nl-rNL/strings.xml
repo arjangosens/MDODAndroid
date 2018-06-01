@@ -40,8 +40,21 @@
     <string name="add">toevoegen</string>
     <string name="risks">persoonlijke risico situaties</string>
     <string name="newGoal">Nieuw doel</string>
-    <string name="newRisk">Nieuwe risico situatie</string>
+    <string name="newRisk">Nieuw risico</string>
     <string name="fieldNotFilledIn">[Niet ingevuld]</string>
     <string name="city">Woonplaats</string>
+    <string name="zipCode">Postcode</string>
+    <string name="invalidZipCode">Onjuiste postcode!</string>
+    <string name="deleteAccount">Verwijder mijn account</string>
+    <string name="deleteAccountTitle">Weet u het zeker?</string>
+    <string name="deleteAccountMessage">Als u doorgaat dan verliest u al uw opgeslagen data. Deze actie kan niet meer teruggedraaid worden!</string>
+    <string name="deleteAccountAbort">Nee</string>
+    <string name="deleteAccountConfirm">Ja, verwijder mijn account</string>
+    <string name="somethingWentWrong">Er ging iets fout, uw goal is niet toegevoegd</string>
+    <string name="somethingWentWrong2">Er ging iets fout, uw goal is niet veranderd</string>
+    <string name="goal">Doel: </string>
+    <string name="risk">risico</string>
+    <string name="risk_update">verander risico</string>
+    <string name="cityInvalid">Onjuiste woonplaats!</string>
 
 </resources>
