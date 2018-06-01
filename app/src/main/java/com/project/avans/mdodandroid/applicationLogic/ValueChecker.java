@@ -126,4 +126,13 @@ public class ValueChecker {
         Log.i("ValueChecker", "checkCity() city is " + result);
         return result;
     }
+
+    public static boolean checkName(String name) {
+        Pattern nameRegex = Pattern.compile("[A-Za-z\\-]{2,50}$");
+        Matcher matcher = nameRegex.matcher(name);
+
+        boolean result = matcher.find();
+        Log.i("ValueChecker", "checkName() name is " + result);
+        return result;
+    }
 }
