@@ -211,9 +211,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("VOLLEY_TAG", error.toString());
-                        validCredentials.setTextColor(Color.RED);
-                        validCredentials.setText(R.string.inValidCredentials);
+
+                        if(error.networkResponse.statusCode == 420){
+                            validCredentials.setTextColor(Color.RED);
+                            validCredentials.setText(R.string.invalidEmail);
+                        }
+                        else{
+                            Log.d("VOLLEY_TAG", error.toString());
+                            validCredentials.setTextColor(Color.RED);
+                            validCredentials.setText(R.string.inValidCredentials);
+                        }
+
                     }
                 }
         );

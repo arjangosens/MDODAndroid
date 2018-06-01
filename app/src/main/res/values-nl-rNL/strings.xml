@@ -57,5 +57,6 @@
     <string name="risk_update">Verander mijn risico</string>
     <string name="changeGoal">Verander mijn doel:</string>
     <string name="delete">Verwijderen</string>
+    <string name="invalidEmail">Email is al gebruikt</string>
 
 </resources>
