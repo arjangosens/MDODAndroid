@@ -117,4 +117,13 @@ public class ValueChecker {
         Log.i("ValueChecker", "checkZipCode() zipCode is " + result);
         return result;
     }
+
+    public static boolean checkCity(String city) {
+        Pattern cityRegex = Pattern.compile("^[a-zA-Z]+([?:\\s-'][a-zA-Z]+)*$");
+        Matcher matcher = cityRegex.matcher(city);
+
+        boolean result = matcher.find();
+        Log.i("ValueChecker", "checkCity() city is " + result);
+        return result;
+    }
 }
