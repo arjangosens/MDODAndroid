@@ -4,7 +4,7 @@
     <string name="login">Login</string>
     <string name="register">Klik hier</string>
     <string name="noAccount">Nog geen account?</string>
-    <string name="unValidCredentials">Voer de goede gegevens in.</string>
+    <string name="inValidCredentials">Voer de goede gegevens in.</string>
     <string name="firstName">Voornaam</string>
     <string name="Insertion">Tussenvoegsel</string>
     <string name="Lastname">Achternaam</string>
@@ -58,5 +58,6 @@
     <string name="changeGoal">Verander mijn doel:</string>
     <string name="delete">Verwijderen</string>
     <string name="invalidEmail">Email is al gebruikt</string>
+    <string name="emailNotFound">Account bestaat niet</string>
 
 </resources>

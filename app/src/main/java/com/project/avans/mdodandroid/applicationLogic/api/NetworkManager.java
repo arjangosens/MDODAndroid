@@ -74,6 +74,7 @@ public class NetworkManager
                         Log.d(TAG + ": ", "login/client Response : " + response.toString());
                         if(null != response.toString())
                             listener.getResult(response.toString());
+                        listener.getResult("");
                     }
                 },
                 new Response.ErrorListener()
@@ -83,8 +84,14 @@ public class NetworkManager
                     {
                         if (null != error.networkResponse)
                         {
-                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
-                            listener.getResult("");
+                            if (error.networkResponse.statusCode == 404){
+                                listener.getResult("empty");
+                            }
+                            else{
+                                Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                                listener.getResult("");
+                            }
+
                         }
                     }
                 });

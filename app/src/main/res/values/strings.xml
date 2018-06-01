@@ -58,4 +58,5 @@
     <string name="changeGoal">Change my goal</string>
     <string name="delete">Delete</string>
     <string name="invalidEmail">Email Already exists</string>
+    <string name="emailNotFound">Email not found</string>
 </resources>
