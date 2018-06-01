@@ -26,7 +26,7 @@
     <string name="saveChanges">Opslaan </string>
     <string name="logOut">uitloggen</string>
     <string name="cancel">Annuleren</string>
-    <string name="adress">Adres</string>
+    <string name="adress">Adres (straat + huisnummer)</string>
     <string name="phoneNumber">Telefoonnummer</string>
     <string name="userSettingsCurrentPasswordInvalid">Het wachtwoord is niet goed probeer het nog eens</string>
     <string name="userSettingsNewPasswordInvalid"> Het wachtwoord moet langer dan 8 letters zijn en minstens 1 letter en cijfer bevatten</string>
