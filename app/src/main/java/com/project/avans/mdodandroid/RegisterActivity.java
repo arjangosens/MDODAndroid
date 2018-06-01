@@ -25,11 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 import com.project.avans.mdodandroid.object_classes.User;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
@@ -52,6 +48,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        //removes the title from the title bar in the registerActivity
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         registerButton = findViewById(R.id.activityRegister_buttonCreateAccount);
         datePickerButton = findViewById(R.id.activityRegister_buttonDateOfBirth);
@@ -212,9 +211,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("VOLLEY_TAG", error.toString());
-                        validCredentials.setTextColor(Color.RED);
-                        validCredentials.setText(R.string.unValidCredentials);
+
+                        if(error.networkResponse.statusCode == 420){
+                            validCredentials.setTextColor(Color.RED);
+                            validCredentials.setText(R.string.invalidEmail);
+                        }
+                        else{
+                            Log.d("VOLLEY_TAG", error.toString());
+                            validCredentials.setTextColor(Color.RED);
+                            validCredentials.setText(R.string.inValidCredentials);
+                        }
+
                     }
                 }
         );
