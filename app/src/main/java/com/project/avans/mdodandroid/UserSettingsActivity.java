@@ -74,8 +74,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         initTypes();
 
         //removes the title from the title bar in the userSettingsActivity
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(getResources().getString(R.string.profile));
 
         //TODO: add local user data
 
