@@ -330,6 +330,16 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         incorrectFieldTextView.setText(getResources().getString(R.string.invalidCity));
                     }
 
+                } else if (type.equals(address.getType())) {
+                    field = String.valueOf(updateDialogGenericEditText.getText());
+
+                    if (ValueChecker.checkAddress(field)) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.invalidAddress));
+                    }
+
                 } else {
                     Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
                     field = String.valueOf(updateDialogGenericEditText.getText());
