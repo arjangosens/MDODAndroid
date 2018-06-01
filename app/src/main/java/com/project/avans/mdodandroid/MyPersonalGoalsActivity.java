@@ -63,10 +63,10 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         task.execute(urls);
 
         ListView goalListView = findViewById(R.id.listView);
-        goalAdapter = new GoalAdapter(getLayoutInflater(), goalList);
+        goalAdapter = new GoalAdapter(getApplicationContext(), this, getLayoutInflater(), goalList);
         goalListView.setAdapter(goalAdapter);
         goalAdapter.notifyDataSetChanged();
-        goalListView.setOnItemClickListener(new onGoalClick(getApplicationContext(), getLayoutInflater(), this));
+//        goalListView.setOnItemClickListener(new onGoalClick(getApplicationContext(), getLayoutInflater(), this));
     }
 
     private void showUpdateDialog() {
