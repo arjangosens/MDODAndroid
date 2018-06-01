@@ -58,6 +58,9 @@
     <string name="changeGoal">Verander mijn doel:</string>
     <string name="delete">Verwijderen</string>
     <string name="invalidEmail">Email is al gebruikt</string>
+    <string name="invalidCity">Onjuiste woonplaats!</string>
+    <string name="invalidAddress">Onjuist adres!</string>
+    <string name="invalidName">Onjuiste naam!</string>
     <string name="emailNotFound">Account bestaat niet</string>
 
 </resources>

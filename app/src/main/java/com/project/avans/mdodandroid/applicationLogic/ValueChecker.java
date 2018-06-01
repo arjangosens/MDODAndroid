@@ -117,4 +117,48 @@ public class ValueChecker {
         Log.i("ValueChecker", "checkZipCode() zipCode is " + result);
         return result;
     }
+
+    public static boolean checkCity(String city) {
+        Pattern cityRegex = Pattern.compile("^[a-zA-Z]+([?:\\s-'][a-zA-Z]+)*$");
+        Matcher matcher = cityRegex.matcher(city);
+
+        boolean result = matcher.find();
+        Log.i("ValueChecker", "checkCity() city is " + result);
+        return result;
+    }
+
+    public static boolean checkName(String name) {
+        Pattern nameRegex = Pattern.compile("[A-Za-z\\-]{2,50}$");
+        Matcher matcher = nameRegex.matcher(name);
+
+        boolean result = matcher.find();
+        Log.i("ValueChecker", "checkName() name is " + result);
+        return result;
+    }
+
+    public static boolean checkInsertion(String insertion) {
+        boolean result = false;
+
+        if (insertion.isEmpty()) {
+            result = true;
+
+        } else {
+            Pattern insertionRegex = Pattern.compile("^[A-Za-z]{2,8}(\\s[A-Z-a-z]{2,8})*");
+            Matcher matcher = insertionRegex.matcher(insertion);
+
+            result = matcher.find();
+            Log.i("ValueChecker", "checkInsertion() insertion is " + result);
+        }
+
+        return result;
+    }
+
+    public static boolean checkAddress(String address) {
+        Pattern addressRegex = Pattern.compile("([A-Za-z'\\-]+\\s)+\\d+([A-Z-a-z]*)");
+        Matcher matcher = addressRegex.matcher(address);
+
+        boolean result = matcher.find();
+        Log.i("ValueChecker", "checkAddress() address is " + result);
+        return result;
+    }
 }
