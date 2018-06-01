@@ -55,6 +55,8 @@
     <string name="goal">Doel: </string>
     <string name="risk">risico</string>
     <string name="risk_update">verander risico</string>
-    <string name="cityInvalid">Onjuiste woonplaats!</string>
+    <string name="invalidCity">Onjuiste woonplaats!</string>
+    <string name="invalidAddress">Onjuist adres!</string>
+    <string name="invalidName">Onjuiste naam!</string>
 
 </resources>

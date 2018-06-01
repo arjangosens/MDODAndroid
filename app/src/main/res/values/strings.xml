@@ -56,5 +56,7 @@
     <string name="somethingWentWrong">Something went wrong, your goal hasn\'t been added</string>
     <string name="somethingWentWrong2">Something went wrong, your goal hasn\'t been changed</string>
     <string name="goal">Goal: </string>
-    <string name="cityInvalid">Invalid city!</string>
+    <string name="invalidCity">Invalid city!</string>
+    <string name="invalidAddress">Invalid address!</string>
+    <string name="invalidName">Invalid name!</string>
 </resources>

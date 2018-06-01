@@ -317,7 +317,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         changeIsValid = true;
 
                     } else {
-                        incorrectFieldTextView.setText(getResources().getString(R.string.cityInvalid));
+                        incorrectFieldTextView.setText(getResources().getString(R.string.invalidCity));
                     }
 
                 } else {
