@@ -38,7 +38,7 @@
     <string name="goals">My personal goals</string>
     <string name="add">add</string>
     <string name="newGoal">New goal</string>
-    <string name="risks">my personal risks</string>
+    <string name="risks">My personal risks</string>
     <string name="newRisk">new Risk</string>
     <string name="invalidPhoneNr">Invalid phone number!</string>
     <string name="fieldNotFilledIn">[Not filled in]</string>

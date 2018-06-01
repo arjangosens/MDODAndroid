@@ -38,7 +38,7 @@
     <string name="invalidPhoneNr">Onjuist telefoonnummer!</string>
     <string name="goals">Mijn persoonlijke doelen</string>
     <string name="add">Toevoegen</string>
-    <string name="risks">Persoonlijke risico situaties</string>
+    <string name="risks">Mijn persoonlijke risico situaties</string>
     <string name="newGoal">Voer een nieuw doel in</string>
     <string name="newRisk">Voer een nieuw risico in</string>
     <string name="fieldNotFilledIn">[Niet ingevuld]</string>
