@@ -15,7 +15,7 @@
     <string name="password">Wachtwoord</string>
     <string name="confirmPassword">Bevestig wachtwoord</string>
     <string name="createAccount">Maak een account</string>
-    <string name="profile">Mijn profiel:</string>
+    <string name="profile">Mijn profiel</string>
     <string name="changeData">Verander gegevens</string>
     <string name="registerAlertDialogTitle">Er ging iets fout!</string>
     <string name="emailInvalid">- Email is niet juist</string>
@@ -62,5 +62,6 @@
     <string name="invalidAddress">Onjuist adres!</string>
     <string name="invalidName">Onjuiste naam!</string>
     <string name="emailNotFound">Account bestaat niet</string>
+    <string name="registerActivityHeader">Registreren</string>
 
 </resources>
