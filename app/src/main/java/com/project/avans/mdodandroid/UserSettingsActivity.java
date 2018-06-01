@@ -278,14 +278,24 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     field = String.valueOf(updateDialogGenericEditText.getText());
                     Log.i("DialogUpdateProfile", "Value of field: " + field);
 
-                    if (field.equals("")) {
-                        incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
-
-                    } else {
-
+                    if (ValueChecker.checkName(field)) {
                         changeIsValid = true;
 
+                    } else {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.invalidName));
                     }
+
+                } else if (type.equals(insertion.getType())) {
+                    field = String.valueOf(updateDialogGenericEditText.getText());
+
+                    if (ValueChecker.checkInsertion(field)) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.invalidName));
+                    }
+
+
 
                 } else if (type.equals(phoneNumber.getType())) {
 
