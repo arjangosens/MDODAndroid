@@ -62,4 +62,5 @@
     <string name="invalidAddress">Invalid address!</string>
     <string name="invalidName">Invalid name!</string>
     <string name="emailNotFound">Email not found</string>
+    <string name="registerActivityHeader">Create new account</string>
 </resources>

@@ -50,7 +50,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         //removes the title from the title bar in the registerActivity
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(getResources().getString(R.string.registerActivityHeader));
 
         registerButton = findViewById(R.id.activityRegister_buttonCreateAccount);
         datePickerButton = findViewById(R.id.activityRegister_buttonDateOfBirth);
