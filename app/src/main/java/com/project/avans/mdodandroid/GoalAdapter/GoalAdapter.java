@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.R;
@@ -47,19 +48,35 @@ public class GoalAdapter extends BaseAdapter {
         GoalAdapter.ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.activity_row_risk, null);
+            view = inflater.inflate(R.layout.activity_row_goal, null);
             viewHolder = new GoalAdapter.ViewHolder();
-            viewHolder.goal = view.findViewById(R.id.RiskRow);
+            viewHolder.goal = view.findViewById(R.id.goalRow);
+            viewHolder.status = view.findViewById(R.id.checkBox_goal);
             view.setTag(viewHolder);
         }else {
             viewHolder = (GoalAdapter.ViewHolder) view.getTag();
         }
+
+//        CheckBox status = findViewById(R.id.checkBox_goal);
+//        if(goal.getStatus().equals("0")){
+//            status.setChecked(false);
+//        } else if (goal.getStatus().equals("1")){
+//            status.setChecked(true);
+//        }
         Goal rv = (Goal) goalArray.get(i);
         viewHolder.goal.setText(rv.Goal());
+
+        if(rv.getStatus().equals("0")){
+            viewHolder.status.setChecked(false);
+        } else if (rv.getStatus().equals("1")){
+            viewHolder.status.setChecked(true);
+        }
+        
         return view;
     }
 
     private static class ViewHolder{
         TextView goal;
+        CheckBox status;
     }
 }

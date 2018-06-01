@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -91,6 +92,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
             builder.setTitle(getResources().getString(R.string.changeGoal));
             hint = goal.getGoal();
             final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+
             updateDialogGenericEditText.setText(hint);
 
             builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
@@ -152,13 +154,14 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                                 if (!(result == null))
                                 {
                                     String goalId = "";
+                                    String status = "0";
                                     try {
                                         goalId = result.getString("goalId");
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                     dialog.dismiss();
-                                    goalList.add(new Goal(goalId, updateDialogGenericEditText.getText().toString()));
+                                    goalList.add(new Goal(goalId, updateDialogGenericEditText.getText().toString(), status));
                                     goalAdapter.notifyDataSetChanged();
                                 } else {
                                     incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong));
