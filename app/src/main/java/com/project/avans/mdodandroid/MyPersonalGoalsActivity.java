@@ -41,6 +41,9 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_personal_goals);
 
+        //removes the title from the title bar in My personal goals
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         Button add = findViewById(R.id.button_goals_add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

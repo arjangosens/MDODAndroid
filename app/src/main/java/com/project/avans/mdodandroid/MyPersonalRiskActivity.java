@@ -55,6 +55,10 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_risks);
+
+        //removes the title from the title bar in my personal risks
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         //Risk e = new Risk("1", "test");
         //RiskList.add(e);
         //getRisk();
