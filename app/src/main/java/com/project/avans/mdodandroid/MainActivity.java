@@ -68,21 +68,27 @@ public class MainActivity extends AppCompatActivity {
             {
                 if (!result.isEmpty())
                 {
-                    //do what you need with the result...
-                    Log.i("VOLLEY_GETRESULT", "Result:" + result);
-
-                    try {
-                        JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
-
-                        Token = object.getString("token");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    if(result. equals("empty")){
+                        resultTextView.setText(R.string.emailNotFound);
                     }
-                            Log.d("the token", Token);
-                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    else{
+                        //do what you need with the result...
+                        Log.i("VOLLEY_GETRESULT", "Result:" + result);
 
-                            startActivity(intent);
+                        try {
+                            JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
+
+                            Token = object.getString("token");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d("the token", Token);
+                        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                        startActivity(intent);
+                    }
+
 
                 } else {
 

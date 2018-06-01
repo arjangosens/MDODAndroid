@@ -74,8 +74,8 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         initTypes();
 
         //removes the title from the title bar in the userSettingsActivity
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(getResources().getString(R.string.profile));
 
         //TODO: add local user data
 
@@ -278,14 +278,24 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     field = String.valueOf(updateDialogGenericEditText.getText());
                     Log.i("DialogUpdateProfile", "Value of field: " + field);
 
-                    if (field.equals("")) {
-                        incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
-
-                    } else {
-
+                    if (ValueChecker.checkName(field)) {
                         changeIsValid = true;
 
+                    } else {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.invalidName));
                     }
+
+                } else if (type.equals(insertion.getType())) {
+                    field = String.valueOf(updateDialogGenericEditText.getText());
+
+                    if (ValueChecker.checkInsertion(field)) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.invalidName));
+                    }
+
+
 
                 } else if (type.equals(phoneNumber.getType())) {
 
@@ -308,6 +318,26 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
                     } else {
                         incorrectZipCodeTextView.setText(getResources().getString(R.string.invalidZipCode));
+                    }
+
+                } else if (type.equals(city.getType())) {
+                    field = String.valueOf(updateDialogGenericEditText.getText());
+
+                    if (ValueChecker.checkCity(field)) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.invalidCity));
+                    }
+
+                } else if (type.equals(address.getType())) {
+                    field = String.valueOf(updateDialogGenericEditText.getText());
+
+                    if (ValueChecker.checkAddress(field)) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.invalidAddress));
                     }
 
                 } else {
