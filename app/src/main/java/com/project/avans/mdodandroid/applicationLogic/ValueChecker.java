@@ -137,11 +137,28 @@ public class ValueChecker {
     }
 
     public static boolean checkInsertion(String insertion) {
-        Pattern insertionRegex = Pattern.compile("^[A-Za-z]{2,8}(\\s[A-Z-a-z]{2,8})*");
-        Matcher matcher = insertionRegex.matcher(insertion);
+        boolean result = false;
+
+        if (insertion.isEmpty()) {
+            result = true;
+
+        } else {
+            Pattern insertionRegex = Pattern.compile("^[A-Za-z]{2,8}(\\s[A-Z-a-z]{2,8})*");
+            Matcher matcher = insertionRegex.matcher(insertion);
+
+            result = matcher.find();
+            Log.i("ValueChecker", "checkInsertion() insertion is " + result);
+        }
+
+        return result;
+    }
+
+    public static boolean checkAddress(String address) {
+        Pattern addressRegex = Pattern.compile("([A-Za-z'\\-]+\\s)+\\d+([A-Z-a-z]*)");
+        Matcher matcher = addressRegex.matcher(address);
 
         boolean result = matcher.find();
-        Log.i("ValueChecker", "checkInsertion() insertion is " + result);
+        Log.i("ValueChecker", "checkAddress() address is " + result);
         return result;
     }
 }
