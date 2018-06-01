@@ -310,6 +310,16 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                         incorrectZipCodeTextView.setText(getResources().getString(R.string.invalidZipCode));
                     }
 
+                } else if (type.equals(city.getType())) {
+                    field = String.valueOf(updateDialogGenericEditText.getText());
+
+                    if (ValueChecker.checkCity(field)) {
+                        changeIsValid = true;
+
+                    } else {
+                        incorrectFieldTextView.setText(getResources().getString(R.string.cityInvalid));
+                    }
+
                 } else {
                     Log.i("DialogUpdateProfile", "Default (else) called with type" + type);
                     field = String.valueOf(updateDialogGenericEditText.getText());
