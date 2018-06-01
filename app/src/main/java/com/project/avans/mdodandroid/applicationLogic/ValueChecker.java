@@ -135,4 +135,13 @@ public class ValueChecker {
         Log.i("ValueChecker", "checkName() name is " + result);
         return result;
     }
+
+    public static boolean checkInsertion(String insertion) {
+        Pattern insertionRegex = Pattern.compile("^[A-Za-z]{2,8}(\\s[A-Z-a-z]{2,8})*");
+        Matcher matcher = insertionRegex.matcher(insertion);
+
+        boolean result = matcher.find();
+        Log.i("ValueChecker", "checkInsertion() insertion is " + result);
+        return result;
+    }
 }
