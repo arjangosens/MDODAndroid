@@ -113,6 +113,26 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
             hint = riskup.getRisk();
             final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
             updateDialogGenericEditText.setHint(hint);
+
+            builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
+                public void onClick(final DialogInterface dialog, int id) {
+                    NetworkManager.getInstance().deleteRisk(riskup.getRiskID(),  new VolleyListener<JSONObject>(){
+                        @Override
+                        public void getResult(JSONObject result)
+                        {
+                            if (!(result == null))
+                            {
+                                RiskList.remove(riskup);
+                                RiskAdapter.notifyDataSetChanged();
+                                dialog.cancel();
+                            } else {
+
+                            }
+                        }
+
+                    });
+                }
+            });
         }
 
         builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);

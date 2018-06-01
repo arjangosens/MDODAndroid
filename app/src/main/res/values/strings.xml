@@ -56,4 +56,5 @@
     <string name="somethingWentWrong2">Something went wrong, your goal hasn\'t been changed</string>
     <string name="goal">Goal: </string>
     <string name="changeGoal">Change my goal</string>
+    <string name="delete">Delete</string>
 </resources>

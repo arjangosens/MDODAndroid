@@ -56,5 +56,6 @@
     <string name="risk">Mijn risico:</string>
     <string name="risk_update">Verander mijn risico</string>
     <string name="changeGoal">Verander mijn doel:</string>
+    <string name="delete">Verwijderen</string>
 
 </resources>

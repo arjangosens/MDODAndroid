@@ -93,6 +93,25 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
             final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
             updateDialogGenericEditText.setHint(hint);
 
+            builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
+                public void onClick(final DialogInterface dialog, int id) {
+                    NetworkManager.getInstance().deleteGoal(goal.getGoalID(),  new VolleyListener<JSONObject>(){
+                        @Override
+                        public void getResult(JSONObject result)
+                        {
+                            if (!(result == null))
+                            {
+                                goalList.remove(goal);
+                                goalAdapter.notifyDataSetChanged();
+                                dialog.cancel();
+                            } else {
+
+                            }
+                        }
+
+                    });
+                }
+            });
         }
 
         builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
