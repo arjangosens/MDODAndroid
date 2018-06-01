@@ -74,6 +74,7 @@ public class NetworkManager
                         Log.d(TAG + ": ", "login/client Response : " + response.toString());
                         if(null != response.toString())
                             listener.getResult(response.toString());
+                        listener.getResult("");
                     }
                 },
                 new Response.ErrorListener()
@@ -83,8 +84,14 @@ public class NetworkManager
                     {
                         if (null != error.networkResponse)
                         {
-                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
-                            listener.getResult("");
+                            if (error.networkResponse.statusCode == 404){
+                                listener.getResult("empty");
+                            }
+                            else{
+                                Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                                listener.getResult("");
+                            }
+
                         }
                     }
                 });
@@ -218,6 +225,47 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
+    public void deleteGoal(String goalId, final VolleyListener<JSONObject> listener) {
+
+        String url = prefixURL + "v1/goal/" + goalId ;
+
+        Map<String, Object> jsonParams = new HashMap<>();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, new JSONObject(jsonParams),
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.d(TAG + ": ", "putGoal Response : " + response.toString());
+                        if(null != response.toString())
+                            listener.getResult(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        if (null != error.networkResponse)
+                        {
+                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            listener.getResult(null);
+                        }
+                    }
+                }){@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            Log.i(TAG, "Mainactivity.Token = " + MainActivity.Token);
+            params.put("Authorization", "Bearer " + MainActivity.Token);
+            params.put("X-Access-Token", MainActivity.Token);
+            params.put("Content-Type", "application/json");
+
+            return params;
+        }};
+        requestQueue.add(request);
+    }
+
 
     public void postRisk(String description, final VolleyListener<JSONObject> listener) {
 
@@ -289,6 +337,47 @@ public class NetworkManager
                         {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult("");
+                        }
+                    }
+                }){@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            Log.i(TAG, "Mainactivity.Token = " + MainActivity.Token);
+            params.put("Authorization", "Bearer " + MainActivity.Token);
+            params.put("X-Access-Token", MainActivity.Token);
+            params.put("Content-Type", "application/json");
+
+            return params;
+        }};
+        requestQueue.add(request);
+    }
+
+    public void deleteRisk(String riskId, final VolleyListener<JSONObject> listener) {
+
+        String url = prefixURL + "v1/risk/" + riskId ;
+
+        Map<String, Object> jsonParams = new HashMap<>();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, new JSONObject(jsonParams),
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.d(TAG + ": ", "putGoal Response : " + response.toString());
+                        if(null != response.toString())
+                            listener.getResult(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        if (null != error.networkResponse)
+                        {
+                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            listener.getResult(null);
                         }
                     }
                 }){@Override

@@ -52,11 +52,14 @@
     <string name="deleteAccountConfirm">Yes, delete my account</string>
     <string name="risk">risk</string>
     <string name="risk_update">update risk</string>
-
     <string name="somethingWentWrong">Something went wrong, your goal hasn\'t been added</string>
     <string name="somethingWentWrong2">Something went wrong, your goal hasn\'t been changed</string>
     <string name="goal">Goal: </string>
+    <string name="changeGoal">Change my goal</string>
+    <string name="delete">Delete</string>
+    <string name="invalidEmail">Email Already exists</string>
     <string name="invalidCity">Invalid city!</string>
     <string name="invalidAddress">Invalid address!</string>
     <string name="invalidName">Invalid name!</string>
+    <string name="emailNotFound">Email not found</string>
 </resources>

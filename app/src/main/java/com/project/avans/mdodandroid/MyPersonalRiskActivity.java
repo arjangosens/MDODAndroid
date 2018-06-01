@@ -55,6 +55,10 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_risks);
+
+        //removes the title from the title bar in my personal risks
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         //Risk e = new Risk("1", "test");
         //RiskList.add(e);
         //getRisk();
@@ -89,16 +93,11 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
 
     private void showUpdateDialog() {
         AlertDialog alertDialog;
+        String hint = "";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
-
-        if (type.equals("")) {
-            builder.setTitle(getResources().getString(R.string.newRisk));
-        } else if (type.equals("update")){
-            builder.setTitle(getResources().getString(R.string.risk_update));
-        }
 
         View view;
 
@@ -106,6 +105,36 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         builder.setView(view);
 
         updateDialogView = view;
+
+        if (type.equals("")) {
+            builder.setTitle(getResources().getString(R.string.newRisk));
+        } else if (type.equals("update")){
+            builder.setTitle(getResources().getString(R.string.risk_update));
+            hint = riskup.getRisk();
+            final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+            updateDialogGenericEditText.setText(hint);
+
+            builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
+                public void onClick(final DialogInterface dialog, int id) {
+                    NetworkManager.getInstance().deleteRisk(riskup.getRiskID(),  new VolleyListener<JSONObject>(){
+                        @Override
+                        public void getResult(JSONObject result)
+                        {
+                            if (!(result == null))
+                            {
+                                RiskList.remove(riskup);
+                                RiskAdapter.notifyDataSetChanged();
+                                dialog.cancel();
+                            } else {
+
+                            }
+                        }
+
+                    });
+                }
+            });
+        }
+
         builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
         builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

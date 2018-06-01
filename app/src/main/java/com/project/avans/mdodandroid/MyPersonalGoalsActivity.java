@@ -41,6 +41,9 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_personal_goals);
 
+        //removes the title from the title bar in My personal goals
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         Button add = findViewById(R.id.button_goals_add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,19 +69,13 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     }
 
     private void showUpdateDialog() {
-
-
         AlertDialog alertDialog;
+        String hint = "";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
 
-        if (type.equals("")) {
-            builder.setTitle(getResources().getString(R.string.newGoal));
-        } else if (type.equals("goal")){
-            builder.setTitle("change goal");
-        }
 
         View view;
 
@@ -86,6 +83,37 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         builder.setView(view);
 
         updateDialogView = view;
+
+        if (type.equals("")) {
+            builder.setTitle(getResources().getString(R.string.newGoal));
+
+        } else if (type.equals("goal")){
+            builder.setTitle(getResources().getString(R.string.changeGoal));
+            hint = goal.getGoal();
+            final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+            updateDialogGenericEditText.setText(hint);
+
+            builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
+                public void onClick(final DialogInterface dialog, int id) {
+                    NetworkManager.getInstance().deleteGoal(goal.getGoalID(),  new VolleyListener<JSONObject>(){
+                        @Override
+                        public void getResult(JSONObject result)
+                        {
+                            if (!(result == null))
+                            {
+                                goalList.remove(goal);
+                                goalAdapter.notifyDataSetChanged();
+                                dialog.cancel();
+                            } else {
+
+                            }
+                        }
+
+                    });
+                }
+            });
+        }
+
         builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
         builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

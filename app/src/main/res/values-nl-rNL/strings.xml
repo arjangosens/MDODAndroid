@@ -2,9 +2,9 @@
 <resources>
     <string name="app_name">Tactus</string>
     <string name="login">Login</string>
-    <string name="register">registreer</string>
+    <string name="register">Klik hier</string>
     <string name="noAccount">Nog geen account?</string>
-    <string name="unValidCredentials">Voer de goede gegevens in.</string>
+    <string name="inValidCredentials">Voer de goede gegevens in.</string>
     <string name="firstName">Voornaam</string>
     <string name="Insertion">Tussenvoegsel</string>
     <string name="Lastname">Achternaam</string>
@@ -34,13 +34,13 @@
     <string name="userSettingsFieldInvalid">Dit veld mag niet leeg zijn!</string>
     <string name="userSettingsCurrentPassword">Huidig wachtwoord</string>
     <string name="userSettingsNewPassword">Nieuw wachtwoord</string>
-    <string name="userSettingsConfirmPassword">bevestig nieuw wachtwoord</string>
+    <string name="userSettingsConfirmPassword">Bevestig nieuw wachtwoord</string>
     <string name="invalidPhoneNr">Onjuist telefoonnummer!</string>
     <string name="goals">Mijn persoonlijke doelen</string>
-    <string name="add">toevoegen</string>
-    <string name="risks">persoonlijke risico situaties</string>
-    <string name="newGoal">Nieuw doel</string>
-    <string name="newRisk">Nieuw risico</string>
+    <string name="add">Toevoegen</string>
+    <string name="risks">Persoonlijke risico situaties</string>
+    <string name="newGoal">Voer een nieuw doel in</string>
+    <string name="newRisk">Voer een nieuw risico in</string>
     <string name="fieldNotFilledIn">[Niet ingevuld]</string>
     <string name="city">Woonplaats</string>
     <string name="zipCode">Postcode</string>
@@ -52,11 +52,15 @@
     <string name="deleteAccountConfirm">Ja, verwijder mijn account</string>
     <string name="somethingWentWrong">Er ging iets fout, uw goal is niet toegevoegd</string>
     <string name="somethingWentWrong2">Er ging iets fout, uw goal is niet veranderd</string>
-    <string name="goal">Doel: </string>
-    <string name="risk">risico</string>
-    <string name="risk_update">verander risico</string>
+    <string name="goal">Mijn doel:</string>
+    <string name="risk">Mijn risico:</string>
+    <string name="risk_update">Verander mijn risico</string>
+    <string name="changeGoal">Verander mijn doel:</string>
+    <string name="delete">Verwijderen</string>
+    <string name="invalidEmail">Email is al gebruikt</string>
     <string name="invalidCity">Onjuiste woonplaats!</string>
     <string name="invalidAddress">Onjuist adres!</string>
     <string name="invalidName">Onjuiste naam!</string>
+    <string name="emailNotFound">Account bestaat niet</string>
 
 </resources>
