@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">MDODAndroid</string>
+    <string name="app_name">Tactus</string>
     <string name="login">Log in</string>
     <string name="register">register</string>
     <string name="noAccount">Don\'t have an account?</string>
-    <string name="unValidCredentials">please enter valid credentials</string>
+    <string name="inValidCredentials">please enter valid credentials</string>
     <string name="firstName">First name</string>
     <string name="Insertion">Insertion</string>
     <string name="Lastname">Last name</string>
@@ -14,18 +14,52 @@
     <string name="password">Password</string>
     <string name="confirmPassword">Confirm password</string>
     <string name="createAccount">Create account</string>
-    <string name="profile">My profile:</string>
+    <string name="profile">My profile</string>
     <string name="changeData">change data</string>
     <string name="registerAlertDialogTitle">Something went wrong!</string>
-    <string name="emailInvalid">Email is invalid</string>
-    <string name="registerPasswordInvalid">Password is invalid (min 8 characters, at least 1 letter and number, confirmation needs to be equal)</string>
-    <string name="emptyNameOrDate">Name and/or date of birth are still empty</string>
+    <string name="emailInvalid">- Email is invalid</string>
+    <string name="registerPasswordInvalid">- Password is invalid (min 8 characters, at least 1 letter and number, confirmation needs to be equal)</string>
+    <string name="emptyNameOrDate">- Name and/or date of birth are still empty</string>
     <string name="alertDialogCancelButton" translatable="false">Ok</string>
     <string name="userSettings">User settings</string>
     <string name="change">Change </string>
     <string name="saveChanges">Save changes </string>
-    <string name="cancel">Cancel </string>
     <string name="logOut">Log out</string>
-
-
+    <string name="adress">Adress</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="cancel">cancel</string>
+    <string name="userSettingsCurrentPasswordInvalid">Invalid password!</string>
+    <string name="userSettingsNewPasswordInvalid">Needs to be longer than 8 characters and contain at least one number and letter</string>
+    <string name="userSettingsConfirmPasswordInvalid">Needs to match new password</string>
+    <string name="userSettingsFieldInvalid">Field cannot be empty!</string>
+    <string name="userSettingsCurrentPassword">Current password</string>
+    <string name="userSettingsNewPassword">New password</string>
+    <string name="userSettingsConfirmPassword">Confirm new password</string>
+    <string name="goals">My personal goals</string>
+    <string name="add">add</string>
+    <string name="newGoal">New goal</string>
+    <string name="risks">my personal risks</string>
+    <string name="newRisk">new Risk</string>
+    <string name="invalidPhoneNr">Invalid phone number!</string>
+    <string name="fieldNotFilledIn">[Not filled in]</string>
+    <string name="city">City</string>
+    <string name="zipCode">Postal address</string>
+    <string name="invalidZipCode">Invalid postal address!</string>
+    <string name="deleteAccount">Delete account</string>
+    <string name="deleteAccountTitle">Are you sure?</string>
+    <string name="deleteAccountMessage">If you continue, all of your data will be lost and cannot be recovered!</string>
+    <string name="deleteAccountAbort">No, abort</string>
+    <string name="deleteAccountConfirm">Yes, delete my account</string>
+    <string name="risk">risk</string>
+    <string name="risk_update">update risk</string>
+    <string name="somethingWentWrong">Something went wrong, your goal hasn\'t been added</string>
+    <string name="somethingWentWrong2">Something went wrong, your goal hasn\'t been changed</string>
+    <string name="goal">Goal: </string>
+    <string name="changeGoal">Change my goal</string>
+    <string name="delete">Delete</string>
+    <string name="invalidEmail">Email Already exists</string>
+    <string name="invalidCity">Invalid city!</string>
+    <string name="invalidAddress">Invalid address!</string>
+    <string name="invalidName">Invalid name!</string>
+    <string name="emailNotFound">Email not found</string>
 </resources>

@@ -25,11 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 import com.project.avans.mdodandroid.object_classes.User;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
@@ -52,6 +48,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        //removes the title from the title bar in the registerActivity
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         registerButton = findViewById(R.id.activityRegister_buttonCreateAccount);
         datePickerButton = findViewById(R.id.activityRegister_buttonDateOfBirth);
@@ -117,28 +116,31 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 boolean validEmail = ValueChecker.checkEmail(email);
 
                 if (validPassword && validEmail && fieldsNotEmpty) {
-                    //TODO: Create intent to dashboard with new account
-                    if(insert.isEmpty()){
+                    //intent to login
+                    if (insert.isEmpty()) {
                         insert = "";
                     }
                     User user = new User(username, insert, lastname, email, dateOfBirth);
                     register(user, password);
-                    Log.i("user", "user: " + user.getDate() + " " + user.getEmail() );
+                    Log.i("user", "user: " + user.getDate() + " " + user.getEmail());
                     Log.i("infix", "infix: " + user.getInsertion() + "I");
 
 
                 } else {
-
+                    //parameter checks
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     String message = "";
 
                     builder.setTitle(R.string.registerAlertDialogTitle);
 
-                    if (!validEmail) message += (getResources().getString(R.string.emailInvalid) + "\n");
+                    if (!validEmail)
+                        message += (getResources().getString(R.string.emailInvalid) + "\n");
 
-                    if  (!validPassword) message += (getResources().getString(R.string.registerPasswordInvalid) + "\n");
+                    if (!validPassword)
+                        message += (getResources().getString(R.string.registerPasswordInvalid) + "\n");
 
-                    if (!fieldsNotEmpty) message += ("" + getResources().getString(R.string.emptyNameOrDate));
+                    if (!fieldsNotEmpty)
+                        message += ("" + getResources().getString(R.string.emptyNameOrDate));
 
                     builder.setMessage(message);
 
@@ -155,7 +157,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
 
 
-                //TODO: Pass data through API and check if data is correct
                 break;
         }
     }
@@ -167,15 +168,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         dateOfBirth = (year + "-" + month + "-" + dayOfMonth);
         Log.i("RegisterActivity", "onDateSet called, date: " + dateOfBirth);
         datePickerButton.setText(dateOfBirth);
-
-
-        //TODO: Pass date of birth through with the rest, and possibly add a check for invalid dates (like in the future)
+        //TODO future date check?
     }
 
 
-    //TODO: connect to the right API URL 
-    private void register(User user, String password) {
+    //connect to the right API URL and gives body parameters
+    private void register(User user, String password)
 
+    {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         final String url = "https://mdod.herokuapp.com/api/register/client";
@@ -188,7 +188,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             body.put("dob", user.getDate());
             body.put("email", user.getEmail());
             body.put("password", password);
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.e("VOLLEY_TAG", e.toString());
         }
 
@@ -211,9 +211,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("VOLLEY_TAG", error.toString());
-                        validCredentials.setTextColor(Color.RED);
-                        validCredentials.setText(R.string.unValidCredentials);
+
+                        if(error.networkResponse.statusCode == 420){
+                            validCredentials.setTextColor(Color.RED);
+                            validCredentials.setText(R.string.invalidEmail);
+                        }
+                        else{
+                            Log.d("VOLLEY_TAG", error.toString());
+                            validCredentials.setTextColor(Color.RED);
+                            validCredentials.setText(R.string.inValidCredentials);
+                        }
+
                     }
                 }
         );
