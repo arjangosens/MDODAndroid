@@ -112,7 +112,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
             builder.setTitle(getResources().getString(R.string.risk_update));
             hint = riskup.getRisk();
             final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
-            updateDialogGenericEditText.setHint(hint);
+            updateDialogGenericEditText.setText(hint);
 
             builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
                 public void onClick(final DialogInterface dialog, int id) {
