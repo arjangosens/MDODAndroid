@@ -34,11 +34,11 @@
     <string name="userSettingsFieldInvalid">Dit veld mag niet leeg zijn!</string>
     <string name="userSettingsCurrentPassword">Huidig wachtwoord</string>
     <string name="userSettingsNewPassword">Nieuw wachtwoord</string>
-    <string name="userSettingsConfirmPassword">bevestig nieuw wachtwoord</string>
+    <string name="userSettingsConfirmPassword">Bevestig nieuw wachtwoord</string>
     <string name="invalidPhoneNr">Onjuist telefoonnummer!</string>
     <string name="goals">Mijn persoonlijke doelen</string>
-    <string name="add">toevoegen</string>
-    <string name="risks">persoonlijke risico situaties</string>
+    <string name="add">Toevoegen</string>
+    <string name="risks">Persoonlijke risico situaties</string>
     <string name="newGoal">Voer een nieuw doel in</string>
     <string name="newRisk">Voer een nieuw risico in</string>
     <string name="fieldNotFilledIn">[Niet ingevuld]</string>
