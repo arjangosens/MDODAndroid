@@ -88,6 +88,7 @@ public class GoalAdapter extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
+                    rv.setStatus("1");
                     NetworkManager.getInstance().putStatusGoal(rv.getGoalID(), "1", new VolleyListener<JSONObject>() {
                         @Override
                         public void getResult(JSONObject object) {
@@ -95,6 +96,7 @@ public class GoalAdapter extends BaseAdapter {
                         }
                     });
                 } else {
+                    rv.setStatus("0");
                     NetworkManager.getInstance().putStatusGoal(rv.getGoalID(), "0", new VolleyListener<JSONObject>() {
                         @Override
                         public void getResult(JSONObject object) {

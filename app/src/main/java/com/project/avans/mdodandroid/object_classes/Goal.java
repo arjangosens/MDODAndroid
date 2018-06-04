@@ -21,6 +21,10 @@ public class Goal implements Serializable {
         return goalID;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getGoal() {
         return goal;
     }
