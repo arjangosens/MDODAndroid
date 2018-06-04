@@ -50,8 +50,8 @@
     <string name="deleteAccountMessage">Als u doorgaat dan verliest u al uw opgeslagen data. Deze actie kan niet meer teruggedraaid worden!</string>
     <string name="deleteAccountAbort">Nee</string>
     <string name="deleteAccountConfirm">Ja, verwijder mijn account</string>
-    <string name="somethingWentWrong">Er ging iets fout, uw goal is niet toegevoegd</string>
-    <string name="somethingWentWrong2">Er ging iets fout, uw goal is niet veranderd</string>
+    <string name="somethingWentWrong">Er ging iets fout, uw doel is niet toegevoegd</string>
+    <string name="somethingWentWrong2">Er ging iets fout, uw doel is niet veranderd</string>
     <string name="goal">Mijn doel:</string>
     <string name="risk">Mijn risico:</string>
     <string name="risk_update">Verander mijn risico</string>
