@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         Log.d("the token", Token);
-                        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), HomepageActivityNew.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                         startActivity(intent);
