@@ -1,5 +1,8 @@
 package com.project.avans.mdodandroid;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
@@ -25,8 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         NetworkManager.getInstance(this);
         setContentView(R.layout.activity_main);
@@ -57,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+         Log.v("ondestroy", "- ON DESTROY -");
     }
 
     private void login(String username, String password) {

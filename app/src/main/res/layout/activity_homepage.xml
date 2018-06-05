@@ -61,7 +61,7 @@
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
-                android:drawableTop="@drawable/caution_sign"
+                android:drawableTop="@drawable/wine"
                 android:paddingTop="10dp"
 
                 android:paddingBottom="10dp"
