@@ -5,23 +5,22 @@ import android.util.Log;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ConsumptionsPerDay implements Serializable{
     final String TAG = "ConsumptionsPerDay";
-    private Calendar date;
+    private Date date;
     private ArrayList<Consumption> consumptions;
 
-    public ConsumptionsPerDay(Calendar date) {
+    public ConsumptionsPerDay(Date date) {
         this.date = date;
         consumptions = new ArrayList<>();
     }
 
     public void add(Consumption consumption) {
-        Calendar consumptionDate = consumption.getTimestamp();
+        Date consumptionDate = consumption.getDate();
 
-        if (consumptionDate.get(Calendar.YEAR) == date.get(Calendar.YEAR)
-                && consumptionDate.get(Calendar.MONTH) == date.get(Calendar.MONTH)
-                && consumptionDate.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
+        if (consumptionDate.compareTo(date) == 0) {
 
             consumptions.add(consumption);
             Log.i(TAG, "consumption added");
@@ -31,11 +30,11 @@ public class ConsumptionsPerDay implements Serializable{
         }
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

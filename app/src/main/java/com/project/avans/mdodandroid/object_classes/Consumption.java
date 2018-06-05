@@ -2,30 +2,31 @@ package com.project.avans.mdodandroid.object_classes;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Consumption implements Serializable{
-    private Calendar timestamp;
+    private Date date;
     private String type;
     private double amount;
     private String description;
 
-    public Consumption(Calendar timestamp, String type, double amount, String description) {
-        this.timestamp = timestamp;
+    public Consumption(Date date, String type, double amount, String description) {
+        this.date = date;
         this.type = type;
         this.amount = amount;
         this.description = description;
     }
 
-    public Consumption(Calendar timestamp) {
-        this.timestamp = timestamp;
+    public Consumption(Date date) {
+        this.date = date;
     }
 
-    public Calendar getTimestamp() {
-        return timestamp;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTimestamp(Calendar timestamp) {
-        this.timestamp = timestamp;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getType() {
