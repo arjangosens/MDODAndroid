@@ -1,6 +1,5 @@
 package com.project.avans.mdodandroid.object_classes;
 
-import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 
 public class Consumption {
