@@ -1,22 +1,26 @@
 package com.project.avans.mdodandroid.object_classes;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Calendar;
 
 public class ConsumptionsPerDay {
-    private GregorianCalendar date;
+    private Calendar date;
     private ArrayList<Consumption> consumptions;
 
-    public ConsumptionsPerDay(GregorianCalendar date) {
+    public ConsumptionsPerDay(Calendar date) {
         this.date = date;
         consumptions = new ArrayList<>();
     }
 
-    public GregorianCalendar getDate() {
+    public void add(Consumption consumption) {
+
+    }
+
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(GregorianCalendar date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
