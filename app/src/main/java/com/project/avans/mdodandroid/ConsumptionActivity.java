@@ -30,7 +30,9 @@ public class ConsumptionActivity extends AppCompatActivity {
         // Create test data
         ConsumptionsPerDay cpdToday = new ConsumptionsPerDay(date);
         Consumption consumption = new Consumption(date, "Alcohol", 5, "idk");
+        cpdToday.add(consumption);
 
+        consumption = new Consumption(date, "Weed", 5, "idk2");
         cpdToday.add(consumption);
 
 
