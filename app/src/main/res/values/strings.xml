@@ -64,4 +64,6 @@
     <string name="emailNotFound">Email not found</string>
     <string name="registerActivityHeader">Create new account</string>
     <string name="homePageActivityHeader">Dashboard</string>
+    <string name="difficultMoments">My difficult moments</string>
+    <string name="newMoment">New difficult moment</string>
 </resources>

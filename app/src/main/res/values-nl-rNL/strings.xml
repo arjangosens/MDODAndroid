@@ -64,5 +64,7 @@
     <string name="emailNotFound">Account bestaat niet</string>
     <string name="registerActivityHeader">Registreren</string>
     <string name="homePageActivityHeader">Dashboard</string>
+    <string name="difficultMoments">Mijn moeilijke momenten</string>
+    <string name="newMoment">Nieuw moeilijk moment</string>
 
 </resources>
