@@ -20,7 +20,6 @@
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".HomepageActivity" />
-        <activity android:name=".HomepageActivityNew"/>
         <activity android:name=".UserSettingsActivity" />
         <activity android:name=".MyPersonalGoalsActivity">
 
