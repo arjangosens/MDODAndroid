@@ -1,29 +1,30 @@
 package com.project.avans.mdodandroid.object_classes;
 
 import java.time.LocalDateTime;
+import java.util.GregorianCalendar;
 
 public class Consumption {
-    private LocalDateTime timestamp;
+    private GregorianCalendar timestamp;
     private String type;
     private double amount;
     private String description;
 
-    public Consumption(LocalDateTime timestamp, String type, double amount, String description) {
+    public Consumption(GregorianCalendar timestamp, String type, double amount, String description) {
         this.timestamp = timestamp;
         this.type = type;
         this.amount = amount;
         this.description = description;
     }
 
-    public Consumption(LocalDateTime timestamp) {
+    public Consumption(GregorianCalendar timestamp) {
         this.timestamp = timestamp;
     }
 
-    public LocalDateTime getTimestamp() {
+    public GregorianCalendar getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(GregorianCalendar timestamp) {
         this.timestamp = timestamp;
     }
 
