@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MyDifficultMoments extends AppCompatActivity implements DialogInterface.OnShowListener {
+public class MyDifficultMoments extends AppCompatActivity implements DialogInterface.OnShowListener, VolleyListener<JSONArray> {
     private View updateDialogView;
     private SeekBar seekBar;
     private ArrayList<Moment> moments = new ArrayList<>();
@@ -48,6 +48,8 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
                 showUpdateDialog();
             }
         });
+
+        NetworkManager.getInstance().getMoment(this);
 
         ListView listView = findViewById(R.id.listView_moments);
         MomentAdapter adapter = new MomentAdapter(this, getLayoutInflater(), moments);
@@ -144,6 +146,21 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
             }
         });
 
+    }
+
+    @Override
+    public void getResult(JSONArray object) {
+        if(!(object == null)) {
+            Log.i("TESTT ", "Does this work?!");
+            for (int i = 0; i < object.length(); i++) {
+                try {
+                    object.getJSONObject(i).getString("type");
+                    Log.i("TESTTT: ", object.getJSONObject(i).getString("type"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     //adds custom menu
