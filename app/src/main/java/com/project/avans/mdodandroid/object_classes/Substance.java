@@ -1,8 +1,19 @@
 package com.project.avans.mdodandroid.object_classes;
 
-/**
- * Created by kelly on 5-6-2018.
- */
+public class Substance {
+    private String id;
+    private String type;
 
-public class substance {
+    public Substance(String id, String type) {
+        this.id = id;
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getType() {
+        return type;
+    }
 }
