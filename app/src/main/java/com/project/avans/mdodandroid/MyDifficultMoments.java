@@ -10,21 +10,24 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
-import com.project.avans.mdodandroid.object_classes.Goal;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MyDifficultMoments extends AppCompatActivity implements DialogInterface.OnShowListener {
     private View updateDialogView;
     private SeekBar seekBar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,9 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
             }
         });
     }
+
     private void showUpdateDialog() {
-        AlertDialog alertDialog;
+        final AlertDialog alertDialog;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
@@ -71,11 +75,35 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
         alertDialog = builder.create();
         alertDialog.setOnShowListener(this);
 
+        NetworkManager.getInstance().getSubstances(new VolleyListener<JSONArray>() {
+            private ArrayList<String> substances = new ArrayList<>();
+            private final Spinner spinner = updateDialogView.findViewById(R.id.spinner_moment);
+            @Override
+            public void getResult(JSONArray object) {
+                try {
+                    Log.i("TEST1234: ", "tetstets");
+                    Log.i("TEST: ", String.valueOf(object.getJSONObject(0)));
+
+                    for (int i = 0;  i < object.length(); i++){
+                        substances.add(object.getJSONObject(i).getString("name"));
+                        Log.i("TEST1234: ", substances.get(i));
+                    }
+
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(alertDialog.getContext(), R.layout.support_simple_spinner_dropdown_item , substances);
+                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(arrayAdapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         alertDialog.show();
     }
 
     @Override
-    public void onShow(DialogInterface dialog) {
+    public void onShow(final DialogInterface dialog) {
+        Log.i("TEST1234: ", "tetstets");
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -83,6 +111,7 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
             public void onClick(View v) {
                 final TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogDifficultMoment_textViewIncorrectField);
                 final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogDifficultMoment_editText);
+                Log.i("TEST1234: ", "tetstets");
 
 
                 String field = String.valueOf(updateDialogGenericEditText.getText());
@@ -92,7 +121,17 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
                 if (field.equals("")) {
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
                 } else {
-
+                    NetworkManager.getInstance().postMoment(String.valueOf(seekBar.getProgress()), String.valueOf(updateDialogGenericEditText.getText()), new VolleyListener<JSONObject>(){
+                        @Override
+                        public void getResult(JSONObject result) {
+                            if (!(result == null))
+                            {
+                                dialog.dismiss();
+                            } else {
+                                incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong));
+                            }
+                        }
+                    });
                 }
             }
         });
