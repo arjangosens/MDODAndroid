@@ -2,10 +2,11 @@ package com.project.avans.mdodandroid.object_classes;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ConsumptionsPerDay {
+public class ConsumptionsPerDay implements Serializable{
     final String TAG = "ConsumptionsPerDay";
     private Calendar date;
     private ArrayList<Consumption> consumptions;

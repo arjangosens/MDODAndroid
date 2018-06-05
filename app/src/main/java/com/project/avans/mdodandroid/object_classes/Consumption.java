@@ -1,8 +1,9 @@
 package com.project.avans.mdodandroid.object_classes;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Consumption {
+public class Consumption implements Serializable{
     private Calendar timestamp;
     private String type;
     private double amount;
