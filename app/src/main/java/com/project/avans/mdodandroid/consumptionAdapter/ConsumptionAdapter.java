@@ -64,7 +64,16 @@ public class ConsumptionAdapter extends BaseAdapter {
         String types = "";
 
         for (Consumption consumption : rv.getConsumptions()) {
-            types = (types + "" + consumption.getType());
+            
+            if (consumption.equals(rv.getConsumptions().get(0))) {
+                types = consumption.getType();
+
+//            } else if (consumption.equals(rv.getConsumptions().get(rv.getConsumptions().size() - 1))) {
+//
+//
+            } else {
+                types = (types + ", " + consumption.getType());
+            }
         }
 
         if (types.isEmpty()) {
