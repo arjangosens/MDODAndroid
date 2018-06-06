@@ -34,6 +34,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".HomepageActivity" />
         <activity android:name=".UserSettingsActivity" />
+        <activity android:name=".MyDifficultMoments"></activity>
         <activity android:name=".MyPersonalGoalsActivity">
 
         </activity>

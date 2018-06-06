@@ -64,6 +64,12 @@
     <string name="emailNotFound">Email not found</string>
     <string name="registerActivityHeader">Create new account</string>
     <string name="homePageActivityHeader">Dashboard</string>
+    <string name="difficultMoments">My difficult moments</string>
+    <string name="newMoment">New difficult moment</string>
+    <string name="moment">Moment: </string>
+    <string name="dateTime">Date and time: </string>
+    <string name="taste">Taste in: </string>
+    <string name="description">Description: </string>
     <string name="phonenumberActivityHeader">Important phone numbers</string>
     <string name="institute">institute</string>
     <string name="doctor">doctor</string>
