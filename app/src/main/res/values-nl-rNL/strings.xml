@@ -70,5 +70,10 @@
     <string name="dateTime">Datum en tijd: </string>
     <string name="taste">Trek in: </string>
     <string name="description">Beschrijving: </string>
+    <string name="phonenumberActivityHeader">belangrijke nummers</string>
+    <string name="institute">instelling</string>
+    <string name="doctor">psycholoog</string>
+    <string name="buddy">bondgenoot</string>
+    <string name="ice">noodhulp</string>
 
 </resources>

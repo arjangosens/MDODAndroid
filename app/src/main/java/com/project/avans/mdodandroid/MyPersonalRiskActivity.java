@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,12 +51,14 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     private String url;
     private String type = "";
     private Risk riskup;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_risks);
 
+        context = this;
         //removes the title from the title bar in my personal risks
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -178,6 +181,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                                             e.printStackTrace();
                                         }
                                         dialog.dismiss();
+                                        startService(new Intent(context, NotificationService.class));
                                         RiskList.add(new Risk(RiskId2, updateDialogGenericEditText.getText().toString()));
                                         RiskAdapter.notifyDataSetChanged();
                                     } else {

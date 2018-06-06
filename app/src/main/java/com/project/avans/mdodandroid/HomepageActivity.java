@@ -1,8 +1,8 @@
 package com.project.avans.mdodandroid;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +19,7 @@ public class HomepageActivity extends AppCompatActivity {
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setTitle(getResources().getString(R.string.homePageActivityHeader));
 
-        Button btn = (Button) findViewById(R.id.button_goals);
+        Button btn = (Button) findViewById(R.id.goalbutton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,7 +28,7 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
-        Button btn2 = (Button) findViewById(R.id.button_risks);
+        Button btn2 = (Button) findViewById(R.id.riskbutton);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +67,10 @@ public class HomepageActivity extends AppCompatActivity {
             case R.id.menu_logout:
                 i = new Intent(getApplicationContext(), MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                break;
+            case R.id.menu_user_phone:
+                i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
                 startActivity(i);
                 break;
             default:
