@@ -35,6 +35,19 @@
             android:layout_height="wrap_content">
 
 
+            <TextView
+                android:id="@+id/textView_clean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="amount of days clean" />
+
             <Button
                 android:id="@+id/riskbutton"
                 android:layout_width="0dp"
@@ -53,7 +66,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/situationbutton"
                 app:layout_constraintEnd_toStartOf="@+id/goalbutton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/goalbutton" />
 
             <Button
                 android:id="@+id/usagebutton"
@@ -83,6 +96,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
@@ -94,7 +108,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/usagebutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/riskbutton"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_clean" />
 
             <Button
                 android:id="@+id/situationbutton"
@@ -114,6 +128,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/riskbutton"
                 app:layout_constraintVertical_bias="1.0" />
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
