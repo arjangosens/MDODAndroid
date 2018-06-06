@@ -116,9 +116,9 @@
         android:layout_marginStart="8dp"
         android:text="[AmountType]"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/act_consumptionDetail_textViewAmountValueField"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/act_consumptionDetail_textViewAmountValueField"
-        tools:layout_editor_absoluteY="148dp" />
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toEndOf="@+id/act_consumptionDetail_textViewAmountValueField" />
 
 </android.support.constraint.ConstraintLayout>
