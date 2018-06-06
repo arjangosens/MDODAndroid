@@ -36,6 +36,15 @@ public class HomepageActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Button btn3 = (Button) findViewById(R.id.button_difficult_moment);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MyDifficultMoments.class);
+                startActivity(i);
+            }
+        });
     }
 
     //adds custom menu
