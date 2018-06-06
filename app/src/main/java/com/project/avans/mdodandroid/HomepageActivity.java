@@ -37,7 +37,7 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
-        Button btn3 = (Button) findViewById(R.id.button_difficult_moment);
+        Button btn3 = (Button) findViewById(R.id.situationbutton);
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
