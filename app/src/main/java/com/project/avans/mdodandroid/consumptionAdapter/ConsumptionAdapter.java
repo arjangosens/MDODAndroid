@@ -12,6 +12,7 @@ import com.project.avans.mdodandroid.object_classes.Consumption;
 import com.project.avans.mdodandroid.object_classes.ConsumptionsPerDay;
 import com.project.avans.mdodandroid.object_classes.UserSettingsType;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 
@@ -59,7 +60,9 @@ public class ConsumptionAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         ConsumptionsPerDay rv = (ConsumptionsPerDay) consumptionsPerDayArrayList.get(i);
-        viewHolder.date.setText(rv.getDate().toString());
+
+        String date = DateFormat.getDateInstance(DateFormat.SHORT).format(rv.getDate());
+        viewHolder.date.setText(date);
 
         String types = "";
 

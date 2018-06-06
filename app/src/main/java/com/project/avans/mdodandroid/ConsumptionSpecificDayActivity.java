@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.project.avans.mdodandroid.consumptionAdapter.ConsumptionSpecDayAdapter;
 import com.project.avans.mdodandroid.object_classes.Consumption;
 import com.project.avans.mdodandroid.object_classes.ConsumptionsPerDay;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class ConsumptionSpecificDayActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -22,6 +24,7 @@ public class ConsumptionSpecificDayActivity extends AppCompatActivity implements
 
     private ListView consumptionsListView;
     private ConsumptionSpecDayAdapter consumptionSpecDayAdapter;
+    private TextView headerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,10 @@ public class ConsumptionSpecificDayActivity extends AppCompatActivity implements
 
             Log.i(TAG, "Size of ArrayList: " + consumptions.size());
         }
+
+        headerTextView = findViewById(R.id.activityConsumptionSpecificDay_textViewHeader);
+        String date = DateFormat.getDateInstance(DateFormat.SHORT).format(consumptionsPerDay.getDate());
+        headerTextView.setText(getResources().getString(R.string.consumptionOnDate, date));
 
         consumptionsListView = (ListView) findViewById(R.id.activityConsumptionSpecificDay_listView);
         consumptionSpecDayAdapter = new ConsumptionSpecDayAdapter(getLayoutInflater(), consumptions);

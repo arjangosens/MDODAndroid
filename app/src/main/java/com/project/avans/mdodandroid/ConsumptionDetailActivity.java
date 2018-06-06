@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.project.avans.mdodandroid.object_classes.Consumption;
 
+import java.text.DateFormat;
+
 public class ConsumptionDetailActivity extends AppCompatActivity {
     private Consumption consumption;
 
@@ -27,6 +29,9 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
             consumption = (Consumption) extras.get(ConsumptionSpecificDayActivity.CONSUMPTION);
         }
 
+        String time = DateFormat.getTimeInstance(DateFormat.SHORT).format(consumption.getDate());
+        String date = DateFormat.getDateInstance(DateFormat.SHORT).format(consumption.getDate());
+
         typeTextView = findViewById(R.id.activityConsumptionDetail_textViewHeader);
         timestampTextView = findViewById(R.id.act_consumptionDetail_textViewTimeStampField);
         amountValueTextView = findViewById(R.id.act_consumptionDetail_textViewAmountValueField);
@@ -35,7 +40,7 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
 
         typeTextView.setText(consumption.getType());
         amountValueTextView.setText(String.valueOf(consumption.getAmount()));
-        timestampTextView.setText(consumption.getDate().toString());
+        timestampTextView.setText(date + " | " + time);
         descriptionTextView.setText(consumption.getDescription());
 
 

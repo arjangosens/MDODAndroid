@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/coloraccent"
         android:padding="8dp"
-        android:text="Consumption on %DATE:"
+        android:text="@string/consumptionOnDate"
         android:textAlignment="viewStart"
         android:textAppearance="@android:style/TextAppearance.Material.Headline"
         android:textColor="@android:color/background_light"

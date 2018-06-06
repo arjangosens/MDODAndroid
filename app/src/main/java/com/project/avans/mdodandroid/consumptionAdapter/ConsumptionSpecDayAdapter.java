@@ -11,6 +11,7 @@ import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.object_classes.Consumption;
 import com.project.avans.mdodandroid.object_classes.ConsumptionsPerDay;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 
@@ -60,7 +61,10 @@ public class ConsumptionSpecDayAdapter extends BaseAdapter {
         }
 
         Consumption rv = (Consumption) consumptionsArrayList.get(i);
-        viewHolder.timestamp.setText(rv.getDate().toString());
+
+        String time = DateFormat.getTimeInstance(DateFormat.SHORT).format(rv.getDate());
+
+        viewHolder.timestamp.setText(time);
 
         String type = rv.getType();
 
