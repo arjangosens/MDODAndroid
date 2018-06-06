@@ -37,10 +37,12 @@
 
             <Button
                 android:id="@+id/riskbutton"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="175dp"
 
                 android:layout_marginBottom="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
@@ -55,16 +57,18 @@
 
             <Button
                 android:id="@+id/usagebutton"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="175dp"
 
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="4dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
-                android:drawableTop="@drawable/wine"
-                android:paddingTop="10dp"
 
+                android:drawableTop="@drawable/wine"
                 android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="Button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,10 +77,12 @@
 
             <Button
                 android:id="@+id/goalbutton"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="175dp"
 
                 android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="4dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
@@ -92,8 +98,10 @@
 
             <Button
                 android:id="@+id/situationbutton"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="175dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
