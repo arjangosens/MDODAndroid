@@ -68,6 +68,7 @@ public class MomentAdapter extends BaseAdapter {
             viewHolder.taste = view.findViewById(R.id.textView_moment_taste);
             viewHolder.seekBar = view.findViewById(R.id.seekBar_moment_row);
             viewHolder.description = view.findViewById(R.id.textView_moment_description);
+            viewHolder.prevention =view.findViewById(R.id.textView_moment_prevention);
 
             view.setTag(viewHolder);
         }else {
@@ -87,6 +88,7 @@ public class MomentAdapter extends BaseAdapter {
         });
         viewHolder.description.setText(moment.getDescription());
         viewHolder.taste.setText(moment.getName());
+        viewHolder.prevention.setText(moment.getPrevention());
 
         return view;
     }
@@ -96,5 +98,6 @@ public class MomentAdapter extends BaseAdapter {
         TextView taste;
         SeekBar seekBar;
         TextView description;
+        TextView prevention;
     }
 }
