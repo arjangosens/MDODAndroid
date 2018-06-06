@@ -64,5 +64,10 @@
     <string name="emailNotFound">Account bestaat niet</string>
     <string name="registerActivityHeader">Registreren</string>
     <string name="homePageActivityHeader">Dashboard</string>
+    <string name="phonenumberActivityHeader">belangrijke nummers</string>
+    <string name="institute">instelling</string>
+    <string name="doctor">psycholoog</string>
+    <string name="buddy">bondgenoot</string>
+    <string name="ice">noodhulp</string>
 
 </resources>

@@ -64,4 +64,9 @@
     <string name="emailNotFound">Email not found</string>
     <string name="registerActivityHeader">Create new account</string>
     <string name="homePageActivityHeader">Dashboard</string>
+    <string name="phonenumberActivityHeader">Important phone numbers</string>
+    <string name="institute">institute</string>
+    <string name="doctor">doctor</string>
+    <string name="buddy">buddy</string>
+    <string name="ice">emergency</string>
 </resources>
