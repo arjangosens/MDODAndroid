@@ -11,19 +11,21 @@
         android:roundIcon="@drawable/tactuslogo_small_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".HomepageActivity" />
+        <activity android:name=".UserSettingsActivity" />
+        <activity android:name=".MyPersonalGoalsActivity" />
+        <activity android:name=".MyPersonalRiskActivity" />
+        <activity android:name=".ConsumptionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".HomepageActivity" />
-        <activity android:name=".UserSettingsActivity" />
-        <activity android:name=".MyPersonalGoalsActivity"></activity>
-        <activity android:name=".MyPersonalRiskActivity" />
-        <activity android:name=".ConsumptionActivity"></activity>
+        <activity android:name=".ConsumptionSpecificDayActivity" />
+        <activity android:name=".ConsumptionDetailActivity"></activity>
     </application>
 
 </manifest>

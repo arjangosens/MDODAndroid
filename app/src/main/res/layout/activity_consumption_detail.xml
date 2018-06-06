@@ -88,11 +88,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="How much?"
         android:textColor="@color/coloraccent"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/act_consumptionDetail_textViewAmountValueField"
-        app:layout_constraintStart_toEndOf="@+id/act_consumptionDetail_imageViewType" />
+        app:layout_constraintStart_toEndOf="@+id/act_consumptionDetail_imageViewType"
+        app:layout_constraintTop_toBottomOf="@+id/act_consumptionDetail_textViewTimeStampField" />
 
     <TextView
         android:id="@+id/act_consumptionDetail_textViewDescLabel"
