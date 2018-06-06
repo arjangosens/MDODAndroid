@@ -138,7 +138,7 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
                         public void getResult(JSONObject result) {
                             if (!(result == null))
                             {
-                                moments.add(new Moment(spinner.getSelectedItem().toString(), "zojuist", String.valueOf(updateDialogGenericEditText.getText()), seekBar.getProgress(), String.valueOf(prevention.getText())));
+                                moments.add(0, new Moment(spinner.getSelectedItem().toString(), "zojuist", String.valueOf(updateDialogGenericEditText.getText()), seekBar.getProgress(), String.valueOf(prevention.getText())));
                                 adapter.notifyDataSetChanged();
                                 dialog.dismiss();
                             } else {
@@ -162,7 +162,11 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
                     Log.i("TESTT: ", String.valueOf(parts.length));
                     String date2 = parts[2] + "-" + parts[1] + "-" + parts[0] + " " + parts[3];
 
-                    moments.add(new Moment(object.getJSONObject(i).getString("name"), date2, object.getJSONObject(i).getString("description"), object.getJSONObject(i).getInt("lust"), object.getJSONObject(i).getString("prevention")));
+                    if (object.getJSONObject(i).getString("prevention").equals("null")){
+                        moments.add(new Moment(object.getJSONObject(i).getString("name"), date2, object.getJSONObject(i).getString("description"), object.getJSONObject(i).getInt("lust"), "Ik heb niks gedaan om gebruik te voorkomen"));
+                    } else {
+                        moments.add(new Moment(object.getJSONObject(i).getString("name"), date2, object.getJSONObject(i).getString("description"), object.getJSONObject(i).getInt("lust"), object.getJSONObject(i).getString("prevention")));
+                    }
                     adapter.notifyDataSetChanged();
                     Log.i("TESTTT: ", moments.toString());
                 } catch (JSONException e) {
