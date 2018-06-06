@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.project.avans.mdodandroid.consumptionAdapter.ConsumptionAdapter;
@@ -16,13 +17,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ConsumptionActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ConsumptionActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
     private ConsumptionAdapter consumptionAdapter;
     private ArrayList<ConsumptionsPerDay> consumptionsPerDayArrayList;
     private Date date;
     public final static String CONSUMPTIONSPD = "consumptionsPerDay";
 
     private ListView cpdListView;
+    private Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,9 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
         consumptionAdapter = new ConsumptionAdapter(getLayoutInflater(), consumptionsPerDayArrayList);
         cpdListView.setAdapter(consumptionAdapter);
         cpdListView.setOnItemClickListener(this);
+
+        registerButton = findViewById(R.id.activityConsumption_buttonRegisterConsumption);
+        registerButton.setOnClickListener(this);
     }
 
     @Override
@@ -61,5 +66,10 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
         i.putExtra(CONSUMPTIONSPD, consumptionsPerDay);
 
         startActivity(i);
+    }
+
+    @Override
+    public void onClick(View v) {
+        
     }
 }
