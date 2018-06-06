@@ -75,5 +75,8 @@
     <string name="doctor">psycholoog</string>
     <string name="buddy">bondgenoot</string>
     <string name="ice">noodhulp</string>
+    <string name="difficult">moeilijk moment</string>
+    <string name="riskbutton">mijn risico\'s</string>
+    <string name="goalbutton">mijn doelen</string>
 
 </resources>

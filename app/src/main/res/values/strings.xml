@@ -75,4 +75,7 @@
     <string name="doctor">doctor</string>
     <string name="buddy">buddy</string>
     <string name="ice">emergency</string>
+    <string name="difficult">difficulty</string>
+    <string name="riskbutton">my risks</string>
+    <string name="goalbutton">my goals</string>
 </resources>
