@@ -527,11 +527,12 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
-    public void postMoment(String substanceId, String lust, String description, final VolleyListener<JSONObject> listener) {
+    public void postMoment(String substanceId, String lust, String description, String prevention, final VolleyListener<JSONObject> listener) {
 
         String url = prefixURL + "v1/difficult_moment";
 
         Map<String, Object> jsonParams = new HashMap<>();
+        jsonParams.put("prevention", prevention);
         jsonParams.put("substance_id", substanceId);
         jsonParams.put("lust", lust);
         jsonParams.put("description", description);

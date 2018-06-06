@@ -5,13 +5,14 @@ public class Moment {
     private int lust;
     private String description;
     private String date;
+    private String prevention;
 
-    public Moment(String name, String date, String description, int lust) {
+    public Moment(String name, String date, String description, int lust, String prevention) {
         this.name = name;
         this.lust = lust;
         this.description = description;
         this.date = date;
-
+        this.prevention = prevention;
     }
 
     public String getName() {
@@ -30,4 +31,7 @@ public class Moment {
         return date;
     }
 
+    public String getPrevention() {
+        return prevention;
+    }
 }
