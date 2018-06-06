@@ -1,8 +1,11 @@
 package com.project.avans.mdodandroid;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.project.avans.mdodandroid.consumptionAdapter.ConsumptionSpecDayAdapter;
@@ -11,12 +14,13 @@ import com.project.avans.mdodandroid.object_classes.ConsumptionsPerDay;
 
 import java.util.ArrayList;
 
-public class ConsumptionSpecificDayActivity extends AppCompatActivity {
+public class ConsumptionSpecificDayActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ArrayList<Consumption> consumptions;
     private ConsumptionsPerDay consumptionsPerDay;
     private final static String TAG = "ConSpecDayActivity";
+    public final static  String CONSUMPTION = "consumption";
 
-    private ListView cpdListView;
+    private ListView consumptionsListView;
     private ConsumptionSpecDayAdapter consumptionSpecDayAdapter;
 
     @Override
@@ -36,8 +40,20 @@ public class ConsumptionSpecificDayActivity extends AppCompatActivity {
             Log.i(TAG, "Size of ArrayList: " + consumptions.size());
         }
 
-        cpdListView = (ListView) findViewById(R.id.activityConsumptionSpecificDay_listView);
+        consumptionsListView = (ListView) findViewById(R.id.activityConsumptionSpecificDay_listView);
         consumptionSpecDayAdapter = new ConsumptionSpecDayAdapter(getLayoutInflater(), consumptions);
-        cpdListView.setAdapter(consumptionSpecDayAdapter);
+        consumptionsListView.setAdapter(consumptionSpecDayAdapter);
+        consumptionsListView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent i = new Intent(getApplicationContext(), ConsumptionDetailActivity.class);
+
+        Consumption consumption = consumptions.get(position);
+        i.putExtra(CONSUMPTION, consumption);
+
+        startActivity(i);
+
     }
 }
