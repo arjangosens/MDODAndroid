@@ -22,8 +22,8 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
-        android:layout_height="407dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -37,13 +37,12 @@
 
             <Button
                 android:id="@+id/riskbutton"
-                android:layout_width="150dp"
                 android:layout_width="0dp"
                 android:layout_height="175dp"
 
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
@@ -57,37 +56,55 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:id="@+id/call_button"
+                android:layout_width="0dp"
+                android:layout_height="175dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/my_button_bg"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/coloraccent"
+                android:drawableTop="@drawable/phone_call"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/difficult"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/usagebutton"
+                app:layout_constraintStart_toStartOf="@+id/situationbutton"
+                app:layout_constraintTop_toBottomOf="@+id/situationbutton" />
+
+
+            <Button
                 android:id="@+id/usagebutton"
-                android:layout_width="150dp"
                 android:layout_width="0dp"
                 android:layout_height="175dp"
 
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+
+
+                android:layout_marginTop="8dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
                 android:drawableTop="@drawable/wine"
-                android:paddingTop="10dp"
-
-                android:drawableTop="@drawable/wine"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="Button"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/call_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/situationbutton"
                 app:layout_constraintTop_toBottomOf="@+id/goalbutton" />
 
             <Button
                 android:id="@+id/goalbutton"
-                android:layout_width="150dp"
                 android:layout_width="0dp"
                 android:layout_height="175dp"
 
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
@@ -103,11 +120,12 @@
 
             <Button
                 android:id="@+id/situationbutton"
-                android:layout_width="150dp"
                 android:layout_width="0dp"
-                android:layout_height="175dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="8dp"
+                android:layout_height="174dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
@@ -115,11 +133,10 @@
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="@string/difficult"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/call_button"
                 app:layout_constraintEnd_toStartOf="@+id/usagebutton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/riskbutton"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/riskbutton" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
