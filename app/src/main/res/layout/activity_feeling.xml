@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/description"
         android:textAppearance="@style/TextAppearance.AppCompat.Menu"
         android:textSize="18sp"
@@ -51,11 +51,11 @@
         app:layout_constraintEnd_toEndOf="@+id/textView_description"
         app:layout_constraintStart_toStartOf="@+id/textView_description"
         app:layout_constraintTop_toBottomOf="@+id/textView_description"
-        app:layout_constraintVertical_bias="0.01999998" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -69,18 +69,15 @@
 
         <ImageView
             android:id="@+id/smiley_happy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/laugh"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp" />
+            app:srcCompat="@drawable/laugh" />
 
         <ImageView
             android:id="@+id/smiley_good"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             app:layout_constraintStart_toEndOf="@+id/smiley_happy"
             app:layout_constraintTop_toTopOf="@+id/smiley_happy"
@@ -88,20 +85,17 @@
 
         <ImageView
             android:id="@+id/smiley_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:adjustViewBounds="false"
             app:layout_constraintStart_toEndOf="@+id/smiley_good"
             app:layout_constraintTop_toTopOf="@+id/smiley_good"
             app:srcCompat="@drawable/meh" />
 
         <ImageView
             android:id="@+id/smiley_sad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             app:layout_constraintStart_toEndOf="@+id/smiley_ok"
             app:layout_constraintTop_toTopOf="@+id/smiley_ok"
@@ -109,14 +103,12 @@
 
         <ImageView
             android:id="@+id/smiley_terrible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="@+id/textView_feeling"
             app:layout_constraintStart_toEndOf="@+id/smiley_sad"
             app:layout_constraintTop_toTopOf="@+id/smiley_sad"
-            app:srcCompat="@drawable/superSad" />
+            app:srcCompat="@drawable/supersad" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
