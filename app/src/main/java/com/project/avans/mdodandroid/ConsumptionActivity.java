@@ -1,7 +1,10 @@
 package com.project.avans.mdodandroid;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.project.avans.mdodandroid.consumptionAdapter.ConsumptionAdapter;
@@ -12,10 +15,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ConsumptionActivity extends AppCompatActivity {
+public class ConsumptionActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ConsumptionAdapter consumptionAdapter;
     private ArrayList<ConsumptionsPerDay> consumptionsPerDayArrayList;
     private Date date;
+    public final String CONSUMPTIONSPD = "consumptionsPerDay";
 
     private ListView cpdListView;
 
@@ -43,5 +47,16 @@ public class ConsumptionActivity extends AppCompatActivity {
         cpdListView = (ListView) findViewById(R.id.activityConsumption_listView);
         consumptionAdapter = new ConsumptionAdapter(getLayoutInflater(), consumptionsPerDayArrayList);
         cpdListView.setAdapter(consumptionAdapter);
+        cpdListView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent i = new Intent(getApplicationContext(), ConsumptionSpecificDayActivity.class);
+
+        ConsumptionsPerDay consumptionsPerDay = consumptionsPerDayArrayList.get(position);
+        i.putExtra(CONSUMPTIONSPD, consumptionsPerDay);
+
+        startActivity(i);
     }
 }
