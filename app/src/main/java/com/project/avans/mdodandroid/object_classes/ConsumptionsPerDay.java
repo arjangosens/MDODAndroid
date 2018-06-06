@@ -1,5 +1,7 @@
 package com.project.avans.mdodandroid.object_classes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.Serializable;

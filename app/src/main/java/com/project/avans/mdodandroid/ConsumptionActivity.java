@@ -19,7 +19,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
     private ConsumptionAdapter consumptionAdapter;
     private ArrayList<ConsumptionsPerDay> consumptionsPerDayArrayList;
     private Date date;
-    public final String CONSUMPTIONSPD = "consumptionsPerDay";
+    public final static String CONSUMPTIONSPD = "consumptionsPerDay";
 
     private ListView cpdListView;
 
