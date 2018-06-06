@@ -79,4 +79,8 @@
     <string name="riskbutton">my risks</string>
     <string name="goalbutton">my goals</string>
     <string name="howAreYou">How are you feeling today?</string>
+    <string name="confirm">Confirm</string>
+    <string name="descriptionInvalid">Description cannot be empty!</string>
+    <string name="smileyNotSelected">Please select a smiley</string>
+
 </resources>
