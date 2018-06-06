@@ -66,5 +66,9 @@
     <string name="homePageActivityHeader">Dashboard</string>
     <string name="difficultMoments">Mijn moeilijke momenten</string>
     <string name="newMoment">Nieuw moeilijk moment</string>
+    <string name="moment">Moment: </string>
+    <string name="dateTime">Datum en tijd: </string>
+    <string name="taste">Trek in: </string>
+    <string name="description">Beschrijving: </string>
 
 </resources>

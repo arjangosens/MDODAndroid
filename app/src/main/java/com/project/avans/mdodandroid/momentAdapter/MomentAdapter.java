@@ -4,11 +4,13 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.GoalAdapter.GoalAdapter;
@@ -59,8 +61,13 @@ public class MomentAdapter extends BaseAdapter {
         MomentAdapter.ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.activity_row_goal, null);
+            view = inflater.inflate(R.layout.activity_row_moment, null);
             viewHolder = new MomentAdapter.ViewHolder();
+
+            viewHolder.date = view.findViewById(R.id.textView_moment_date);
+            viewHolder.taste = view.findViewById(R.id.textView_moment_taste);
+            viewHolder.seekBar = view.findViewById(R.id.seekBar_moment_row);
+            viewHolder.description = view.findViewById(R.id.textView_moment_description);
 
             view.setTag(viewHolder);
         }else {
@@ -69,10 +76,25 @@ public class MomentAdapter extends BaseAdapter {
 
         final Moment moment = (Moment) momentArray.get(i);
 
+        viewHolder.date.setText(moment.getDate());
+        viewHolder.seekBar.setMax(5);
+        viewHolder.seekBar.setProgress(moment.getLust());
+        viewHolder.seekBar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
+        viewHolder.description.setText(moment.getDescription());
+        viewHolder.taste.setText(moment.getName());
+
         return view;
     }
 
     private static class ViewHolder{
-        TextView moment;
+        TextView date;
+        TextView taste;
+        SeekBar seekBar;
+        TextView description;
     }
 }

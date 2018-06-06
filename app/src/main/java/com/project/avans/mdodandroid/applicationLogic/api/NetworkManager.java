@@ -532,7 +532,7 @@ public class NetworkManager
         String url = prefixURL + "v1/difficult_moment";
 
         Map<String, Object> jsonParams = new HashMap<>();
-        jsonParams.put("substanceId", substanceId);
+        jsonParams.put("substance_id", substanceId);
         jsonParams.put("lust", lust);
         jsonParams.put("description", description);
 

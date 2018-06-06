@@ -66,4 +66,8 @@
     <string name="homePageActivityHeader">Dashboard</string>
     <string name="difficultMoments">My difficult moments</string>
     <string name="newMoment">New difficult moment</string>
+    <string name="moment">Moment: </string>
+    <string name="dateTime">Date and time: </string>
+    <string name="taste">Taste in: </string>
+    <string name="description">Description: </string>
 </resources>

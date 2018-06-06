@@ -32,6 +32,7 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
     private View updateDialogView;
     private SeekBar seekBar;
     private ArrayList<Moment> moments = new ArrayList<>();
+    private MomentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
         NetworkManager.getInstance().getMoment(this);
 
         ListView listView = findViewById(R.id.listView_moments);
-        MomentAdapter adapter = new MomentAdapter(this, getLayoutInflater(), moments);
+        adapter = new MomentAdapter(this, getLayoutInflater(), moments);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -118,7 +119,7 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
             public void onClick(View v) {
                 final TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogDifficultMoment_textViewIncorrectField);
                 final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogDifficultMoment_editText);
-                Spinner spinner = updateDialogView.findViewById(R.id.spinner_moment);
+                final Spinner spinner = updateDialogView.findViewById(R.id.spinner_moment);
 
 
                 Log.i("TEST: ", String.valueOf(spinner.getSelectedItemPosition()));
@@ -131,11 +132,13 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
                 if (field.equals("")) {
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
                 } else {
-                    NetworkManager.getInstance().postMoment( String.valueOf(spinner.getSelectedItemPosition()),String.valueOf(seekBar.getProgress()), String.valueOf(updateDialogGenericEditText.getText()), new VolleyListener<JSONObject>(){
+                    NetworkManager.getInstance().postMoment( String.valueOf(spinner.getSelectedItemPosition() + 1),String.valueOf(seekBar.getProgress()), String.valueOf(updateDialogGenericEditText.getText()), new VolleyListener<JSONObject>(){
                         @Override
                         public void getResult(JSONObject result) {
                             if (!(result == null))
                             {
+                                moments.add(new Moment(spinner.getSelectedItem().toString(), "zojuist", String.valueOf(updateDialogGenericEditText.getText()), seekBar.getProgress()));
+                                adapter.notifyDataSetChanged();
                                 dialog.dismiss();
                             } else {
                                 incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong));
@@ -151,11 +154,16 @@ public class MyDifficultMoments extends AppCompatActivity implements DialogInter
     @Override
     public void getResult(JSONArray object) {
         if(!(object == null)) {
-            Log.i("TESTT ", "Does this work?!");
             for (int i = 0; i < object.length(); i++) {
                 try {
-                    object.getJSONObject(i).getString("type");
-                    Log.i("TESTTT: ", object.getJSONObject(i).getString("type"));
+                    String date = object.getJSONObject(i).getString("date_lust");
+                    String[] parts = date.split("[-T.]+");
+                    Log.i("TESTT: ", String.valueOf(parts.length));
+                    String date2 = parts[2] + "-" + parts[1] + "-" + parts[0] + " " + parts[3];
+
+                    moments.add(new Moment(object.getJSONObject(i).getString("name"), date2, object.getJSONObject(i).getString("description"), object.getJSONObject(i).getInt("lust")));
+                    adapter.notifyDataSetChanged();
+                    Log.i("TESTTT: ", moments.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
