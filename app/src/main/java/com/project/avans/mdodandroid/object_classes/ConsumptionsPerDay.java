@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,16 +14,18 @@ public class ConsumptionsPerDay implements Serializable{
     final String TAG = "ConsumptionsPerDay";
     private Date date;
     private ArrayList<Consumption> consumptions;
+    private String dateFormatString;
 
     public ConsumptionsPerDay(Date date) {
         this.date = date;
+        dateFormatString = DateFormat.getDateInstance(DateFormat.SHORT).format(date);
         consumptions = new ArrayList<>();
     }
 
     public void add(Consumption consumption) {
-        Date consumptionDate = consumption.getDate();
+        String consumptionDateString = DateFormat.getDateInstance(DateFormat.SHORT).format(consumption.getDate());
 
-        if (consumptionDate.compareTo(date) == 0) {
+        if (consumptionDateString.equals(dateFormatString)) {
 
             consumptions.add(consumption);
             Log.i(TAG, "consumption added");

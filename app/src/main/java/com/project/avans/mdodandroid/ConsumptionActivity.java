@@ -37,6 +37,8 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
         Consumption consumption = new Consumption(date, "Alcohol", 5, "idk");
         cpdToday.add(consumption);
 
+        date = Calendar.getInstance().getTime();
+
         consumption = new Consumption(date, "Weed", 5, "idk2");
         cpdToday.add(consumption);
 
