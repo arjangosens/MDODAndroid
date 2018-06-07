@@ -50,7 +50,7 @@
     <string name="deleteAccountMessage">If you continue, all of your data will be lost and cannot be recovered!</string>
     <string name="deleteAccountAbort">No, abort</string>
     <string name="deleteAccountConfirm">Yes, delete my account</string>
-    <string name="risk">risk</string>
+    <string name="risk">risk:</string>
     <string name="risk_update">update risk</string>
     <string name="somethingWentWrong">Something went wrong, your goal hasn\'t been added</string>
     <string name="somethingWentWrong2">Something went wrong, your goal hasn\'t been changed</string>
@@ -65,4 +65,18 @@
     <string name="registerActivityHeader">Create new account</string>
     <string name="homePageActivityHeader">Dashboard</string>
     <string name="consumptionOnDate">Consumption on %1$s:</string>
+    <string name="difficultMoments">My difficult moments</string>
+    <string name="newMoment">New difficult moment</string>
+    <string name="moment">Moment: </string>
+    <string name="dateTime">Date and time: </string>
+    <string name="taste">Taste in: </string>
+    <string name="description">Description: </string>
+    <string name="phonenumberActivityHeader">Important phone numbers</string>
+    <string name="institute">institute</string>
+    <string name="doctor">doctor</string>
+    <string name="buddy">buddy</string>
+    <string name="ice">emergency</string>
+    <string name="difficult">difficulty</string>
+    <string name="riskbutton">my risks</string>
+    <string name="goalbutton">my goals</string>
 </resources>

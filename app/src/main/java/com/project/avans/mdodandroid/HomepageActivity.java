@@ -1,12 +1,20 @@
 package com.project.avans.mdodandroid;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HomepageActivity extends AppCompatActivity {
 
@@ -19,7 +27,7 @@ public class HomepageActivity extends AppCompatActivity {
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setTitle(getResources().getString(R.string.homePageActivityHeader));
 
-        Button btn = (Button) findViewById(R.id.button_goals);
+        Button btn = (Button) findViewById(R.id.goalbutton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,12 +36,40 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
-        Button btn2 = (Button) findViewById(R.id.button_risks);
+        Button btn2 = (Button) findViewById(R.id.riskbutton);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), MyPersonalRiskActivity.class);
                 startActivity(i);
+            }
+        });
+
+        Button btn3 = (Button) findViewById(R.id.situationbutton);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MyDifficultMoments.class);
+                startActivity(i);
+            }
+        });
+
+        NetworkManager.getInstance().getCleanDays(new VolleyListener<JSONObject>() {
+            @Override
+            public void getResult(JSONObject object) {
+                TextView cleandays = findViewById(R.id.textView_clean);
+
+
+                try {
+                    if(object.getString("daysClean").equals("null")){
+                        cleandays.setText("Nog geen gebruik geregistreerd");
+                    } else{
+                        cleandays.setText("Je bent al " + object.getString("daysClean") + " dagen clean.");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -58,6 +94,10 @@ public class HomepageActivity extends AppCompatActivity {
             case R.id.menu_logout:
                 i = new Intent(getApplicationContext(), MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                break;
+            case R.id.menu_user_phone:
+                i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
                 startActivity(i);
                 break;
             default:
