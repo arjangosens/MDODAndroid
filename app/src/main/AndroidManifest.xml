@@ -16,19 +16,17 @@
         <activity android:name=".UserSettingsActivity" />
         <activity android:name=".MyPersonalGoalsActivity" />
         <activity android:name=".MyPersonalRiskActivity" />
-        <activity android:name=".ConsumptionActivity"/>
+        <activity android:name=".ConsumptionActivity" />
 
         <service
             android:name=".NotificationService"
             android:label="@string/app_name">
-        <intent-filter>
-            <action android:name="your.app.domain.NotificationService" />
+            <intent-filter>
+                <action android:name="your.app.domain.NotificationService" />
 
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </service>
-
-
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -38,10 +36,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ConsumptionSpecificDayActivity" />
-        <activity android:name=".ConsumptionDetailActivity"></activity>
-        <activity android:name=".PhoneSettingsActivity"/>
-        <activity android:name=".MyDifficultMoments"></activity>
+        <activity android:name=".ConsumptionDetailActivity" />
+        <activity android:name=".PhoneSettingsActivity" />
+        <activity android:name=".MyDifficultMoments" />
+        <activity android:name=".RegisterConsumptionActivity"></activity>
     </application>
-
 
 </manifest>
