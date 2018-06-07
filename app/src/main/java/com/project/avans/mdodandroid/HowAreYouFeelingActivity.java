@@ -26,10 +26,17 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
     final String SAD = "Sad";
     final String TERRIBLE = "Terrible";
 
+    private int color;
+    private int colorSmileyTerrible;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feeling);
+
+        //Find colors
+        color = getResources().getColor(R.color.selected);
+        colorSmileyTerrible = getResources().getColor(R.color.colorSmileyTerrible);
 
         //Find all the smileys in the activity_feeling.xml in the layout folder
         smileyHappy = findViewById(R.id.smiley_happy);
@@ -51,6 +58,14 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
         smileyOk.setTag(OK);
         smileySad.setTag(SAD);
         smileyTerrible.setTag(TERRIBLE);
+
+        //set Black color
+        smileyHappy.setColorFilter(color);
+        smileyGood.setColorFilter(color);
+        smileyOk.setColorFilter(color);
+        smileySad.setColorFilter(color);
+        smileyTerrible.setColorFilter(color);
+
 
         //find descriptionField to send the description to the api when the confirm button is pressed
         description = findViewById(R.id.editText_feeling_description);
@@ -96,7 +111,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
         //get the tag when a image is clicked
         String emotion = String.valueOf(v.getTag());
 
-        int color = getResources().getColor(R.color.selected);
+
 
 
         //this selects the current smiley and deselects the other smileys
@@ -104,95 +119,96 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
             case HAPPY:
                 if(v.isSelected()){
                     v.setSelected(false);
-                    smileyHappy.clearColorFilter();
+                    smileyHappy.setColorFilter(color);
                 } else {
                     v.setSelected(true);
-                    smileyHappy.setColorFilter(color);
+                    smileyHappy.clearColorFilter();
 
                     //deselect all the other smileys
-                    smileyGood.clearColorFilter();
+                    smileyGood.setColorFilter(color);
                     smileyGood.setSelected(false);
-                    smileyOk.clearColorFilter();
+                    smileyOk.setColorFilter(color);
                     smileyOk.setSelected(false);
-                    smileySad.clearColorFilter();
+                    smileySad.setColorFilter(color);
                     smileySad.setSelected(false);
-                    smileyTerrible.clearColorFilter();
+                    smileyTerrible.setColorFilter(color);
                     smileyTerrible.setSelected(false);
                 }
                 break;
             case GOOD:
                 if(v.isSelected()){
                     v.setSelected(false);
-                    smileyGood.clearColorFilter();
+                    smileyGood.setColorFilter(color);
                 } else {
                     v.setSelected(true);
-                    smileyGood.setColorFilter(color);
+                    smileyGood.clearColorFilter();
 
                     //deselect all the other smileys
-                    smileyHappy.clearColorFilter();
+                    smileyHappy.setColorFilter(color);
                     smileyHappy.setSelected(false);
-                    smileyOk.clearColorFilter();
+                    smileyOk.setColorFilter(color);
                     smileyOk.setSelected(false);
-                    smileySad.clearColorFilter();
+                    smileySad.setColorFilter(color);
                     smileySad.setSelected(false);
-                    smileyTerrible.clearColorFilter();
+                    smileyTerrible.setColorFilter(color);
                     smileyTerrible.setSelected(false);
                 }
                 break;
             case OK:
                 if(v.isSelected()){
                     v.setSelected(false);
-                    smileyOk.clearColorFilter();
+                    smileyOk.setColorFilter(color);
                 } else {
                     v.setSelected(true);
-                    smileyOk.setColorFilter(color);
+                    smileyOk.clearColorFilter();
+
 
                     //deselect all the other smileys
-                    smileyHappy.clearColorFilter();
+                    smileyHappy.setColorFilter(color);
                     smileyHappy.setSelected(false);
-                    smileyGood.clearColorFilter();
+                    smileyGood.setColorFilter(color);
                     smileyGood.setSelected(false);
-                    smileySad.clearColorFilter();
+                    smileySad.setColorFilter(color);
                     smileySad.setSelected(false);
-                    smileyTerrible.clearColorFilter();
+                    smileyTerrible.setColorFilter(color);
                     smileyTerrible.setSelected(false);
                 }
                 break;
             case SAD:
                 if(v.isSelected()){
                     v.setSelected(false);
-                    smileySad.clearColorFilter();
+                    smileySad.setColorFilter(color);
                 } else {
                     v.setSelected(true);
-                    smileySad.setColorFilter(color);
+                    smileySad.clearColorFilter();
 
                     //deselect all the other smileys
-                    smileyHappy.clearColorFilter();
+                    smileyHappy.setColorFilter(color);
                     smileyHappy.setSelected(false);
-                    smileyGood.clearColorFilter();
+                    smileyGood.setColorFilter(color);
                     smileyGood.setSelected(false);
-                    smileyOk.clearColorFilter();
+                    smileyOk.setColorFilter(color);
                     smileyOk.setSelected(false);
-                    smileyTerrible.clearColorFilter();
+                    smileyTerrible.setColorFilter(color);
                     smileyTerrible.setSelected(false);
                 }
                 break;
             case TERRIBLE:
                 if(v.isSelected()){
                     v.setSelected(false);
-                    smileyTerrible.clearColorFilter();
+                    smileyTerrible.setColorFilter(color);
                 } else {
                     v.setSelected(true);
-                    smileyTerrible.setColorFilter(color);
+                    smileyTerrible.setColorFilter(colorSmileyTerrible);
 
                     //deselect all the other smileys
-                    smileyHappy.clearColorFilter();
+                    smileyHappy.setColorFilter(color);
                     smileyHappy.setSelected(false);
-                    smileyGood.clearColorFilter();
+                    smileyGood.setColorFilter(color);
                     smileyGood.setSelected(false);
-                    smileyOk.clearColorFilter();
+                    smileyOk.setColorFilter(color);
                     smileyOk.setSelected(false);
-                    smileySad.clearColorFilter();
+                    smileySad.setColorFilter(color);
                     smileySad.setSelected(false);
                 }
                 break;
