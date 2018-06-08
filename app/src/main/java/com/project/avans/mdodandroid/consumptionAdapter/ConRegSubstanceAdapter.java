@@ -1,7 +1,7 @@
 package com.project.avans.mdodandroid.consumptionAdapter;
 
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,17 +72,6 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
 
         public void bind(final OnItemClickListener listener, final int position, final ViewHolder holder) {
 
-//            if (!cursor.moveToPosition(position)) {
-//                return;
-//            }
-
-
-//            String fullName = cursor.getString(cursor.getColumnIndex(MainActivity.EXTRA_FULLNAME));
-//            String URL = cursor.getString(cursor.getColumnIndex(MainActivity.EXTRA_PIC_URL));
-//            final String id = cursor.getString(cursor.getColumnIndex(MainActivity.EXTRA_ID));
-//            final String _id = cursor.getString(cursor.getColumnIndex(MainActivity.EXTRA_IDENTIFIER));
-
-
             holder.substanceBtn.setClickable(false);
 
             Substance substance = substances.get(position);
@@ -90,7 +79,8 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
             holder.substanceBtn.setText(substance.getType());
 
             Drawable top = substance.getDrawable();
-            holder.substanceBtn.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
+//            top.setTint(itemView.getResources().getColor(android.R.color.black));
+            holder.substanceBtn.setCompoundDrawablesWithIntrinsicBounds(null, top, null, null);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -99,6 +89,11 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
                     if (listener != null) {
                         listener.onItemClick(position);
                     }
+
+//                        Drawable[] drawables = holder.substanceBtn.getCompoundDrawables();
+//                        Drawable wrapDrawable = DrawableCompat.wrap(drawables[1]);
+//                        DrawableCompat.setTint(wrapDrawable, itemView.getResources().getColor(R.color.coloraccent));
+
                 }
 
             });

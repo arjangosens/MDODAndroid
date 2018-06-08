@@ -56,6 +56,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
     @Override
     public void onItemClick(int position) {
+//        substanceRv.getRecycledViewPool().clear();
         Log.i(TAG, "OnItemClick() called on pos " + position);
     }
 }

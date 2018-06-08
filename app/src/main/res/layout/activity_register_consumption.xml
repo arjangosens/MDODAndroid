@@ -69,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_RecyclerViewSubstances" />
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewSelectionLabel" />
 
         <TextView
             android:id="@+id/act_registerConsumption_textViewDescriptionLabel"
@@ -112,6 +112,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewDescriptionLabel"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewSelectionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Currently selected:"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_RecyclerViewSubstances" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewSelectionValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:text="[Type]"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/act_registerConsumption_textViewSelectionLabel"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_RecyclerViewSubstances" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
