@@ -706,7 +706,6 @@ public class NetworkManager
 
         Map<String, Object> jsonParams = new HashMap<>();
         jsonParams.put("firm", institution);
-        jsonParams.put("dr", doctor);
         jsonParams.put("buddy", buddy);
         jsonParams.put("ice", ice);
         jsonParams.put("id", id);

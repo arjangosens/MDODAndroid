@@ -7,7 +7,7 @@
         android:title="@string/userSettings" />
     <item
         android:id="@+id/menu_user_phone"
-        android:title="phonenumbers" />
+        android:title="@string/phonenumbers" />
     <item
         android:id="@+id/menu_logout"
         android:title="@string/logOut" />
