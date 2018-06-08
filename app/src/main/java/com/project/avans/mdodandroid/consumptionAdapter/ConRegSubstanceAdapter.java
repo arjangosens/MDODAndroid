@@ -1,6 +1,7 @@
 package com.project.avans.mdodandroid.consumptionAdapter;
 
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +18,18 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
 
 
     private final OnItemClickListener listener;
-    private ArrayList<Substance> substances;
+    private static ArrayList<Substance> substances;
 
 
     public ConRegSubstanceAdapter(ArrayList<Substance> substances, OnItemClickListener listener) {
         this.listener = listener;
-        this.substances = substances;
+        ConRegSubstanceAdapter.substances = substances;
     }
 
+    public static ArrayList<Substance> getSubstances() {
+
+        return substances;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,6 +58,7 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         private Button substanceBtn;
+        private ArrayList<Substance> substances;
 
         //private ImageView image;
 
@@ -60,6 +66,7 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
         public ViewHolder(View itemView) {
             super(itemView);
             this.substanceBtn = (Button) itemView.findViewById(R.id.row_consumptionType_button);
+            substances = ConRegSubstanceAdapter.getSubstances();
         }
 
 
@@ -77,8 +84,13 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
 
 
             holder.substanceBtn.setClickable(false);
-//            holder.substanceBtn.setText();
 
+            Substance substance = substances.get(position);
+
+            holder.substanceBtn.setText(substance.getType());
+
+            Drawable top = substance.getDrawable();
+            holder.substanceBtn.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -87,9 +99,6 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
                     if (listener != null) {
                         listener.onItemClick(position);
                     }
-//                    Intent intent = new Intent(itemView.getContext(), ImageDetailActivity.class);
-//                    intent.putExtra(MainActivity.EXTRA_IDENTIFIER, _id);
-//                    itemView.getContext().startActivity(intent);
                 }
 
             });
