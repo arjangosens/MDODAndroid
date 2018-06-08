@@ -13,6 +13,65 @@
         android:layout_height="wrap_content"
         tools:context=".RegisterConsumptionActivity">
 
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewMoodLabel">
+
+            <ImageView
+                android:id="@+id/con_smiley_happy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/laugh" />
+
+            <ImageView
+                android:id="@+id/con_smiley_good"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/con_smiley_happy"
+                app:layout_constraintTop_toTopOf="@+id/con_smiley_happy"
+                app:srcCompat="@drawable/happy" />
+
+            <ImageView
+                android:id="@+id/con_smiley_ok"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/con_smiley_good"
+                app:layout_constraintTop_toTopOf="@+id/con_smiley_good"
+                app:srcCompat="@drawable/meh" />
+
+            <ImageView
+                android:id="@+id/con_smiley_sad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/con_smiley_ok"
+                app:layout_constraintTop_toTopOf="@+id/con_smiley_ok"
+                app:srcCompat="@drawable/sad" />
+
+            <ImageView
+                android:id="@+id/con_smiley_terrible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="@+id/textView_feeling"
+                app:layout_constraintStart_toEndOf="@+id/con_smiley_sad"
+                app:layout_constraintTop_toTopOf="@+id/con_smiley_sad"
+                app:srcCompat="@drawable/supersad" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/activityConsumptionSpecificDay_textViewHeader2"
             android:layout_width="0dp"
