@@ -76,8 +76,8 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
 //            final String _id = cursor.getString(cursor.getColumnIndex(MainActivity.EXTRA_IDENTIFIER));
 
 
-//            holder.textViewList.setText("IMAGE ID: " + id);
-//            Picasso.get().load(URL).into(holder.imageViewList);
+            holder.substanceBtn.setClickable(false);
+//            holder.substanceBtn.setText();
 
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
