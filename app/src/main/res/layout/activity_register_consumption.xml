@@ -71,21 +71,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewSelectionLabel" />
 
-        <TextView
-            android:id="@+id/act_registerConsumption_textViewDescriptionLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Description:"
-            android:textColor="@color/coloraccent"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_spinnerAmount" />
-
         <Spinner
             android:id="@+id/act_registerConsumption_spinnerAmount"
             android:layout_width="wrap_content"
@@ -96,22 +81,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewAmountLabel" />
-
-        <EditText
-            android:id="@+id/act_registerConsumption_editTextDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:ems="10"
-            android:hint="description"
-            android:inputType="textMultiLine"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewDescriptionLabel"
-            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/act_registerConsumption_textViewSelectionLabel"
@@ -135,6 +104,79 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/act_registerConsumption_textViewSelectionLabel"
             app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_RecyclerViewSubstances" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewLocationLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Where are you?"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_spinnerAmount" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewCauseLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="What caused it?"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_editTextLocationValue" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewMoodLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="How do you feel?"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_editTextCauseValue" />
+
+        <EditText
+            android:id="@+id/act_registerConsumption_editTextLocationValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="Location"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewLocationLabel" />
+
+        <EditText
+            android:id="@+id/act_registerConsumption_editTextCauseValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="Cause"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewCauseLabel" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
