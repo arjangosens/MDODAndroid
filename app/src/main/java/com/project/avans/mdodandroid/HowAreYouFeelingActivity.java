@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -7,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+
+import org.json.JSONObject;
 
 
 public class HowAreYouFeelingActivity extends AppCompatActivity implements View.OnClickListener {
@@ -84,20 +90,46 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                     error.setText(getResources().getString(R.string.descriptionInvalid));
                 }
 
+                int value;
+
                 if(smileyHappy.isSelected()){
+                    value = 1;
                     Log.i("IMAGE SELECTED: ", "1");
                 } else if (smileyGood.isSelected()){
+                    value = 2;
                     Log.i("IMAGE SELECTED: ", "2");
                 } else if (smileyOk.isSelected()){
+                    value = 3;
                     Log.i("IMAGE SELECTED: ", "3");
                 } else if (smileySad.isSelected()) {
+                    value = 4;
                     Log.i("IMAGE SELECTED: ", "4");
                 } else if (smileyTerrible.isSelected()){
+                    value = 5;
                     Log.i("IMAGE SELECTED: ", "5");
                 } else {
+                    value = 0;
                     Log.i("IMAGE SELECTED: ", "NO IMAGE SELECTED");
                     error.setText(getResources().getString(R.string.smileyNotSelected));
                 }
+
+                NetworkManager.getInstance().postStatus(value, field, new VolleyListener<JSONObject>() {
+                    @Override
+                    public void getResult(JSONObject object) {
+                        Log.i("TEST: ", object.toString());
+
+                        if (!(object == null))
+                        {
+                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        } else {
+                            error.setText(getResources().getString(R.string.somethingWentWrong));
+                        }
+                    }
+                });
+
+
             }
         });
 
