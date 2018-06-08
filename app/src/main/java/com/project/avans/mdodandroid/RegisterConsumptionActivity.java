@@ -25,13 +25,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         setContentView(R.layout.activity_register_consumption);
 
         substances = new ArrayList<>();
-        substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
-        substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "ml"));
-        substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "g"));
-        substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "qwerty"));
-        substances.add(new Substance("LSD", getResources().getDrawable(R.drawable.lsd), "mg"));
-        substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "lines"));
-        substances.add(new Substance("Other", getResources().getDrawable(R.drawable.question), ""));
+        initTypes();
 
         substanceRv = (RecyclerView) findViewById(R.id.act_registerConsumption_RecyclerViewSubstances);
 
@@ -58,5 +52,15 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
     public void onItemClick(int position) {
 //        substanceRv.getRecycledViewPool().clear();
         Log.i(TAG, "OnItemClick() called on pos " + position);
+    }
+
+    private void initTypes() {
+        substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
+        substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "ml"));
+        substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "g"));
+        substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "qwerty"));
+        substances.add(new Substance("LSD", getResources().getDrawable(R.drawable.lsd), "mg"));
+        substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "lines"));
+        substances.add(new Substance("Other", getResources().getDrawable(R.drawable.question), ""));
     }
 }
