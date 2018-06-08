@@ -67,7 +67,7 @@
                 android:drawableTop="@drawable/phone_call"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:text="@string/difficult"
+                android:text="@string/phonenumbers"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/usagebutton"
                 app:layout_constraintStart_toStartOf="@+id/situationbutton"

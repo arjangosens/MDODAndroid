@@ -78,5 +78,11 @@
     <string name="difficult">moeilijk moment</string>
     <string name="riskbutton">mijn risico\'s</string>
     <string name="goalbutton">mijn doelen</string>
+    <string name="phonenumbers">mijn telefoonnummers</string>
+    <string name="shrink">Behandelaar</string>
+    <string name="numbernotfilled">telefoon nummer is niet ingevuld, wil je dat nu doen?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nee</string>
+    <string name="contactDr">Nummer is er nog niet, vraag naar uw behandelaar</string>
 
 </resources>

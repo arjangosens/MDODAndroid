@@ -78,4 +78,11 @@
     <string name="difficult">difficulty</string>
     <string name="riskbutton">my risks</string>
     <string name="goalbutton">my goals</string>
+    <string name="phonenumbers">my phonenumbers</string>
+    <string name="shrink">psychologist</string>
+    <string name="numbernotfilled">telephone number has not been inserted, do you want to insert it now?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="contactDr">Please contact your psychologist, number not filled in</string>
+
 </resources>
