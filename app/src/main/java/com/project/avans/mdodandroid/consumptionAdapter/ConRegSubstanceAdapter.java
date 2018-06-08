@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.RegisterConsumptionActivity;
 import com.project.avans.mdodandroid.object_classes.Substance;
 
 import java.util.ArrayList;

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.project.avans.mdodandroid.consumptionAdapter.ConRegSubstanceAdapter;
 import com.project.avans.mdodandroid.object_classes.Substance;
@@ -15,6 +16,9 @@ import java.util.ArrayList;
 
 public class RegisterConsumptionActivity extends AppCompatActivity implements ConRegSubstanceAdapter.OnItemClickListener {
     private RecyclerView substanceRv;
+
+    private TextView typetextView;
+
     private ArrayList<Substance> substances;
     private ConRegSubstanceAdapter adapter;
     private static final String TAG = "RegConsumptionActivity";
@@ -28,6 +32,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         initTypes();
 
         substanceRv = (RecyclerView) findViewById(R.id.act_registerConsumption_RecyclerViewSubstances);
+        typetextView = (TextView) findViewById(R.id.act_registerConsumption_textViewSelectionValue);
 
 //        adapter = new ConRegSubstanceAdapter(substances);
 //        adapter.setOnItemClickListener(this);
@@ -38,6 +43,10 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
             @Override
             public void onItemClick(int position) {
                 Log.i(TAG, "onItemClick(" + position + ") called");
+
+                Substance substance = substances.get(position);
+
+                typetextView.setText(substance.getType());
             }
         });
         substanceRv.setAdapter(this.adapter);
