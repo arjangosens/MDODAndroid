@@ -11,42 +11,38 @@
         android:layout_height="62dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
         android:contentDescription="Tactus"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintBottom_toTopOf="@+id/textView_clean"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/tactuslogo" />
 
+    <TextView
+        android:id="@+id/textView_clean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:text="amount of days clean" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/textView_clean">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-            <TextView
-                android:id="@+id/textView_clean"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="amount of days clean" />
 
             <Button
                 android:id="@+id/riskbutton"
@@ -56,6 +52,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
@@ -66,7 +63,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/situationbutton"
                 app:layout_constraintEnd_toStartOf="@+id/goalbutton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/goalbutton" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/call_button"
@@ -119,6 +116,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/my_button_bg"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
@@ -130,7 +128,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/usagebutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/riskbutton"
-                app:layout_constraintTop_toBottomOf="@+id/textView_clean" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/situationbutton"
