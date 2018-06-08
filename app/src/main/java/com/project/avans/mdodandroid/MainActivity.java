@@ -96,6 +96,27 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         Log.d("the token", Token);
+
+                        NetworkManager.getInstance().getEmotionStatusDays(new VolleyListener<JSONObject>() {
+                            @Override
+                            public void getResult(JSONObject object) {
+                                if(!(object ==  null)){
+                                    Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
+                                    startActivity(intent);
+                                } else try {
+                                    if (object.getInt("status") == 0){
+                                        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
+                                        startActivity(intent);
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+
                         Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

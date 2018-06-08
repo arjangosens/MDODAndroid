@@ -79,5 +79,9 @@
     <string name="riskbutton">mijn risico\'s</string>
     <string name="goalbutton">mijn doelen</string>
     <string name="consumptionOnDate">Gebruik op %1$s:</string>
+    <string name="howAreYou">Hoe voel je je vandaag?</string>
+    <string name="confirm">Bevestig</string>
+    <string name="descriptionInvalid">De beschrijving mag niet leeg zijn!</string>
+    <string name="smileyNotSelected">U bent vergeten een smiley te selecteren</string>
 
 </resources>
