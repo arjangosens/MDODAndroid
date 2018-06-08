@@ -176,8 +176,15 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
                             JSONObject resultObject = result.getJSONObject(0);
                             id = resultObject.getInt("id");
                             Log.i("phoneId: ", id.toString());
+
                             institution.setValue(resultObject.getString("PNfirm"));
-                            doctor.setValue(resultObject.getString("phonenumber"));
+                            try{
+                                doctor.setValue(resultObject.getString("phonenumber"));
+                            }
+                            catch(JSONException e){
+                                doctor.setValue("");
+                            }
+
                             buddy.setValue(resultObject.getString("PNbuddy"));
                             ice.setValue(resultObject.getString("PNice"));
 
@@ -204,6 +211,12 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
 
                     }
                 });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 
     @Override

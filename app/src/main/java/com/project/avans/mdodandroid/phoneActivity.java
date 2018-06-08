@@ -45,6 +45,7 @@ public class phoneActivity extends AppCompatActivity {
             @Override
             public void getResult(JSONArray result) {
                 try{
+                    String doctor;
                     if (result.length() > 0)
                     {
                         Log.i("VOLLEY_GETRESULT", "Result:" + result.toString());
@@ -52,7 +53,14 @@ public class phoneActivity extends AppCompatActivity {
                             JSONObject resultObject = result.getJSONObject(0);
 
                             String institution = (resultObject.getString("PNfirm"));
-                            String doctor = (resultObject.getString("phonenumber"));
+
+                            try{
+                                doctor = (resultObject.getString("phonenumber"));
+                            }
+                            catch(JSONException e){
+                                doctor = ("");
+
+                            }
                             String buddy = (resultObject.getString("PNbuddy"));
                             String ice = (resultObject.getString("PNice"));
 
@@ -75,14 +83,19 @@ public class phoneActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numbers.getPhoneInstitute().equals("") || numbers.getPhoneInstitute().equals("null")){
+                try {
+                    if (numbers.getPhoneInstitute().equals("") || numbers.getPhoneInstitute().equals("null")) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage(getResources().getString(R.string.numbernotfilled)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
+                    } else {
+                        Intent call = new Intent(Intent.ACTION_DIAL);
+                        call.setData(Uri.parse("tel:" + numbers.getPhoneInstitute()));
+                        startActivity(call);
+                    }
+                }
+                catch (Exception e){
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(getResources().getString(R.string.numbernotfilled)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
-                }
-                else{
-                    Intent call = new Intent(Intent.ACTION_DIAL);
-                    call.setData(Uri.parse("tel:" + numbers.getPhoneInstitute()));
-                    startActivity(call);
                 }
 
             }
@@ -92,15 +105,20 @@ public class phoneActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numbers.getPhoneDoctor().equals("") || numbers.getPhoneDoctor().equals("null")){
+                try {
+                    if (numbers.getPhoneDoctor().equals("") || numbers.getPhoneDoctor().equals("null")) {
+                        Toast toast = Toast.makeText(context, getResources().getString(R.string.contactDr), Toast.LENGTH_LONG);
+                        toast.show();
+
+                    } else {
+                        Intent call = new Intent(Intent.ACTION_DIAL);
+                        call.setData(Uri.parse("tel:" + numbers.getPhoneDoctor()));
+                        startActivity(call);
+                    }
+                }
+                catch (Exception e){
                     Toast toast = Toast.makeText(context, getResources().getString(R.string.contactDr), Toast.LENGTH_LONG);
                     toast.show();
-
-                }
-                else{
-                    Intent call = new Intent(Intent.ACTION_DIAL);
-                    call.setData(Uri.parse("tel:" + numbers.getPhoneDoctor()));
-                    startActivity(call);
                 }
             }
         });
@@ -109,14 +127,19 @@ public class phoneActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numbers.getPhoneBuddy().equals("") || numbers.getPhoneBuddy().equals("null")){
+                try {
+                    if (numbers.getPhoneBuddy().equals("") || numbers.getPhoneBuddy().equals("null")) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage(getResources().getString(R.string.numbernotfilled)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
+                    } else {
+                        Intent call = new Intent(Intent.ACTION_DIAL);
+                        call.setData(Uri.parse("tel:" + numbers.getPhoneBuddy()));
+                        startActivity(call);
+                    }
+                }
+                catch (Exception e){
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(getResources().getString(R.string.numbernotfilled)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
-                }
-                else{
-                    Intent call = new Intent(Intent.ACTION_DIAL);
-                    call.setData(Uri.parse("tel:" + numbers.getPhoneBuddy()));
-                    startActivity(call);
                 }
             }
         });
@@ -125,14 +148,19 @@ public class phoneActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numbers.getPhoneEmergency().equals("") || numbers.getPhoneEmergency().equals("null")){
+                try {
+                    if (numbers.getPhoneEmergency().equals("") || numbers.getPhoneEmergency().equals("null")) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage(getResources().getString(R.string.numbernotfilled)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
+                    } else {
+                        Intent call = new Intent(Intent.ACTION_DIAL);
+                        call.setData(Uri.parse("tel:" + numbers.getPhoneEmergency()));
+                        startActivity(call);
+                    }
+                }
+                catch (Exception e){
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(getResources().getString(R.string.numbernotfilled)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
-                }
-                else{
-                    Intent call = new Intent(Intent.ACTION_DIAL);
-                    call.setData(Uri.parse("tel:" + numbers.getPhoneEmergency()));
-                    startActivity(call);
                 }
 
 
