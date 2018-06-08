@@ -2,21 +2,29 @@ package com.project.avans.mdodandroid.object_classes;
 
 import android.graphics.drawable.Drawable;
 
+import java.util.ArrayList;
+
 public class Substance {
     private String id;
     private String type;
     private Drawable drawable;
     private String measurement;
+    private ArrayList<Integer> amountOptions;
 
     public Substance(String id, String type) {
         this.id = id;
         this.type = type;
+        amountOptions = new ArrayList<>();
     }
 
     public Substance(String type, Drawable drawable, String measurement) {
         this.type = type;
         this.drawable = drawable;
         this.measurement = measurement;
+    }
+
+    public void addAmountOption(int amount) {
+        amountOptions.add(amount);
     }
 
     public String getId() {
@@ -49,5 +57,13 @@ public class Substance {
 
     public void setMeasurement(String measurement) {
         this.measurement = measurement;
+    }
+
+    public ArrayList<Integer> getAmountOptions() {
+        return amountOptions;
+    }
+
+    public void setAmountOptions(ArrayList<Integer> amountOptions) {
+        this.amountOptions = amountOptions;
     }
 }
