@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -79,6 +80,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
             @Override
             public void onClick(View v) {
                 String field = String.valueOf(description.getText());
+                Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
 
                 if(field.equals("")){
                     error.setText(getResources().getString(R.string.descriptionInvalid));
@@ -86,14 +88,20 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
 
                 if(smileyHappy.isSelected()){
                     Log.i("IMAGE SELECTED: ", "1");
+                    startActivity(i);
                 } else if (smileyGood.isSelected()){
+                    startActivity(i);
                     Log.i("IMAGE SELECTED: ", "2");
+                    startActivity(i);
                 } else if (smileyOk.isSelected()){
                     Log.i("IMAGE SELECTED: ", "3");
+                    startActivity(i);
                 } else if (smileySad.isSelected()) {
                     Log.i("IMAGE SELECTED: ", "4");
+                    startActivity(i);
                 } else if (smileyTerrible.isSelected()){
                     Log.i("IMAGE SELECTED: ", "5");
+                    startActivity(i);
                 } else {
                     Log.i("IMAGE SELECTED: ", "NO IMAGE SELECTED");
                     error.setText(getResources().getString(R.string.smileyNotSelected));
