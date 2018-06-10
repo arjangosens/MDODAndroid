@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 } catch (JSONException e){
+                                    Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
+                                    startActivity(intent);
                                     e.printStackTrace();
                                 }
                             }

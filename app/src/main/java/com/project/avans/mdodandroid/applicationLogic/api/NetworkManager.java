@@ -833,7 +833,7 @@ public class NetworkManager
 
     public void postStatus(int emotion, String description, final VolleyListener<JSONObject> listener) {
 
-        String url = prefixURL + "v1/difficult_moment";
+        String url = prefixURL + "v1/mood";
 
         Map<String, Object> jsonParams = new HashMap<>();
         jsonParams.put("value", emotion);
