@@ -24,7 +24,7 @@
     <string name="userSettings">Account instellingen</string>
     <string name="change">Verander </string>
     <string name="saveChanges">Opslaan </string>
-    <string name="logOut">uitloggen</string>
+    <string name="logOut">Uitloggen</string>
     <string name="cancel">Annuleren</string>
     <string name="adress">Adres (straat + huisnummer)</string>
     <string name="phoneNumber">Telefoonnummer</string>
@@ -70,11 +70,11 @@
     <string name="dateTime">Datum en tijd: </string>
     <string name="taste">Trek in: </string>
     <string name="description">Beschrijving: </string>
-    <string name="phonenumberActivityHeader">belangrijke nummers</string>
-    <string name="institute">instelling</string>
-    <string name="doctor">psycholoog</string>
-    <string name="buddy">bondgenoot</string>
-    <string name="ice">noodhulp</string>
+    <string name="phonenumberActivityHeader">Belangrijke nummers</string>
+    <string name="institute">Instelling</string>
+    <string name="doctor">Psycholoog</string>
+    <string name="buddy">Bondgenoot</string>
+    <string name="ice">Noodhulp</string>
     <string name="difficult">moeilijk moment</string>
     <string name="riskbutton">mijn risico\'s</string>
     <string name="goalbutton">mijn doelen</string>
@@ -89,6 +89,6 @@
     <string name="confirm">Bevestig</string>
     <string name="descriptionInvalid">De beschrijving mag niet leeg zijn!</string>
     <string name="smileyNotSelected">U bent vergeten een smiley te selecteren</string>
-    <string name="usage">mijn gebruik</string>
+    <string name="usage">Mijn gebruik</string>
 
 </resources>

@@ -90,6 +90,7 @@
     <string name="confirm">Confirm</string>
     <string name="descriptionInvalid">Description cannot be empty!</string>
     <string name="smileyNotSelected">Please select a smiley</string>
-    <string name="usage">my usage</string>
+    <string name="usage">My usage</string>
+
 
 </resources>

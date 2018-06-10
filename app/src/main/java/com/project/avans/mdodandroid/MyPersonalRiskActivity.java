@@ -191,7 +191,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                                         }
                                         dialog.dismiss();
                                         //startService(new Intent(context, NotificationService.class));
-                                        Notificat(getNotification("notification"), 2*24*60*60*1000);
+
 
                                         RiskList.add(new Risk(RiskId2, updateDialogGenericEditText.getText().toString()));
                                         RiskAdapter.notifyDataSetChanged();
@@ -262,51 +262,6 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         }
 
 
-    public void Notificat(Notification notification, int delay) {
 
-
-        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
-    }
-
-    private Notification getNotification(String content) {
-        if (Build.VERSION.SDK_INT >= 26) {
-            channel();
-            Notification.Builder builder = new Notification.Builder(this.context, channelId);
-            builder.setContentTitle("Scheduled Notification");
-            builder.setContentText(content);
-            builder.setSmallIcon(R.drawable.tactuslogo_small_round);
-            return builder.build();
-        }
-        else{
-            Notification.Builder builder = new Notification.Builder(this.context);
-            builder.setContentTitle("Scheduled Notification");
-            builder.setContentText(content);
-            builder.setSmallIcon(R.drawable.tactuslogo_small_round);
-            return builder.build();
-        }
-    }
-    private void channel() {
-        if (Build.VERSION.SDK_INT >= 26) {
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            channelId = "Tactus channel Id";
-            CharSequence channelName = "Tactus";
-            int importance = NotificationManager.IMPORTANCE_LOW;
-            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
-            notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
-            notificationChannel.enableVibration(true);
-            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-    }
 
 }

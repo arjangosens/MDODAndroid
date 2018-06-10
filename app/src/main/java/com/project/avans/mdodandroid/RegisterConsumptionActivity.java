@@ -1,11 +1,22 @@
 package com.project.avans.mdodandroid;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +39,8 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
     private ImageView smileyOk;
     private ImageView smileySad;
     private ImageView smileyTerrible;
+    Context context;
+    private String channelId;
 
     private ConRegSubstanceAdapter adapter;
     private static final String TAG = "RegConsumptionActivity";
@@ -62,6 +75,18 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
             }
         });
         substanceRv.setAdapter(this.adapter);
+
+        Button btn = (Button) findViewById(R.id.registerUsageButton);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Post..
+                //Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 2*24*60*60*1000);//for real
+                Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 60*1000);//for showing
+                Intent i = new Intent(getApplicationContext(), ConsumptionActivity.class);
+                startActivity(i);
+            }
+        });
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -142,6 +167,54 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
             case R.id.con_smiley_terrible:
                 selectSmiley(4);
                 break;
+        }
+    }
+
+
+    public void Notificat(Notification notification, int delay) {
+
+
+        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    }
+
+    private Notification getNotification(String content) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            channel();
+            Notification.Builder builder = new Notification.Builder(this.context, channelId);
+            builder.setContentTitle("Tactus Bericht");
+            builder.setContentText(content);
+            builder.setSmallIcon(R.drawable.tactuslogo_small_round);
+            return builder.build();
+        }
+        else{
+            Notification.Builder builder = new Notification.Builder(this.context);
+            builder.setContentTitle("Tactus Bericht");
+            builder.setContentText(content);
+            builder.setSmallIcon(R.drawable.tactuslogo_small_round);
+            return builder.build();
+        }
+    }
+    private void channel() {
+        if (Build.VERSION.SDK_INT >= 26) {
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            channelId = "Tactus channel Id";
+            CharSequence channelName = "Tactus";
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            notificationManager.createNotificationChannel(notificationChannel);
         }
     }
 }
