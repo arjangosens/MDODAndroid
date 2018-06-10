@@ -84,5 +84,9 @@
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="contactDr">Nummer is er nog niet, vraag naar uw behandelaar</string>
+    <string name="howAreYou">Hoe voel je je vandaag?</string>
+    <string name="confirm">Bevestig</string>
+    <string name="descriptionInvalid">De beschrijving mag niet leeg zijn!</string>
+    <string name="smileyNotSelected">U bent vergeten een smiley te selecteren</string>
 
 </resources>

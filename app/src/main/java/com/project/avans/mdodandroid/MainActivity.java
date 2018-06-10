@@ -96,15 +96,29 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         Log.d("the token", Token);
-                        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                        startActivity(intent);
+                        NetworkManager.getInstance().getEmotionStatusDays(new VolleyListener<JSONObject>() {
+                            @Override
+                            public void getResult(JSONObject object) {
+                                try {
+                                    if (object.getInt("status") == 0) {
+                                        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    } else{
+                                        Log.i("TEST: ", object.toString());
+                                        Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
+                                        startActivity(intent);
+                                    }
+                                } catch (JSONException e){
+                                    Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
+                                    startActivity(intent);
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     }
-
-
                 } else {
-
                     resultTextView.setText(R.string.inValidCredentials);
                 }
             }

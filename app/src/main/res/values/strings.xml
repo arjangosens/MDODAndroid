@@ -85,4 +85,9 @@
     <string name="no">No</string>
     <string name="contactDr">Please contact your psychologist, number not filled in</string>
 
+    <string name="howAreYou">How are you feeling today?</string>
+    <string name="confirm">Confirm</string>
+    <string name="descriptionInvalid">Description cannot be empty!</string>
+    <string name="smileyNotSelected">Please select a smiley</string>
+
 </resources>
