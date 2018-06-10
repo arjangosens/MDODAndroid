@@ -3,6 +3,7 @@ package com.project.avans.mdodandroid;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -70,6 +71,8 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onClick(View v) {
+       Intent intent = new Intent(getApplicationContext(), RegisterConsumptionActivity.class);
+       startActivity(intent);
         
     }
 }

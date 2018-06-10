@@ -89,5 +89,6 @@
     <string name="confirm">Bevestig</string>
     <string name="descriptionInvalid">De beschrijving mag niet leeg zijn!</string>
     <string name="smileyNotSelected">U bent vergeten een smiley te selecteren</string>
+    <string name="usage">mijn gebruik</string>
 
 </resources>
