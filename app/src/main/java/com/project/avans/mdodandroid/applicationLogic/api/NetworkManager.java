@@ -873,7 +873,7 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
-    public void postUsage(String Location, String Amount, String Mood, String Cause,Integer SubstanceId, final VolleyListener<JSONObject> listener) {
+    public void postUsage(String Location, Integer Amount, Integer Mood, String Cause,Integer SubstanceId, final VolleyListener<JSONObject> listener) {
 
         String url = prefixURL + "v1/usage";
 
