@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void getResult(JSONObject object) {
                                 try {
-                                    if (object.getInt("status") == 0) {
+                                    if (object.getInt("daysDifference") == 0) {
                                         Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);

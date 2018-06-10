@@ -54,6 +54,7 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_settings);
 
+
         //Get types
         initTypes();
 
@@ -104,11 +105,7 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
             updateDialogPhoneNrEditText.setHint(hint);
 
         } else if (type.equals(doctor.getType())) {
-            view = inflater.inflate(R.layout.dialog_updateprofile_phonenumber, null);
-            hint = doctor.getValue();
-
-            updateDialogPhoneNrEditText = view.findViewById(R.id.dialogUpdateProfilePhone_editText);
-            updateDialogPhoneNrEditText.setHint(hint);
+            return;
         }
         else if (type.equals(buddy.getType())) {
             view = inflater.inflate(R.layout.dialog_updateprofile_phonenumber, null);
@@ -179,8 +176,15 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
                             JSONObject resultObject = result.getJSONObject(0);
                             id = resultObject.getInt("id");
                             Log.i("phoneId: ", id.toString());
+
                             institution.setValue(resultObject.getString("PNfirm"));
-                            doctor.setValue(resultObject.getString("PNdr"));
+                            try{
+                                doctor.setValue(resultObject.getString("phonenumber"));
+                            }
+                            catch(JSONException e){
+                                doctor.setValue("");
+                            }
+
                             buddy.setValue(resultObject.getString("PNbuddy"));
                             ice.setValue(resultObject.getString("PNice"));
 
@@ -207,6 +211,12 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
 
                     }
                 });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 
     @Override
@@ -306,5 +316,6 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
         }
         return true;
     }
+
 
 }
