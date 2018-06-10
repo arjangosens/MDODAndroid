@@ -10,12 +10,15 @@ public class Consumption implements Serializable{
     private Integer amount;
     private String description;
     private Integer feeling;
+    private String location;
+    private String cause;
 
-    public Consumption(Date date, String type, Integer amount, String description, Integer feeling) {
+    public Consumption(Date date, String type, Integer amount, String location, String cause, Integer feeling) {
         this.date = date;
         this.type = type;
         this.amount = amount;
-        this.description = description;
+        this.location = location;
+        this.cause = cause;
         this.feeling = feeling;
     }
 
@@ -61,5 +64,21 @@ public class Consumption implements Serializable{
 
     public void setFeeling(Integer feeling) {
         this.feeling = feeling;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
     }
 }
