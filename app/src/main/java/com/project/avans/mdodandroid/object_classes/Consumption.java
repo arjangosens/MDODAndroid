@@ -9,12 +9,14 @@ public class Consumption implements Serializable{
     private String type;
     private double amount;
     private String description;
+    private Integer feeling;
 
-    public Consumption(Date date, String type, double amount, String description) {
+    public Consumption(Date date, String type, double amount, String description, Integer feeling) {
         this.date = date;
         this.type = type;
         this.amount = amount;
         this.description = description;
+        this.feeling = feeling;
     }
 
     public Consumption(Date date) {
@@ -51,5 +53,13 @@ public class Consumption implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getFeeling() {
+        return feeling;
+    }
+
+    public void setFeeling(Integer feeling) {
+        this.feeling = feeling;
     }
 }

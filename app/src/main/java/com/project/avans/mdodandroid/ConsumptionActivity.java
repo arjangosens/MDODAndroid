@@ -37,12 +37,12 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
 
         // Create test data
         ConsumptionsPerDay cpdToday = new ConsumptionsPerDay(date);
-        Consumption consumption = new Consumption(date, "Alcohol", 5, "idk");
+        Consumption consumption = new Consumption(date, "Alcohol", 5, "idk", 1);
         cpdToday.add(consumption);
 
         date = Calendar.getInstance().getTime();
 
-        consumption = new Consumption(date, "Weed", 5, "idk2");
+        consumption = new Consumption(date, "Weed", 5, "idk2", 2);
         cpdToday.add(consumption);
 
 
