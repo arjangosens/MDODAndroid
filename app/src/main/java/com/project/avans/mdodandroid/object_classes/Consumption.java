@@ -83,4 +83,12 @@ public class Consumption implements Serializable{
     public void setCause(String cause) {
         this.cause = cause;
     }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
+    }
 }

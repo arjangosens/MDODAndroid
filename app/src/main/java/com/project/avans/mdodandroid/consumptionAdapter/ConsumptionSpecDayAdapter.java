@@ -54,6 +54,7 @@ public class ConsumptionSpecDayAdapter extends BaseAdapter {
             viewHolder.type = view.findViewById(R.id.row_consumptionSpecificDay_textViewType);
             viewHolder.timestamp = view.findViewById(R.id.row_consumptionSpecificDay_textViewTimeStamp);
             viewHolder.amount = view.findViewById(R.id.row_consumptionSpecificDay_textViewAmount);
+            viewHolder.measurement = view.findViewById(R.id.row_consumptionSpecificDay_textViewMeasurement);
             view.setTag(viewHolder);
 
         }else {
@@ -66,6 +67,12 @@ public class ConsumptionSpecDayAdapter extends BaseAdapter {
 
         viewHolder.timestamp.setText(time);
 
+        String measurement = "";
+
+        if (!rv.getMeasurement().isEmpty() && !rv.getMeasurement().equals("null")) {
+            measurement = rv.getMeasurement();
+        }
+
         String type = rv.getType();
 
 
@@ -74,6 +81,7 @@ public class ConsumptionSpecDayAdapter extends BaseAdapter {
         }
 
         viewHolder.type.setText(type);
+        viewHolder.measurement.setText(measurement);
 
         String amount = String.valueOf(rv.getAmount());
         viewHolder.amount.setText(amount);
@@ -85,6 +93,7 @@ public class ConsumptionSpecDayAdapter extends BaseAdapter {
         TextView type;
         TextView timestamp;
         TextView amount;
+        TextView measurement;
     }
 }
 

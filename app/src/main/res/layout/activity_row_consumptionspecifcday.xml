@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/row_consumptionSpecificDay_textViewType"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -46,5 +46,13 @@
         android:layout_marginEnd="8dp"
         android:text="[Amount]"
         app:layout_constraintBottom_toBottomOf="@+id/row_consumptionSpecificDay_textViewType"
+        app:layout_constraintEnd_toStartOf="@+id/row_consumptionSpecificDay_textViewMeasurement" />
+
+    <TextView
+        android:id="@+id/row_consumptionSpecificDay_textViewMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/row_consumptionSpecificDay_textViewAmount"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>
