@@ -85,6 +85,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
             @Override
             public void onClick(View v) {
                 String field = String.valueOf(description.getText());
+                
 
                 if(field.equals("")){
                     error.setText(getResources().getString(R.string.descriptionInvalid));
@@ -95,18 +96,23 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                 if(smileyHappy.isSelected()){
                     value = 1;
                     Log.i("IMAGE SELECTED: ", "1");
+                    
                 } else if (smileyGood.isSelected()){
                     value = 2;
                     Log.i("IMAGE SELECTED: ", "2");
+                    
                 } else if (smileyOk.isSelected()){
                     value = 3;
                     Log.i("IMAGE SELECTED: ", "3");
+                    
                 } else if (smileySad.isSelected()) {
                     value = 4;
                     Log.i("IMAGE SELECTED: ", "4");
+                    
                 } else if (smileyTerrible.isSelected()){
                     value = 5;
                     Log.i("IMAGE SELECTED: ", "5");
+                    
                 } else {
                     value = 0;
                     Log.i("IMAGE SELECTED: ", "NO IMAGE SELECTED");

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterConsumptionActivity">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".RegisterConsumptionActivity">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewMoodLabel">
+
+            <ImageView
+                android:id="@+id/con_smiley_happy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/laugh" />
+
+            <ImageView
+                android:id="@+id/con_smiley_good"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/con_smiley_happy"
+                app:layout_constraintTop_toTopOf="@+id/con_smiley_happy"
+                app:srcCompat="@drawable/happy" />
+
+            <ImageView
+                android:id="@+id/con_smiley_ok"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/con_smiley_good"
+                app:layout_constraintTop_toTopOf="@+id/con_smiley_good"
+                app:srcCompat="@drawable/meh" />
+
+            <ImageView
+                android:id="@+id/con_smiley_sad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/con_smiley_ok"
+                app:layout_constraintTop_toTopOf="@+id/con_smiley_ok"
+                app:srcCompat="@drawable/sad" />
+
+            <ImageView
+                android:id="@+id/con_smiley_terrible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="@+id/textView_feeling"
+                app:layout_constraintStart_toEndOf="@+id/con_smiley_sad"
+                app:layout_constraintTop_toTopOf="@+id/con_smiley_sad"
+                app:srcCompat="@drawable/supersad" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/activityConsumptionSpecificDay_textViewHeader2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/coloraccent"
+            android:padding="8dp"
+            android:text="Register consumption"
+            android:textAlignment="viewStart"
+            android:textAppearance="@android:style/TextAppearance.Material.Headline"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/act_registerConsumption_RecyclerViewSubstances"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewTypeLabel" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewTypeLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="What did you use?"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activityConsumptionSpecificDay_textViewHeader2" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewAmountLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="How much did you use?"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/act_registerConsumption_editTextAmountValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewSelectionLabel" />
+
+        <EditText
+            android:id="@+id/act_registerConsumption_editTextAmountValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="dosage"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/act_registerConsumption_textViewLocationLabel"
+            app:layout_constraintEnd_toStartOf="@+id/act_unit_textview"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewAmountLabel" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewSelectionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Currently selected:"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_RecyclerViewSubstances" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewSelectionValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/act_registerConsumption_textViewSelectionLabel"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_RecyclerViewSubstances" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewLocationLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:text="Where are you?"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_editTextAmountValue" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewCauseLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="What caused it?"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_editTextLocationValue" />
+
+        <TextView
+            android:id="@+id/act_registerConsumption_textViewMoodLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="How do you feel?"
+            android:textColor="@color/coloraccent"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_editTextCauseValue" />
+
+        <EditText
+            android:id="@+id/act_registerConsumption_editTextLocationValue"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="Location"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewLocationLabel" />
+
+        <EditText
+            android:id="@+id/act_registerConsumption_editTextCauseValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="Cause"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewCauseLabel" />
+
+        <Button
+            android:id="@+id/registerUsageButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/coloraccent"
+
+            android:text="@string/saveChanges"
+            android:textAppearance="@android:style/TextAppearance.Material.Headline"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+        <TextView
+            android:id="@+id/act_unit_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:editable="false"
+            app:layout_constraintBottom_toTopOf="@+id/act_registerConsumption_textViewLocationLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/act_registerConsumption_editTextAmountValue"
+            app:layout_constraintTop_toBottomOf="@+id/act_registerConsumption_textViewAmountLabel" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

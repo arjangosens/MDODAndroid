@@ -64,6 +64,7 @@
     <string name="emailNotFound">Email not found</string>
     <string name="registerActivityHeader">Create new account</string>
     <string name="homePageActivityHeader">Dashboard</string>
+    <string name="consumptionOnDate">Consumption on %1$s:</string>
     <string name="difficultMoments">My difficult moments</string>
     <string name="newMoment">New difficult moment</string>
     <string name="moment">Moment: </string>
@@ -89,5 +90,7 @@
     <string name="confirm">Confirm</string>
     <string name="descriptionInvalid">Description cannot be empty!</string>
     <string name="smileyNotSelected">Please select a smiley</string>
+    <string name="usage">My usage</string>
+
 
 </resources>

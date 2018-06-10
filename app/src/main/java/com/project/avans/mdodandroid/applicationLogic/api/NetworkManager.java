@@ -873,4 +873,91 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
+    public void postUsage(String Location, Integer Amount, Integer Mood, String Cause,Integer SubstanceId, final VolleyListener<JSONObject> listener) {
+
+        String url = prefixURL + "v1/usage";
+
+        Map<String, Object> jsonParams = new HashMap<>();
+        jsonParams.put("location", Location);
+        jsonParams.put("amount", Amount);
+        jsonParams.put("mood", Mood);
+        jsonParams.put("cause", Cause);
+        jsonParams.put("substanceId", SubstanceId);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.d(TAG + ": ", "post moment Response : " + response.toString());
+                        if(null != response.toString())
+                            listener.getResult(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        if (null != error.networkResponse)
+                        {
+                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            listener.getResult(null);
+                        }
+                    }
+                }){@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            Log.i(TAG, "Mainactivity.Token = " + MainActivity.Token);
+            params.put("Authorization", "Bearer " + MainActivity.Token);
+            params.put("X-Access-Token", MainActivity.Token);
+            params.put("Content-Type", "application/json");
+
+            return params;
+        }};
+        requestQueue.add(request);
+    }
+
+    public void getUsage(final VolleyListener<JSONArray> listener) {
+
+        String url = prefixURL + "v1/usage";
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>()
+                {
+                    @Override
+                    public void onResponse(JSONArray response)
+                    {
+                        Log.d(TAG + ": ", "GET client Response : " + response.toString());
+                        if(null != response.toString())
+                            listener.getResult(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        if (null != error.networkResponse)
+                        {
+                            Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
+                            listener.getResult(null);
+
+                        }
+                    }
+                }) {@Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> params = new HashMap<String, String>();
+            Log.i(TAG, "Mainactivity.Token = " + MainActivity.Token);
+            params.put("Authorization", "Bearer " + MainActivity.Token);
+            params.put("X-Access-Token", MainActivity.Token);
+            params.put("Content-Type", "application/json");
+
+            return params;
+        }};
+
+        requestQueue.add(request);
+    }
+
 }
