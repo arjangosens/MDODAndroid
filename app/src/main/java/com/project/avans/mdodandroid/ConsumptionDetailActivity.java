@@ -59,6 +59,7 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
         }
 
         typeTextView.setText(consumption.getType());
+        amountTypeTextView.setText(String.valueOf(consumption.getMeasurement()));
         amountValueTextView.setText(String.valueOf(consumption.getAmount()));
         timestampTextView.setText(date + " | " + time);
         descriptionTextView.setText(consumption.getDescription());
