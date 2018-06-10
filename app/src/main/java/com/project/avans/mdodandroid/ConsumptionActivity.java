@@ -36,6 +36,21 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
         date = Calendar.getInstance().getTime();
 
         // Create test data
+        getUsage();
+
+
+
+        cpdListView = (ListView) findViewById(R.id.activityConsumption_listView);
+        consumptionAdapter = new ConsumptionAdapter(getLayoutInflater(), consumptionsPerDayArrayList);
+        cpdListView.setAdapter(consumptionAdapter);
+        cpdListView.setOnItemClickListener(this);
+
+        registerButton = findViewById(R.id.activityConsumption_buttonRegisterConsumption);
+        registerButton.setOnClickListener(this);
+    }
+
+    private void getUsage() {
+        //Create test data (for now)
         ConsumptionsPerDay cpdToday = new ConsumptionsPerDay(date);
         Consumption consumption = new Consumption(date, "Alcohol", 5, "idk", 1);
         cpdToday.add(consumption);
@@ -47,16 +62,6 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
 
 
         consumptionsPerDayArrayList.add(cpdToday);
-
-
-
-        cpdListView = (ListView) findViewById(R.id.activityConsumption_listView);
-        consumptionAdapter = new ConsumptionAdapter(getLayoutInflater(), consumptionsPerDayArrayList);
-        cpdListView.setAdapter(consumptionAdapter);
-        cpdListView.setOnItemClickListener(this);
-
-        registerButton = findViewById(R.id.activityConsumption_buttonRegisterConsumption);
-        registerButton.setOnClickListener(this);
     }
 
     @Override
