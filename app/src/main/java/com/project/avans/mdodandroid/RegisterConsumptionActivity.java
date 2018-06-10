@@ -27,6 +27,7 @@ import com.project.avans.mdodandroid.consumptionAdapter.ConRegSubstanceAdapter;
 import com.project.avans.mdodandroid.object_classes.Substance;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -34,15 +35,24 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
     private RecyclerView substanceRv;
 
     private TextView typetextView;
+    private TextView LocationTextView;
+    private TextView causeTextView;
+    private TextView unitTextView;
+
+    private TextView amountTextView;
+
 
     private ArrayList<Substance> substances;
     private ArrayList<ImageView> smileys;
+    private Integer substanceId;
 
+    private Integer feelingId;
     private ImageView smileyHappy;
     private ImageView smileyGood;
     private ImageView smileyOk;
     private ImageView smileySad;
     private ImageView smileyTerrible;
+    String substanceStr;
     Context context;
     private String channelId;
 
@@ -60,8 +70,16 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         initTypes();
         initSmileys();
 
+
         substanceRv = (RecyclerView) findViewById(R.id.act_registerConsumption_RecyclerViewSubstances);
         typetextView = (TextView) findViewById(R.id.act_registerConsumption_textViewSelectionValue);
+        LocationTextView = (TextView)findViewById(R.id.act_registerConsumption_editTextLocationValue);
+        causeTextView = (TextView)findViewById(R.id.act_registerConsumption_editTextCauseValue);
+        amountTextView = (TextView)findViewById(R.id.act_registerConsumption_editTextAmountValue);
+        unitTextView = (TextView)findViewById(R.id.act_unit_textview);
+
+
+
 
 //        adapter = new ConRegSubstanceAdapter(substances);
 //        adapter.setOnItemClickListener(this);
@@ -74,8 +92,11 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                 Log.i(TAG, "onItemClick(" + position + ") called");
 
                 Substance substance = substances.get(position);
-
                 typetextView.setText(substance.getType());
+                substanceStr = String.valueOf(typetextView.getText());
+                initUnit(substance.getMeasurement());
+
+
             }
         });
         substanceRv.setAdapter(this.adapter);
@@ -87,29 +108,45 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
                 //TODO checks for empty fields
 
-                if(false){
-                    NetworkManager.getInstance().postUsage("",1,1,"",1, new VolleyListener<JSONObject>() {
-                        @Override
-                        public void getResult(JSONObject object) {
-                            Log.i("TEST: ", object.toString());
+                String location = String.valueOf(LocationTextView.getText());
+                String cause = String.valueOf(causeTextView.getText());
+                String amountTmp = String.valueOf(amountTextView.getText());
+                Integer amount = Integer.parseInt(amountTmp);
 
-                            if (!(object == null))
-                            {
-                                Intent intent = new Intent(getApplicationContext(), ConsumptionActivity.class);
+                if(!substanceStr.equals("") && !location.equals("") && !cause.equals("") && feelingId != null){
 
-                                startActivity(intent);
-                            } else {
-                                //TODO error message
+                    Log.i("data, ",location + " " + amount + " " + feelingId +  " " + cause + " " + substanceId );
+
+                        NetworkManager.getInstance().postUsage(location,amount,feelingId,cause,substanceId, new VolleyListener<JSONObject>() {
+                            @Override
+                            public void getResult(JSONObject object) {
+                                try {
+                                    Log.i("TEST: ", object.toString());
+
+                                    if (!(object == null)) {
+                                        Intent i = new Intent(getApplicationContext(), ConsumptionActivity.class);
+
+                                        //Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 2*24*60*60*1000);//for real
+                                        Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 60 * 1000);//for showing
+                                        startActivity(i);
+
+
+                                    } else {
+                                        //TODO error message
+                                    }
+                                }
+                                catch (NullPointerException e){
+                                    //TODO iets mis met de server
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                    });
+                        });
+
                 }
 
-                //TODO Post..
-                //Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 2*24*60*60*1000);//for real
-                Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 60*1000);//for showing
-                Intent i = new Intent(getApplicationContext(), ConsumptionActivity.class);
-                startActivity(i);
+
+
+
             }
         });
 
@@ -126,13 +163,42 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
     }
 
     private void initTypes() {
-        substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
+        //substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
         substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "ml"));
         substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "g"));
         substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "qwerty"));
         substances.add(new Substance("LSD", getResources().getDrawable(R.drawable.lsd), "mg"));
         substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "lines"));
         substances.add(new Substance("Other", getResources().getDrawable(R.drawable.question), ""));
+    }
+
+    private void initUnit(String unit) {
+
+        Log.i("substance Id: ", substanceStr);
+
+        unitTextView.setText(unit);
+        if(substanceStr.equals("Nothing")){
+            substanceId = 12;
+        }
+        else if (substanceStr.equals("Alcohol")){
+            Log.i("Alcohol", "chosen");
+            substanceId = 1;
+        }
+        else if (substanceStr.equals("Weed")){
+            substanceId = 2;
+        }
+        else if (substanceStr.equals("GHB")){
+            substanceId = 8;
+        }
+        else if (substanceStr.equals("LSD")){
+            substanceId = 9;
+        }
+        else if (substanceStr.equals("Cocaine")) {
+            substanceId = 10;
+        }
+        else if (substanceStr.equals("Other")){
+            substanceId = 11;
+        }
     }
 
     private void initSmileys() {
@@ -175,22 +241,27 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         switch (v.getId()) {
             case R.id.con_smiley_happy:
                 selectSmiley(0);
+                feelingId = 5;
                 break;
 
             case R.id.con_smiley_good:
                 selectSmiley(1);
+                feelingId = 4;
                 break;
 
             case R.id.con_smiley_ok:
                 selectSmiley(2);
+                feelingId = 3;
                 break;
 
             case R.id.con_smiley_sad:
                 selectSmiley(3);
+                feelingId = 2;
                 break;
 
             case R.id.con_smiley_terrible:
                 selectSmiley(4);
+                feelingId = 1;
                 break;
         }
     }
@@ -212,14 +283,14 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
     private Notification getNotification(String content) {
         if (Build.VERSION.SDK_INT >= 26) {
             channel();
-            Notification.Builder builder = new Notification.Builder(this.context, channelId);
+            Notification.Builder builder = new Notification.Builder(context, channelId);
             builder.setContentTitle("Tactus Bericht");
             builder.setContentText(content);
             builder.setSmallIcon(R.drawable.tactuslogo_small_round);
             return builder.build();
         }
         else{
-            Notification.Builder builder = new Notification.Builder(this.context);
+            Notification.Builder builder = new Notification.Builder(context);
             builder.setContentTitle("Tactus Bericht");
             builder.setContentText(content);
             builder.setSmallIcon(R.drawable.tactuslogo_small_round);

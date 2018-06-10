@@ -878,11 +878,11 @@ public class NetworkManager
         String url = prefixURL + "v1/usage";
 
         Map<String, Object> jsonParams = new HashMap<>();
-        jsonParams.put("Location", Location);
-        jsonParams.put("Amount", Amount);
-        jsonParams.put("Mood", Mood);
-        jsonParams.put("Cause", Cause);
-        jsonParams.put("SubstanceId", SubstanceId);
+        jsonParams.put("location", Location);
+        jsonParams.put("amount", Amount);
+        jsonParams.put("mood", Mood);
+        jsonParams.put("cause", Cause);
+        jsonParams.put("substanceId", SubstanceId);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
                 new Response.Listener<JSONObject>()
