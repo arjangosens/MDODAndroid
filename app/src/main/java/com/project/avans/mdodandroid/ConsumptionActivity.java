@@ -75,4 +75,11 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
        startActivity(intent);
         
     }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
+
 }

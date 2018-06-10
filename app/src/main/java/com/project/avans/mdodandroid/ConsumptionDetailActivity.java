@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,5 +45,11 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
         descriptionTextView.setText(consumption.getDescription());
 
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), ConsumptionActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 }

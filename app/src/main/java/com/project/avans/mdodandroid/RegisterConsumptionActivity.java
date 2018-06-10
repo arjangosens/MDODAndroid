@@ -21,8 +21,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.consumptionAdapter.ConRegSubstanceAdapter;
 import com.project.avans.mdodandroid.object_classes.Substance;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -80,6 +84,27 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //TODO checks for empty fields
+
+                if(false){
+                    NetworkManager.getInstance().postUsage("","","","",1, new VolleyListener<JSONObject>() {
+                        @Override
+                        public void getResult(JSONObject object) {
+                            Log.i("TEST: ", object.toString());
+
+                            if (!(object == null))
+                            {
+                                Intent intent = new Intent(getApplicationContext(), ConsumptionActivity.class);
+
+                                startActivity(intent);
+                            } else {
+                                //TODO error message
+                            }
+                        }
+                    });
+                }
+
                 //TODO Post..
                 //Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 2*24*60*60*1000);//for real
                 Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 60*1000);//for showing

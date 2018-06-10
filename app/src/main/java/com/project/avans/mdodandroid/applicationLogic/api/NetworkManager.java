@@ -873,15 +873,16 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
-    public void postUsage(String substanceId, String lust, String description, String prevention, final VolleyListener<JSONObject> listener) {
+    public void postUsage(String Location, String Amount, String Mood, String Cause,Integer SubstanceId, final VolleyListener<JSONObject> listener) {
 
         String url = prefixURL + "v1/usage";
 
         Map<String, Object> jsonParams = new HashMap<>();
-        jsonParams.put("prevention", prevention);
-        jsonParams.put("substance_id", substanceId);
-        jsonParams.put("lust", lust);
-        jsonParams.put("description", description);
+        jsonParams.put("Location", Location);
+        jsonParams.put("Amount", Amount);
+        jsonParams.put("Mood", Mood);
+        jsonParams.put("Cause", Cause);
+        jsonParams.put("SubstanceId", SubstanceId);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
                 new Response.Listener<JSONObject>()
@@ -918,14 +919,15 @@ public class NetworkManager
         requestQueue.add(request);
     }
 
-    public void getUsage(final VolleyListener<JSONObject> listener) {
+    public void getUsage(final VolleyListener<JSONArray> listener) {
+
         String url = prefixURL + "v1/usage";
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>()
                 {
                     @Override
-                    public void onResponse(JSONObject response)
+                    public void onResponse(JSONArray response)
                     {
                         Log.d(TAG + ": ", "GET client Response : " + response.toString());
                         if(null != response.toString())
@@ -941,6 +943,7 @@ public class NetworkManager
                         {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
+
                         }
                     }
                 }) {@Override
