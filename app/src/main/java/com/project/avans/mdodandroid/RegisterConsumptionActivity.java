@@ -88,7 +88,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                 //TODO checks for empty fields
 
                 if(false){
-                    NetworkManager.getInstance().postUsage("","","","",1, new VolleyListener<JSONObject>() {
+                    NetworkManager.getInstance().postUsage("",1,1,"",1, new VolleyListener<JSONObject>() {
                         @Override
                         public void getResult(JSONObject object) {
                             Log.i("TEST: ", object.toString());

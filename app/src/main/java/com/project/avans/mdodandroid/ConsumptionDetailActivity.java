@@ -42,6 +42,10 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
         descriptionTextView = findViewById(R.id.act_consumptionDetail_textViewDescField);
         feelingImg = findViewById(R.id.act_consumptionDetail_imageViewType);
 
+        if (consumption.getFeeling() == 1){
+            feelingImg.setImageResource(R.drawable.happy);
+        }
+
         typeTextView.setText(consumption.getType());
         amountValueTextView.setText(String.valueOf(consumption.getAmount()));
         timestampTextView.setText(date + " | " + time);
