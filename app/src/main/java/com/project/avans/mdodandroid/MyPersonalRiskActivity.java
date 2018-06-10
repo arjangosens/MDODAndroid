@@ -1,8 +1,17 @@
 package com.project.avans.mdodandroid;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -50,12 +59,15 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     private String url;
     private String type = "";
     private Risk riskup;
+    Context context;
+    private String channelId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_risks);
 
+        context = this;
         //removes the title from the title bar in my personal risks
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -178,6 +190,9 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                                             e.printStackTrace();
                                         }
                                         dialog.dismiss();
+                                        //startService(new Intent(context, NotificationService.class));
+
+
                                         RiskList.add(new Risk(RiskId2, updateDialogGenericEditText.getText().toString()));
                                         RiskAdapter.notifyDataSetChanged();
                                     } else {
@@ -245,6 +260,8 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
             this.riskup = risk;
             showUpdateDialog();
         }
+
+
 
 
 }

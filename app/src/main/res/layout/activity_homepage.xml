@@ -3,57 +3,153 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.project.avans.mdodandroid.HomepageActivity"
-    tools:layout_editor_absoluteY="81dp">
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView2Tactus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/imageView2"
+        android:layout_width="294dp"
+        android:layout_height="62dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_goals"
+        android:contentDescription="Tactus"
+        app:layout_constraintBottom_toTopOf="@+id/textView_clean"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52"
         app:srcCompat="@drawable/tactuslogo" />
 
-    <Button
-        android:id="@+id/button_goals"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textView_clean"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="152dp"
-        android:background="@color/coloraccent"
-        android:text="@string/goals"
-        android:textColor="@android:color/background_light"
-        android:textStyle="bold"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:text="amount of days clean" />
 
-    <Button
-        android:id="@+id/button_risks"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/coloraccent"
-        android:text="@string/risks"
-        android:textColor="@android:color/background_light"
-        android:textStyle="bold"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_goals"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_clean">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/riskbutton"
+                android:layout_width="0dp"
+                android:layout_height="175dp"
+
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/my_button_bg"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/coloraccent"
+                android:drawableTop="@drawable/caution_sign"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/riskbutton"
+                app:layout_constraintBottom_toTopOf="@+id/situationbutton"
+                app:layout_constraintEnd_toStartOf="@+id/goalbutton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/call_button"
+                android:layout_width="0dp"
+                android:layout_height="175dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/my_button_bg"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/coloraccent"
+                android:drawableTop="@drawable/phone_call"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/phonenumbers"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/usagebutton"
+                app:layout_constraintStart_toStartOf="@+id/situationbutton"
+                app:layout_constraintTop_toBottomOf="@+id/situationbutton" />
+
+
+            <Button
+                android:id="@+id/usagebutton"
+                android:layout_width="0dp"
+                android:layout_height="175dp"
+
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+
+
+                android:layout_marginTop="8dp"
+                android:background="@drawable/my_button_bg"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/coloraccent"
+
+                android:drawableTop="@drawable/wine"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/usage"
+                app:layout_constraintBottom_toTopOf="@+id/call_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/situationbutton"
+                app:layout_constraintTop_toBottomOf="@+id/goalbutton" />
+
+            <Button
+                android:id="@+id/goalbutton"
+                android:layout_width="0dp"
+                android:layout_height="175dp"
+
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/my_button_bg"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/coloraccent"
+                android:drawableTop="@drawable/like"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/goalbutton"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toTopOf="@+id/usagebutton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/riskbutton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/situationbutton"
+                android:layout_width="0dp"
+                android:layout_height="174dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/my_button_bg"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/coloraccent"
+                android:drawableTop="@drawable/thought"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/difficult"
+                app:layout_constraintBottom_toTopOf="@+id/call_button"
+                app:layout_constraintEnd_toStartOf="@+id/usagebutton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/riskbutton" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

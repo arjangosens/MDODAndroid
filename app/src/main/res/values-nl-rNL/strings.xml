@@ -24,7 +24,7 @@
     <string name="userSettings">Account instellingen</string>
     <string name="change">Verander </string>
     <string name="saveChanges">Opslaan </string>
-    <string name="logOut">uitloggen</string>
+    <string name="logOut">Uitloggen</string>
     <string name="cancel">Annuleren</string>
     <string name="adress">Adres (straat + huisnummer)</string>
     <string name="phoneNumber">Telefoonnummer</string>
@@ -64,5 +64,31 @@
     <string name="emailNotFound">Account bestaat niet</string>
     <string name="registerActivityHeader">Registreren</string>
     <string name="homePageActivityHeader">Dashboard</string>
+    <string name="difficultMoments">Mijn moeilijke momenten</string>
+    <string name="newMoment">Nieuw moeilijk moment</string>
+    <string name="moment">Moment: </string>
+    <string name="dateTime">Datum en tijd: </string>
+    <string name="taste">Trek in: </string>
+    <string name="description">Beschrijving: </string>
+    <string name="phonenumberActivityHeader">Belangrijke nummers</string>
+    <string name="institute">Instelling</string>
+    <string name="doctor">Psycholoog</string>
+    <string name="buddy">Bondgenoot</string>
+    <string name="ice">Noodhulp</string>
+    <string name="difficult">moeilijk moment</string>
+    <string name="riskbutton">mijn risico\'s</string>
+    <string name="goalbutton">mijn doelen</string>
+    <string name="consumptionOnDate">Gebruik op %1$s:</string>
+    <string name="phonenumbers">mijn telefoonnummers</string>
+    <string name="shrink">Behandelaar</string>
+    <string name="numbernotfilled">telefoon nummer is niet ingevuld, wil je dat nu doen?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nee</string>
+    <string name="contactDr">Nummer is er nog niet, vraag naar uw behandelaar</string>
+    <string name="howAreYou">Hoe voel je je vandaag?</string>
+    <string name="confirm">Bevestig</string>
+    <string name="descriptionInvalid">De beschrijving mag niet leeg zijn!</string>
+    <string name="smileyNotSelected">U bent vergeten een smiley te selecteren</string>
+    <string name="usage">Mijn gebruik</string>
 
 </resources>

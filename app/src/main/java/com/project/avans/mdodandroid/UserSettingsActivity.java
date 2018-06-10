@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
@@ -63,6 +65,9 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     private String type;
     private View updateDialogView;
+    private Context context = this;
+
+    int duration = Toast.LENGTH_LONG;
 
 
     @Override
@@ -205,46 +210,52 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         NetworkManager.getInstance().getClient(new VolleyListener<JSONArray>() {
             @Override
             public void getResult(JSONArray result) {
-                if (result.length() > 0)
-                {
-                    Log.i("VOLLEY_GETRESULT", "Result:" + result.toString());
-                    try {
-                        JSONObject resultObject = result.getJSONObject(0);
-                        firstName.setValue(resultObject.getString("firstname"));
-                        insertion.setValue(resultObject.getString("infix"));
-                        lastName.setValue(resultObject.getString("lastname"));
-                        phoneNumber.setValue(resultObject.getString("phonenumber"));
-                        address.setValue(resultObject.getString("adress"));
-                        city.setValue(resultObject.getString("city"));
-                        zipCode.setValue(resultObject.getString("zipcode"));
+                try{
+                    if (result.length() > 0)
+                    {
+                        Log.i("VOLLEY_GETRESULT", "Result:" + result.toString());
+                        try {
+                            JSONObject resultObject = result.getJSONObject(0);
+                            firstName.setValue(resultObject.getString("firstname"));
+                            insertion.setValue(resultObject.getString("infix"));
+                            lastName.setValue(resultObject.getString("lastname"));
+                            phoneNumber.setValue(resultObject.getString("phonenumber"));
+                            address.setValue(resultObject.getString("adress"));
+                            city.setValue(resultObject.getString("city"));
+                            zipCode.setValue(resultObject.getString("zipcode"));
 
-                        String dobString = resultObject.getString("birthday");
-                        String[] splitDobString = dobString.split("T");
-                        dobString = splitDobString[0];
-                        birthday.setValue(dobString);
+                            String dobString = resultObject.getString("birthday");
+                            String[] splitDobString = dobString.split("T");
+                            dobString = splitDobString[0];
+                            birthday.setValue(dobString);
 
 //                        Log.i("BIRTHDAYVALUE", birthday.getValue());
 
-                        ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
+                            ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
+                }catch (NullPointerException e) {
+                    Toast toast = Toast.makeText(context, getResources().getString(R.string.registerAlertDialogTitle), duration);
+                    toast.show();
                 }
-            }
-        });
-    }
+                }
+            });
+        }
 
-    private void updateClient() {
-        NetworkManager.getInstance().updateClient(firstName.getValue(), insertion.getValue(), lastName.getValue(),
-                phoneNumber.getValue(), birthday.getValue(), city.getValue(), address.getValue(), zipCode.getValue(), new VolleyListener<JSONObject>() {
-                    @Override
-                    public void getResult(JSONObject object) {
+        private void updateClient() {
+            NetworkManager.getInstance().updateClient(firstName.getValue(), insertion.getValue(), lastName.getValue(),
+                    phoneNumber.getValue(), birthday.getValue(), city.getValue(), address.getValue(), zipCode.getValue(), new VolleyListener<JSONObject>() {
+                        @Override
+                        public void getResult(JSONObject object) {
 
-                    }
-                });
-    }
+                        }
+                    });
+        }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
