@@ -28,6 +28,9 @@
             </intent-filter>
         </service>
 
+        <receiver android:name=".NotificationPublisher" />
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,12 +43,15 @@
         <activity android:name=".HomepageActivity" />
         <activity android:name=".UserSettingsActivity" />
         <activity android:name=".MyDifficultMoments"></activity>
-        <activity android:name=".MyPersonalGoalsActivity"></activity>
+        <activity android:name=".MyPersonalGoalsActivity">
+
+
+        </activity>
         <activity android:name=".MyPersonalRiskActivity"/>
         <activity android:name=".PhoneSettingsActivity"/>
-        <activity android:name=".ConsumptionSpecificDayActivity" />
-        <activity android:name=".ConsumptionDetailActivity" />
-        <activity android:name=".RegisterConsumptionActivity"></activity>
+        <activity android:name=".phoneActivity"/>
+
+
     </application>
 
 </manifest>

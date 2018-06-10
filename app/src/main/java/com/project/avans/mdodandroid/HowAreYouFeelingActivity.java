@@ -9,6 +9,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
+import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+
+import org.json.JSONObject;
+
 
 public class HowAreYouFeelingActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView smileyHappy;
@@ -80,32 +85,57 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
             @Override
             public void onClick(View v) {
                 String field = String.valueOf(description.getText());
-                Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+                
 
                 if(field.equals("")){
                     error.setText(getResources().getString(R.string.descriptionInvalid));
                 }
 
+                int value;
+
                 if(smileyHappy.isSelected()){
+                    value = 1;
                     Log.i("IMAGE SELECTED: ", "1");
-                    startActivity(i);
+                    
                 } else if (smileyGood.isSelected()){
-                    startActivity(i);
+                    value = 2;
                     Log.i("IMAGE SELECTED: ", "2");
-                    startActivity(i);
+                    
                 } else if (smileyOk.isSelected()){
+                    value = 3;
                     Log.i("IMAGE SELECTED: ", "3");
-                    startActivity(i);
+                    
                 } else if (smileySad.isSelected()) {
+                    value = 4;
                     Log.i("IMAGE SELECTED: ", "4");
-                    startActivity(i);
+                    
                 } else if (smileyTerrible.isSelected()){
+                    value = 5;
                     Log.i("IMAGE SELECTED: ", "5");
-                    startActivity(i);
+                    
                 } else {
+                    value = 0;
                     Log.i("IMAGE SELECTED: ", "NO IMAGE SELECTED");
                     error.setText(getResources().getString(R.string.smileyNotSelected));
                 }
+
+                NetworkManager.getInstance().postStatus(value, field, new VolleyListener<JSONObject>() {
+                    @Override
+                    public void getResult(JSONObject object) {
+                        Log.i("TEST: ", object.toString());
+
+                        if (!(object == null))
+                        {
+                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        } else {
+                            error.setText(getResources().getString(R.string.somethingWentWrong));
+                        }
+                    }
+                });
+
+
             }
         });
 

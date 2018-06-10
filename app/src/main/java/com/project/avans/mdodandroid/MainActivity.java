@@ -100,32 +100,25 @@ public class MainActivity extends AppCompatActivity {
                         NetworkManager.getInstance().getEmotionStatusDays(new VolleyListener<JSONObject>() {
                             @Override
                             public void getResult(JSONObject object) {
-                                if(!(object ==  null)){
-                                    Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
-                                    startActivity(intent);
-                                } else try {
-                                    if (object.getInt("status") == 0){
+                                try {
+                                    if (object.getInt("daysDifference") == 0) {
                                         Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
-                                    } else {
+                                    } else{
+                                        Log.i("TEST: ", object.toString());
                                         Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
                                         startActivity(intent);
                                     }
-                                } catch (JSONException e) {
+                                } catch (JSONException e){
+                                    Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
+                                    startActivity(intent);
                                     e.printStackTrace();
                                 }
                             }
                         });
-
-                        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                        startActivity(intent);
                     }
-
-
                 } else {
-
                     resultTextView.setText(R.string.inValidCredentials);
                 }
             }

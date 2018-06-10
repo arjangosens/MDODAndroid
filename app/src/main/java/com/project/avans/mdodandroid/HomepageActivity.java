@@ -54,6 +54,24 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+        Button btn4 = (Button) findViewById(R.id.call_button);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), phoneActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button btn5 = (Button) findViewById(R.id.usagebutton);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), phoneActivity.class);
+                startActivity(i);
+            }
+        });
+
         NetworkManager.getInstance().getCleanDays(new VolleyListener<JSONObject>() {
             @Override
             public void getResult(JSONObject object) {
