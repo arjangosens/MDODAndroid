@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/coloraccent"
         android:padding="8dp"
-        android:text="Consumption:"
+        android:text="Mijn gebruik: "
         android:textAlignment="viewStart"
         android:textAppearance="@android:style/TextAppearance.Material.Headline"
         android:textColor="@android:color/background_light"
@@ -48,10 +48,29 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@color/coloraccent"
-        android:text="Register consumption"
+        android:text="Registreer gebruik"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nothingUsedButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activityConsumption_listView" />
+
+    <Button
+        android:id="@+id/nothingUsedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/coloraccent"
+        android:text="Niets Gebruikt!!"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activityConsumption_buttonRegisterConsumption" />
 </android.support.constraint.ConstraintLayout>
