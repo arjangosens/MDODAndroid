@@ -42,8 +42,20 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
         descriptionTextView = findViewById(R.id.act_consumptionDetail_textViewDescField);
         feelingImg = findViewById(R.id.act_consumptionDetail_imageViewType);
 
-        if (consumption.getFeeling() == 1){
+        if (consumption.getFeeling() == 0){
+            feelingImg.setImageResource(R.drawable.laugh);
+        }
+        else if(consumption.getFeeling() == 1){
             feelingImg.setImageResource(R.drawable.happy);
+        }
+        else if(consumption.getFeeling() == 2){
+            feelingImg.setImageResource(R.drawable.meh);
+        }
+        else if(consumption.getFeeling() == 3){
+            feelingImg.setImageResource(R.drawable.sad);
+        }
+        else if(consumption.getFeeling() == 4){
+            feelingImg.setImageResource(R.drawable.supersad);
         }
 
         typeTextView.setText(consumption.getType());
@@ -52,11 +64,5 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
         descriptionTextView.setText(consumption.getDescription());
 
 
-    }
-    @Override
-    public void onBackPressed() {
-        Intent i = new Intent(getApplicationContext(), ConsumptionActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
     }
 }

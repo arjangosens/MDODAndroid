@@ -7,11 +7,11 @@ import java.util.Date;
 public class Consumption implements Serializable{
     private Date date;
     private String type;
-    private double amount;
+    private Integer amount;
     private String description;
     private Integer feeling;
 
-    public Consumption(Date date, String type, double amount, String description, Integer feeling) {
+    public Consumption(Date date, String type, Integer amount, String description, Integer feeling) {
         this.date = date;
         this.type = type;
         this.amount = amount;
@@ -43,7 +43,7 @@ public class Consumption implements Serializable{
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
