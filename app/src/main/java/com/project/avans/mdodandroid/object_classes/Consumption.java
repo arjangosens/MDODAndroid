@@ -12,14 +12,16 @@ public class Consumption implements Serializable{
     private Integer feeling;
     private String location;
     private String cause;
+    private String measurement;
 
-    public Consumption(Date date, String type, Integer amount, String location, String cause, Integer feeling) {
+    public Consumption(Date date, String type, Integer amount, String location, String cause, Integer feeling, String measurement) {
         this.date = date;
         this.type = type;
         this.amount = amount;
         this.location = location;
         this.cause = cause;
         this.feeling = feeling;
+        this.measurement = measurement;
     }
 
     public Consumption(Date date) {
