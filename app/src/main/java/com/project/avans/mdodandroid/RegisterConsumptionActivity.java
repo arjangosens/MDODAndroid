@@ -64,6 +64,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_consumption);
 
+        context = this;
         substances = new ArrayList<>();
         smileys = new ArrayList<>();
 
