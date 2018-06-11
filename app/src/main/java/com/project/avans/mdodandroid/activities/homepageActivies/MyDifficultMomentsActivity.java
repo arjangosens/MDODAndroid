@@ -31,7 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MyDifficultMoments extends AppCompatActivity implements DialogInterface.OnShowListener, VolleyListener<JSONArray> {
+public class MyDifficultMomentsActivity extends AppCompatActivity implements DialogInterface.OnShowListener, VolleyListener<JSONArray> {
     private View updateDialogView;
     private SeekBar seekBar;
     private ArrayList<Moment> moments = new ArrayList<>();

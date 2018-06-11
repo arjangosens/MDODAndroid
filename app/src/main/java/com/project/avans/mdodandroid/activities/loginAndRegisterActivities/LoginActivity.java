@@ -26,12 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     TextView resultTextView;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         NetworkManager.getInstance(this);
         setContentView(R.layout.activity_main);

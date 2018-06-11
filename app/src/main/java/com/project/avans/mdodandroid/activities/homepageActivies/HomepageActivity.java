@@ -53,7 +53,7 @@ public class HomepageActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MyDifficultMoments.class);
+                Intent i = new Intent(getApplicationContext(), MyDifficultMomentsActivity.class);
                 startActivity(i);
             }
         });
