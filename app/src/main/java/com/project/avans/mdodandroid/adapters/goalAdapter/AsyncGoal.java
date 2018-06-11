@@ -3,7 +3,7 @@ package com.project.avans.mdodandroid.adapters.goalAdapter;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.MainActivity;
+import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
 import com.project.avans.mdodandroid.domain.Goal;
 
 import org.json.JSONArray;
@@ -47,8 +47,8 @@ public class AsyncGoal extends AsyncTask<String, Void, String> {
             httpConnection.setAllowUserInteraction(false);
             httpConnection.setInstanceFollowRedirects(true);
             httpConnection.setRequestMethod("GET");
-            httpConnection.setRequestProperty("X-Access-Token", MainActivity.Token);
-            httpConnection.setRequestProperty("authorization", "Bearer " + MainActivity.Token);
+            httpConnection.setRequestProperty("X-Access-Token", LoginActivity.Token);
+            httpConnection.setRequestProperty("authorization", "Bearer " + LoginActivity.Token);
             httpConnection.connect();
             responseCode = httpConnection.getResponseCode();
 

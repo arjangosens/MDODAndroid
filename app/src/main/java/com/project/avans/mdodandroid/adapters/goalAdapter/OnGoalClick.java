@@ -9,12 +9,12 @@ import android.widget.AdapterView;
 import com.project.avans.mdodandroid.domain.Goal;
 
 
-public class onGoalClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class OnGoalClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private Context context;
     private LayoutInflater inflater;
     private OnAlertBoxAvailable listener;
 
-    public onGoalClick(Context context, LayoutInflater inflater, OnAlertBoxAvailable listener) {
+    public OnGoalClick(Context context, LayoutInflater inflater, OnAlertBoxAvailable listener) {
         this.context = context;
         this.inflater = inflater;
         this.listener = listener;

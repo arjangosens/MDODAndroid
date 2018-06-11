@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     public static String Token;
     EditText email;
     EditText password;

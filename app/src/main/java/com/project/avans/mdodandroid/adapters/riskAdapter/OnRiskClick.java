@@ -6,12 +6,12 @@ import android.widget.AdapterView;
 
 import com.project.avans.mdodandroid.domain.Risk;
 
-public class onRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class OnRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private OnAlertBoxAvailableR listener;
 
 
-    public onRiskClick(OnAlertBoxAvailableR listener) {
+    public OnRiskClick(OnAlertBoxAvailableR listener) {
         this.listener = listener;
     }
 

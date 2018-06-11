@@ -16,12 +16,12 @@ import android.widget.TextView;
 import android.widget.ListView;
 
 import com.project.avans.mdodandroid.R;
-import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.MainActivity;
+import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
 import com.project.avans.mdodandroid.adapters.riskAdapter.AsyncRisk;
 import com.project.avans.mdodandroid.adapters.riskAdapter.OnAlertBoxAvailableR;
 import com.project.avans.mdodandroid.adapters.riskAdapter.RiskListener;
-import com.project.avans.mdodandroid.adapters.riskAdapter.onRiskClick;
+import com.project.avans.mdodandroid.adapters.riskAdapter.OnRiskClick;
 import com.project.avans.mdodandroid.adapters.riskAdapter.RiskAdapter;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
@@ -74,7 +74,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         RiskAdapter = new RiskAdapter(getLayoutInflater(), RiskList);
         RiskListView.setAdapter(RiskAdapter);
         RiskAdapter.notifyDataSetChanged();
-        RiskListView.setOnItemClickListener(new onRiskClick(this) {});
+        RiskListView.setOnItemClickListener(new OnRiskClick(this) {});
     }
 
     @Override
@@ -223,7 +223,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                     startActivity(i);
                     break;
                 case R.id.menu_logout:
-                    i = new Intent(getApplicationContext(), MainActivity.class);
+                    i = new Intent(getApplicationContext(), LoginActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                     break;

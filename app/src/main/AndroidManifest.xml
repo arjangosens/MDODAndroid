@@ -38,7 +38,7 @@
         <receiver android:name=".applicationLogic.notifications.NotificationPublisher" />
 
 
-        <activity android:name=".activities.loginAndRegisterActivities.MainActivity">
+        <activity android:name=".activities.loginAndRegisterActivities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

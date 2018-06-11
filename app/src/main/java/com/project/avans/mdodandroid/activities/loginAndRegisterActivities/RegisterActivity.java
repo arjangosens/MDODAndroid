@@ -23,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.avans.mdodandroid.R;
-import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.MainActivity;
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 import com.project.avans.mdodandroid.domain.User;
 
@@ -206,7 +205,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         Log.d("VOLLEY_TAG response", response.toString());
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
-                        Intent intent = new Intent(context, MainActivity.class);
+                        Intent intent = new Intent(context, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
