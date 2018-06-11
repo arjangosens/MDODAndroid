@@ -11,14 +11,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.project.avans.mdodandroid.MainActivity;
-import com.project.avans.mdodandroid.object_classes.UserSettingsType;
-import com.project.avans.mdodandroid.object_classes.Risk;
+import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.MainActivity;
+import com.project.avans.mdodandroid.domain.Risk;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
