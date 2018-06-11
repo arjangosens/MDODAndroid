@@ -129,7 +129,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                         if (!(object == null))
                         {
                             Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         } else {
                             error.setText(getResources().getString(R.string.somethingWentWrong));
