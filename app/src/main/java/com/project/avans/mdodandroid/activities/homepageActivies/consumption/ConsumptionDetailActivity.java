@@ -1,13 +1,12 @@
-package com.project.avans.mdodandroid;
+package com.project.avans.mdodandroid.activities.homepageActivies.consumption;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.project.avans.mdodandroid.object_classes.Consumption;
+import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.domain.Consumption;
 
 import java.text.DateFormat;
 

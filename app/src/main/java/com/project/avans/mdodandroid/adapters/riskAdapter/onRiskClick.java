@@ -1,19 +1,10 @@
-package com.project.avans.mdodandroid.adapters.RiskAdapter;
+package com.project.avans.mdodandroid.adapters.riskAdapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.sip.SipSession;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.project.avans.mdodandroid.MainActivity;
-import com.project.avans.mdodandroid.R;
-
-import com.project.avans.mdodandroid.object_classes.Risk;
+import com.project.avans.mdodandroid.domain.Risk;
 
 public class onRiskClick extends AppCompatActivity implements AdapterView.OnItemClickListener {
 

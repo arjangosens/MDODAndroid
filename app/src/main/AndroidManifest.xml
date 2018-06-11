@@ -17,7 +17,7 @@
         <activity android:name=".activities.homepageActivies.MyPersonalGoalsActivity" />
         <activity android:name=".activities.homepageActivies.MyPersonalRiskActivity" />
         <activity android:name=".activities.homepageActivies.consumption.ConsumptionActivity" />
-        <activity android:name=".activities.loginAndRegisterActivities.HowAreYouFeelingActivity"> </activity>
+        <activity android:name=".activities.homepageActivies.HowAreYouFeelingActivity"> </activity>
         <activity android:name=".activities.homepageActivies.MyDifficultMoments"/>
         <activity android:name=".activities.settingActivities.PhoneSettingsActivity"/>
         <activity android:name=".activities.homepageActivies.phoneActivity"/>

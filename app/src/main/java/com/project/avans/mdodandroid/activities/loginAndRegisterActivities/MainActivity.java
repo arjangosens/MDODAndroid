@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.activities.homepageActivies.HowAreYouFeelingActivity;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 

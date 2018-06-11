@@ -1,4 +1,4 @@
-package com.project.avans.mdodandroid;
+package com.project.avans.mdodandroid.activities.homepageActivies.consumption;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -8,7 +8,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.nfc.Tag;
 import android.os.Build;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -20,12 +19,14 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
+import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationPublisher;
+import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
-import com.project.avans.mdodandroid.consumptionAdapter.ConsumptionAdapter;
-import com.project.avans.mdodandroid.consumptionAdapter.ConsumptionSpecDayAdapter;
-import com.project.avans.mdodandroid.object_classes.Consumption;
-import com.project.avans.mdodandroid.object_classes.ConsumptionsPerDay;
+import com.project.avans.mdodandroid.adapters.consumptionAdapter.ConsumptionAdapter;
+import com.project.avans.mdodandroid.domain.Consumption;
+import com.project.avans.mdodandroid.domain.ConsumptionsPerDay;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.project.avans.mdodandroid;
+package com.project.avans.mdodandroid.activities.homepageActivies.consumption;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +9,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.project.avans.mdodandroid.consumptionAdapter.ConsumptionSpecDayAdapter;
-import com.project.avans.mdodandroid.object_classes.Consumption;
-import com.project.avans.mdodandroid.object_classes.ConsumptionsPerDay;
+import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.activities.homepageActivies.consumption.ConsumptionActivity;
+import com.project.avans.mdodandroid.activities.homepageActivies.consumption.ConsumptionDetailActivity;
+import com.project.avans.mdodandroid.adapters.consumptionAdapter.ConsumptionSpecDayAdapter;
+import com.project.avans.mdodandroid.domain.Consumption;
+import com.project.avans.mdodandroid.domain.ConsumptionsPerDay;
 
 import java.text.DateFormat;
 import java.util.ArrayList;

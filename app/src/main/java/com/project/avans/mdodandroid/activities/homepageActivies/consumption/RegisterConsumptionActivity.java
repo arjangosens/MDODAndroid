@@ -1,4 +1,4 @@
-package com.project.avans.mdodandroid;
+package com.project.avans.mdodandroid.activities.homepageActivies.consumption;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -18,16 +18,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.activities.homepageActivies.consumption.ConsumptionActivity;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
-import com.project.avans.mdodandroid.consumptionAdapter.ConRegSubstanceAdapter;
-import com.project.avans.mdodandroid.object_classes.Substance;
+import com.project.avans.mdodandroid.adapters.consumptionAdapter.ConRegSubstanceAdapter;
+import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationPublisher;
+import com.project.avans.mdodandroid.domain.Substance;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
