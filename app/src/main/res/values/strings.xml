@@ -91,6 +91,7 @@
     <string name="descriptionInvalid">Description cannot be empty!</string>
     <string name="smileyNotSelected">Please select a smiley</string>
     <string name="usage">My usage</string>
-
+    <string name="myMessages">My Messages</string>
+    <string name="newMessage">New Message</string>
 
 </resources>

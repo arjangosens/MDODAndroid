@@ -90,5 +90,7 @@
     <string name="descriptionInvalid">De beschrijving mag niet leeg zijn!</string>
     <string name="smileyNotSelected">U bent vergeten een smiley te selecteren</string>
     <string name="usage">Mijn gebruik</string>
+    <string name="myMessages">Mijn berichten</string>
+    <string name="newMessage">Nieuw bericht</string>
 
 </resources>
