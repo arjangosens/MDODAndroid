@@ -41,7 +41,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     private String type = "";
     private Risk riskup;
     Context context;
-    private String channelId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

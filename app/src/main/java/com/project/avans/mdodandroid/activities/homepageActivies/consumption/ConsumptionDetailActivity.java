@@ -54,7 +54,7 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
             feelingImg.setImageResource(R.drawable.sad);
         }
         else if(consumption.getFeeling() == 4){
-            feelingImg.setImageResource(R.drawable.supersad);
+            feelingImg.setImageResource(R.drawable.verysadred);
         }
 
         typeTextView.setText(consumption.getType());

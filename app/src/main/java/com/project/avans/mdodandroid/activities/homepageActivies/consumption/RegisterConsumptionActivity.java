@@ -26,6 +26,7 @@ import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.adapters.consumptionAdapter.ConRegSubstanceAdapter;
 import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationPublisher;
+import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationService;
 import com.project.avans.mdodandroid.domain.Substance;
 
 import org.json.JSONObject;
@@ -127,9 +128,8 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
                                     if (!(object == null)) {
                                         Intent i = new Intent(getApplicationContext(), ConsumptionActivity.class);
-
-                                        //Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 2*24*60*60*1000);//for real
-                                        Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 60 * 1000);//for showing
+                                        NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
+                                        //NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 2*24*60*60*1000, context);
                                         startActivity(i);
 
 
@@ -166,11 +166,11 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
     private void initTypes() {
         //substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
-        substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "ml"));
-        substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "g"));
-        substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "qwerty"));
+        substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "glazen"));
+        substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "gram"));
+        substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "ml"));
         substances.add(new Substance("LSD", getResources().getDrawable(R.drawable.lsd), "mg"));
-        substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "lines"));
+        substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "gram"));
         substances.add(new Substance("Other", getResources().getDrawable(R.drawable.question), ""));
     }
 
@@ -270,51 +270,4 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         Log.i(TAG, "feelingId = " + feelingId);
     }
 
-
-    public void Notificat(Notification notification, int delay) {
-
-
-        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
-    }
-
-    private Notification getNotification(String content) {
-        if (Build.VERSION.SDK_INT >= 26) {
-            channel();
-            Notification.Builder builder = new Notification.Builder(context, channelId);
-            builder.setContentTitle("Tactus Bericht");
-            builder.setContentText(content);
-            builder.setSmallIcon(R.drawable.tactuslogo_small_round);
-            return builder.build();
-        }
-        else{
-            Notification.Builder builder = new Notification.Builder(context);
-            builder.setContentTitle("Tactus Bericht");
-            builder.setContentText(content);
-            builder.setSmallIcon(R.drawable.tactuslogo_small_round);
-            return builder.build();
-        }
-    }
-    private void channel() {
-        if (Build.VERSION.SDK_INT >= 26) {
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            channelId = "Tactus channel Id";
-            CharSequence channelName = "Tactus";
-            int importance = NotificationManager.IMPORTANCE_LOW;
-            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
-            notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
-            notificationChannel.enableVibration(true);
-            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-    }
 }
