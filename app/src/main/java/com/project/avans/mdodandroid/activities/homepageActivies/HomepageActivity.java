@@ -1,5 +1,8 @@
 package com.project.avans.mdodandroid.activities.homepageActivies;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,16 +19,18 @@ import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsA
 import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HomepageActivity extends AppCompatActivity {
-
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        context = this;
 
         //removes the title from the title bar in the HomepageActivity
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -90,13 +95,42 @@ public class HomepageActivity extends AppCompatActivity {
                     else if(object.getString("daysClean").equals("0")) {
                         cleandays.setText("U had een terugval, neem contact op met uw begeleider.");
 
-                    }else
+                    }
+                    else
                     {
                         if(object.getString("daysClean").equals("30")){
-
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Al een maand niet gebruikt, ga zo door!")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                        }
+                                    });
+                            AlertDialog alert = builder.create();
+                            alert.show();
                         }
                         else if(object.getString("daysClean").equals("356")){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Al een jaar clean we zijn trots!")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                        }
+                                    });
+                            AlertDialog alert = builder.create();
+                            alert.show();
+                        }
 
+                        else if(object.getString("daysClean").equals("7")){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Een week clean, goed bezig!")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                        }
+                                    });
+                            AlertDialog alert = builder.create();
+                            alert.show();
                         }
                         cleandays.setText("Je bent al " + object.getString("daysClean") + " dagen clean.");
                     }

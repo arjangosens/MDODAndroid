@@ -102,6 +102,7 @@
     <string name="whatCausedIt">What caused it?</string>
     <string name="feelingAbout">How do you feel about it?</string>
     <string name="amount">Amount:</string>
+    <string name="used">There is a usage registered, please contact your psychologist</string>
 
 
 </resources>

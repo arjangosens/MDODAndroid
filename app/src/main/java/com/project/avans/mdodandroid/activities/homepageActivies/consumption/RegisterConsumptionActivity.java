@@ -6,10 +6,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +24,8 @@ import android.widget.TextView;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.homepageActivies.consumption.ConsumptionActivity;
+import com.project.avans.mdodandroid.activities.homepageActivies.phoneActivity;
+import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.adapters.consumptionAdapter.ConRegSubstanceAdapter;
@@ -127,10 +131,13 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                                     Log.i("TEST: ", object.toString());
 
                                     if (!(object == null)) {
-                                        Intent i = new Intent(getApplicationContext(), ConsumptionActivity.class);
+
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
                                         NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
                                         //NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 2*24*60*60*1000, context);
-                                        startActivity(i);
+                                        builder.setMessage(getResources().getString(R.string.used)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
+
 
 
                                     } else {
@@ -270,5 +277,22 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
         Log.i(TAG, "feelingId = " + feelingId);
     }
+
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    Intent i = new Intent(getApplicationContext(),phoneActivity.class);
+                    startActivity(i);
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    Intent i2 = new Intent(getApplicationContext(), ConsumptionActivity.class);
+                    startActivity(i2);
+                    break;
+            }
+        }
+    };
 
 }
