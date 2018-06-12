@@ -14,23 +14,32 @@ import android.widget.TextView;
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
-import com.project.avans.mdodandroid.domain.Goal;
+import com.project.avans.mdodandroid.domain.Message;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MyMessagesActivity extends AppCompatActivity implements DialogInterface.OnShowListener {
+import java.util.ArrayList;
+
+public class MyMessagesActivity extends AppCompatActivity implements DialogInterface.OnShowListener, VolleyListener<JSONArray> {
     private ListView messages;
     private Button newMessage;
     private View updateDialogView;
+    private ArrayList<Message> messagesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_messages);
 
+        //removes the title from the title bar in My personal goals
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         messages = findViewById(R.id.listView_message);
         newMessage = findViewById(R.id.button_new_message);
+
+        NetworkManager.getInstance().getMessages(this);
 
         newMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +48,19 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
             }
         });
 
+    }
+
+    @Override
+    public void getResult(JSONArray object) {
+        if (!(object == null)) {
+            for (int i = 0; i < object.length(); i++) {
+                try {
+                    messagesList.add(new Message(object.getJSONObject(i).getString("message"), object.getJSONObject(i).getString("date"), object.getJSONObject(i).getString("psychologist")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private void showUpdateDialog() {
