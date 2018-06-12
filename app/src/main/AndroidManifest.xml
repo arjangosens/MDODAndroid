@@ -11,19 +11,40 @@
         android:roundIcon="@drawable/tactuslogo_small_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".activities.loginAndRegisterActivities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".HomepageActivity" />
-        <activity android:name=".UserSettingsActivity" />
-        <activity android:name=".MyPersonalGoalsActivity"></activity>
-        <activity android:name=".MyPersonalRiskActivity" />
-        <activity android:name=".MyDifficultMoments"></activity>
+        <activity android:name=".activities.loginAndRegisterActivities.RegisterActivity" />
+        <activity android:name=".activities.homepageActivies.HomepageActivity" />
+        <activity android:name=".activities.settingActivities.UserSettingsActivity" />
+        <activity android:name=".activities.homepageActivies.MyPersonalGoalsActivity" />
+        <activity android:name=".activities.homepageActivies.MyPersonalRiskActivity" />
+        <activity android:name=".activities.homepageActivies.consumption.ConsumptionActivity" />
+        <activity android:name=".activities.homepageActivies.HowAreYouFeelingActivity"/>
+        <activity android:name=".activities.homepageActivies.MyDifficultMomentsActivity"/>
+        <activity android:name=".activities.settingActivities.PhoneSettingsActivity"/>
+        <activity android:name=".activities.homepageActivies.phoneActivity"/>
+        <activity android:name=".activities.homepageActivies.consumption.ConsumptionDetailActivity"/>
+        <activity android:name=".activities.homepageActivies.consumption.ConsumptionSpecificDayActivity"/>
+        <activity android:name=".activities.homepageActivies.consumption.RegisterConsumptionActivity"/>
+
+        <service
+            android:name=".applicationLogic.notifications.NotificationService"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="your.app.domain.NotificationService" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".applicationLogic.notifications.NotificationPublisher" />
+
     </application>
 
 </manifest>
