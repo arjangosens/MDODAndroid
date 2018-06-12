@@ -166,6 +166,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
     private void initTypes() {
         //substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
+        substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "joints"));
         substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "glazen"));
         substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "gram"));
         substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "ml"));

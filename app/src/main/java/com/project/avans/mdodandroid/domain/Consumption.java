@@ -8,7 +8,6 @@ public class Consumption implements Serializable{
     private Date date;
     private String type;
     private Integer amount;
-    private String description;
     private Integer feeling;
     private String location;
     private String cause;
@@ -44,20 +43,12 @@ public class Consumption implements Serializable{
         this.type = type;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
     public void setAmount(Integer amount) {
         this.amount = amount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Integer getFeeling() {
