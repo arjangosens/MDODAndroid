@@ -43,7 +43,7 @@ public class Consumption implements Serializable{
         this.type = type;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
