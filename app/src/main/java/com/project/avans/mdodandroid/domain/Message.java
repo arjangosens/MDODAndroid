@@ -7,12 +7,12 @@ package com.project.avans.mdodandroid.domain;
 public class Message {
     private String message;
     private String date;
-    private String psychologist;
+    private String sendBy;
 
-    public Message(String message, String date, String psychologist) {
+    public Message(String message, String date, String sendBy) {
         this.message = message;
         this.date = date;
-        this.psychologist = psychologist;
+        this.sendBy = sendBy;
     }
 
     public String getMessage() {
@@ -23,7 +23,7 @@ public class Message {
         return date;
     }
 
-    public String getPsychologist() {
-        return psychologist;
+    public String getSendBy() {
+        return sendBy;
     }
 }

@@ -960,7 +960,7 @@ public class NetworkManager
 
     public void getMessages(final VolleyListener<JSONArray> listener) {
 
-        String url = prefixURL + "v1/message/client";
+        String url = prefixURL + "v1/messages/client";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>()
@@ -1001,7 +1001,7 @@ public class NetworkManager
 
     public void postMessage(String message, final VolleyListener<JSONObject> listener) {
 
-        String url = prefixURL + "v1/message/client";
+        String url = prefixURL + "v1/messages/client";
 
         Map<String, Object> jsonParams = new HashMap<>();
         jsonParams.put("message", message);

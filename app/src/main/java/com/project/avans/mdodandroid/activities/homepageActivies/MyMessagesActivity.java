@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.adapters.messageAdapter.MessageAdapter;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.domain.Message;
@@ -26,6 +27,7 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
     private ListView messages;
     private Button newMessage;
     private View updateDialogView;
+    private MessageAdapter messageAdapter = null;
     private ArrayList<Message> messagesList = new ArrayList<>();
 
     @Override
@@ -39,21 +41,30 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
         messages = findViewById(R.id.listView_message);
         newMessage = findViewById(R.id.button_new_message);
 
+        NetworkManager.getInstance().getMessages(this);
+
+        messageAdapter = new MessageAdapter(getLayoutInflater(), messagesList, this);
+        messages.setAdapter(messageAdapter);
+        messageAdapter.notifyDataSetChanged();
+
         newMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showUpdateDialog();
             }
         });
-
     }
 
     @Override
     public void getResult(JSONArray object) {
+        Log.i("TEST: ", object.toString());
         if (!(object == null)) {
             for (int i = 0; i < object.length(); i++) {
                 try {
-                    messagesList.add(new Message(object.getJSONObject(i).getString("message"), object.getJSONObject(i).getString("date"), object.getJSONObject(i).getString("psychologist")));
+                    Log.i("TEST2: ", object.getJSONObject(i).toString());
+                    messagesList.add(new Message(object.getJSONObject(i).getString("message"), object.getJSONObject(i).getString("date"), object.getJSONObject(i).getString("sendBy")));
+                    messageAdapter.notifyDataSetChanged();
+                    Log.i("TEST3: ", messagesList.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
