@@ -64,6 +64,7 @@
     <string name="emailNotFound">Email not found</string>
     <string name="registerActivityHeader">Create new account</string>
     <string name="homePageActivityHeader">Dashboard</string>
+    <string name="consumptionOnDate">Consumption on %1$s:</string>
     <string name="difficultMoments">My difficult moments</string>
     <string name="newMoment">New difficult moment</string>
     <string name="moment">Moment: </string>
@@ -84,5 +85,23 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="contactDr">Please contact your psychologist, number not filled in</string>
+
+    <string name="howAreYou">How are you feeling today?</string>
+    <string name="confirm">Confirm</string>
+    <string name="descriptionInvalid">Description cannot be empty!</string>
+    <string name="smileyNotSelected">Please select a smiley</string>
+    <string name="usage">My usage</string>
+    <string name="location">Location:</string>
+    <string name="cause">Cause:</string>
+    <string name="When">When?</string>
+    <string name="howMuch">How much?</string>
+    <string name="whatDidYouUse">What did you use?</string>
+    <string name="currentlySelected">Currently selected:</string>
+    <string name="howMuch2">How much did you use?</string>
+    <string name="whereWereYou">Where were you?</string>
+    <string name="whatCausedIt">What caused it?</string>
+    <string name="feelingAbout">How do you feel about it?</string>
+    <string name="amount">Amount:</string>
+
 
 </resources>
