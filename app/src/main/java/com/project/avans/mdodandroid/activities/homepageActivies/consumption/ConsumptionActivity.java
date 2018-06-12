@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -91,6 +92,9 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
+                MediaPlayer applause= MediaPlayer.create(ConsumptionActivity.this, R.raw.applause);
+                applause.start();
 
             }
         });
