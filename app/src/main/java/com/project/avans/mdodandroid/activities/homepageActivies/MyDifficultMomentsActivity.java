@@ -185,6 +185,11 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
         getMenuInflater().inflate(R.menu.settings_menu, menu);
         return true;
     }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, HomepageActivity.class);
+        startActivity(i);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

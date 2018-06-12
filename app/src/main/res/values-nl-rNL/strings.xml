@@ -90,5 +90,16 @@
     <string name="descriptionInvalid">De beschrijving mag niet leeg zijn!</string>
     <string name="smileyNotSelected">U bent vergeten een smiley te selecteren</string>
     <string name="usage">Mijn gebruik</string>
+    <string name="location">Locatie:</string>
+    <string name="cause">Oorzaak:</string>
+    <string name="When">Wanneer?</string>
+    <string name="howMuch">Hoeveel?</string>
+    <string name="whatDidYouUse">Wat heb je gebruikt?</string>
+    <string name="currentlySelected">Nu aangeklikt:</string>
+    <string name="howMuch2">Hoeveel heb je gebruikt?</string>
+    <string name="whereWereYou">Waar was je?</string>
+    <string name="whatCausedIt">Waardoor gebeurde het?</string>
+    <string name="feelingAbout">Hoe voel je je erover?</string>
+    <string name="amount">Hoeveelheid:</string>
 
 </resources>
