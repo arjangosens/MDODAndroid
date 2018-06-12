@@ -54,6 +54,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
     private ImageView smileyOk;
     private ImageView smileySad;
     private ImageView smileyTerrible;
+
     String substanceStr;
     Context context;
     private String channelId;
@@ -73,6 +74,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         initTypes();
         initSmileys();
 
+        substanceStr = "";
 
         substanceRv = (RecyclerView) findViewById(R.id.act_registerConsumption_RecyclerViewSubstances);
         typetextView = (TextView) findViewById(R.id.act_registerConsumption_textViewSelectionValue);
@@ -94,10 +96,14 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
             public void onItemClick(int position) {
                 Log.i(TAG, "onItemClick(" + position + ") called");
 
-                Substance substance = substances.get(position);
-                typetextView.setText(substance.getType());
-                substanceStr = String.valueOf(typetextView.getText());
-                initUnit(substance.getMeasurement());
+                try {
+                    Substance substance = substances.get(position);
+                    typetextView.setText(substance.getType());
+                    substanceStr = String.valueOf(typetextView.getText());
+                    initUnit(substance.getMeasurement());
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -111,12 +117,21 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
                 //TODO checks for empty fields
 
-                String location = String.valueOf(LocationTextView.getText());
-                String cause = String.valueOf(causeTextView.getText());
-                String amountTmp = String.valueOf(amountTextView.getText());
-                Integer amount = Integer.parseInt(amountTmp);
+                String location = "";
+                String cause = "";
+                int amount = 0;
 
-                if(!substanceStr.equals("") && !location.equals("") && !cause.equals("") && feelingId != null){
+                try {
+                    location = String.valueOf(LocationTextView.getText());
+                    cause = String.valueOf(causeTextView.getText());
+                    amount = Integer.valueOf(amountTextView.getText().toString());
+
+                } catch (NullPointerException | NumberFormatException e){
+                    Log.i(TAG, "Some fields were still empty!");
+                    e.printStackTrace();
+                }
+
+                if(!substanceStr.isEmpty() && !location.isEmpty() && !cause.isEmpty() && feelingId != null){
 
                     Log.i("data, ",location + " " + amount + " " + feelingId +  " " + cause + " " + substanceId );
 
