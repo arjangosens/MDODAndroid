@@ -68,7 +68,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView_feeling"
                 app:layout_constraintStart_toEndOf="@+id/con_smiley_sad"
                 app:layout_constraintTop_toTopOf="@+id/con_smiley_sad"
-                app:srcCompat="@drawable/supersad" />
+                app:srcCompat="@drawable/verysadred" />
         </LinearLayout>
 
         <TextView
