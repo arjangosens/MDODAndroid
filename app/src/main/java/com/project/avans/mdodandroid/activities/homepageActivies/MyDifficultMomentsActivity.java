@@ -136,7 +136,7 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
                 if (field.equals("")) {
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
                 } else {
-                    NetworkManager.getInstance().postMoment( String.valueOf(spinner.getSelectedItemPosition() + 1),String.valueOf(seekBar.getProgress()), String.valueOf(updateDialogGenericEditText.getText()), String.valueOf(prevention.getText()), new VolleyListener<JSONObject>(){
+                    NetworkManager.getInstance().postMoment( String.valueOf(spinner.getSelectedItem()),String.valueOf(seekBar.getProgress()), String.valueOf(updateDialogGenericEditText.getText()), String.valueOf(prevention.getText()), new VolleyListener<JSONObject>(){
                         @Override
                         public void getResult(JSONObject result) {
                             if (!(result == null))
@@ -184,6 +184,11 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings_menu, menu);
         return true;
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, HomepageActivity.class);
+        startActivity(i);
     }
 
     @Override

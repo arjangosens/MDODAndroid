@@ -31,6 +31,7 @@ public class HomepageActivity extends AppCompatActivity {
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setTitle(getResources().getString(R.string.homePageActivityHeader));
 
+
         Button btn = (Button) findViewById(R.id.goalbutton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +86,18 @@ public class HomepageActivity extends AppCompatActivity {
                 try {
                     if(object.getString("daysClean").equals("null")){
                         cleandays.setText("Nog geen gebruik geregistreerd");
-                    } else{
+                    }
+                    else if(object.getString("daysClean").equals("0")) {
+                        cleandays.setText("U had een terugval, neem contact op met uw begeleider.");
+
+                    }else
+                    {
+                        if(object.getString("daysClean").equals("30")){
+
+                        }
+                        else if(object.getString("daysClean").equals("356")){
+
+                        }
                         cleandays.setText("Je bent al " + object.getString("daysClean") + " dagen clean.");
                     }
 
@@ -104,6 +116,11 @@ public class HomepageActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -115,7 +132,9 @@ public class HomepageActivity extends AppCompatActivity {
                 break;
             case R.id.menu_logout:
                 i = new Intent(getApplicationContext(), LoginActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(i);
                 break;
             case R.id.menu_user_phone:
