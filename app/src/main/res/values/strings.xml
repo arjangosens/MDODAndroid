@@ -91,6 +91,10 @@
     <string name="descriptionInvalid">Description cannot be empty!</string>
     <string name="smileyNotSelected">Please select a smiley</string>
     <string name="usage">My usage</string>
+    <string name="location">Location:</string>
+    <string name="cause">Cause:</string>
+    <string name="When">When?</string>
+    <string name="howMuch">How much?</string>
 
 
 </resources>
