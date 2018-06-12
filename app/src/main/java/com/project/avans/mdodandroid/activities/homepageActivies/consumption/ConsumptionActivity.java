@@ -99,7 +99,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
             public void getResult(JSONArray result) {
                 try {
                     if (result.length() > 0) {
-                        for (int i = 0; i < result.length() - 1; i++) {
+                        for (int i = 0; i < result.length(); i++) {
                             Log.i("VOLLEY_GETRESULT", "Result:" + result.toString());
                             try {
                                 JSONObject resultObject = result.getJSONObject(i);
