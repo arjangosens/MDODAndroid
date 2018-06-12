@@ -39,8 +39,6 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
         messages = findViewById(R.id.listView_message);
         newMessage = findViewById(R.id.button_new_message);
 
-        NetworkManager.getInstance().getMessages(this);
-
         newMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -59,7 +59,7 @@ public class GoalAdapter extends BaseAdapter {
         GoalAdapter.ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.activity_row_goal, null);
+            view = inflater.inflate(R.layout.row_goal, null);
             viewHolder = new GoalAdapter.ViewHolder();
             viewHolder.goal = view.findViewById(R.id.goalRow);
             viewHolder.status = view.findViewById(R.id.checkBox_goal);

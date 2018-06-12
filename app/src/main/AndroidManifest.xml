@@ -11,7 +11,12 @@
         android:roundIcon="@drawable/tactuslogo_small_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.loginAndRegisterActivities.LoginActivity"/>
+
+        <activity android:name=".activities.loginAndRegisterActivities.LoginActivity"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".activities.loginAndRegisterActivities.RegisterActivity" />
         <activity android:name=".activities.homepageActivies.HomepageActivity" />
         <activity android:name=".activities.settingActivities.UserSettingsActivity" />
@@ -38,11 +43,7 @@
 
         <receiver android:name=".applicationLogic.notifications.NotificationPublisher" />
 
-        <activity android:name=".activities.homepageActivies.MyMessagesActivity"> <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        <activity android:name=".activities.homepageActivies.MyMessagesActivity">
         </activity>
     </application>
 

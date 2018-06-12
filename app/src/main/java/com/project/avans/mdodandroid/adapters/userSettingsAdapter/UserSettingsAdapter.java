@@ -47,7 +47,7 @@ public class UserSettingsAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.activity_row_usersettings, null);
+            view = inflater.inflate(R.layout.row_usersettings, null);
             viewHolder = new ViewHolder();
             viewHolder.type = view.findViewById(R.id.row_userSettings_textViewType);
             viewHolder.value = view.findViewById(R.id.row_userSettings_textViewValue);

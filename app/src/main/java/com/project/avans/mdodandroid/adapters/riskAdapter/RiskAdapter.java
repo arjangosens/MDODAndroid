@@ -48,7 +48,7 @@ import java.util.ArrayList;
         public View getView(int i, View view, ViewGroup viewGroup) {
             ViewHolder viewHolder;
             if(view == null){
-                view = inflater.inflate(R.layout.activity_row_risk, null);
+                view = inflater.inflate(R.layout.row_risk, null);
                 viewHolder = new ViewHolder();
                 viewHolder.Risk = view.findViewById(R.id.RiskRow);
                 TextView risk = (TextView)view.findViewById(R.id.textView_row);
