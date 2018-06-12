@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterConsumptionActivity">
+    tools:context=".activities.homepageActivies.consumption.RegisterConsumptionActivity">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".RegisterConsumptionActivity">
+        tools:context=".activities.homepageActivies.consumption.RegisterConsumptionActivity">
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -68,7 +68,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView_feeling"
                 app:layout_constraintStart_toEndOf="@+id/con_smiley_sad"
                 app:layout_constraintTop_toTopOf="@+id/con_smiley_sad"
-                app:srcCompat="@drawable/supersad" />
+                app:srcCompat="@drawable/verysadred" />
         </LinearLayout>
 
         <TextView
