@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+import com.project.avans.mdodandroid.domain.Goal;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MyMessagesActivity extends AppCompatActivity implements DialogInterface.OnShowListener {
@@ -73,7 +76,34 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
     }
 
     @Override
-    public void onShow(DialogInterface dialog) {
+    public void onShow(final DialogInterface dialog) {
+        Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+        button.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                final TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
+                final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
+
+                String field = String.valueOf(updateDialogGenericEditText.getText());
+                Log.i("DialogUpdateProfile", "Value of field: " + field);
+
+                if (field.equals("")) {
+                    incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
+                } else {
+                    NetworkManager.getInstance().postMessage(field, new VolleyListener<JSONObject>() {
+                        @Override
+                        public void getResult(JSONObject object) {
+                            if (!(object == null))
+                            {
+                                dialog.dismiss();
+                            } else {
+                                incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong));
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 }
