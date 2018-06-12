@@ -3,21 +3,15 @@ package com.project.avans.mdodandroid.adapters.messageAdapter;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.project.avans.mdodandroid.R;
-import com.project.avans.mdodandroid.adapters.momentAdapter.MomentAdapter;
 import com.project.avans.mdodandroid.domain.Message;
 
 import java.util.ArrayList;
-
-/**
- * Created by kelly on 12-6-2018.
- */
 
 public class MessageAdapter extends BaseAdapter {
     private LayoutInflater inflater;

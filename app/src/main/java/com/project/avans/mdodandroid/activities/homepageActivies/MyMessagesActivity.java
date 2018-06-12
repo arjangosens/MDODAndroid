@@ -116,7 +116,7 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
                 final TextView incorrectFieldTextView = updateDialogView.findViewById(R.id.dialogUpdateProfile_textViewIncorrectField);
                 final TextView updateDialogGenericEditText = updateDialogView.findViewById(R.id.dialogUpdateProfile_editText);
 
-                String field = String.valueOf(updateDialogGenericEditText.getText());
+                final String field = String.valueOf(updateDialogGenericEditText.getText());
                 Log.i("DialogUpdateProfile", "Value of field: " + field);
 
                 if (field.equals("")) {
@@ -127,6 +127,7 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
                         public void getResult(JSONObject object) {
                             if (!(object == null))
                             {
+                                messagesList.add(0, new Message(field, "zojuist", "uzelf"));
                                 dialog.dismiss();
                             } else {
                                 incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong));
