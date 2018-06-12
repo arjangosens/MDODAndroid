@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.homepageActivies.consumption.ConsumptionActivity;
@@ -149,7 +150,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
 
                                     } else {
-                                        //TODO error message
+
                                     }
                                 }
                                 catch (NullPointerException e){
@@ -159,10 +160,10 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                             }
                         });
 
+                } else {
+                    Toast toast = Toast.makeText(RegisterConsumptionActivity.this, getResources().getString(R.string.emptyFields), Toast.LENGTH_SHORT);
+                    toast.show();
                 }
-
-
-
 
             }
         });
@@ -183,10 +184,9 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         //substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
         substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "joints"));
         substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "glazen"));
-        substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "gram"));
         substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "ml"));
         substances.add(new Substance("LSD", getResources().getDrawable(R.drawable.lsd), "mg"));
-        substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "gram"));
+        substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "g"));
         substances.add(new Substance("Other", getResources().getDrawable(R.drawable.question), ""));
     }
 

@@ -101,5 +101,6 @@
     <string name="whatCausedIt">Waardoor gebeurde het?</string>
     <string name="feelingAbout">Hoe voel je je erover?</string>
     <string name="amount">Hoeveelheid:</string>
+    <string name="emptyFields">Sommige velden zijn nog leeg!</string>
 
 </resources>
