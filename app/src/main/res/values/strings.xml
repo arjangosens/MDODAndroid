@@ -93,5 +93,16 @@
     <string name="usage">My usage</string>
     <string name="myMessages">My Messages</string>
     <string name="newMessage">New Message</string>
+    <string name="location">Location:</string>
+    <string name="cause">Cause:</string>
+    <string name="When">When?</string>
+    <string name="howMuch">How much?</string>
+    <string name="whatDidYouUse">What did you use?</string>
+    <string name="currentlySelected">Currently selected:</string>
+    <string name="howMuch2">How much did you use?</string>
+    <string name="whereWereYou">Where were you?</string>
+    <string name="whatCausedIt">What caused it?</string>
+    <string name="feelingAbout">How do you feel about it?</string>
+    <string name="amount">Amount:</string>
 
 </resources>

@@ -17,7 +17,8 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
     private TextView timestampTextView;
     private TextView amountValueTextView;
     private TextView amountTypeTextView;
-    private TextView descriptionTextView;
+    private TextView locationTextView;
+    private TextView causeTextView;
     private ImageView feelingImg;
 
     @Override
@@ -38,7 +39,8 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
         timestampTextView = findViewById(R.id.act_consumptionDetail_textViewTimeStampField);
         amountValueTextView = findViewById(R.id.act_consumptionDetail_textViewAmountValueField);
         amountTypeTextView = findViewById(R.id.act_consumptionDetail_textViewAmountTypeField);
-        descriptionTextView = findViewById(R.id.act_consumptionDetail_textViewDescField);
+        locationTextView = findViewById(R.id.act_consumptionDetail_textViewLocationField);
+        causeTextView = findViewById(R.id.act_consumptionDetail_textViewCauseField);
         feelingImg = findViewById(R.id.act_consumptionDetail_imageViewType);
 
         if (consumption.getFeeling() == 0){
@@ -54,14 +56,16 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
             feelingImg.setImageResource(R.drawable.sad);
         }
         else if(consumption.getFeeling() == 4){
-            feelingImg.setImageResource(R.drawable.supersad);
+            feelingImg.setImageResource(R.drawable.verysadred);
         }
 
         typeTextView.setText(consumption.getType());
         amountTypeTextView.setText(String.valueOf(consumption.getMeasurement()));
         amountValueTextView.setText(String.valueOf(consumption.getAmount()));
         timestampTextView.setText(date + " | " + time);
-        descriptionTextView.setText(consumption.getDescription());
+        locationTextView.setText(consumption.getLocation());
+        causeTextView.setText(consumption.getCause());
+
 
 
     }

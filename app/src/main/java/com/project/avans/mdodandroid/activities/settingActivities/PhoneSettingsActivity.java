@@ -215,12 +215,7 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
                     }
                 });
     }
-    @Override
-    public void onBackPressed() {
-        Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
-    }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

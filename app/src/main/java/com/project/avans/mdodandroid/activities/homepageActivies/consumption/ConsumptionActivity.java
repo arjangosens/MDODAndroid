@@ -1,11 +1,13 @@
 package com.project.avans.mdodandroid.activities.homepageActivies.consumption;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -25,6 +27,7 @@ import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.adapters.consumptionAdapter.ConsumptionAdapter;
+import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationService;
 import com.project.avans.mdodandroid.domain.Consumption;
 import com.project.avans.mdodandroid.domain.ConsumptionsPerDay;
 
@@ -71,7 +74,23 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Notificat(getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft."), 60 * 1000);//for showing
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Goed gedaan, ga zo door!")
+                        .setCancelable(false)
+                        .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //do things
+                                NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
+                                //NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 2*24*60*60*1000, context);
+                                Intent i = new Intent(context, HomepageActivity.class);
+                                startActivity(i);
+
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
 
             }
         });
@@ -81,25 +100,12 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void getUsage() {
-        //Create test data (for now)
-//        ConsumptionsPerDay cpdToday = new ConsumptionsPerDay(date);
-//        Consumption consumption = new Consumption(date, "Alcohol", 5, "idk", 1);
-//        cpdToday.add(consumption);
-//
-//        date = Calendar.getInstance().getTime();
-//
-//        consumption = new Consumption(date, "Weed", 5, "idk2", 2);
-//        cpdToday.add(consumption);
-//
-//
-//        consumptionsPerDayArrayList.add(cpdToday);
-
         NetworkManager.getInstance().getUsage(new VolleyListener<JSONArray>() {
             @Override
             public void getResult(JSONArray result) {
                 try {
                     if (result.length() > 0) {
-                        for (int i = 0; i < result.length() - 1; i++) {
+                        for (int i = 0; i < result.length(); i++) {
                             Log.i("VOLLEY_GETRESULT", "Result:" + result.toString());
                             try {
                                 JSONObject resultObject = result.getJSONObject(i);
