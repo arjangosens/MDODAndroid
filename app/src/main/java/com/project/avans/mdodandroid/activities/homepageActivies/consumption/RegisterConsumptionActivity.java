@@ -243,29 +243,31 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         switch (v.getId()) {
             case R.id.con_smiley_happy:
                 selectSmiley(0);
-                feelingId = 5;
+                feelingId = 0;
                 break;
 
             case R.id.con_smiley_good:
                 selectSmiley(1);
-                feelingId = 4;
+                feelingId = 1;
                 break;
 
             case R.id.con_smiley_ok:
                 selectSmiley(2);
-                feelingId = 3;
+                feelingId = 2;
                 break;
 
             case R.id.con_smiley_sad:
                 selectSmiley(3);
-                feelingId = 2;
+                feelingId = 3;
                 break;
 
             case R.id.con_smiley_terrible:
                 selectSmiley(4);
-                feelingId = 1;
+                feelingId = 4;
                 break;
         }
+
+        Log.i(TAG, "feelingId = " + feelingId);
     }
 
 
