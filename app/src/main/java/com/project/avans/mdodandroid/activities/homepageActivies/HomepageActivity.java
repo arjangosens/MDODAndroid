@@ -151,7 +151,13 @@ public class HomepageActivity extends AppCompatActivity {
                             AlertDialog alert = builder.create();
                             alert.show();
                         }
-                        cleandays.setText("Je bent al " + object.getString("daysClean") + " dagen clean.");
+
+                        if(object.getString("daysClean").equals("1")){
+                            cleandays.setText("Je bent nu één dag clean, probeer door te zetten!");
+                        } else {
+                            cleandays.setText("Je bent al " + object.getString("daysClean") + " dagen clean.");
+                        }
+
                     }
 
                 } catch (JSONException e) {

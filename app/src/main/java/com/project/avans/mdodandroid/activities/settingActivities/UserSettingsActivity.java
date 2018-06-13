@@ -419,6 +419,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 break;
+            case R.id.menu_user_phone:
+                i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
+                startActivity(i);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }

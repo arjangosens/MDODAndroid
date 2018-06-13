@@ -17,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -24,6 +26,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
+import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
+import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
+import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
 import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationPublisher;
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
@@ -216,5 +221,39 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
         Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+    }
+
+    //adds custom menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        Intent i;
+        switch(id){
+            case R.id.menu_user_settings:
+                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
+                startActivity(i);
+                break;
+            case R.id.menu_logout:
+                i = new Intent(getApplicationContext(), LoginActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(i);
+                break;
+            case R.id.menu_user_phone:
+                i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
+                startActivity(i);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }

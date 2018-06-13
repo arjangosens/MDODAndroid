@@ -310,7 +310,13 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
                 break;
             case R.id.menu_logout:
                 i = new Intent(getApplicationContext(), LoginActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(i);
+                break;
+            case R.id.menu_user_phone:
+                i = new Intent(getApplicationContext(), PhoneSettingsActivity.class);
                 startActivity(i);
                 break;
             default:
@@ -318,8 +324,4 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
         }
         return true;
     }
-
-
-
-
 }

@@ -32,7 +32,6 @@ public class PhoneActivity extends AppCompatActivity {
     PhoneNumbers numbers;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,34 +43,32 @@ public class PhoneActivity extends AppCompatActivity {
         NetworkManager.getInstance().getClientPhone(new VolleyListener<JSONArray>() {
             @Override
             public void getResult(JSONArray result) {
-                try{
+                try {
                     String doctor;
-                    if (result.length() > 0)
-                    {
+                    if (result.length() > 0) {
                         Log.i("VOLLEY_GETRESULT", "Result:" + result.toString());
                         try {
                             JSONObject resultObject = result.getJSONObject(0);
 
                             String institution = (resultObject.getString("PNfirm"));
 
-                            try{
+                            try {
                                 doctor = (resultObject.getString("phonenumber"));
-                            }
-                            catch(JSONException e){
+                            } catch (JSONException e) {
                                 doctor = ("");
 
                             }
                             String buddy = (resultObject.getString("PNbuddy"));
                             String ice = (resultObject.getString("PNice"));
 
-                             numbers = new PhoneNumbers(institution, doctor, buddy, ice);
+                            numbers = new PhoneNumbers(institution, doctor, buddy, ice);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                    }}
-                catch (NullPointerException e){
+                    }
+                } catch (NullPointerException e) {
                     Toast toast = Toast.makeText(context, getResources().getString(R.string.registerAlertDialogTitle), Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -92,8 +89,7 @@ public class PhoneActivity extends AppCompatActivity {
                         call.setData(Uri.parse("tel:" + numbers.getPhoneInstitute()));
                         startActivity(call);
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(getResources().getString(R.string.numbernotfilled)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
                 }
@@ -115,8 +111,7 @@ public class PhoneActivity extends AppCompatActivity {
                         call.setData(Uri.parse("tel:" + numbers.getPhoneDoctor()));
                         startActivity(call);
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     Toast toast = Toast.makeText(context, getResources().getString(R.string.contactDr), Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -136,8 +131,7 @@ public class PhoneActivity extends AppCompatActivity {
                         call.setData(Uri.parse("tel:" + numbers.getPhoneBuddy()));
                         startActivity(call);
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(getResources().getString(R.string.numbernotfilled)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
                 }
@@ -157,8 +151,7 @@ public class PhoneActivity extends AppCompatActivity {
                         call.setData(Uri.parse("tel:" + numbers.getPhoneEmergency()));
                         startActivity(call);
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(getResources().getString(R.string.numbernotfilled)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
                 }
@@ -168,45 +161,14 @@ public class PhoneActivity extends AppCompatActivity {
         });
     }
 
-    //adds custom menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.settings_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        Intent i;
-        switch(id){
-            case R.id.menu_user_settings:
-                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
-                startActivity(i);
-                break;
-            case R.id.menu_logout:
-                i = new Intent(getApplicationContext(), LoginActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-                break;
-            case R.id.menu_user_phone:
-                i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
-                startActivity(i);
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return true;
-    }
 
 
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            switch (which){
+            switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
-                    Intent i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
+                    Intent i = new Intent(getApplicationContext(), PhoneSettingsActivity.class);
                     startActivity(i);
                     break;
 
@@ -221,6 +183,40 @@ public class PhoneActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+    }
+
+    //adds custom menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        Intent i;
+        switch (id) {
+            case R.id.menu_user_settings:
+                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
+                startActivity(i);
+                break;
+            case R.id.menu_logout:
+                i = new Intent(getApplicationContext(), LoginActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(i);
+                break;
+            case R.id.menu_user_phone:
+                i = new Intent(getApplicationContext(), PhoneSettingsActivity.class);
+                startActivity(i);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
 

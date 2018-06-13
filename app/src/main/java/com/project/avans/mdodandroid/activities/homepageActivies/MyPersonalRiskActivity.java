@@ -210,36 +210,38 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                                   }
 
     //adds custom menu
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            getMenuInflater().inflate(R.menu.settings_menu, menu);
-            return true;
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-            Intent i;
-            switch(id){
-                case R.id.menu_user_settings:
-                    i = new Intent(getApplicationContext(), UserSettingsActivity.class);
-                    startActivity(i);
-                    break;
-                case R.id.menu_logout:
-                    i = new Intent(getApplicationContext(), LoginActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                    break;
-                case R.id.menu_user_phone:
-                    i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
-                    startActivity(i);
-                    break;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-            return true;
+        Intent i;
+        switch (id) {
+            case R.id.menu_user_settings:
+                i = new Intent(getApplicationContext(), UserSettingsActivity.class);
+                startActivity(i);
+                break;
+            case R.id.menu_logout:
+                i = new Intent(getApplicationContext(), LoginActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(i);
+                break;
+            case R.id.menu_user_phone:
+                i = new Intent(getApplicationContext(), PhoneSettingsActivity.class);
+                startActivity(i);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+        return true;
+    }
 
 
         @Override
