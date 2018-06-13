@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
+import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
 import com.project.avans.mdodandroid.adapters.riskAdapter.AsyncRisk;
 import com.project.avans.mdodandroid.adapters.riskAdapter.OnAlertBoxAvailableR;
@@ -228,6 +229,10 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                 case R.id.menu_logout:
                     i = new Intent(getApplicationContext(), LoginActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                    break;
+                case R.id.menu_user_phone:
+                    i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
                     startActivity(i);
                     break;
                 default:
