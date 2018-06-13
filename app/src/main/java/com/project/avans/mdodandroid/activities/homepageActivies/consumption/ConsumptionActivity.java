@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -60,10 +61,8 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
 
         consumptionsPerDayArrayList = new ArrayList<>();
         date = Calendar.getInstance().getTime();
-
-        // Create test data
+        
         getUsage();
-
 
         cpdListView = (ListView) findViewById(R.id.activityConsumption_listView);
         consumptionAdapter = new ConsumptionAdapter(getLayoutInflater(), consumptionsPerDayArrayList);
@@ -91,6 +90,9 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
+                MediaPlayer applause= MediaPlayer.create(ConsumptionActivity.this, R.raw.applause);
+                applause.start();
 
             }
         });
@@ -141,14 +143,13 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                                     if (!consumptionsPerDayArrayList.isEmpty()) {
 
                                         boolean isAdded = false;
+                                        SimpleDateFormat compareDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                        String compareDate = compareDateFormat.format(parsedDate);
 
                                         for (ConsumptionsPerDay consumptionsPerDay : consumptionsPerDayArrayList) {
+                                            String compareCpdDate = compareDateFormat.format(consumptionsPerDay.getDate());
 
-                                            //Uses deprecated methods, should be changed in the future
-                                            if (consumptionsPerDay.getDate().getYear() == consumption.getDate().getYear()
-                                                    && consumptionsPerDay.getDate().getMonth() == consumption.getDate().getMonth()
-                                                    && consumptionsPerDay.getDate().getDay() == consumption.getDate().getDay()) {
-
+                                            if (compareDate.equals(compareCpdDate)) {
                                                 consumptionsPerDay.add(consumption);
                                                 Log.i("ConsumptionAct", "consumption added to existing cpd!");
                                                 isAdded = true;
@@ -182,8 +183,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
 
                     }
                 } catch (NullPointerException e) {
-//                    Toast toast = Toast.makeText(context, getResources().getString(R.string.registerAlertDialogTitle), duration);
-//                    toast.show();
+                    e.printStackTrace();
                 }
             }
         });
@@ -213,52 +213,5 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
         startActivity(i);
     }
 
-
-    public void Notificat(Notification notification, int delay) {
-
-
-        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
-    }
-
-    private Notification getNotification(String content) {
-        if (Build.VERSION.SDK_INT >= 26) {
-            channel();
-            Notification.Builder builder = new Notification.Builder(context, channelId);
-            builder.setContentTitle("Tactus Bericht");
-            builder.setContentText(content);
-            builder.setSmallIcon(R.drawable.tactuslogo_small_round);
-            return builder.build();
-        }
-        else{
-            Notification.Builder builder = new Notification.Builder(context);
-            builder.setContentTitle("Tactus Bericht");
-            builder.setContentText(content);
-            builder.setSmallIcon(R.drawable.tactuslogo_small_round);
-            return builder.build();
-        }
-    }
-    private void channel() {
-        if (Build.VERSION.SDK_INT >= 26) {
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            channelId = "Tactus channel Id";
-            CharSequence channelName = "Tactus";
-            int importance = NotificationManager.IMPORTANCE_LOW;
-            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
-            notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
-            notificationChannel.enableVibration(true);
-            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-    }
 
 }

@@ -101,5 +101,7 @@
     <string name="whatCausedIt">Waardoor gebeurde het?</string>
     <string name="feelingAbout">Hoe voel je je erover?</string>
     <string name="amount">Hoeveelheid:</string>
+    <string name="emptyFields">Sommige velden zijn nog leeg!</string>
+    <string name="used">U heeft gebruik geregistreerd, u kan het beste contact opnemen met Tactus of een bondgenoot. Wilt U dat nu doen?</string>
 
 </resources>
