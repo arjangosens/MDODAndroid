@@ -6,10 +6,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,9 +21,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.homepageActivies.consumption.ConsumptionActivity;
+import com.project.avans.mdodandroid.activities.homepageActivies.phoneActivity;
+import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.adapters.consumptionAdapter.ConRegSubstanceAdapter;
@@ -54,6 +59,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
     private ImageView smileyOk;
     private ImageView smileySad;
     private ImageView smileyTerrible;
+
     String substanceStr;
     Context context;
     private String channelId;
@@ -73,6 +79,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         initTypes();
         initSmileys();
 
+        substanceStr = "";
 
         substanceRv = (RecyclerView) findViewById(R.id.act_registerConsumption_RecyclerViewSubstances);
         typetextView = (TextView) findViewById(R.id.act_registerConsumption_textViewSelectionValue);
@@ -94,10 +101,14 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
             public void onItemClick(int position) {
                 Log.i(TAG, "onItemClick(" + position + ") called");
 
-                Substance substance = substances.get(position);
-                typetextView.setText(substance.getType());
-                substanceStr = String.valueOf(typetextView.getText());
-                initUnit(substance.getMeasurement());
+                try {
+                    Substance substance = substances.get(position);
+                    typetextView.setText(substance.getType());
+                    substanceStr = String.valueOf(typetextView.getText());
+                    initUnit(substance.getMeasurement());
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -111,12 +122,21 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
                 //TODO checks for empty fields
 
-                String location = String.valueOf(LocationTextView.getText());
-                String cause = String.valueOf(causeTextView.getText());
-                String amountTmp = String.valueOf(amountTextView.getText());
-                Integer amount = Integer.parseInt(amountTmp);
+                String location = "";
+                String cause = "";
+                int amount = 0;
 
-                if(!substanceStr.equals("") && !location.equals("") && !cause.equals("") && feelingId != null){
+                try {
+                    location = String.valueOf(LocationTextView.getText());
+                    cause = String.valueOf(causeTextView.getText());
+                    amount = Integer.valueOf(amountTextView.getText().toString());
+
+                } catch (NullPointerException | NumberFormatException e){
+                    Log.i(TAG, "Some fields were still empty!");
+                    e.printStackTrace();
+                }
+
+                if(!substanceStr.isEmpty() && !location.isEmpty() && !cause.isEmpty() && feelingId != null){
 
                     Log.i("data, ",location + " " + amount + " " + feelingId +  " " + cause + " " + substanceId );
 
@@ -127,14 +147,17 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                                     Log.i("TEST: ", object.toString());
 
                                     if (!(object == null)) {
-                                        Intent i = new Intent(getApplicationContext(), ConsumptionActivity.class);
+
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
                                         NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
                                         //NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 2*24*60*60*1000, context);
-                                        startActivity(i);
+                                        builder.setMessage(getResources().getString(R.string.used)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
+
 
 
                                     } else {
-                                        //TODO error message
+
                                     }
                                 }
                                 catch (NullPointerException e){
@@ -144,10 +167,10 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                             }
                         });
 
+                } else {
+                    Toast toast = Toast.makeText(RegisterConsumptionActivity.this, getResources().getString(R.string.emptyFields), Toast.LENGTH_SHORT);
+                    toast.show();
                 }
-
-
-
 
             }
         });
@@ -168,10 +191,9 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         //substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
         substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "joints"));
         substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "glazen"));
-        substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "gram"));
         substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "ml"));
         substances.add(new Substance("LSD", getResources().getDrawable(R.drawable.lsd), "mg"));
-        substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "gram"));
+        substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "g"));
         substances.add(new Substance("Other", getResources().getDrawable(R.drawable.question), ""));
     }
 
@@ -270,5 +292,22 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
         Log.i(TAG, "feelingId = " + feelingId);
     }
+
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    Intent i = new Intent(getApplicationContext(),phoneActivity.class);
+                    startActivity(i);
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    Intent i2 = new Intent(getApplicationContext(), ConsumptionActivity.class);
+                    startActivity(i2);
+                    break;
+            }
+        }
+    };
 
 }

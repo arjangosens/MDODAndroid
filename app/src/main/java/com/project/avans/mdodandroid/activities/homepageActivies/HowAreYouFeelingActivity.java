@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid.activities.homepageActivies;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
+import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationService;
 
 import org.json.JSONObject;
 
@@ -26,6 +28,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
     private Button buttonConfirm;
     private TextView description;
     private TextView error;
+    Context context;
 
     //create final strings because the emotions stay the same
     final String HAPPY = "Happy";
@@ -41,6 +44,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feeling);
+        context = this;
 
         //Find colors
         color = getResources().getColor(R.color.selected);
@@ -128,6 +132,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
 
                         if (!(object == null))
                         {
+                            NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gevoel ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
                             Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                             startActivity(intent);
                         } else {
