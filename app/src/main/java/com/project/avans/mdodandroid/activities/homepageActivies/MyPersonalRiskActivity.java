@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -49,8 +50,10 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         setContentView(R.layout.activity_personal_risks);
 
         context = this;
-        //removes the title from the title bar in my personal risks
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //set the toolbar so it has the right image
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         //Risk e = new Risk("1", "test");
         //RiskList.add(e);
@@ -205,7 +208,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
             });
                                   }
 
-                //adds custom menu
+    //adds custom menu
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {
             getMenuInflater().inflate(R.menu.settings_menu, menu);
@@ -241,8 +244,4 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
             this.riskup = risk;
             showUpdateDialog();
         }
-
-
-
-
 }

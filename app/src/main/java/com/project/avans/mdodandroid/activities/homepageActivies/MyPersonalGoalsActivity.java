@@ -42,10 +42,10 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_personal_goals);
+
+        //set the toolbar so it has the right image
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        //removes the title from the title bar in My personal goals
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Button add = findViewById(R.id.button_goals_add);
         add.setOnClickListener(new View.OnClickListener() {
