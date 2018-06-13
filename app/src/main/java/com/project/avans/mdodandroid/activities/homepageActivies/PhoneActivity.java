@@ -27,7 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class phoneActivity extends AppCompatActivity {
+public class PhoneActivity extends AppCompatActivity {
     Context context = this;
     PhoneNumbers numbers;
 
@@ -37,6 +37,9 @@ public class phoneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
+
+        //set the toolbar so it has the right image
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 
         NetworkManager.getInstance().getClientPhone(new VolleyListener<JSONArray>() {
             @Override

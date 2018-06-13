@@ -27,7 +27,7 @@
         <activity android:name=".activities.homepageActivies.HowAreYouFeelingActivity" />
         <activity android:name=".activities.homepageActivies.MyDifficultMomentsActivity" />
         <activity android:name=".activities.settingActivities.PhoneSettingsActivity" />
-        <activity android:name=".activities.homepageActivies.phoneActivity" />
+        <activity android:name=".activities.homepageActivies.PhoneActivity" />
         <activity android:name=".activities.homepageActivies.consumption.ConsumptionDetailActivity" />
         <activity android:name=".activities.homepageActivies.consumption.ConsumptionSpecificDayActivity" />
         <activity android:name=".activities.homepageActivies.consumption.RegisterConsumptionActivity" />

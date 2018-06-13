@@ -20,7 +20,6 @@ import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsA
 import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
-import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,7 +71,7 @@ public class HomepageActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), phoneActivity.class);
+                Intent i = new Intent(getApplicationContext(), PhoneActivity.class);
                 startActivity(i);
             }
         });

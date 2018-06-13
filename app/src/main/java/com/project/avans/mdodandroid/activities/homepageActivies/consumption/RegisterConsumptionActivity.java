@@ -1,16 +1,8 @@
 package com.project.avans.mdodandroid.activities.homepageActivies.consumption;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
-import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,13 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
-import com.project.avans.mdodandroid.activities.homepageActivies.consumption.ConsumptionActivity;
-import com.project.avans.mdodandroid.activities.homepageActivies.phoneActivity;
-import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
+import com.project.avans.mdodandroid.activities.homepageActivies.PhoneActivity;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.adapters.consumptionAdapter.ConRegSubstanceAdapter;
-import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationPublisher;
 import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationService;
 import com.project.avans.mdodandroid.domain.Substance;
 
@@ -298,7 +287,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         public void onClick(DialogInterface dialog, int which) {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
-                    Intent i = new Intent(getApplicationContext(),phoneActivity.class);
+                    Intent i = new Intent(getApplicationContext(),PhoneActivity.class);
                     startActivity(i);
                     break;
 
