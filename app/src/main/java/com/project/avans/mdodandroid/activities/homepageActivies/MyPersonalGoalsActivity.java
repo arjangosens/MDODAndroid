@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,8 +43,9 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_personal_goals);
 
-        //removes the title from the title bar in My personal goals
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //set the toolbar so it has the right image
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         Button add = findViewById(R.id.button_goals_add);
         add.setOnClickListener(new View.OnClickListener() {

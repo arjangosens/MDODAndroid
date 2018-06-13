@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -58,6 +59,10 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consumption);
         context = this;
+
+        //set the toolbar so it has the right image
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         consumptionsPerDayArrayList = new ArrayList<>();
         date = Calendar.getInstance().getTime();

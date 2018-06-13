@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,9 +44,9 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
         setContentView(R.layout.activity_my_difficult_moments);
 
         NetworkManager.getInstance().getMoment(this);
-
-        //removes the title from the title bar in My Difficult Moments
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //set the toolbar so it has the right image
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         Button add = findViewById(R.id.button_moments_add);
         add.setOnClickListener(new View.OnClickListener() {

@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/tactuslogo_small_round"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
 
         <activity android:name=".activities.loginAndRegisterActivities.LoginActivity"><intent-filter>
@@ -31,15 +32,6 @@
         <activity android:name=".activities.homepageActivies.consumption.ConsumptionSpecificDayActivity" />
         <activity android:name=".activities.homepageActivies.consumption.RegisterConsumptionActivity" />
 
-        <service
-            android:name=".applicationLogic.notifications.NotificationService"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="your.app.domain.NotificationService" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </service>
 
         <receiver android:name=".applicationLogic.notifications.NotificationPublisher" />
 
