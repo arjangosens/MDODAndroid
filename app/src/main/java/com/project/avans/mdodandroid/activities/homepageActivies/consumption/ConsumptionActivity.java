@@ -145,13 +145,16 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                                     if (!consumptionsPerDayArrayList.isEmpty()) {
 
                                         boolean isAdded = false;
+                                        SimpleDateFormat compareDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                        String compareDate = compareDateFormat.format(parsedDate);
+
 
                                         for (ConsumptionsPerDay consumptionsPerDay : consumptionsPerDayArrayList) {
 
                                             //Uses deprecated methods, should be changed in the future
-                                            if (consumptionsPerDay.getDate().getYear() == consumption.getDate().getYear()
-                                                    && consumptionsPerDay.getDate().getMonth() == consumption.getDate().getMonth()
-                                                    && consumptionsPerDay.getDate().getDay() == consumption.getDate().getDay()) {
+                                            String compareCpdDate = compareDateFormat.format(consumptionsPerDay.getDate());
+
+                                            if (compareDate.equals(compareCpdDate)) {
 
                                                 consumptionsPerDay.add(consumption);
                                                 Log.i("ConsumptionAct", "consumption added to existing cpd!");
