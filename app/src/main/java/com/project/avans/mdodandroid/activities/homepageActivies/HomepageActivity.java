@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.homepageActivies.consumption.ConsumptionActivity;
@@ -26,10 +27,17 @@ public class HomepageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
-
+        context = this;
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         //removes the title from the title bar in the HomepageActivity
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setTitle(getResources().getString(R.string.homePageActivityHeader));
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //getSupportActionBar().setTitle(getResources().getString(R.string.homePageActivityHeader));
+        //getSupportActionBar().setStackedBackgroundDrawable(getResources().getDrawable(R.drawable.tactuslogo_small));
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.tactuslogo_small));
+
+
 
         Button btn = (Button) findViewById(R.id.goalbutton);
         btn.setOnClickListener(new View.OnClickListener() {

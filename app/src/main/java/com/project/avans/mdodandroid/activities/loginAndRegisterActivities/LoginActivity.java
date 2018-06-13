@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //removes the title from the title bar in mainactivity
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         email = (EditText) findViewById(R.id.editText_Email);
         password = (EditText) findViewById(R.id.editText_Password);
