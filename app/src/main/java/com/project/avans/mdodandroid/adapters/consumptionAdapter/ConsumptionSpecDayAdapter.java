@@ -49,7 +49,7 @@ public class ConsumptionSpecDayAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.activity_row_consumptionspecifcday, null);
+            view = inflater.inflate(R.layout.row_consumptionspecifcday, null);
             viewHolder = new ViewHolder();
             viewHolder.type = view.findViewById(R.id.row_consumptionSpecificDay_textViewType);
             viewHolder.timestamp = view.findViewById(R.id.row_consumptionSpecificDay_textViewTimeStamp);

@@ -82,6 +82,15 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+        Button btn6 = (Button) findViewById(R.id.messagesButton);
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MyMessagesActivity.class);
+                startActivity(i);
+            }
+        });
+
         NetworkManager.getInstance().getCleanDays(new VolleyListener<JSONObject>() {
             @Override
             public void getResult(JSONObject object) {

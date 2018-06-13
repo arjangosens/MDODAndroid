@@ -49,7 +49,7 @@ public class ConsumptionAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.activity_row_consumption, null);
+            view = inflater.inflate(R.layout.row_consumption, null);
             viewHolder = new ViewHolder();
             viewHolder.types = view.findViewById(R.id.row_consumption_textViewTypes);
             viewHolder.date = view.findViewById(R.id.row_consumption_textViewDate);

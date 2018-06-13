@@ -32,7 +32,7 @@ public class ConRegSubstanceAdapter extends RecyclerView.Adapter<ConRegSubstance
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_row_consumption_type, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_consumption_type, parent, false);
         return new ViewHolder(v);
     }
 

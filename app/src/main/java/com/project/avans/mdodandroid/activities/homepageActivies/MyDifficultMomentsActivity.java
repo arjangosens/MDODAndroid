@@ -42,6 +42,8 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_difficult_moments);
 
+        NetworkManager.getInstance().getMoment(this);
+
         //removes the title from the title bar in My Difficult Moments
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -52,8 +54,6 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
                 showUpdateDialog();
             }
         });
-
-        NetworkManager.getInstance().getMoment(this);
 
         ListView listView = findViewById(R.id.listView_moments);
         adapter = new MomentAdapter(this, getLayoutInflater(), moments);

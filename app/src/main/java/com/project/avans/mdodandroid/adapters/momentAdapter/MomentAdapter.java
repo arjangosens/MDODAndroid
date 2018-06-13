@@ -52,7 +52,7 @@ public class MomentAdapter extends BaseAdapter {
         MomentAdapter.ViewHolder viewHolder;
 
         if(view == null){
-            view = inflater.inflate(R.layout.activity_row_moment, null);
+            view = inflater.inflate(R.layout.row_moment, null);
             viewHolder = new MomentAdapter.ViewHolder();
 
             viewHolder.date = view.findViewById(R.id.textView_moment_date);
