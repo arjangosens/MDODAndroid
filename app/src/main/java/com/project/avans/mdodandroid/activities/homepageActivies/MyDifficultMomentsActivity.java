@@ -44,6 +44,7 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
         setContentView(R.layout.activity_my_difficult_moments);
 
         NetworkManager.getInstance().getMoment(this);
+
         //set the toolbar so it has the right image
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
