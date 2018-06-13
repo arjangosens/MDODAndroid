@@ -61,10 +61,8 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
 
         consumptionsPerDayArrayList = new ArrayList<>();
         date = Calendar.getInstance().getTime();
-
-        // Create test data
+        
         getUsage();
-
 
         cpdListView = (ListView) findViewById(R.id.activityConsumption_listView);
         consumptionAdapter = new ConsumptionAdapter(getLayoutInflater(), consumptionsPerDayArrayList);
@@ -148,14 +146,10 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                                         SimpleDateFormat compareDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                                         String compareDate = compareDateFormat.format(parsedDate);
 
-
                                         for (ConsumptionsPerDay consumptionsPerDay : consumptionsPerDayArrayList) {
-
-                                            //Uses deprecated methods, should be changed in the future
                                             String compareCpdDate = compareDateFormat.format(consumptionsPerDay.getDate());
 
                                             if (compareDate.equals(compareCpdDate)) {
-
                                                 consumptionsPerDay.add(consumption);
                                                 Log.i("ConsumptionAct", "consumption added to existing cpd!");
                                                 isAdded = true;
@@ -189,8 +183,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
 
                     }
                 } catch (NullPointerException e) {
-//                    Toast toast = Toast.makeText(context, getResources().getString(R.string.registerAlertDialogTitle), duration);
-//                    toast.show();
+                    e.printStackTrace();
                 }
             }
         });
