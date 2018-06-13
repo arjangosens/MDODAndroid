@@ -92,6 +92,7 @@
     <string name="usage">Mijn gebruik</string>
     <string name="myMessages">Mijn berichten</string>
     <string name="newMessage">Nieuw bericht</string>
+    <string name="message">Bericht:</string>
     <string name="location">Locatie:</string>
     <string name="cause">Oorzaak:</string>
     <string name="When">Wanneer?</string>
@@ -105,5 +106,6 @@
     <string name="amount">Hoeveelheid:</string>
     <string name="emptyFields">Sommige velden zijn nog leeg!</string>
     <string name="used">U heeft gebruik geregistreerd, u kan het beste contact opnemen met Tactus of een bondgenoot. Wilt U dat nu doen?</string>
+    <string name="sendBy">Verzonden door:</string>
 
 </resources>

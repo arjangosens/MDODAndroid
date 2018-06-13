@@ -93,6 +93,7 @@
     <string name="usage">My usage</string>
     <string name="myMessages">My Messages</string>
     <string name="newMessage">New Message</string>
+    <string name="message">Message:</string>
     <string name="location">Location:</string>
     <string name="cause">Cause:</string>
     <string name="When">When?</string>
@@ -106,5 +107,6 @@
     <string name="amount">Amount:</string>
     <string name="emptyFields">Some fields are still empty!</string>
     <string name="used">There is a usage registered, please contact your psychologist</string>
+    <string name="sendBy">Send By:</string>
 
 </resources>

@@ -51,6 +51,7 @@ public class MessageAdapter extends BaseAdapter {
 
             viewHolder.date = view.findViewById(R.id.textView_messages_date);
             viewHolder.message = view.findViewById(R.id.textView_message_view);
+            viewHolder.sendBy = view.findViewById(R.id.textView_message_sendBy);
             view.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) view.getTag();
@@ -61,6 +62,7 @@ public class MessageAdapter extends BaseAdapter {
 
         viewHolder.date.setText(message.getDate());
         viewHolder.message.setText(message.getMessage());
+        viewHolder.sendBy.setText(message.getSendBy());
 
         return view;
     }
@@ -68,5 +70,6 @@ public class MessageAdapter extends BaseAdapter {
     private static class ViewHolder{
         TextView date;
         TextView message;
+        TextView sendBy;
     }
 }

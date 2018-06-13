@@ -92,34 +92,34 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
             @Override
             public void onClick(View v) {
                 String field = String.valueOf(description.getText());
-                
 
-                if(field.equals("")){
+
+                if (field.equals("")) {
                     error.setText(getResources().getString(R.string.descriptionInvalid));
                 }
 
                 int value;
 
-                if(smileyHappy.isSelected()){
+                if (smileyHappy.isSelected()) {
                     value = 1;
                     Log.i("IMAGE SELECTED: ", "1");
-                    
-                } else if (smileyGood.isSelected()){
+
+                } else if (smileyGood.isSelected()) {
                     value = 2;
                     Log.i("IMAGE SELECTED: ", "2");
-                    
-                } else if (smileyOk.isSelected()){
+
+                } else if (smileyOk.isSelected()) {
                     value = 3;
                     Log.i("IMAGE SELECTED: ", "3");
-                    
+
                 } else if (smileySad.isSelected()) {
                     value = 4;
                     Log.i("IMAGE SELECTED: ", "4");
-                    
-                } else if (smileyTerrible.isSelected()){
+
+                } else if (smileyTerrible.isSelected()) {
                     value = 5;
                     Log.i("IMAGE SELECTED: ", "5");
-                    
+
                 } else {
                     value = 0;
                     Log.i("IMAGE SELECTED: ", "NO IMAGE SELECTED");
@@ -131,8 +131,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                     public void getResult(JSONObject object) {
                         Log.i("TEST: ", object.toString());
 
-                        if (!(object == null))
-                        {
+                        if (!(object == null)) {
                             NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gevoel ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
                             Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                             startActivity(intent);
@@ -157,12 +156,10 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
         String emotion = String.valueOf(v.getTag());
 
 
-
-
         //this selects the current smiley and deselects the other smileys
-        switch(emotion){
+        switch (emotion) {
             case HAPPY:
-                if(v.isSelected()){
+                if (v.isSelected()) {
                     v.setSelected(false);
                     smileyHappy.setColorFilter(color);
                 } else {
@@ -181,7 +178,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                 }
                 break;
             case GOOD:
-                if(v.isSelected()){
+                if (v.isSelected()) {
                     v.setSelected(false);
                     smileyGood.setColorFilter(color);
                 } else {
@@ -200,7 +197,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                 }
                 break;
             case OK:
-                if(v.isSelected()){
+                if (v.isSelected()) {
                     v.setSelected(false);
                     smileyOk.setColorFilter(color);
                 } else {
@@ -220,7 +217,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                 }
                 break;
             case SAD:
-                if(v.isSelected()){
+                if (v.isSelected()) {
                     v.setSelected(false);
                     smileySad.setColorFilter(color);
                 } else {
@@ -239,7 +236,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                 }
                 break;
             case TERRIBLE:
-                if(v.isSelected()){
+                if (v.isSelected()) {
                     v.setSelected(false);
                     smileyTerrible.setColorFilter(color);
                 } else {
