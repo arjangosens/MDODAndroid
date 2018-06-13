@@ -74,7 +74,6 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onClick(View v) {
 
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Goed gedaan, ga zo door!")
                         .setCancelable(false)
@@ -85,15 +84,14 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                                 //NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 2*24*60*60*1000, context);
                                 Intent i = new Intent(context, HomepageActivity.class);
                                 startActivity(i);
-
                             }
                         });
+
                 AlertDialog alert = builder.create();
                 alert.show();
 
                 MediaPlayer applause= MediaPlayer.create(ConsumptionActivity.this, R.raw.applause);
                 applause.start();
-
             }
         });
 
@@ -116,8 +114,10 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                                 String measurement = resultObject.getString("measuringUnit");
                                 String location = resultObject.getString("location");
                                 String cause = resultObject.getString("cause");
+
                                 int amount = resultObject.getInt("amount");
                                 int mood = resultObject.getInt("mood");
+
                                 String date = resultObject.getString("usedDate_formatted");
 
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd:HH-mm");
@@ -126,6 +126,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                                 try {
                                     parsedDate = dateFormat.parse(date);
                                     Log.i("ConsumptionAct", "date: " + parsedDate);
+
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
@@ -134,6 +135,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
 
                                 if (parsedDate != null) {
                                     consumption = new Consumption(parsedDate, name, amount, location, cause, mood, measurement);
+
                                 } else {
                                     Log.i("ConsumptionAct", "Date not parsed!");
                                     consumption = null;
@@ -161,7 +163,6 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                                             Log.i("ConsumptionAct", "cpd not found!, created new one");
                                             consumptionsPerDay.add(consumption);
                                             consumptionsPerDayArrayList.add(consumptionsPerDay);
-
                                         }
 
                                     } else {
@@ -169,7 +170,6 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                                         Log.i("ConsumptionAct", "cpd not found!, created new one");
                                         consumptionsPerDay.add(consumption);
                                         consumptionsPerDayArrayList.add(consumptionsPerDay);
-
                                     }
                                 }
 
@@ -182,6 +182,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                         }
 
                     }
+
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
@@ -203,7 +204,6 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
     public void onClick(View v) {
         Intent intent = new Intent(getApplicationContext(), RegisterConsumptionActivity.class);
         startActivity(intent);
-
     }
 
     @Override
@@ -212,6 +212,4 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
-
-
 }
