@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid.activities.homepageActivies;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -14,12 +15,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
 import com.project.avans.mdodandroid.adapters.messageAdapter.MessageAdapter;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.domain.Message;
@@ -36,20 +39,27 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
     private View updateDialogView;
     private MessageAdapter messageAdapter = null;
     private ArrayList<Message> messagesList = new ArrayList<>();
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_messages);
-
+        context = this;
         //set the toolbar so it has the right image
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         messages = findViewById(R.id.listView_message);
         newMessage = findViewById(R.id.button_new_message);
-
-        NetworkManager.getInstance().getMessages(this);
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else {
+        NetworkManager.getInstance().getMessages(this);}
 
         messageAdapter = new MessageAdapter(getLayoutInflater(), messagesList, this);
         messages.setAdapter(messageAdapter);
@@ -69,8 +79,13 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
         if (!(object == null)) {
             for (int i = 0; i < object.length(); i++) {
                 try {
+                    String date = object.getJSONObject(i).getString("date");
+                    String[] parts = date.split("[-T.]+");
+                    Log.i("TESTT: ", String.valueOf(parts.length));
+                    String date2 = parts[2] + "-" + parts[1] + "-" + parts[0] + " " + parts[3];
+
                     Log.i("TEST2: ", object.getJSONObject(i).toString());
-                    messagesList.add(new Message(object.getJSONObject(i).getString("message"), object.getJSONObject(i).getString("date"), object.getJSONObject(i).getString("sendBy")));
+                    messagesList.add(new Message(object.getJSONObject(i).getString("message"), date2 , object.getJSONObject(i).getString("sendBy")));
                     messageAdapter.notifyDataSetChanged();
                     Log.i("TEST3: ", messagesList.toString());
                 } catch (JSONException e) {
@@ -130,6 +145,11 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
                 if (field.equals("")) {
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
                 } else {
+                    if (ConnectionChecker.CheckCon(context)) {
+                        Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    } else {
                     NetworkManager.getInstance().postMessage(field, new VolleyListener<JSONObject>() {
                         @Override
                         public void getResult(JSONObject object) {
@@ -138,10 +158,10 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
                                 messagesList.add(0, new Message(field, "zojuist", "uzelf"));
                                 dialog.dismiss();
                             } else {
-                                incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong));
+                                incorrectFieldTextView.setText(getResources().getString(R.string.messageNotsend));
                             }
                         }
-                    });
+                    });}
                 }
             }
         });

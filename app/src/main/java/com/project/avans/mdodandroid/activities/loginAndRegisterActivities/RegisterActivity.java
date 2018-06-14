@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 import com.project.avans.mdodandroid.domain.User;
 
@@ -119,10 +120,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if (insert.isEmpty()) {
                         insert = "";
                     }
+
+                    if (ConnectionChecker.CheckCon(context)) {
+                        Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
                     User user = new User(username, insert, lastname, email, dateOfBirth);
                     register(user, password);
                     Log.i("user", "user: " + user.getDate() + " " + user.getEmail());
-                    Log.i("infix", "infix: " + user.getInsertion() + "I");
+                    Log.i("infix", "infix: " + user.getInsertion() + "I");}
 
 
                 } else {

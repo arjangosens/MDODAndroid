@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid.activities.homepageActivies;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -17,11 +18,13 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.adapters.momentAdapter.MomentAdapter;
@@ -38,13 +41,22 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
     private SeekBar seekBar;
     private ArrayList<Moment> moments = new ArrayList<>();
     private MomentAdapter adapter;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_difficult_moments);
+        context= this;
 
-        NetworkManager.getInstance().getMoment(this);
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else {
+        NetworkManager.getInstance().getMoment(this);}
 
         //set the toolbar so it has the right image
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -92,7 +104,13 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
 
         alertDialog = builder.create();
         alertDialog.setOnShowListener(this);
-
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else {
         NetworkManager.getInstance().getSubstances(new VolleyListener<JSONArray>() {
             private ArrayList<String> substances = new ArrayList<>();
             private final Spinner spinner = updateDialogView.findViewById(R.id.spinner_moment);
@@ -110,7 +128,7 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
                     e.printStackTrace();
                 }
             }
-        });
+        });}
 
         alertDialog.show();
     }
@@ -129,16 +147,16 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
                 final Spinner spinner = updateDialogView.findViewById(R.id.spinner_moment);
 
 
-                Log.i("TEST: ", String.valueOf(spinner.getSelectedItemPosition()));
-                Log.i("TEST1234: ", String.valueOf(spinner.getSelectedItem()));
-
-
                 String field = String.valueOf(updateDialogGenericEditText.getText());
                 Log.i("DialogUpdateProfile", "Value of field: " + field);
 
                 if (field.equals("")) {
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
                 } else {
+                    if (ConnectionChecker.CheckCon(context)) {
+                        Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
                     NetworkManager.getInstance().postMoment( String.valueOf(spinner.getSelectedItem()),String.valueOf(seekBar.getProgress()), String.valueOf(updateDialogGenericEditText.getText()), String.valueOf(prevention.getText()), new VolleyListener<JSONObject>(){
                         @Override
                         public void getResult(JSONObject result) {
@@ -151,7 +169,7 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
                                 incorrectFieldTextView.setText(getResources().getString(R.string.somethingWentWrong));
                             }
                         }
-                    });
+                    });}
                 }
             }
         });

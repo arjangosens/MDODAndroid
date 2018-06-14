@@ -31,7 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/laugh" />
+                app:srcCompat="@drawable/laugh"
+                android:tint="@color/DarkGreen"/>
 
             <ImageView
                 android:id="@+id/con_smiley_good"
@@ -49,7 +50,8 @@
                 android:layout_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/con_smiley_good"
                 app:layout_constraintTop_toTopOf="@+id/con_smiley_good"
-                app:srcCompat="@drawable/meh" />
+                app:srcCompat="@drawable/meh"
+                android:tint="@color/Yellow"/>
 
             <ImageView
                 android:id="@+id/con_smiley_sad"
@@ -58,7 +60,8 @@
                 android:layout_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/con_smiley_ok"
                 app:layout_constraintTop_toTopOf="@+id/con_smiley_ok"
-                app:srcCompat="@drawable/sad" />
+                app:srcCompat="@drawable/sad"
+                android:tint="@color/LightRed"/>
 
             <ImageView
                 android:id="@+id/con_smiley_terrible"
@@ -68,7 +71,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView_feeling"
                 app:layout_constraintStart_toEndOf="@+id/con_smiley_sad"
                 app:layout_constraintTop_toTopOf="@+id/con_smiley_sad"
-                app:srcCompat="@drawable/verysadred" />
+                app:srcCompat="@drawable/verysadred"
+                android:tint="@color/DarkRed"/>
         </LinearLayout>
 
         <TextView

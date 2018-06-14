@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
@@ -162,15 +163,14 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
 
     private void getValues() {
 
-//
-//        // Fill types with test values
-//        institution.setValue("+31612345678");
-//        doctor.setValue("+31612345678");
-//        buddy.setValue("+31612345678");
-//        ice.setValue("+31612345678");
-//        ((BaseAdapter) settingsListview.getAdapter()).notifyDataSetChanged();
 
-        //TODO: Replace test values with actual API get call
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else {
 
         NetworkManager.getInstance().getClientPhone(new VolleyListener<JSONArray>() {
             @Override
@@ -207,17 +207,21 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
                     toast.show();
                 }
             }
-        });
+        });}
     }
 
     private void updatePhone() {
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
         NetworkManager.getInstance().updatephone(institution.getValue(), doctor.getValue(), buddy.getValue(),
                 ice.getValue(), id,  new VolleyListener<JSONObject>() {
                     @Override
                     public void getResult(JSONObject object) {
 
                     }
-                });
+                });}
     }
 
 
@@ -290,6 +294,12 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 
     //adds custom menu
     @Override
@@ -316,8 +326,8 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
                 startActivity(i);
                 break;
             case R.id.menu_user_phone:
-                i = new Intent(getApplicationContext(), PhoneSettingsActivity.class);
-                startActivity(i);
+//                i = new Intent(getApplicationContext(), PhoneSettingsActivity.class);
+//                startActivity(i);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

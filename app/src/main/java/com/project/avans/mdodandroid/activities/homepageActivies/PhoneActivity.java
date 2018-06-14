@@ -19,6 +19,7 @@ import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.domain.PhoneNumbers;
@@ -39,7 +40,16 @@ public class PhoneActivity extends AppCompatActivity {
 
         //set the toolbar so it has the right image
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+
+        } else {
         NetworkManager.getInstance().getClientPhone(new VolleyListener<JSONArray>() {
             @Override
             public void getResult(JSONArray result) {
@@ -69,11 +79,11 @@ public class PhoneActivity extends AppCompatActivity {
 
                     }
                 } catch (NullPointerException e) {
-                    Toast toast = Toast.makeText(context, getResources().getString(R.string.registerAlertDialogTitle), Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(context, getResources().getString(R.string.registerAlertDialogTitle), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
-        });
+        });}
 
 
         Button btn = (Button) findViewById(R.id.institute_button);

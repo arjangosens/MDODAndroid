@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
@@ -25,6 +26,7 @@ import com.project.avans.mdodandroid.adapters.riskAdapter.OnAlertBoxAvailableR;
 import com.project.avans.mdodandroid.adapters.riskAdapter.RiskListener;
 import com.project.avans.mdodandroid.adapters.riskAdapter.OnRiskClick;
 import com.project.avans.mdodandroid.adapters.riskAdapter.RiskAdapter;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.domain.Risk;
@@ -59,11 +61,19 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         //Risk e = new Risk("1", "test");
         //RiskList.add(e);
         //getRisk();
+
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else {
         url = "https://mdod.herokuapp.com/api/v1/risk";
 
         String[] urls = new String[] {url};
         AsyncRisk task = new AsyncRisk((RiskListener) this);
-        task.execute(urls);
+        task.execute(urls);}
 
         Button add = findViewById(R.id.button_risks);
         add.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +123,12 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
 
             builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
                 public void onClick(final DialogInterface dialog, int id) {
+
+                    if (ConnectionChecker.CheckCon(context)) {
+                        Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    } else {
                     NetworkManager.getInstance().deleteRisk(riskup.getRiskID(),  new VolleyListener<JSONObject>(){
                         @Override
                         public void getResult(JSONObject result)
@@ -127,7 +143,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                             }
                         }
 
-                    });
+                    });}
                 }
             });
         }
@@ -161,14 +177,19 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
                 } else {
-                    if (type.equals("")) {
-                        NetworkManager.getInstance().postRisk(updateDialogGenericEditText.getText().toString(),  new VolleyListener<JSONObject>(){
-                            @Override
-                            public void getResult(JSONObject result)
-                            {
+
+                    if (ConnectionChecker.CheckCon(context)) {
+                        Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    } else {
+                        if (type.equals("")) {
+                            NetworkManager.getInstance().postRisk(updateDialogGenericEditText.getText().toString(), new VolleyListener<JSONObject>() {
+                                @Override
+                                public void getResult(JSONObject result) {
 
                                     String RiskId2 = "";
-                                    if (!(result == null)){
+                                    if (!(result == null)) {
                                         try {
                                             RiskId2 = result.getString("riskId");
                                         } catch (JSONException e) {
@@ -187,12 +208,10 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                             });
 
                         } else if (type.equals("update")) {
-                            NetworkManager.getInstance().updateRisk(updateDialogGenericEditText.getText().toString(), riskup, new VolleyListener<String>(){
+                            NetworkManager.getInstance().updateRisk(updateDialogGenericEditText.getText().toString(), riskup, new VolleyListener<String>() {
                                 @Override
-                                public void getResult(String result)
-                                {
-                                    if (!result.isEmpty())
-                                    {
+                                public void getResult(String result) {
+                                    if (!result.isEmpty()) {
                                         System.out.println(RiskList.indexOf(riskup));
                                         dialog.dismiss();
                                         RiskList.get(RiskList.indexOf(riskup)).setRisk(updateDialogGenericEditText.getText().toString());
@@ -206,8 +225,9 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                         }
                     }
                 }
-            });
-                                  }
+            }
+        });
+    }
 
     //adds custom menu
     @Override
@@ -244,11 +264,11 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     }
 
 
-        @Override
-        public void onAlertBoxAvailableR(Risk risk) {
-            Log.i("TEST: ", risk.toString());
-            type = "update";
-            this.riskup = risk;
-            showUpdateDialog();
-        }
+    @Override
+    public void onAlertBoxAvailableR(Risk risk) {
+        Log.i("TEST: ", risk.toString());
+        type = "update";
+        this.riskup = risk;
+        showUpdateDialog();
+    }
 }

@@ -24,11 +24,14 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationPublisher;
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
@@ -57,7 +60,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
     private ListView cpdListView;
     private Button registerButton;
     Context context;
-    private String channelId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +113,14 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void getUsage() {
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else {
+
         NetworkManager.getInstance().getUsage(new VolleyListener<JSONArray>() {
             @Override
             public void getResult(JSONArray result) {
@@ -197,7 +208,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                     e.printStackTrace();
                 }
             }
-        });
+        });}
     }
 
     @Override

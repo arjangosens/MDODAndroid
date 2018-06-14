@@ -34,6 +34,7 @@
         android:text="@string/description"
         android:textAppearance="@style/TextAppearance.AppCompat.Menu"
         android:textSize="18sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
@@ -47,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textCapSentences|textMultiLine"
+        android:inputType="textCapSentences|textImeMultiLine"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/textView_description"
         app:layout_constraintStart_toStartOf="@+id/textView_description"
@@ -73,7 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/laugh" />
+            app:srcCompat="@drawable/laugh"
+            android:tint="@color/DarkGreen"/>
 
         <ImageView
             android:id="@+id/smiley_good"
@@ -91,7 +93,8 @@
             android:layout_weight="1"
             app:layout_constraintStart_toEndOf="@+id/smiley_good"
             app:layout_constraintTop_toTopOf="@+id/smiley_good"
-            app:srcCompat="@drawable/meh" />
+            app:srcCompat="@drawable/meh"
+            android:tint="@color/Yellow"/>
 
         <ImageView
             android:id="@+id/smiley_sad"
@@ -100,7 +103,8 @@
             android:layout_weight="1"
             app:layout_constraintStart_toEndOf="@+id/smiley_ok"
             app:layout_constraintTop_toTopOf="@+id/smiley_ok"
-            app:srcCompat="@drawable/sad" />
+            app:srcCompat="@drawable/sad"
+            android:tint="@color/LightRed"/>
 
         <ImageView
             android:id="@+id/smiley_terrible"
@@ -110,7 +114,8 @@
             app:layout_constraintEnd_toEndOf="@+id/textView_feeling"
             app:layout_constraintStart_toEndOf="@+id/smiley_sad"
             app:layout_constraintTop_toTopOf="@+id/smiley_sad"
-            app:srcCompat="@drawable/supersad" />
+            app:srcCompat="@drawable/supersad"
+            android:tint="@color/DarkRed"/>
     </LinearLayout>
 
     <Button

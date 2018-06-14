@@ -107,5 +107,7 @@
     <string name="emptyFields">Sommige velden zijn nog leeg!</string>
     <string name="used">U heeft gebruik geregistreerd, u kan het beste contact opnemen met Tactus of een bondgenoot. Wilt u dat nu doen?</string>
     <string name="sendBy">Verzonden door:</string>
+    <string name="messageNotsend">Er ging iets fout, je bericht is niet verstuurd.</string>
+    <string name="noConnection">U heeft geen internet, verbind met het internet om verder te gaan</string>
 
 </resources>

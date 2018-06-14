@@ -20,8 +20,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.ValueChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
@@ -214,6 +216,13 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 //        address.setValue("Lovensdijkstraat 61, Breda");
 
         //TODO: Replace test values with actual API get call
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_LONG);
+            toast.show();
+            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else {
 
         NetworkManager.getInstance().getClient(new VolleyListener<JSONArray>() {
             @Override
@@ -252,17 +261,22 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
                     toast.show();
                 }
                 }
-            });
+            });}
         }
 
         private void updateClient() {
+            if (ConnectionChecker.CheckCon(context)) {
+                Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                toast.show();
+
+            } else {
             NetworkManager.getInstance().updateClient(firstName.getValue(), insertion.getValue(), lastName.getValue(),
                     phoneNumber.getValue(), birthday.getValue(), city.getValue(), address.getValue(), zipCode.getValue(), new VolleyListener<JSONObject>() {
                         @Override
                         public void getResult(JSONObject object) {
 
                         }
-                    });
+                    });}
         }
 
     @Override
@@ -450,6 +464,11 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         builder.setPositiveButton(getResources().getString(R.string.deleteAccountConfirm), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                if (ConnectionChecker.CheckCon(context)) {
+                    Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
                 Log.i("US_DELETEACCOUNT", "Deletion of account confirmed");
                 NetworkManager.getInstance().deleteClient(new VolleyListener<JSONObject>() {
                     @Override
@@ -460,7 +479,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+                startActivity(i);}
             }
         });
 
@@ -468,4 +487,11 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         alertDialog.show();
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
+
 }

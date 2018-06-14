@@ -10,9 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
+import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationService;
@@ -126,6 +129,13 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                     error.setText(getResources().getString(R.string.smileyNotSelected));
                 }
 
+                if (ConnectionChecker.CheckCon(context)) {
+                    Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                    toast.show();
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                } else {
                 NetworkManager.getInstance().postStatus(value, field, new VolleyListener<JSONObject>() {
                     @Override
                     public void getResult(JSONObject object) {
@@ -139,7 +149,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                             error.setText(getResources().getString(R.string.somethingWentWrong));
                         }
                     }
-                });
+                });}
 
 
             }

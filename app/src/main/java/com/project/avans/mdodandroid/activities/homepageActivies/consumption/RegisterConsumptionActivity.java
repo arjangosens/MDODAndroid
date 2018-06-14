@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
+import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
 import com.project.avans.mdodandroid.activities.homepageActivies.PhoneActivity;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.adapters.consumptionAdapter.ConRegSubstanceAdapter;
@@ -128,7 +130,11 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                 if(!substanceStr.isEmpty() && !location.isEmpty() && !cause.isEmpty() && feelingId != null){
 
                     Log.i("data, ",location + " " + amount + " " + feelingId +  " " + cause + " " + substanceId );
+                    if (ConnectionChecker.CheckCon(context)) {
+                        Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                        toast.show();
 
+                    } else {
                         NetworkManager.getInstance().postUsage(location,amount,feelingId,cause,substanceId, new VolleyListener<JSONObject>() {
                             @Override
                             public void getResult(JSONObject object) {
@@ -154,7 +160,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                                     e.printStackTrace();
                                 }
                             }
-                        });
+                        });}
 
                 } else {
                     Toast toast = Toast.makeText(RegisterConsumptionActivity.this, getResources().getString(R.string.emptyFields), Toast.LENGTH_SHORT);
@@ -178,12 +184,12 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
     private void initTypes() {
         //substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
-        substances.add(new Substance("Weed", getResources().getDrawable(R.drawable.marijuana), "joints"));
+        substances.add(new Substance("Wiet", getResources().getDrawable(R.drawable.marijuana), "joints"));
         substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "glazen"));
         substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "ml"));
         substances.add(new Substance("LSD", getResources().getDrawable(R.drawable.lsd), "mg"));
-        substances.add(new Substance("Cocaine", getResources().getDrawable(R.drawable.cocaine), "g"));
-        substances.add(new Substance("Other", getResources().getDrawable(R.drawable.question), ""));
+        substances.add(new Substance("Cocaïne", getResources().getDrawable(R.drawable.cocaine), "g"));
+        substances.add(new Substance("Anders", getResources().getDrawable(R.drawable.question), ""));
     }
 
     private void initUnit(String unit) {
@@ -198,7 +204,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
             Log.i("Alcohol", "chosen");
             substanceId = 1;
         }
-        else if (substanceStr.equals("Weed")){
+        else if (substanceStr.equals("Wiet")){
             substanceId = 2;
         }
         else if (substanceStr.equals("GHB")){
@@ -207,10 +213,10 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         else if (substanceStr.equals("LSD")){
             substanceId = 9;
         }
-        else if (substanceStr.equals("Cocaine")) {
+        else if (substanceStr.equals("Cocaïne")) {
             substanceId = 10;
         }
-        else if (substanceStr.equals("Other")){
+        else if (substanceStr.equals("Anders")){
             substanceId = 11;
         }
     }

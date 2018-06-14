@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid.activities.homepageActivies;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
@@ -23,6 +25,7 @@ import com.project.avans.mdodandroid.adapters.goalAdapter.AsyncGoal;
 import com.project.avans.mdodandroid.adapters.goalAdapter.GoalAdapter;
 import com.project.avans.mdodandroid.adapters.goalAdapter.GoalListener;
 import com.project.avans.mdodandroid.adapters.goalAdapter.OnAlertBoxAvailable;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.domain.Goal;
@@ -38,11 +41,13 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
     private GoalAdapter goalAdapter = null;
     private String type = "";
     private Goal goal;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_personal_goals);
+        context = this;
 
         //set the toolbar so it has the right image
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -57,13 +62,23 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
             }
         });
 
+
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+            Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+
+
+        } else {
         //TEST DATA API
         String url = "https://mdod.herokuapp.com/api/v1/goal";
 //        "https://mdod.herokuapp.com/api/v1/goal
 
         String[] urls = new String[] {url};
         AsyncGoal task = new AsyncGoal((GoalListener) this);
-        task.execute(urls);
+        task.execute(urls);}
 
         ListView goalListView = findViewById(R.id.listView);
         goalAdapter = new GoalAdapter(getApplicationContext(), this, getLayoutInflater(), goalList);
@@ -100,6 +115,12 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
 
             builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
                 public void onClick(final DialogInterface dialog, int id) {
+
+                    if (ConnectionChecker.CheckCon(context)) {
+                        Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    } else {
                     NetworkManager.getInstance().deleteGoal(goal.getGoalID(),  new VolleyListener<JSONObject>(){
                         @Override
                         public void getResult(JSONObject result)
@@ -114,7 +135,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                             }
                         }
 
-                    });
+                    });}
                 }
             });
         }
@@ -148,6 +169,11 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                 if (field.equals("")) {
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
                 } else {
+                    if (ConnectionChecker.CheckCon(context)) {
+                        Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    } else {
 
                     if (type.equals("")) {
                         NetworkManager.getInstance().postGoal(updateDialogGenericEditText.getText().toString(),  new VolleyListener<JSONObject>(){
@@ -189,7 +215,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
                             }
 
                         });
-                    }
+                    }}
                 }
             }
         });

@@ -1,6 +1,9 @@
 package com.project.avans.mdodandroid.activities.loginAndRegisterActivities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 import com.project.avans.mdodandroid.activities.homepageActivies.HomepageActivity;
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.homepageActivies.HowAreYouFeelingActivity;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 
@@ -28,12 +32,17 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     TextView resultTextView;
     private Boolean exit = false;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NetworkManager.getInstance(this);
         setContentView(R.layout.activity_main);
+        context = this;
+
+
+
 
         //removes the title from the title bar in mainactivity
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -92,55 +101,60 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(String username, String password) {
 
-        NetworkManager.getInstance().loginClient(username, password, new VolleyListener<String>()
-        {
-            @Override
-            public void getResult(String result)
-            {
-                if (!result.isEmpty())
-                {
-                    if(result. equals("empty")){
-                        resultTextView.setText(R.string.emailNotFound);
-                    }
-                    else{
-                        //do what you need with the result...
-                        Log.i("VOLLEY_GETRESULT", "Result:" + result);
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
 
-                        try {
-                            JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
+            NetworkManager.getInstance().loginClient(username, password, new VolleyListener<String>() {
+                @Override
+                public void getResult(String result) {
+                    if (!result.isEmpty()) {
+                        if (result.equals("empty")) {
+                            resultTextView.setText(R.string.emailNotFound);
+                        } else {
+                            //do what you need with the result...
+                            Log.i("VOLLEY_GETRESULT", "Result:" + result);
 
-                            Token = object.getString("token");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Log.d("the token", Token);
+                            try {
+                                JSONObject object = (JSONObject) new JSONTokener(result).nextValue();
 
-                        NetworkManager.getInstance().getEmotionStatusDays(new VolleyListener<JSONObject>() {
-                            @Override
-                            public void getResult(JSONObject object) {
-                                try {
-                                    if (object.getInt("daysDifference") == 0) {
-                                        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(intent);
-                                    } else{
-                                        Log.i("TEST: ", object.toString());
+                                Token = object.getString("token");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            Log.d("the token", Token);
+
+                            NetworkManager.getInstance().getEmotionStatusDays(new VolleyListener<JSONObject>() {
+                                @Override
+                                public void getResult(JSONObject object) {
+                                    try {
+                                        if (object.getInt("daysDifference") == 0) {
+                                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(intent);
+                                        } else {
+                                            Log.i("TEST: ", object.toString());
+                                            Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    } catch (JSONException e) {
                                         Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
                                         startActivity(intent);
+                                        e.printStackTrace();
                                     }
-                                } catch (JSONException e){
-                                    Intent intent = new Intent(getApplicationContext(), HowAreYouFeelingActivity.class);
-                                    startActivity(intent);
-                                    e.printStackTrace();
                                 }
-                            }
-                        });
+                            });
+                        }
+                    } else {
+                        resultTextView.setText(R.string.inValidCredentials);
                     }
-                } else {
-                    resultTextView.setText(R.string.inValidCredentials);
                 }
-            }
-        });
-        
+            });
+        }
+
     }
-}
+    }
+
+
+

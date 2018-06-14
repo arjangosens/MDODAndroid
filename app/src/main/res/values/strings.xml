@@ -108,5 +108,7 @@
     <string name="emptyFields">Some fields are still empty!</string>
     <string name="used">There is a usage registered, please contact your psychologist</string>
     <string name="sendBy">Send By:</string>
+    <string name="messageNotsend">something went wrong, your message has not been sent</string>
+    <string name="noConnection">No internet connection detected</string>
 
 </resources>

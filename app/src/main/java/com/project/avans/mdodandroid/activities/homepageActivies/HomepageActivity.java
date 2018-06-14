@@ -15,12 +15,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.project.avans.mdodandroid.R;
 import com.project.avans.mdodandroid.activities.homepageActivies.consumption.ConsumptionActivity;
 import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.LoginActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.PhoneSettingsActivity;
 import com.project.avans.mdodandroid.activities.settingActivities.UserSettingsActivity;
+import com.project.avans.mdodandroid.applicationLogic.ConnectionChecker;
 import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 
@@ -101,11 +103,17 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+
+        if (ConnectionChecker.CheckCon(context)) {
+            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+            toast.show();
+            TextView cleandays = findViewById(R.id.textView_clean);
+            cleandays.setText("U heeft geen internet");
+        } else {
         NetworkManager.getInstance().getCleanDays(new VolleyListener<JSONObject>() {
             @Override
             public void getResult(JSONObject object) {
                 TextView cleandays = findViewById(R.id.textView_clean);
-
 
                 try {
                     if(object.getString("daysClean").equals("null")){
@@ -164,7 +172,7 @@ public class HomepageActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        });
+        });}
     }
 
     //adds custom menu
