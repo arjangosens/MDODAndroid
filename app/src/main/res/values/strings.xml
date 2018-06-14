@@ -117,7 +117,7 @@
     <string name="thirtyDays">You have not used for a month, keep it up!</string>
     <string name="oneYear">No usage for a year already, we are proud!</string>
     <string name="oneWeek">No usage for a week, good work!</string>
-    <string name="oneDay">You haven\'t used in a week, you can do it!</string>
+    <string name="oneDay">You haven\'t used for one day, you can do it!</string>
     <string name="already">You are already </string>
     <string name="daysClean"> days clean</string>
     <string name="noFeeling">You haven\'t registered your feeling in two days, please do</string>
