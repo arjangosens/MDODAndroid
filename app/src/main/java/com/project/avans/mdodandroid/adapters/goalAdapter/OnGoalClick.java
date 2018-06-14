@@ -23,9 +23,6 @@ public class OnGoalClick extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Goal rv = (Goal) adapterView.getItemAtPosition(i);
-//            Intent intent = new Intent(context, MainActivity.class); // TODO change to edit page
-//            intent.putExtra("Goal", rv);
-//            context.startActivity(intent);
         listener.onAlertBoxAvailable(rv);
     }
 

@@ -42,6 +42,7 @@ public class PhoneActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        //Connection check
         if (ConnectionChecker.CheckCon(context)) {
             Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
             toast.show();
@@ -50,6 +51,7 @@ public class PhoneActivity extends AppCompatActivity {
             startActivity(i);
 
         } else {
+            //API call
         NetworkManager.getInstance().getClientPhone(new VolleyListener<JSONArray>() {
             @Override
             public void getResult(JSONArray result) {
@@ -86,6 +88,7 @@ public class PhoneActivity extends AppCompatActivity {
         });}
 
 
+        //Buttons with check to evaluate if the fields aren't empty
         Button btn = (Button) findViewById(R.id.institute_button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +191,7 @@ public class PhoneActivity extends AppCompatActivity {
         }
     };
 
+    //Back button routing
     @Override
     public void onBackPressed() {
         Intent i = new Intent(getApplicationContext(), HomepageActivity.class);
@@ -202,6 +206,7 @@ public class PhoneActivity extends AppCompatActivity {
         return true;
     }
 
+    //Custom menu functionality
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

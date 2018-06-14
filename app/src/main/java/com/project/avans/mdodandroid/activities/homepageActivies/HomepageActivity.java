@@ -37,18 +37,12 @@ public class HomepageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_homepage);
         context = this;
 
-        int color = Color.parseColor("#ffffff");
 
+        //custom toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        //removes the title from the title bar in the HomepageActivity
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //getSupportActionBar().setTitle(getResources().getString(R.string.homePageActivityHeader));
-        //getSupportActionBar().setStackedBackgroundDrawable(getResources().getDrawable(R.drawable.tactuslogo_small));
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.tactuslogo_small));
-
+        //Goals
         Button btn = (Button) findViewById(R.id.goalbutton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +52,7 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+        //Risks
         Button btn2 = (Button) findViewById(R.id.riskbutton);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +62,7 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+        //Difficult moment
         Button btn3 = (Button) findViewById(R.id.situationbutton);
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +72,7 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+        //Call
         Button btn4 = (Button) findViewById(R.id.call_button);
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +82,7 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+        //Usage
         Button btn5 = (Button) findViewById(R.id.usagebutton);
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +92,7 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
+        //Messages
         Button btn6 = (Button) findViewById(R.id.messagesButton);
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,31 +102,33 @@ public class HomepageActivity extends AppCompatActivity {
             }
         });
 
-
+        //Connection check
         if (ConnectionChecker.CheckCon(context)) {
             Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
             toast.show();
             TextView cleandays = findViewById(R.id.textView_clean);
-            cleandays.setText("U heeft geen internet");
+            cleandays.setText(R.string.noInternet);
         } else {
+        //API call
         NetworkManager.getInstance().getCleanDays(new VolleyListener<JSONObject>() {
             @Override
             public void getResult(JSONObject object) {
                 TextView cleandays = findViewById(R.id.textView_clean);
 
+                //suprise messages
                 try {
                     if(object.getString("daysClean").equals("null")){
-                        cleandays.setText("Nog geen gebruik geregistreerd");
+                        cleandays.setText(R.string.noUsageRegistered);
                     }
                     else if(object.getString("daysClean").equals("0")) {
-                        cleandays.setText("U had een terugval, neem contact op met uw begeleider.");
+                        cleandays.setText(R.string.relapse);
 
                     }
                     else
                     {
                         if(object.getString("daysClean").equals("30")){
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setMessage("Al een maand niet gebruikt, ga zo door!")
+                            builder.setMessage(R.string.thirtyDays)
                                     .setCancelable(false)
                                     .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
@@ -138,7 +139,7 @@ public class HomepageActivity extends AppCompatActivity {
                         }
                         else if(object.getString("daysClean").equals("356")){
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setMessage("Al een jaar clean we zijn trots!")
+                            builder.setMessage(R.string.oneYear)
                                     .setCancelable(false)
                                     .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
@@ -150,7 +151,7 @@ public class HomepageActivity extends AppCompatActivity {
 
                         else if(object.getString("daysClean").equals("7")){
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setMessage("Een week clean, goed bezig!")
+                            builder.setMessage(R.string.oneWeek)
                                     .setCancelable(false)
                                     .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
@@ -161,9 +162,9 @@ public class HomepageActivity extends AppCompatActivity {
                         }
 
                         if(object.getString("daysClean").equals("1")){
-                            cleandays.setText("Je bent nu één dag clean, probeer door te zetten!");
+                            cleandays.setText(R.string.oneDay);
                         } else {
-                            cleandays.setText("Je bent al " + object.getString("daysClean") + " dagen clean.");
+                            cleandays.setText(R.string.already + object.getString("daysClean") + R.string.daysClean);
                         }
 
                     }
@@ -182,11 +183,13 @@ public class HomepageActivity extends AppCompatActivity {
         return true;
     }
 
+    //Disables back button because of logout
     @Override
     public void onBackPressed() {
 
     }
 
+    //Menu options
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

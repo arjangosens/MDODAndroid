@@ -46,12 +46,15 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_messages);
         context = this;
+
         //set the toolbar so it has the right image
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         messages = findViewById(R.id.listView_message);
         newMessage = findViewById(R.id.button_new_message);
+
+        //Connection check
         if (ConnectionChecker.CheckCon(context)) {
             Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
             toast.show();
@@ -59,6 +62,7 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         } else {
+            //API call
         NetworkManager.getInstance().getMessages(this);}
 
         messageAdapter = new MessageAdapter(getLayoutInflater(), messagesList, this);
@@ -73,21 +77,20 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
         });
     }
 
+
+    //API result processing
     @Override
     public void getResult(JSONArray object) {
-        Log.i("TEST: ", object.toString());
+        Log.i("Result messages: ", object.toString());
         if (!(object == null)) {
             for (int i = 0; i < object.length(); i++) {
                 try {
                     String date = object.getJSONObject(i).getString("date");
                     String[] parts = date.split("[-T.]+");
-                    Log.i("TESTT: ", String.valueOf(parts.length));
                     String date2 = parts[2] + "-" + parts[1] + "-" + parts[0] + " " + parts[3];
-
-                    Log.i("TEST2: ", object.getJSONObject(i).toString());
                     messagesList.add(new Message(object.getJSONObject(i).getString("message"), date2 , object.getJSONObject(i).getString("sendBy")));
                     messageAdapter.notifyDataSetChanged();
-                    Log.i("TEST3: ", messagesList.toString());
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -95,9 +98,10 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
         }
     }
 
+    //Making of Dialog box
     private void showUpdateDialog() {
         AlertDialog alertDialog;
-        String hint = "Voer hier uw bericht in";
+        String hint = getResources().getString(R.string.insertMessage);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Get the layout inflater
@@ -129,6 +133,7 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
         alertDialog.show();
     }
 
+    //Dialogbox functionality
     @Override
     public void onShow(final DialogInterface dialog) {
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
@@ -155,7 +160,7 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
                         public void getResult(JSONObject object) {
                             if (!(object == null))
                             {
-                                messagesList.add(0, new Message(field, "zojuist", "uzelf"));
+                                messagesList.add(0, new Message(field, getResources().getString(R.string.justNow), getResources().getString(R.string.sendByMe)));
                                 dialog.dismiss();
                             } else {
                                 incorrectFieldTextView.setText(getResources().getString(R.string.messageNotsend));
@@ -174,6 +179,7 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
         return true;
     }
 
+    //Custom menu functionality
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

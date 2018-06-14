@@ -49,6 +49,7 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
         setContentView(R.layout.activity_my_difficult_moments);
         context= this;
 
+        //Connection check
         if (ConnectionChecker.CheckCon(context)) {
             Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
             toast.show();
@@ -76,6 +77,7 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
         adapter.notifyDataSetChanged();
     }
 
+    //Makes update dialog
     private void showUpdateDialog() {
         final AlertDialog alertDialog;
 
@@ -104,6 +106,8 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
 
         alertDialog = builder.create();
         alertDialog.setOnShowListener(this);
+
+        //Connection check
         if (ConnectionChecker.CheckCon(context)) {
             Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
             toast.show();
@@ -111,6 +115,7 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         } else {
+            //API call
         NetworkManager.getInstance().getSubstances(new VolleyListener<JSONArray>() {
             private ArrayList<String> substances = new ArrayList<>();
             private final Spinner spinner = updateDialogView.findViewById(R.id.spinner_moment);
@@ -133,9 +138,10 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
         alertDialog.show();
     }
 
+
+    //Dialog box functionality
     @Override
     public void onShow(final DialogInterface dialog) {
-        Log.i("TEST1234: ", "tetstets");
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -153,16 +159,18 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
                 if (field.equals("")) {
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
                 } else {
+                    //Connection test
                     if (ConnectionChecker.CheckCon(context)) {
                         Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
                         toast.show();
                     } else {
+                        //API call
                     NetworkManager.getInstance().postMoment( String.valueOf(spinner.getSelectedItem()),String.valueOf(seekBar.getProgress()), String.valueOf(updateDialogGenericEditText.getText()), String.valueOf(prevention.getText()), new VolleyListener<JSONObject>(){
                         @Override
                         public void getResult(JSONObject result) {
                             if (!(result == null))
                             {
-                                moments.add(0, new Moment(spinner.getSelectedItem().toString(), "zojuist", String.valueOf(updateDialogGenericEditText.getText()), seekBar.getProgress(), String.valueOf(prevention.getText())));
+                                moments.add(0, new Moment(spinner.getSelectedItem().toString(), getResources().getString(R.string.justNow), String.valueOf(updateDialogGenericEditText.getText()), seekBar.getProgress(), String.valueOf(prevention.getText())));
                                 adapter.notifyDataSetChanged();
                                 dialog.dismiss();
                             } else {
@@ -176,6 +184,8 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
 
     }
 
+
+    //API result processing
     @Override
     public void getResult(JSONArray object) {
         if(!(object == null)) {
@@ -200,6 +210,7 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
         }
     }
 
+    //Backbutton handling
     @Override
     public void onBackPressed() {
         Intent i = new Intent(this, HomepageActivity.class);
@@ -213,6 +224,8 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
         return true;
     }
 
+
+    //Custom menu functionality
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

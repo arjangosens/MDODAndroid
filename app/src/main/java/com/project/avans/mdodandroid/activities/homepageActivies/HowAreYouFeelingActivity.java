@@ -129,6 +129,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                     error.setText(getResources().getString(R.string.smileyNotSelected));
                 }
 
+                //Connection check
                 if (ConnectionChecker.CheckCon(context)) {
                     Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
                     toast.show();
@@ -136,13 +137,14 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                 } else {
+                //API call
                 NetworkManager.getInstance().postStatus(value, field, new VolleyListener<JSONObject>() {
                     @Override
                     public void getResult(JSONObject object) {
                         Log.i("TEST: ", object.toString());
 
                         if (!(object == null)) {
-                            NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gevoel ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
+                            NotificationService.Notificat(NotificationService.getNotification(getResources().getString(R.string.noFeeling), context), 60 * 1000, context);
                             Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                             startActivity(intent);
                         } else {

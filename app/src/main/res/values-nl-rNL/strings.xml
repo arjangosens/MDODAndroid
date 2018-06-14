@@ -109,5 +109,20 @@
     <string name="sendBy">Verzonden door:</string>
     <string name="messageNotsend">Er ging iets fout, je bericht is niet verstuurd.</string>
     <string name="noConnection">U heeft geen internet, verbind met het internet om verder te gaan</string>
+    <string name="backAgain">Druk nog een keer op terug om af te sluiten.</string>
+    <string name="noInternet">U heeft geen internet.</string>
+    <string name="noUsageRegistered">U heeft nog geen gebruik geregistreerd.</string>
+    <string name="relapse">U heeft een terugval gehad, neem contact op met uw behandelaar.</string>
+    <string name="thirtyDays">U heeft al een maand niet gebruikt, ga zo door!</string>
+    <string name="oneYear">U heeft al een jaar niet gebruikt, we zijn trots!</string>
+    <string name="oneWeek">U heeft al een week niet gebruikt, goed bezig!</string>
+    <string name="oneDay">Je bent nu één dag clean, probeer door te zetten!</string>
+    <string name="already">U bent al </string>
+    <string name="daysClean"> dagen clean</string>
+    <string name="noFeeling">U Heeft al 2 dagen geen gevoel ingevoerd, voer uw gevoel in alstublieft.</string>
+    <string name="justNow">Zojuist</string>
+    <string name="insertMessage">Voer uw bericht hier in.</string>
+    <string name="sendByMe">Uzelf</string>
+    <string name="noUsage">U heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.</string>
 
 </resources>

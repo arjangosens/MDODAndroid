@@ -53,7 +53,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
     String substanceStr;
     Context context;
-    private String channelId;
+
 
     private ConRegSubstanceAdapter adapter;
     private static final String TAG = "RegConsumptionActivity";
@@ -82,9 +82,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
 
 
-//        adapter = new ConRegSubstanceAdapter(substances);
-//        adapter.setOnItemClickListener(this);
-//        substanceRv.setAdapter(adapter);
+
 
         substanceRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         this.adapter = new ConRegSubstanceAdapter(substances, new ConRegSubstanceAdapter.OnItemClickListener() {
@@ -92,6 +90,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
             public void onItemClick(int position) {
                 Log.i(TAG, "onItemClick(" + position + ") called");
 
+                //Makes the pictures of substances appear
                 try {
                     Substance substance = substances.get(position);
                     typetextView.setText(substance.getType());
@@ -111,7 +110,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
             @Override
             public void onClick(View v) {
 
-                //TODO checks for empty fields
+
 
                 String location = "";
                 String cause = "";
@@ -130,23 +129,24 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                 if(!substanceStr.isEmpty() && !location.isEmpty() && !cause.isEmpty() && feelingId != null){
 
                     Log.i("data, ",location + " " + amount + " " + feelingId +  " " + cause + " " + substanceId );
+                    //Connection check
                     if (ConnectionChecker.CheckCon(context)) {
                         Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
                         toast.show();
 
                     } else {
+                        //API call
                         NetworkManager.getInstance().postUsage(location,amount,feelingId,cause,substanceId, new VolleyListener<JSONObject>() {
                             @Override
                             public void getResult(JSONObject object) {
                                 try {
-                                    Log.i("TEST: ", object.toString());
 
                                     if (!(object == null)) {
 
                                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-                                        NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
-                                        //NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 2*24*60*60*1000, context);
+                                        //Set notification
+                                        NotificationService.Notificat(NotificationService.getNotification(getResources().getString(R.string.noUsage), context), 2*24*60*60*1000, context);
                                         builder.setMessage(getResources().getString(R.string.used)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
 
 
@@ -156,7 +156,6 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
                                     }
                                 }
                                 catch (NullPointerException e){
-                                    //TODO iets mis met de server
                                     e.printStackTrace();
                                 }
                             }
@@ -176,12 +175,13 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
 
     }
 
+
     @Override
     public void onItemClick(int position) {
-//        substanceRv.getRecycledViewPool().clear();
         Log.i(TAG, "OnItemClick() called on pos " + position);
     }
 
+    //Initialize images
     private void initTypes() {
         //substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
         substances.add(new Substance("Wiet", getResources().getDrawable(R.drawable.marijuana), "joints"));
@@ -192,6 +192,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         substances.add(new Substance("Anders", getResources().getDrawable(R.drawable.question), ""));
     }
 
+    //converting position to database position
     private void initUnit(String unit) {
 
         Log.i("substance Id: ", substanceStr);
@@ -221,6 +222,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         }
     }
 
+    //Initalise smileys
     private void initSmileys() {
         smileyHappy = (ImageView) findViewById(R.id.con_smiley_happy);
         smileyGood = (ImageView) findViewById(R.id.con_smiley_good);
@@ -254,6 +256,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         }
     }
 
+    //smiley onclick
     @Override
     public void onClick(View v) {
         Log.i(TAG, "Onclick called");
@@ -288,6 +291,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         Log.i(TAG, "feelingId = " + feelingId);
     }
 
+    //Dialog Onclick
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {

@@ -108,7 +108,23 @@
     <string name="emptyFields">Some fields are still empty!</string>
     <string name="used">There is a usage registered, please contact your psychologist</string>
     <string name="sendBy">Send By:</string>
-    <string name="messageNotsend">something went wrong, your message has not been sent</string>
+    <string name="messageNotsend">Something went wrong, your message has not been sent</string>
     <string name="noConnection">No internet connection detected</string>
+    <string name="backAgain">Press back again to exit.</string>
+    <string name="noInternet">You have no internet.</string>
+    <string name="noUsageRegistered">You have not registered any usage. </string>
+    <string name="relapse">You have had a relapse, please contact your psychologist</string>
+    <string name="thirtyDays">You have not used for a month, keep it up!</string>
+    <string name="oneYear">No usage for a year already, we are proud!</string>
+    <string name="oneWeek">No usage for a week, good work!</string>
+    <string name="oneDay">You haven\'t used in a week, you can do it!</string>
+    <string name="already">You are already </string>
+    <string name="daysClean"> days clean</string>
+    <string name="noFeeling">You haven\'t registered your feeling in two days, please do</string>
+    <string name="justNow">Just now</string>
+    <string name="insertMessage">Insert message here.</string>
+    <string name="sendByMe">You</string>
+    <string name="noUsage">You haven\t registered your usage in two days, please do</string>
+
 
 </resources>

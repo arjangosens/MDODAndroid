@@ -43,10 +43,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
-        //removes the title from the title bar in mainactivity
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         email = (EditText) findViewById(R.id.editText_Email);
         password = (EditText) findViewById(R.id.editText_Password);
         resultTextView = (TextView) findViewById(R.id.textview_Status);
@@ -78,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         if (exit) {
             finish(); // finish activity
         } else {
-            Toast.makeText(this, "Press Back again to Exit.",
+            Toast.makeText(this, R.string.backAgain,
                     Toast.LENGTH_SHORT).show();
             exit = true;
             new Handler().postDelayed(new Runnable() {

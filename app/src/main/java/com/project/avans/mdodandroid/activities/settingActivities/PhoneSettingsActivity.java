@@ -70,7 +70,7 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setTitle(getResources().getString(R.string.phonenumberActivityHeader));
 
-        //TODO: add local user data
+
 
         settings.add(institution);
         settings.add(doctor);
@@ -78,7 +78,7 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
         settings.add(ice);
 
 
-        //TODO: connect the Textviews to the userdata
+
 
         settingsListview = (ListView) findViewById(R.id.listview_phone);
         userSettingsAdapter = new UserSettingsAdapter(getLayoutInflater(), settings);
@@ -268,7 +268,7 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
 
                 {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " allowed");
-                    // TODO: Save changes made in AlertDialog
+
 
                     for (UserSettingsType userSettingsType : settings) {
 

@@ -62,7 +62,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
             }
         });
 
-
+        //Connection check
         if (ConnectionChecker.CheckCon(context)) {
             Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
             toast.show();
@@ -103,6 +103,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
 
         updateDialogView = view;
 
+        //Checks for the type of command issued
         if (type.equals("")) {
             builder.setTitle(getResources().getString(R.string.newGoal));
 
@@ -116,11 +117,13 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
             builder.setNeutralButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
                 public void onClick(final DialogInterface dialog, int id) {
 
+                    //Connection check
                     if (ConnectionChecker.CheckCon(context)) {
                         Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
                         toast.show();
 
                     } else {
+                        //API call
                     NetworkManager.getInstance().deleteGoal(goal.getGoalID(),  new VolleyListener<JSONObject>(){
                         @Override
                         public void getResult(JSONObject result)
@@ -153,6 +156,7 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         alertDialog.show();
     }
 
+    //Dialog box functionality
     @Override
     public void onShow(final DialogInterface dialog) {
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);

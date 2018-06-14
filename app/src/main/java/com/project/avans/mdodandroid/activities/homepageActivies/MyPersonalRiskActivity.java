@@ -58,10 +58,8 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        //Risk e = new Risk("1", "test");
-        //RiskList.add(e);
-        //getRisk();
 
+        //Connection check
         if (ConnectionChecker.CheckCon(context)) {
             Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
             toast.show();
@@ -69,6 +67,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         } else {
+            //Async API call
         url = "https://mdod.herokuapp.com/api/v1/risk";
 
         String[] urls = new String[] {url};
@@ -91,6 +90,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         RiskListView.setOnItemClickListener(new OnRiskClick(this) {});
     }
 
+    //Listens for updates
     @Override
     public void onRiskListener(Risk risk) {
         RiskList.add(risk);
@@ -98,6 +98,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
 
     }
 
+    //Making of dialog box
     private void showUpdateDialog() {
         AlertDialog alertDialog;
         String hint = "";
@@ -161,6 +162,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         alertDialog.show();
     }
 
+    //Dialog box functionality
     @Override
     public void onShow(final DialogInterface dialog) {
         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
@@ -177,13 +179,14 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
 
                 } else {
-
+                    //Connection check
                     if (ConnectionChecker.CheckCon(context)) {
                         Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
                         toast.show();
 
                     } else {
                         if (type.equals("")) {
+                            //API call
                             NetworkManager.getInstance().postRisk(updateDialogGenericEditText.getText().toString(), new VolleyListener<JSONObject>() {
                                 @Override
                                 public void getResult(JSONObject result) {
@@ -236,6 +239,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
         return true;
     }
 
+    //Custom menu functionality
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -264,6 +268,7 @@ public class MyPersonalRiskActivity extends AppCompatActivity implements DialogI
     }
 
 
+    //On update listener
     @Override
     public void onAlertBoxAvailableR(Risk risk) {
         Log.i("TEST: ", risk.toString());

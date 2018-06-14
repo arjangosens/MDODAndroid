@@ -89,10 +89,10 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         initTypes();
 
         //removes the title from the title bar in the userSettingsActivity
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         getSupportActionBar().setTitle(getResources().getString(R.string.profile));
 
-        //TODO: add local user data
+
 
         settings.add(firstName);
         settings.add(insertion);
@@ -104,7 +104,6 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
         settings.add(phoneNumber);
 
 
-        //TODO: connect the Textviews to the userdata
 
         settingsListview = (ListView) findViewById(R.id.listview_settings);
         userSettingsAdapter = new UserSettingsAdapter(getLayoutInflater(), settings);
@@ -208,14 +207,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
     private void getValues() {
 
-//
-//        // Fill types with test values
-//        firstName.setValue("John");
-//        lastName.setValue("Doe");
-//        phoneNumber.setValue("+31612345678");
-//        address.setValue("Lovensdijkstraat 61, Breda");
 
-        //TODO: Replace test values with actual API get call
         if (ConnectionChecker.CheckCon(context)) {
             Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_LONG);
             toast.show();
@@ -384,7 +376,7 @@ public class UserSettingsActivity extends AppCompatActivity implements AdapterVi
 
                 {
                     Log.i("UserSettingsActivity", "Save changes  of " + type + " allowed");
-                    // TODO: Save changes made in AlertDialog
+
 
                     for (UserSettingsType userSettingsType : settings) {
 

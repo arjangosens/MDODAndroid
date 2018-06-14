@@ -173,7 +173,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         dateOfBirth = (year + "-" + month + "-" + dayOfMonth);
         Log.i("RegisterActivity", "onDateSet called, date: " + dateOfBirth);
         datePickerButton.setText(dateOfBirth);
-        //TODO future date check?
     }
 
 
