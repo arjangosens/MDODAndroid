@@ -198,10 +198,8 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         Log.i("substance Id: ", substanceStr);
 
         unitTextView.setText(unit);
-        if(substanceStr.equals("Nothing")){
-            substanceId = 12;
-        }
-        else if (substanceStr.equals("Alcohol")){
+
+        if (substanceStr.equals("Alcohol")){
             Log.i("Alcohol", "chosen");
             substanceId = 1;
         }

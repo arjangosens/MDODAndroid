@@ -130,5 +130,7 @@
     <string name="alot">Veel</string>
     <string name="prevent">Wat heb je gedaan om gebruik te voorkomen?</string>
     <string name="weed">Wiet</string>
+    <string name="registerUsage">Registreer gebruik</string>
+    <string name="notUsed">Niets gebruikt!!</string>
 
 </resources>

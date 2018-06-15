@@ -131,6 +131,9 @@
     <string name="alot">A lot</string>
     <string name="prevent">What have you done to prevent using?</string>
     <string name="weed">weed</string>
+    <string name="registerUsage">Register Usage</string>
+    <string name="notUsed">Not Used!!</string>
+
 
 
 </resources>
