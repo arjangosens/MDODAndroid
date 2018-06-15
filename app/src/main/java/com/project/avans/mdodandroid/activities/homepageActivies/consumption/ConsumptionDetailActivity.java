@@ -1,5 +1,6 @@
 package com.project.avans.mdodandroid.activities.homepageActivies.consumption;
 
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -45,18 +46,26 @@ public class ConsumptionDetailActivity extends AppCompatActivity {
 
         if (consumption.getFeeling() == 0){
             feelingImg.setImageResource(R.drawable.laugh);
+            if (Build.VERSION.SDK_INT >= 23) {
+            feelingImg.setColorFilter(getColor(R.color.DarkGreen));}
         }
         else if(consumption.getFeeling() == 1){
             feelingImg.setImageResource(R.drawable.happy);
         }
         else if(consumption.getFeeling() == 2){
             feelingImg.setImageResource(R.drawable.meh);
+            if (Build.VERSION.SDK_INT >= 23) {
+                feelingImg.setColorFilter(getColor(R.color.Yellow));}
         }
         else if(consumption.getFeeling() == 3){
             feelingImg.setImageResource(R.drawable.sad);
+            if (Build.VERSION.SDK_INT >= 23) {
+                feelingImg.setColorFilter(getColor(R.color.LightRed));}
         }
         else if(consumption.getFeeling() == 4){
             feelingImg.setImageResource(R.drawable.verysadred);
+            if (Build.VERSION.SDK_INT >= 23) {
+                feelingImg.setColorFilter(getColor(R.color.DarkRed));}
         }
 
         typeTextView.setText(consumption.getType());

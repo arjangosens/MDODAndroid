@@ -126,6 +126,11 @@
     <string name="sendByMe">You</string>
     <string name="noUsage">You haven\t registered your usage in two days, please do</string>
     <string name="send">Send</string>
+    <string name="desire">How much do you crave it?</string>
+    <string name="notMuch">Not much</string>
+    <string name="alot">A lot</string>
+    <string name="prevent">What have you done to prevent using?</string>
+    <string name="weed">weed</string>
 
 
 </resources>

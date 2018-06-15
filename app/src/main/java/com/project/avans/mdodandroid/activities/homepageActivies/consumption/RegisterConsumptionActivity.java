@@ -184,7 +184,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
     //Initialize images
     private void initTypes() {
         //substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
-        substances.add(new Substance("Wiet", getResources().getDrawable(R.drawable.marijuana), "joints"));
+        substances.add(new Substance(getResources().getString(R.string.weed), getResources().getDrawable(R.drawable.marijuana), "joints"));
         substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "glazen"));
         substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "ml"));
         substances.add(new Substance("LSD", getResources().getDrawable(R.drawable.lsd), "mg"));
@@ -205,7 +205,7 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
             Log.i("Alcohol", "chosen");
             substanceId = 1;
         }
-        else if (substanceStr.equals("Wiet")){
+        else if (substanceStr.equals(getResources().getString(R.string.weed))){
             substanceId = 2;
         }
         else if (substanceStr.equals("GHB")){

@@ -125,5 +125,10 @@
     <string name="sendByMe">Uzelf</string>
     <string name="noUsage">U heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.</string>
     <string name="send">Verzenden</string>
+    <string name="desire">Hoeveel trek heeft u?</string>
+    <string name="notMuch">Weinig</string>
+    <string name="alot">Veel</string>
+    <string name="prevent">Wat heb je gedaan om gebruik te voorkomen?</string>
+    <string name="weed">Wiet</string>
 
 </resources>
