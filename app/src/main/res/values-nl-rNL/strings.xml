@@ -124,5 +124,6 @@
     <string name="insertMessage">Voer uw bericht hier in.</string>
     <string name="sendByMe">Uzelf</string>
     <string name="noUsage">U heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.</string>
+    <string name="send">Verzenden</string>
 
 </resources>

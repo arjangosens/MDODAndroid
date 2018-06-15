@@ -125,6 +125,7 @@
     <string name="insertMessage">Insert message here.</string>
     <string name="sendByMe">You</string>
     <string name="noUsage">You haven\t registered your usage in two days, please do</string>
+    <string name="send">Send</string>
 
 
 </resources>

@@ -120,7 +120,7 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
 
         updateDialogGenericEditText.setHint(hint);
 
-        builder.setPositiveButton(getResources().getString(R.string.saveChanges), null);
+        builder.setPositiveButton(getResources().getString(R.string.send), null);
         builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
