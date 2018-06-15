@@ -256,7 +256,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                 break;
             case R.id.menu_logout:
                 android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
-                builder.setMessage(getResources().getString(R.string.used)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener2).setNegativeButton(getResources().getString(R.string.no), dialogClickListener2).show();
+                builder.setMessage(getResources().getString(R.string.logOut)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener2).setNegativeButton(getResources().getString(R.string.no), dialogClickListener2).show();
                 break;
             case R.id.menu_user_phone:
                 i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);

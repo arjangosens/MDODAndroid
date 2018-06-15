@@ -221,7 +221,7 @@ public class HomepageActivity extends AppCompatActivity {
                 break;
             case R.id.menu_logout:
                 android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
-                builder.setMessage(getResources().getString(R.string.used)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
+                builder.setMessage(getResources().getString(R.string.logOut)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
                 break;
             case R.id.menu_user_phone:
                 i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
