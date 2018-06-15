@@ -220,11 +220,8 @@ public class HomepageActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
             case R.id.menu_logout:
-                i = new Intent(getApplicationContext(), LoginActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(i);
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                builder.setMessage(getResources().getString(R.string.used)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener).setNegativeButton(getResources().getString(R.string.no), dialogClickListener).show();
                 break;
             case R.id.menu_user_phone:
                 i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
@@ -235,4 +232,23 @@ public class HomepageActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    //Dialog Onclick
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(i);
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        }
+    };
 }

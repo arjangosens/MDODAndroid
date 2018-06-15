@@ -245,25 +245,23 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         return true;
     }
 
+    //Custom menu functionality
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         Intent i;
-        switch (id) {
+        switch(id){
             case R.id.menu_user_settings:
                 i = new Intent(getApplicationContext(), UserSettingsActivity.class);
                 startActivity(i);
                 break;
             case R.id.menu_logout:
-                i = new Intent(getApplicationContext(), LoginActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(i);
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                builder.setMessage(getResources().getString(R.string.used)).setPositiveButton(getResources().getString(R.string.yes), dialogClickListener2).setNegativeButton(getResources().getString(R.string.no), dialogClickListener2).show();
                 break;
             case R.id.menu_user_phone:
-                i = new Intent(getApplicationContext(), PhoneSettingsActivity.class);
+                i = new Intent(getApplicationContext(),PhoneSettingsActivity.class);
                 startActivity(i);
                 break;
             default:
@@ -271,4 +269,23 @@ public class MyPersonalGoalsActivity extends AppCompatActivity implements Dialog
         }
         return true;
     }
+
+    //Dialog Onclick
+    DialogInterface.OnClickListener dialogClickListener2 = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(i);
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        }
+    };
 }
