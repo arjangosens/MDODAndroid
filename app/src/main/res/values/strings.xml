@@ -80,7 +80,7 @@
     <string name="riskbutton">my risks</string>
     <string name="goalbutton">my goals</string>
     <string name="phonenumbers">my phonenumbers</string>
-    <string name="shrink">sendBy</string>
+    <string name="shrink">shrink</string>
     <string name="numbernotfilled">telephone number has not been inserted, do you want to insert it now?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>

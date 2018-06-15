@@ -150,11 +150,13 @@ public class MyMessagesActivity extends AppCompatActivity implements DialogInter
                 if (field.equals("")) {
                     incorrectFieldTextView.setText(getResources().getString(R.string.userSettingsFieldInvalid));
                 } else {
+                    //connection check
                     if (ConnectionChecker.CheckCon(context)) {
                         Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
                         toast.show();
 
                     } else {
+                        //API call
                     NetworkManager.getInstance().postMessage(field, new VolleyListener<JSONObject>() {
                         @Override
                         public void getResult(JSONObject object) {

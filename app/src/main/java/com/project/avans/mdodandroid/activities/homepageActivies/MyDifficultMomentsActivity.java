@@ -71,6 +71,15 @@ public class MyDifficultMomentsActivity extends AppCompatActivity implements Dia
             }
         });
 
+        Button call = findViewById(R.id.button_moments_call);
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PhoneActivity.class);
+                startActivity(intent);
+            }
+        });
+
         ListView listView = findViewById(R.id.listView_moments);
         adapter = new MomentAdapter(this, getLayoutInflater(), moments);
         listView.setAdapter(adapter);

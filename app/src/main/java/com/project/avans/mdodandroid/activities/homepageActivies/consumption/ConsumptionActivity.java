@@ -92,9 +92,9 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
                         .setCancelable(false)
                         .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                //do things
-                                NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
-                                //NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 2*24*60*60*1000, context);
+                                //set notification
+                                //NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 60 * 1000, context);
+                                NotificationService.Notificat(NotificationService.getNotification("U Heeft al 2 dagen geen gebruik ingevoerd, voer uw gebruik in alstublieft.", context), 2*24*60*60*1000, context);
                                 Intent i = new Intent(context, HomepageActivity.class);
                                 startActivity(i);
                             }
@@ -113,6 +113,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void getUsage() {
+        //connection check
         if (ConnectionChecker.CheckCon(context)) {
             Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
             toast.show();
@@ -121,6 +122,7 @@ public class ConsumptionActivity extends AppCompatActivity implements AdapterVie
             startActivity(i);
         } else {
 
+            //API call
         NetworkManager.getInstance().getUsage(new VolleyListener<JSONArray>() {
             @Override
             public void getResult(JSONArray result) {

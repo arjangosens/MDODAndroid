@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,11 +32,13 @@ import org.json.JSONObject;
 
 public class HomepageActivity extends AppCompatActivity {
     private Context context;
+    private Boolean exit = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         context = this;
+
 
 
         //custom toolbar
@@ -186,6 +189,20 @@ public class HomepageActivity extends AppCompatActivity {
     //Disables back button because of logout
     @Override
     public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, R.string.backAgain,
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
 
     }
 
