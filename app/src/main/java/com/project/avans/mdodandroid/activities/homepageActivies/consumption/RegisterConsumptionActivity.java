@@ -186,10 +186,12 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         //substances.add(new Substance("Nothing", getResources().getDrawable(R.drawable.like), ""));
         substances.add(new Substance(getResources().getString(R.string.weed), getResources().getDrawable(R.drawable.marijuana), "joints"));
         substances.add(new Substance("Alcohol", getResources().getDrawable(R.drawable.wine), "glazen"));
-        substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "ml"));
-        substances.add(new Substance("LSD", getResources().getDrawable(R.drawable.lsd), "mg"));
-        substances.add(new Substance("Cocaïne", getResources().getDrawable(R.drawable.cocaine), "g"));
+        substances.add(new Substance("GHB", getResources().getDrawable(R.drawable.ghb), "milliliter"));
+        substances.add(new Substance("XTC", getResources().getDrawable(R.drawable.pills), "pillen"));
+        substances.add(new Substance("Cocaïne", getResources().getDrawable(R.drawable.cocaine), "gram"));
+        substances.add(new Substance("Speed", getResources().getDrawable(R.drawable.sniffing), "gram"));
         substances.add(new Substance("Anders", getResources().getDrawable(R.drawable.question), ""));
+
     }
 
     //converting position to database position
@@ -209,7 +211,10 @@ public class RegisterConsumptionActivity extends AppCompatActivity implements Co
         else if (substanceStr.equals("GHB")){
             substanceId = 8;
         }
-        else if (substanceStr.equals("LSD")){
+        else if (substanceStr.equals("Speed")){
+            substanceId = 3;
+        }
+        else if (substanceStr.equals("XTC")){
             substanceId = 9;
         }
         else if (substanceStr.equals("Cocaïne")) {
