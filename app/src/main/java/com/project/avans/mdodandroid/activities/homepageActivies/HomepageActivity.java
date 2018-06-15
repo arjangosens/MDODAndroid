@@ -190,7 +190,9 @@ public class HomepageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (exit) {
-            finish(); // finish activity
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
         } else {
             Toast.makeText(this, R.string.backAgain,
                     Toast.LENGTH_SHORT).show();
