@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterConsumptionActivity">
+    tools:context=".activities.homepageActivies.consumption.RegisterConsumptionActivity">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".RegisterConsumptionActivity">
+        tools:context=".activities.homepageActivies.consumption.RegisterConsumptionActivity">
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -31,7 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/laugh" />
+                app:srcCompat="@drawable/laugh"
+                android:tint="@color/DarkGreen"/>
 
             <ImageView
                 android:id="@+id/con_smiley_good"
@@ -49,7 +50,8 @@
                 android:layout_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/con_smiley_good"
                 app:layout_constraintTop_toTopOf="@+id/con_smiley_good"
-                app:srcCompat="@drawable/meh" />
+                app:srcCompat="@drawable/meh"
+                android:tint="@color/Yellow"/>
 
             <ImageView
                 android:id="@+id/con_smiley_sad"
@@ -58,7 +60,8 @@
                 android:layout_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/con_smiley_ok"
                 app:layout_constraintTop_toTopOf="@+id/con_smiley_ok"
-                app:srcCompat="@drawable/sad" />
+                app:srcCompat="@drawable/sad"
+                android:tint="@color/LightRed"/>
 
             <ImageView
                 android:id="@+id/con_smiley_terrible"
@@ -68,7 +71,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView_feeling"
                 app:layout_constraintStart_toEndOf="@+id/con_smiley_sad"
                 app:layout_constraintTop_toTopOf="@+id/con_smiley_sad"
-                app:srcCompat="@drawable/supersad" />
+                app:srcCompat="@drawable/verysadred"
+                android:tint="@color/DarkRed"/>
         </LinearLayout>
 
         <TextView
@@ -106,7 +110,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Wat heb je gebruikt?"
+            android:text="@string/whatDidYouUse"
             android:textColor="@color/coloraccent"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +125,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Hoeveel heb je gebruikt?"
+            android:text="@string/howMuch2"
             android:textColor="@color/coloraccent"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/act_registerConsumption_editTextAmountValue"
@@ -137,8 +141,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
             android:ems="10"
-            android:hint="Hoeveelheid"
-            android:inputType="textPersonName"
+            android:hint="@string/amount"
+            android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/act_registerConsumption_textViewLocationLabel"
             app:layout_constraintEnd_toStartOf="@+id/act_unit_textview"
             app:layout_constraintHorizontal_bias="0.0"
@@ -150,7 +154,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Nu aangeklikt: "
+            android:layout_marginTop="3dp"
+            android:text="@string/currentlySelected"
             android:textColor="@color/coloraccent"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,6 +167,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/act_registerConsumption_textViewSelectionLabel"
@@ -173,7 +181,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:text="Waar was je?"
+            android:text="@string/whereWereYou"
             android:textColor="@color/coloraccent"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -188,7 +196,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Waardoor gebeurde het?"
+            android:text="@string/whatCausedIt"
             android:textColor="@color/coloraccent"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -203,7 +211,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Hoe voel je je erover?"
+            android:text="@string/feelingAbout"
             android:textColor="@color/coloraccent"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -218,7 +226,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:ems="10"
-            android:hint="Plaats"
+            android:hint="@string/location"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -232,7 +240,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:ems="10"
-            android:hint="Cause"
+            android:hint="@string/cause"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

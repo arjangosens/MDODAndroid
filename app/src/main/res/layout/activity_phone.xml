@@ -5,15 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/colorprimary"
+        android:elevation="4dp"
+
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/textView_clean"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageView
+            android:id="@+id/actionBarImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="5dp"
+            android:src="@drawable/tactuslogo_big_white"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="2dp" />
+
+    </android.support.v7.widget.Toolbar>
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -57,10 +85,10 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/my_button_bg"
                 android:drawableLeft="@drawable/first_aid_kit"
-                android:paddingLeft="10dp"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
                 android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:text="@string/ice"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -77,10 +105,10 @@
                 android:layout_marginStart="16dp"
                 android:background="@drawable/my_button_bg"
                 android:drawableLeft="@drawable/men_shaking_hands"
-                android:paddingLeft="10dp"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/coloraccent"
                 android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:text="@string/buddy"
                 android:textColor="#000000"
@@ -97,11 +125,11 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:background="@drawable/my_button_bg"
-                android:drawablePadding="10dp"
-                android:paddingLeft="10dp"
-                android:drawableTint="@color/coloraccent"
                 android:drawableLeft="@drawable/confusion"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/coloraccent"
                 android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:text="@string/shrink"
                 app:layout_constraintBottom_toTopOf="@+id/buddy_button"

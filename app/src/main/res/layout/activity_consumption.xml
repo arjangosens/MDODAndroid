@@ -4,18 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConsumptionActivity">
+    tools:context=".activities.homepageActivies.consumption.ConsumptionActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/colorprimary"
+        android:elevation="4dp"
+
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+        <ImageView
+            android:id="@+id/actionBarImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/tactuslogo_big_white"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="2dp"
+            android:paddingBottom="5dp"/>
+
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/activityConsumption_textViewHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:background="@color/coloraccent"
         android:padding="8dp"
-        android:text="Mijn gebruik: "
+        android:text="@string/usage"
         android:textAlignment="viewStart"
         android:textAppearance="@android:style/TextAppearance.Material.Headline"
         android:textColor="@android:color/background_light"
@@ -23,7 +47,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
     <ListView
         android:id="@+id/activityConsumption_listView"
@@ -48,7 +72,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@color/coloraccent"
-        android:text="Registreer gebruik"
+        android:text="@string/registerUsage"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/nothingUsedButton"
@@ -65,7 +89,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@color/coloraccent"
-        android:text="Niets Gebruikt!!"
+        android:text="@string/notUsed"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
