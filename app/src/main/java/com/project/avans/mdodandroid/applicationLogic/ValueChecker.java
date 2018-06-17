@@ -107,4 +107,13 @@ public class ValueChecker {
         Log.i("ValueChecker", "checkAddress() address is " + result);
         return result;
     }
+
+    public static boolean checkNumbers(String name) {
+        Pattern nameRegex = Pattern.compile("^[0-9]{0,5}$");
+        Matcher matcher = nameRegex.matcher(name);
+
+        boolean result = matcher.find();
+        Log.i("ValueChecker", "checkName() name is " + result);
+        return result;
+    }
 }
