@@ -164,10 +164,11 @@ public class HomepageActivity extends AppCompatActivity {
                             alert.show();
                         }
 
-                        if(object.getString("daysClean").equals("1")){
+                        else if(object.getString("daysClean").equals("1")){
                             cleandays.setText(R.string.oneDay);
-                        } else {
-                            cleandays.setText(R.string.already + object.getString("daysClean") + R.string.daysClean);
+                        }
+                        else {
+                            cleandays.setText(getResources().getString(R.string.already) + " " + object.getString("daysClean") + " " +  getResources().getString(R.string.daysClean));
                         }
 
                     }
