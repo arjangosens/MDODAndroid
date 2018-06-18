@@ -96,62 +96,40 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
             public void onClick(View v) {
                 String field = String.valueOf(description.getText());
 
+                int value = selectedSmiley();
 
-                if (field.equals("")) {
+                if(value == 0){
+                    Log.i("IMAGE SELECTED: ", "NO IMAGE SELECTED");
+                }
+
+                if(field.equals("")){
                     error.setText(getResources().getString(R.string.descriptionInvalid));
-                } else {
+                }
 
-                    int value;
-
-                    if (smileyHappy.isSelected()) {
-                        value = 1;
-                        Log.i("IMAGE SELECTED: ", "1");
-
-                    } else if (smileyGood.isSelected()) {
-                        value = 2;
-                        Log.i("IMAGE SELECTED: ", "2");
-
-                    } else if (smileyOk.isSelected()) {
-                        value = 3;
-                        Log.i("IMAGE SELECTED: ", "3");
-
-                    } else if (smileySad.isSelected()) {
-                        value = 4;
-                        Log.i("IMAGE SELECTED: ", "4");
-
-                    } else if (smileyTerrible.isSelected()) {
-                        value = 5;
-                        Log.i("IMAGE SELECTED: ", "5");
-
+                if(!(field.equals("")||value == 0)) {
+                    //Connection check
+                    if (ConnectionChecker.CheckCon(context)) {
+                        Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
+                        toast.show();
+                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
                     } else {
-                        value = 0;
-                        Log.i("IMAGE SELECTED: ", "NO IMAGE SELECTED");
-                        error.setText(getResources().getString(R.string.smileyNotSelected));
+                        //API call
+                        NetworkManager.getInstance().postStatus(value, field, new VolleyListener<JSONObject>() {
+                            @Override
+                            public void getResult(JSONObject object) {
+                                Log.i("TEST: ", object.toString());
 
-                        //Connection check
-                        if (ConnectionChecker.CheckCon(context)) {
-                            Toast toast = Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT);
-                            toast.show();
-                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(i);
-                        } else {
-                            //API call
-                            NetworkManager.getInstance().postStatus(value, field, new VolleyListener<JSONObject>() {
-                                @Override
-                                public void getResult(JSONObject object) {
-                                    Log.i("TEST: ", object.toString());
-
-                                    if (!(object == null)) {
-                                        NotificationService.Notificat(NotificationService.getNotification(getResources().getString(R.string.noFeeling), context), 48 * 60 * 60 * 1000, context);
-                                        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
-                                        startActivity(intent);
-                                    } else {
-                                        error.setText(getResources().getString(R.string.somethingWentWrong));
-                                    }
+                                if (!(object == null)) {
+                                    NotificationService.Notificat(NotificationService.getNotification(getResources().getString(R.string.noFeeling), context), 48 * 60 * 60 * 1000, context);
+                                    Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    error.setText(getResources().getString(R.string.somethingWentWrong));
                                 }
-                            });
-                        }
+                            }
+                        });
                     }
                 }
             }
@@ -267,5 +245,37 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                 }
                 break;
         }
+    }
+
+
+    private int selectedSmiley(){
+        int value = 0;
+
+        if (smileyHappy.isSelected()) {
+            value = 1;
+            Log.i("IMAGE SELECTED: ", "1");
+
+        } else if (smileyGood.isSelected()) {
+            value = 2;
+            Log.i("IMAGE SELECTED: ", "2");
+
+        } else if (smileyOk.isSelected()) {
+            value = 3;
+            Log.i("IMAGE SELECTED: ", "3");
+
+        } else if (smileySad.isSelected()) {
+            value = 4;
+            Log.i("IMAGE SELECTED: ", "4");
+
+        } else if (smileyTerrible.isSelected()) {
+            value = 5;
+            Log.i("IMAGE SELECTED: ", "5");
+
+        } else if (value == 0) {
+            Log.i("IMAGE SELECTED: ", "NO IMAGE SELECTED");
+            error.setText(getResources().getString(R.string.smileyNotSelected));
+        }
+
+        return value;
     }
 }
