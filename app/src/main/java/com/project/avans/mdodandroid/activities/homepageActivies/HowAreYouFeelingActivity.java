@@ -126,7 +126,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                                     Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                                     startActivity(intent);
                                 } else {
-                                    error.setText(getResources().getString(R.string.somethingWentWrong));
+                                    error.setText(getResources().getString(R.string.someThingWentWrongFeeling));
                                 }
                             }
                         });

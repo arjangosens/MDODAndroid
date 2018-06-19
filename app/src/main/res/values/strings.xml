@@ -85,7 +85,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="contactDr">Please contact your sendBy, number not filled in</string>
-
     <string name="howAreYou">How are you feeling today?</string>
     <string name="confirm">Confirm</string>
     <string name="descriptionInvalid">Description cannot be empty!</string>
@@ -134,6 +133,9 @@
     <string name="registerUsage">Register Usage</string>
     <string name="notUsed">Not Used!!</string>
     <string name="logout">Are you sure you want to logout?</string>
+    <string name="much">much</string>
+    <string name="little">little</string>
+    <string name="someThingWentWrongFeeling">Something went wrong, your status hasn't been updated</string>
 
 
 

@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/notMuch"
+        android:text="@string/little"
         app:layout_constraintBottom_toBottomOf="@+id/seekBar_difficult_moment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/seekBar_difficult_moment" />
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="@string/alot"
+        android:text="@string/much"
         app:layout_constraintBottom_toBottomOf="@+id/seekBar_difficult_moment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/seekBar_difficult_moment" />
