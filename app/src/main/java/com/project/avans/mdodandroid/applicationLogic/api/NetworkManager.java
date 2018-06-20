@@ -15,13 +15,13 @@ import com.project.avans.mdodandroid.activities.loginAndRegisterActivities.Login
 import com.project.avans.mdodandroid.domain.Risk;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class NetworkManager
-{
+public class NetworkManager {
     private static final String TAG = "NetworkManager";
     private static NetworkManager instance = null;
 
@@ -30,32 +30,27 @@ public class NetworkManager
     //for Volley API
     public RequestQueue requestQueue;
 
-    private NetworkManager(Context context)
-    {
+    private NetworkManager(Context context) {
         requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         //other stuf if you need
     }
 
-    public static synchronized NetworkManager getInstance(Context context)
-    {
+    public static synchronized NetworkManager getInstance(Context context) {
         if (null == instance)
             instance = new NetworkManager(context);
         return instance;
     }
 
     //this is so you don't need to pass context each time
-    public static synchronized NetworkManager getInstance()
-    {
-        if (null == instance)
-        {
+    public static synchronized NetworkManager getInstance() {
+        if (null == instance) {
             throw new IllegalStateException(NetworkManager.class.getSimpleName() +
                     " is not initialized, call getInstance(...) first");
         }
         return instance;
     }
 
-    public void loginClient(Object email, Object password, final VolleyListener<String> listener)
-    {
+    public void loginClient(Object email, Object password, final VolleyListener<String> listener) {
 
         String url = prefixURL + "login/client";
 
@@ -64,27 +59,21 @@ public class NetworkManager
         jsonParams.put("password", password);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "login/client Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response.toString());
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
-                            if (error.networkResponse.statusCode == 404){
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
+                            if (error.networkResponse.statusCode == 404) {
                                 listener.getResult("empty");
-                            }
-                            else{
+                            } else {
                                 Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                                 listener.getResult("");
                             }
@@ -101,42 +90,38 @@ public class NetworkManager
         String url = prefixURL + "client";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.d(TAG + ": ", "GET client Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
 
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
     }
-
 
 
     public void postGoal(String description, final VolleyListener<JSONObject> listener) {
@@ -146,79 +131,73 @@ public class NetworkManager
         jsonParams.put("description", description);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "login/client Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
     public void putGoal(String goalId, String description, final VolleyListener<JSONObject> listener) {
 
-        String url = prefixURL + "v1/goal/" + goalId ;
+        String url = prefixURL + "v1/goal/" + goalId;
 
         Map<String, Object> jsonParams = new HashMap<>();
         jsonParams.put("description", description);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "putGoal Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
@@ -231,78 +210,72 @@ public class NetworkManager
         jsonParams.put("isCompleted", status);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "putGoal Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
     public void deleteGoal(String goalId, final VolleyListener<JSONObject> listener) {
 
-        String url = prefixURL + "v1/goal/" + goalId ;
+        String url = prefixURL + "v1/goal/" + goalId;
 
         Map<String, Object> jsonParams = new HashMap<>();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "putGoal Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
@@ -315,37 +288,34 @@ public class NetworkManager
         jsonParams.put("description", description);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "post risk Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
@@ -358,78 +328,72 @@ public class NetworkManager
         jsonParams.put("description", description);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "post risk Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response.toString());
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult("");
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
     public void deleteRisk(String riskId, final VolleyListener<JSONObject> listener) {
 
-        String url = prefixURL + "v1/risk/" + riskId ;
+        String url = prefixURL + "v1/risk/" + riskId;
 
         Map<String, Object> jsonParams = new HashMap<>();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "putGoal Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
@@ -450,38 +414,35 @@ public class NetworkManager
         jsonParams.put("zipcode", zipcode);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "PUT client Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
 
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
 
@@ -536,37 +497,34 @@ public class NetworkManager
         jsonParams.put("description", description);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "post moment Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
@@ -575,38 +533,35 @@ public class NetworkManager
         String url = prefixURL + "v1/difficult_moment";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.d(TAG + ": ", "GET moment Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
 
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
     }
@@ -616,43 +571,38 @@ public class NetworkManager
         String url = prefixURL + "v1/substance/all";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.d(TAG + ": ", "GET substance Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
 
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
     }
-
-
 
 
     public void getClientPhone(final VolleyListener<JSONArray> listener) {
@@ -660,45 +610,42 @@ public class NetworkManager
         String url = prefixURL + "v1/phone";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.d(TAG + ": ", "GET client Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
 
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
     }
 
 
     public void updatephone(String institution, String doctor, String buddy, String ice,
-                             Integer id, final VolleyListener<JSONObject> listener) {
+                            Integer id, final VolleyListener<JSONObject> listener) {
 
         String url = prefixURL + "v1/phone";
 
@@ -710,38 +657,35 @@ public class NetworkManager
 
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "PUT phonenr Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
 
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
 
@@ -752,38 +696,35 @@ public class NetworkManager
         String url = prefixURL + "v1/usage/clean/status";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "GET client Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
 
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
     }
@@ -792,37 +733,34 @@ public class NetworkManager
         String url = prefixURL + "v1/mood/status";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "GET client Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
     }
@@ -837,41 +775,44 @@ public class NetworkManager
         jsonParams.put("description", description);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "post status Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
-                            listener.getResult(null);
+                            JSONObject object = new JSONObject();
+                            try {
+                                object.put("conflict", String.valueOf(error.networkResponse.statusCode));
+                                listener.getResult(object);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
-    public void postUsage(String Location, Integer Amount, Integer Mood, String Cause,Integer SubstanceId, final VolleyListener<JSONObject> listener) {
+    public void postUsage(String Location, Integer Amount, Integer Mood, String Cause, Integer SubstanceId, final VolleyListener<JSONObject> listener) {
 
         String url = prefixURL + "v1/usage";
 
@@ -883,37 +824,34 @@ public class NetworkManager
         jsonParams.put("substanceId", SubstanceId);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "post moment Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
@@ -922,38 +860,35 @@ public class NetworkManager
         String url = prefixURL + "v1/usage";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.d(TAG + ": ", "GET client Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
 
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
     }
@@ -963,38 +898,35 @@ public class NetworkManager
         String url = prefixURL + "v1/messages/client";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response)
-                    {
+                    public void onResponse(JSONArray response) {
                         Log.d(TAG + ": ", "GET client Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
 
                         }
                     }
-                }) {@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
 
         requestQueue.add(request);
     }
@@ -1007,37 +939,34 @@ public class NetworkManager
         jsonParams.put("message", message);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(jsonParams),
-                new Response.Listener<JSONObject>()
-                {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG + ": ", "post moment Response : " + response.toString());
-                        if(null != response.toString())
+                        if (null != response.toString())
                             listener.getResult(response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        if (null != error.networkResponse)
-                        {
+                    public void onErrorResponse(VolleyError error) {
+                        if (null != error.networkResponse) {
                             Log.d(TAG + ": ", "Error Response code: " + error.networkResponse.statusCode);
                             listener.getResult(null);
                         }
                     }
-                }){@Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> params = new HashMap<String, String>();
-            Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
-            params.put("Authorization", "Bearer " + LoginActivity.Token);
-            params.put("X-Access-Token", LoginActivity.Token);
-            params.put("Content-Type", "application/json");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i(TAG, "Mainactivity.Token = " + LoginActivity.Token);
+                params.put("Authorization", "Bearer " + LoginActivity.Token);
+                params.put("X-Access-Token", LoginActivity.Token);
+                params.put("Content-Type", "application/json");
 
-            return params;
-        }};
+                return params;
+            }
+        };
         requestQueue.add(request);
     }
 
