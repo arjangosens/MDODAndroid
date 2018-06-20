@@ -133,5 +133,9 @@
     <string name="registerUsage">Registreer gebruik</string>
     <string name="notUsed">Niets gebruikt!!</string>
     <string name="logout">Weet je zeker dat je uit wil loggen?</string>
+    <string name="much">veel</string>
+    <string name="little">weinig</string>
+    <string name="someThingWentWrongFeeling">Er ging iets mis, je status is niet geüpdatet</string>
+    <string name="psychologist">psycholoog</string>
 
 </resources>

@@ -131,7 +131,7 @@
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:text="@string/shrink"
+                android:text="@string/psychologist"
                 app:layout_constraintBottom_toTopOf="@+id/buddy_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

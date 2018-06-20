@@ -20,14 +20,14 @@
     <string name="emailInvalid">- Email is invalid</string>
     <string name="registerPasswordInvalid">- Password is invalid (min 8 characters, at least 1 letter and number, confirmation needs to be equal)</string>
     <string name="emptyNameOrDate">- Name and/or date of birth are still empty</string>
-    <string name="alertDialogCancelButton" translatable="false">Ok</string>
+    <string name="alertDialogCancelButton" translatable="false">OK</string>
     <string name="userSettings">User settings</string>
     <string name="change">Change </string>
-    <string name="saveChanges">Save changes </string>
+    <string name="saveChanges">Save </string>
     <string name="logOut">Log out</string>
-    <string name="adress">Adress (street + house number)</string>
+    <string name="adress">Address (street + house number)</string>
     <string name="phoneNumber">Phone Number</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="userSettingsCurrentPasswordInvalid">Invalid password!</string>
     <string name="userSettingsNewPasswordInvalid">Needs to be longer than 8 characters and contain at least one number and letter</string>
     <string name="userSettingsConfirmPasswordInvalid">Needs to match new password</string>
@@ -36,10 +36,10 @@
     <string name="userSettingsNewPassword">New password</string>
     <string name="userSettingsConfirmPassword">Confirm new password</string>
     <string name="goals">My personal goals</string>
-    <string name="add">add</string>
+    <string name="add">Add</string>
     <string name="newGoal">New goal</string>
     <string name="risks">My personal risks</string>
-    <string name="newRisk">new Risk</string>
+    <string name="newRisk">New risk</string>
     <string name="invalidPhoneNr">Invalid phone number!</string>
     <string name="fieldNotFilledIn">[Not filled in]</string>
     <string name="city">City</string>
@@ -77,15 +77,14 @@
     <string name="buddy">buddy</string>
     <string name="ice">emergency</string>
     <string name="difficult">difficulty</string>
-    <string name="riskbutton">my risks</string>
-    <string name="goalbutton">my goals</string>
-    <string name="phonenumbers">my phonenumbers</string>
-    <string name="shrink">shrink</string>
-    <string name="numbernotfilled">telephone number has not been inserted, do you want to insert it now?</string>
+    <string name="riskbutton">My risks</string>
+    <string name="goalbutton">My goals</string>
+    <string name="phonenumbers">My phonenumbers</string>
+    <string name="shrink">Shrink</string>
+    <string name="numbernotfilled">Telephone number has not been inserted, do you want to insert it now?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="contactDr">Please contact your sendBy, number not filled in</string>
-
     <string name="howAreYou">How are you feeling today?</string>
     <string name="confirm">Confirm</string>
     <string name="descriptionInvalid">Description cannot be empty!</string>
@@ -134,6 +133,10 @@
     <string name="registerUsage">Register Usage</string>
     <string name="notUsed">Not Used!!</string>
     <string name="logout">Are you sure you want to logout?</string>
+    <string name="much">much</string>
+    <string name="little">little</string>
+    <string name="someThingWentWrongFeeling">Something went wrong, your status hasn\'t been updated</string>
+    <string name="psychologist">psychologist</string>
 
 
 
