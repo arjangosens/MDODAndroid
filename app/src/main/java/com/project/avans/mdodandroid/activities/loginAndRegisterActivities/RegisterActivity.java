@@ -96,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.activityRegister_buttonDateOfBirth:
                 Log.i("RegisterActivity", "onClick of datePickerButton called");
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, 2018, 0, 1);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(this, this,2018, 0, 1);
                 datePickerDialog.show();
 
                 break;

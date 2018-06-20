@@ -123,7 +123,7 @@
     <string name="justNow">Just now</string>
     <string name="insertMessage">Insert message here.</string>
     <string name="sendByMe">You</string>
-    <string name="noUsage">You haven\t registered your usage in two days, please do</string>
+    <string name="noUsage">You haven\'t registered your usage in two days, please do</string>
     <string name="send">Send</string>
     <string name="desire">How much do you crave it?</string>
     <string name="notMuch">Not much</string>
