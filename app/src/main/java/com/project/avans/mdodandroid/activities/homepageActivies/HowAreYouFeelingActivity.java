@@ -20,6 +20,7 @@ import com.project.avans.mdodandroid.applicationLogic.api.NetworkManager;
 import com.project.avans.mdodandroid.applicationLogic.api.VolleyListener;
 import com.project.avans.mdodandroid.applicationLogic.notifications.NotificationService;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -125,7 +126,13 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                                     NotificationService.Notificat(NotificationService.getNotification(getResources().getString(R.string.noFeeling), context), 48 * 60 * 60 * 1000, context);
                                     Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                                     startActivity(intent);
-                                } else {
+                                } else if(object.has("conflict")) {
+                                    try {
+                                        error.setText(object.getString("conflict"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else{
                                     error.setText(getResources().getString(R.string.someThingWentWrongFeeling));
                                 }
                             }
