@@ -135,7 +135,8 @@
     <string name="logout">Are you sure you want to logout?</string>
     <string name="much">much</string>
     <string name="little">little</string>
-    <string name="someThingWentWrongFeeling">Something went wrong, your status hasn't been updated</string>
+    <string name="someThingWentWrongFeeling">Something went wrong, your status hasn\'t been updated</string>
+    <string name="psychologist">psychologist</string>
 
 
 
