@@ -8,7 +8,6 @@ public class ConnectionChecker {
 
     public static Boolean CheckCon(Context context){
 
-
         try{
             ConnectivityManager cm =
                     (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -27,7 +26,6 @@ public class ConnectionChecker {
             e.printStackTrace();
             return false;
         }
-
 
     }
 }
