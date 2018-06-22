@@ -72,10 +72,10 @@
     <string name="taste">Taste in: </string>
     <string name="description">Description: </string>
     <string name="phonenumberActivityHeader">Important phone numbers</string>
-    <string name="institute">institute</string>
-    <string name="doctor">doctor</string>
-    <string name="buddy">buddy</string>
-    <string name="ice">emergency</string>
+    <string name="institute">Institute</string>
+    <string name="doctor">Doctor</string>
+    <string name="buddy">Buddy</string>
+    <string name="ice">Emergency</string>
     <string name="difficult">difficulty</string>
     <string name="riskbutton">My risks</string>
     <string name="goalbutton">My goals</string>
@@ -123,7 +123,7 @@
     <string name="justNow">Just now</string>
     <string name="insertMessage">Insert message here.</string>
     <string name="sendByMe">You</string>
-    <string name="noUsage">You haven\t registered your usage in two days, please do</string>
+    <string name="noUsage">You haven\'t registered your usage in two days, please do</string>
     <string name="send">Send</string>
     <string name="desire">How much do you crave it?</string>
     <string name="notMuch">Not much</string>
@@ -136,7 +136,7 @@
     <string name="much">much</string>
     <string name="little">little</string>
     <string name="someThingWentWrongFeeling">Something went wrong, your status hasn\'t been updated</string>
-    <string name="psychologist">psychologist</string>
+    <string name="psychologist">Psychologist</string>
 
 
 

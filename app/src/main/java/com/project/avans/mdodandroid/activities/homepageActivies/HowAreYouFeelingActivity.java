@@ -123,7 +123,7 @@ public class HowAreYouFeelingActivity extends AppCompatActivity implements View.
                                 Log.i("TEST: ", object.toString());
 
                                 if (!(object == null)) {
-                                    NotificationService.Notificat(NotificationService.getNotification(getResources().getString(R.string.noFeeling), context), 48 * 60 * 60 * 1000, context);
+                                    NotificationService.NotificatF(NotificationService.getNotification(getResources().getString(R.string.noFeeling), context), 48 * 60 * 60 * 1000, context);
                                     Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                                     startActivity(intent);
                                 } else if(object.has("conflict")) {

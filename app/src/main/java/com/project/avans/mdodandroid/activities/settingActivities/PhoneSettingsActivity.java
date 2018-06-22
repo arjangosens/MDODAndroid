@@ -156,7 +156,7 @@ public class PhoneSettingsActivity extends AppCompatActivity implements AdapterV
 
     private void initTypes() {
         institution = new UserSettingsType(getResources().getString(R.string.institute));
-        doctor = new UserSettingsType(getResources().getString(R.string.shrink));
+        doctor = new UserSettingsType(getResources().getString(R.string.psychologist));
         buddy = new UserSettingsType(getResources().getString(R.string.buddy));
         ice = new UserSettingsType(getResources().getString(R.string.ice));
     }
